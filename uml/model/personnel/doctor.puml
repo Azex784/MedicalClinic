@@ -1,0 +1,10 @@
+@startuml
+
+class Doctor{
+-specialisation:vector<specialisation>
+-doctorCost:unsinged int
++getInfo():string
+}
+
+
+@enduml

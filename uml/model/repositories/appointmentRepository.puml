@@ -1,0 +1,16 @@
+@startuml
+
+class AppointmentRepository{
++get(i:int):Appointment
++add(appointment:Appointment):void
++remove(appointment:Appointment):void
++report():string
++size():int
++findBy(predicate:AppointmentPredicate):Appointment[0..*]
++findAll():Appointment[0..*]
+}
+
+AppointmentRepository -->  Appointment
+AppointmentRepository ..>  AppointmentPredicate
+
+@enduml

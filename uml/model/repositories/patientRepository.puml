@@ -1,0 +1,15 @@
+@startuml
+
+class PatientRepository{
++get(i:int):Patient
++add(patient:Patient):void
++remove(patient:Patient):void
++report():string
++size():int
++findBy(predicate:PatientPredicate):Patient[0..*]
++findAll():Patient[0..*]
+}
+
+PatientRepository --> Patient
+PatientRepository ..> PatientPredicate
+@enduml

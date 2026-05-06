@@ -1,0 +1,10 @@
+@startuml
+
+class Patient{
+-personalNumber:string
++getInfo():string
+}
+
+Patient --> Address
+
+@enduml

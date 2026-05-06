@@ -1,0 +1,9 @@
+@startuml
+
+!include ../patient/patient.puml
+!include ../patient/address.puml
+!include ../personnel/doctor.puml
+!include ../personnel/nurse.puml
+!include ../personnel/personnel.puml
+
+@enduml

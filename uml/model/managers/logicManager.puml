@@ -1,0 +1,15 @@
+@startuml
+
+class LogicManager {
++getPersonnelManager():PersonnelManager
++getPatientManager():PatientManager
++getServiceManager():ServiceManager
++getAppointmentManager():AppointmentManager
+}
+
+LogicManager *--> AppointmentManager
+LogicManager *--> PatientManager
+LogicManager *--> PersonnelManager
+LogicManager *--> ServiceManager
+
+@enduml

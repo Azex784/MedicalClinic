@@ -1,0 +1,16 @@
+@startuml
+
+abstract class Service{
+-serviceCost:unsigned int
+-serviceDuration:unsigned int
+-serviceName:string
+-serviceId:unsigned int
+-requiredDoctorSize: unsigned int
+-requiredDoctorSpec:specialisation
++getInfo():string
+}
+
+Service <|-- Consultation
+Service <|-- Treatment
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+class ConsultationRoom{
+-numberOfCharis:unsigned int
++getInfo():string
+}
+
+@enduml

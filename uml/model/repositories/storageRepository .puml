@@ -1,0 +1,18 @@
+@startuml
+
+class StorageRepository{
+-patientRepository:PatientRepository
+-appointmentRepository:AppointmentRepository
+-personnelRepository:PersonnelRepository
+-treatmentRepository:TreatmentRepository
++getPatientRepository():PatientRepository
++getAppointmentRepository():AppointmentRepository
++getPersonnelRepository():PersonnelRepository
++getTreatmentRepository():TreatmentRepository
+}
+StorageRepository *-->  PersonnelRepository
+StorageRepository *-->  PatientRepository
+StorageRepository *-->  AppointmentRepository
+StorageRepository *-->  ServiceRepository
+
+@enduml

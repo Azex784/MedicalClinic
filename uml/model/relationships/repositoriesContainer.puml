@@ -1,0 +1,11 @@
+@startuml
+
+!include ../repositories/storageRepository .puml
+!include ../repositories/patientRepository.puml
+!include ../repositories/personnelRepository.puml
+!include ../repositories/appointmentRepository.puml
+!include ../repositories/serviceRepository.puml
+
+
+
+@enduml

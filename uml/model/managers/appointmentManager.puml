@@ -1,0 +1,23 @@
+@startuml
+
+class AppointmentManager {
+  +getPatientAppointments(patient:Patient):Appointment[0..*]
+  +getAppointmentAppointments(personnel:Appointment):Appointment[0..*]
+  +getServiceAppointments(service:Service):Appointment[0..*]
+  +getAppointmentsCost(patient:Patient):unsigned int
+
+  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime)
+  +finishAppointment(patient:Patient, beginTime:ptime):unsigned int
+
+  +findAppointments(predicate:AppointmentPredicate):Appointment[0..*]
+  +findAllAppointments():Appointment[0..*]
+}
+
+AppointmentManager *-->  "archiveAppointments" AppointmentRepository
+
+AppointmentManager *-->  "activeAppointments" AppointmentRepository
+
+AppointmentRepository --> Appointment
+AppointmentRepository ..> AppointmentPredicate
+
+@enduml

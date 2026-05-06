@@ -1,0 +1,11 @@
+@startuml
+
+abstract class Room{
+-roomNumber:unsigned int
++{abstract} getInfo(): string
+}
+
+Room <|-- SurgeryRoom
+Room <|-- ConsultationRoom
+
+@enduml

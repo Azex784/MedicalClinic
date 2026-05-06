@@ -1,0 +1,9 @@
+@startuml
+
+!include ../services/service.puml
+!include ../appointment.puml
+!include ../rooms/room.puml
+!include ../personnel/personnel.puml
+
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+class Consultation{
+-topic:string
+-isOnline: bool
+-numberOfChairsRequired: unsinged int
++getInfo():string
+}
+
+
+@enduml

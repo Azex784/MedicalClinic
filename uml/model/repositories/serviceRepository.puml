@@ -1,0 +1,16 @@
+@startuml
+
+class ServiceRepository{
++get(i:int):Service
++add(service:Service):void
++remove(service:Service):void
++report():string
++size():int
++findBy(predicate:ServicePredicate):Service[0..*]
++findAll():Service[0..*]
+}
+
+ServiceRepository --> Service
+ServiceRepository ..> ServicePredicate
+
+@enduml

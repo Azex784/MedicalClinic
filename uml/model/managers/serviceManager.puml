@@ -1,0 +1,16 @@
+@startuml
+
+class ServiceManager {
+  +getService(serviceID:unsigned int):Service
+  +addConsultation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,topic:string):Service
+  +addTreatment(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,isAnaesthesiaNeeded: bool):Service
+  +removeService(serviceID:unsigned int):void
+  +findServices(predicate:ServicePredicate):Service[0..*]
+  +findAllServices():Service[0..*]
+}
+
+ServiceManager *--> ServiceRepository
+ServiceRepository --> Service
+ServiceRepository ..> ServicePredicate
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+class PatientManager {
+  +getPatient(personalID:string):Patient
+  +registerPatient(firstName:string, lastName:string, personalID:string, address:Address):Patient
+  +unregisterPatient(personalID:string):void
+  +findPatients(predicate:PatientPredicate):Patient[0..*]
+  +findAllPatients():Patient[0..*]
+}
+
+PatientManager *--> PatientRepository
+PatientRepository --> Patient
+PatientRepository ..> PatientPredicate
+
+@enduml

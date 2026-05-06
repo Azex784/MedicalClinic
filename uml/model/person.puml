@@ -1,0 +1,14 @@
+@startuml
+
+abstract class Person{
+-name:string
+-lastName:string
++ {abstract} getInfo(): string
+}
+
+abstract class Personnel{}
+
+Person <|-- Personnel
+Person <|-- Patient
+
+@enduml

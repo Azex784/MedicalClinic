@@ -1,0 +1,17 @@
+@startuml
+
+class PersonnelManager {
++getPersonnel(personnelId:unsigned intx):Personnel
+
++addDoctor(firstName:string, lastName:string, personnelId:unsigned int, specialisation:vector<specialisation>):Personnel
++addNurse(firstName:string, lastName:string, personnelId:unsigned int):Personnel
++removePersonnel(personnelId:unsigned int):void
++findPersonnels(predicate:PersonnelPredicate):Personnel[0..*]
++findAll():Personnel[0..*]
+}
+
+PersonnelManager *--> PersonnelRepository
+PersonnelRepository --> Personnel
+PersonnelRepository ..> PersonnelPredicate
+
+@enduml

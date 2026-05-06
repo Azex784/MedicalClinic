@@ -1,0 +1,12 @@
+@startuml
+
+abstract class Personnel{
+-isActive:bool
+-personnelId:unsigned int
++{abstract} getInfo(): string
+}
+
+Personnel <|-- Doctor
+Personnel <|-- Nurse
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+class Treatment{
+-isAnaesthesiaNeeded: bool
+-requiresXRay: bool
+-requiresLaser: bool
+-requiredNurseSize: unsigned int
++getInfo():string
+}
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+class Appointment{
+-appointmentBeginDate:ptime
+-appointmentEndDate:ptime
+-appointmentCost:unsigned int
++changeAppointmentDate(ptime _date):bool
++cancelAppointmentDate(ptime _date):void
++getInfo():string
+}
+
+Appointment --> Patient
+Appointment --> Service
+Appointment --> "0..*" Personnel : assignedPersonnel >
+Appointment --> Room
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+class PersonnelRepository{
++get(i:int):Personnel
++add(personnel:Personnel):void
++remove(personnel:Personnel):void
++report():string
++size():int
++findBy(predicate:PersonnelPredicate):Personnel[0..*]
++findAll():Personnel[0..*]
+}
+
+PersonnelRepository --> Personnel
+PersonnelRepository ..> PersonnelPredicate
+
+@enduml

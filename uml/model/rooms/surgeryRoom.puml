@@ -1,0 +1,11 @@
+@startuml
+
+class SurgeryRoom{
+-hasLaser: bool
+-hasXRay: bool
+-maxCapacity: int
++getInfo():string
+}
+
+
+@enduml
