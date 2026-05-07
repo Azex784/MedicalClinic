@@ -9,4 +9,18 @@ abstract class Personnel{
 Personnel <|-- Doctor
 Personnel <|-- Nurse
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Personnel
+Abstrakcyjna klasa reprezentująca
+personnel.
+Klasa ta dziedziczy z klasy person.
+isActive - reprezuntuje czy dany
+człowiek przynależący do personelu
+jest teraz dostępny.
+personnelId - specjalny
+idetyifatkor pracownika personelu.
+end note
+
+!endif
 @enduml

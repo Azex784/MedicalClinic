@@ -6,6 +6,15 @@ abstract class Person{
 + {abstract} getInfo(): string
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Person
+Abstrakcyjna klasa reprezentująca
+człowieka.
+end note
+
+!endif
+
 abstract class Personnel{}
 
 Person <|-- Personnel

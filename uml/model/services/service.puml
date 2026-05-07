@@ -7,10 +7,24 @@ abstract class Service{
 -serviceId:unsigned int
 -requiredDoctorSize: unsigned int
 -requiredDoctorSpec:specialisation
-+getInfo():string
++{abstract}getInfo():string
 }
 
 Service <|-- Consultation
 Service <|-- Treatment
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Service
+Abstrakcyjna klasa reprezentująca usługę.
+serviceCost - koszt usługi, wliczając koszt pięlegniarekm Doktora
+serviceDuration - czas w minutach trwania usługi
+serviceName - nazwa usługi
+serviceId - unikalny numer usługi
+requiredDoctorSize - wymagana liczba lekarzy
+requiredDoctorSpec - wymagane specjalności lekarza
+potrzebne do przeprowadzenia usługi
+end note
+
+!endif
 @enduml

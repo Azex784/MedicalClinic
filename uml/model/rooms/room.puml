@@ -8,4 +8,14 @@ abstract class Room{
 Room <|-- SurgeryRoom
 Room <|-- ConsultationRoom
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Room
+Abstrakcyjna klasa reprezentująca
+sale.
+roomNumber - numer sali
+end note
+
+!endif
+
 @enduml

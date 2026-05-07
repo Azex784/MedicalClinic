@@ -6,5 +6,16 @@ class Doctor{
 +getInfo():string
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Doctor
+Klasa reprezentująca doktora.
+Klasa ta dziedziczy z klasy Personnel.
+specialisation określa jakie specjalizacje
+doktor - jakie zabiegi może dokonać.
+doctorCost - określa koszt lekarza w zależności od prestiżu lekarza.
+end note
+
+!endif
 
 @enduml

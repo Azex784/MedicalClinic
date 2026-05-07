@@ -1,11 +1,17 @@
 @startuml
 
+
 class Address{
 -city:string
 -street:string
 -number:string
 +getInfo():string
-
 }
+
+!ifndef UKRYJ_NOTATKI
+note right of Address
+Klasa reprezentująca adres pacjenta.
+end note
+!endif
 
 @enduml

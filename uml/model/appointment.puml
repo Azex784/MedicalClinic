@@ -11,7 +11,27 @@ class Appointment{
 
 Appointment --> Patient
 Appointment --> Service
-Appointment --> "0..*" Personnel : assignedPersonnel >
+Appointment --> "0..*" Personnel : lista personelu >
 Appointment --> Room
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Appointment
+Klasa reprezentująca spotkanie z lekarzem.
+appointmentBeginDate - data rozpoczęcia spotkania
+appointmentEndDate - data zakończenia spotkania, obliczana
+na podstawie czasu trwania usługi
+appointmentCost - koszt spotkania wyliczony dodając koszt
+przydzielonych lekarzy, koszt usługi.
+Klasa ta zawiera wskaznik do pacjenta, usługi i zawiera liste
+przydzielonego personelu do danej usługi i do pokoju w którym
+spotkanie się odbędzie.
+changeAppointmentDate - metoda zmienia date spotkania, jeśli dany
+termin i personel jest w tej dacie wolny. Zwraca wartość co
+informuje czy powiodła się zmiana.
+cancelAppointmentDate - anulowanie umuwionego spotkania.
+end note
+
+!endif
 
 @enduml

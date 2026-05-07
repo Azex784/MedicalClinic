@@ -8,4 +8,20 @@ class Treatment{
 +getInfo():string
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Treatment
+Klasa reprezentująca zabieg.
+isAnaesthesiaNeeded - czy potrzebny jest
+znieczulenie. Jeśli tak naliczana jest opłata
+w wyokości 100 zł
+requiresXRay - czy potrzeba przeprowadić prześwietlenie
+requiresLaser - czy potrzebny jest laser zabiegowy
+requiredNurseSize - liczba potrzbnych pięleniarek do przeprowadzenia
+zabiegu
+end note
+
+!endif
+
+
 @enduml

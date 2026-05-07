@@ -3,9 +3,18 @@
 class Consultation{
 -topic:string
 -isOnline: bool
--numberOfChairsRequired: unsinged int
 +getInfo():string
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of Consultation
+Klasa reprezentująca konsultacje.
+topic - temat konsultacji
+isOnline - czy konsultacja jest przeprowadzana w
+trybie online.
+end note
+
+!endif
 
 @enduml

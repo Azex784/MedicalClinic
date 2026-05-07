@@ -3,5 +3,12 @@
 class Nurse{
 +getInfo():string
 }
+!ifndef UKRYJ_NOTATKI
 
+note right of Nurse
+Klasa reprezentująca pielegniarke.
+Klasa ta dziedziczy z klasy Personnel.
+end note
+
+!endif
 @enduml

@@ -1,8 +1,17 @@
 @startuml
 
 class ConsultationRoom{
--numberOfCharis:unsigned int
 +getInfo():string
 }
+
+!ifndef UKRYJ_NOTATKI
+
+note right of ConsultationRoom
+Klasa reprezentująca sale przeznaczoną
+do przeprowadzania konsultacji.
+Klasa ta dziedziczy z klasy Room.
+end note
+
+!endif
 
 @enduml
