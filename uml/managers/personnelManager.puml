@@ -4,7 +4,6 @@ class PersonnelManager {
 +getPersonnel(personnelId:unsigned int):Personnel
 +addDoctor(firstName:string, lastName:string, personnelId:unsigned int, specialisation:vector<specialisation>):Personnel
 +addNurse(firstName:string, lastName:string, personnelId:unsigned int):Personnel
-+removePersonnel(personnelId:unsigned int):void
 +findPersonnels(predicate:PersonnelPredicate):Personnel[0..*]
 +findAll():Personnel[0..*]
 }
@@ -15,9 +14,6 @@ note right of PersonnelManager
 Klasa zarządzająca personelem.
 addDoctor dodaje lekarza
 addNurse dodaje pielęgniarke
-removePersonnel - sprawia że dana osoba
-personelu staje się archiwalna i przestaje być aktywna(dostępna).
-Metoda ta również anuluje wszystkie spotkania danego czlowieka personelu.
 end note
 
 !endif

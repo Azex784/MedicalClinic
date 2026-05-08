@@ -3,7 +3,6 @@
 class PatientManager {
   +getPatient(personalID:string):Patient
   +registerPatient(firstName:string, lastName:string, personalID:string, address:Address):Patient
-  +unregisterPatient(personalID:string):void
   +findPatients(predicate:PatientPredicate):Patient[0..*]
   +findAllPatients():Patient[0..*]
 }
@@ -13,7 +12,6 @@ class PatientManager {
 note right of PatientManager
 Klasa zarządzająca pacjentami.
 registerPatient - dodaje pacjenta do repozytorium
-unregisterPatient - zmienia atrybut isArchive na true
 co może się odbyć gdy pacjent nie ma zaplanowanego żadnego
 spotkania.
 end note

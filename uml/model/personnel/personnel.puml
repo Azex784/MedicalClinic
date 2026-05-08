@@ -8,7 +8,6 @@ abstract class Personnel{
 
 Personnel <|-- Doctor
 Personnel <|-- Nurse
-Personnel "0..*" --> "0..*" Appointment : lista aktywnych spotkan - słabe wskazniki >
 
 !ifndef UKRYJ_NOTATKI
 
@@ -22,8 +21,6 @@ jest teraz dostępny.Jesli nie jest
 moze byc przyporzadkowany do uslugi.
 personnelId - specjalny
 identyfikator pracownika personelu.
-Klasa ta również przechwywuje liste
-swoich zaplanowanych spotkań.
 end note
 
 
