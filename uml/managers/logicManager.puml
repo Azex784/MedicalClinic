@@ -5,11 +5,22 @@ class LogicManager {
 +getPatientManager():PatientManager
 +getServiceManager():ServiceManager
 +getAppointmentManager():AppointmentManager
++removePersonnel(personnelId:unsigned int):void
 }
 
 LogicManager *--> AppointmentManager
 LogicManager *--> PatientManager
 LogicManager *--> PersonnelManager
 LogicManager *--> ServiceManager
+LogicManager *--> RoomManager
 
+
+!ifndef UKRYJ_NOTATKI
+
+note right of LogicManager
+Klasa zawierającą wszystkie obiekty zarządców.
+removePersonnel - metoda
+end note
+
+!endif
 @enduml

@@ -2,9 +2,10 @@
 
 class AppointmentManager {
   +getPatientAppointments(patient:Patient):Appointment[0..*]
-  +getAppointmentAppointments(personnel:Appointment):Appointment[0..*]
+  +getPersonnelAppointments(personnel:Appointment):Appointment[0..*]
   +getServiceAppointments(service:Service):Appointment[0..*]
   +getAppointmentsCost(patient:Patient):unsigned int
+  +getRoomAppointments(room:Room):Appointment[0..*]
 
   +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime)
   +finishAppointment(patient:Patient, beginTime:ptime):unsigned int
@@ -12,6 +13,24 @@ class AppointmentManager {
   +findAppointments(predicate:AppointmentPredicate):Appointment[0..*]
   +findAllAppointments():Appointment[0..*]
 }
+
+!ifndef UKRYJ_NOTATKI
+
+note right of AppointmentManager
+Klasa zarządzająca spotkaniami.
+getAppointmentsCost - wysokość kosztów danego klienta
+arrangeAppointment - metoda służąca do zorganizowania
+spotkania. Dodaje ona spotkanie do repozytrium activeAppointments.
+ Musi ona sprawdzić czy personel i dany
+pokój jest wolny w danym terminie
+finishAppointment - metoda szukająca dane
+spotkanie klienta, wyliczajacy konćowy koszt.
+Sprawia ona również że klasa Appointment zostaje dodana do
+repozytrium archive. Usuwa również siebie z aktywnych spotkań
+personelu.
+end note
+
+!endif
 
 AppointmentManager *-->  "archiveAppointments" AppointmentRepository
 

@@ -1,0 +1,12 @@
+@startuml
+
+!define UKRYJ_NOTATKI
+
+!include ../model/patient/patient.puml
+!include ../model/patient/address.puml
+!include ../model/personnel/doctor.puml
+!include ../model/personnel/nurse.puml
+!include ../model/personnel/personnel.puml
+!include ../model/person.puml
+
+@enduml

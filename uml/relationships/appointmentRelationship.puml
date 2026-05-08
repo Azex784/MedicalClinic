@@ -1,0 +1,11 @@
+@startuml
+
+!define UKRYJ_NOTATKI
+
+!include ../model/services/service.puml
+!include ../model/appointment.puml
+!include ../model/rooms/room.puml
+!include ../model/personnel/personnel.puml
+
+
+@enduml

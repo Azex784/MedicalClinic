@@ -1,9 +1,0 @@
-@startuml
-
-!define UKRYJ_NOTATKI
-
-!include ../rooms/room.puml
-!include ../rooms/consultingRoom.puml
-!include ../rooms/surgeryRoom.puml
-
-@enduml

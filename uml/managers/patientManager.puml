@@ -8,6 +8,18 @@ class PatientManager {
   +findAllPatients():Patient[0..*]
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of PatientManager
+Klasa zarządzająca pacjentami.
+registerPatient - dodaje pacjenta do repozytorium
+unregisterPatient - zmienia atrybut isArchive na true
+co może się odbyć gdy pacjent nie ma zaplanowanego żadnego
+spotkania.
+end note
+
+!endif
+
 PatientManager *--> PatientRepository
 PatientRepository --> Patient
 PatientRepository ..> PatientPredicate

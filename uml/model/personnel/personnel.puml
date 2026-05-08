@@ -8,6 +8,7 @@ abstract class Personnel{
 
 Personnel <|-- Doctor
 Personnel <|-- Nurse
+Personnel "0..*" --> "0..*" Appointment : lista aktywnych spotkan - słabe wskazniki >
 
 !ifndef UKRYJ_NOTATKI
 
@@ -17,10 +18,16 @@ personnel.
 Klasa ta dziedziczy z klasy person.
 isActive - reprezuntuje czy dany
 człowiek przynależący do personelu
-jest teraz dostępny.
+jest teraz dostępny.Jesli nie jest
+moze byc przyporzadkowany do uslugi.
 personnelId - specjalny
-idetyifatkor pracownika personelu.
+identyfikator pracownika personelu.
+Klasa ta również przechwywuje liste
+swoich zaplanowanych spotkań.
 end note
+
+
+
 
 !endif
 @enduml

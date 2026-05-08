@@ -29,7 +29,7 @@ spotkanie się odbędzie.
 changeAppointmentDate - metoda zmienia date spotkania, jeśli dany
 termin i personel jest w tej dacie wolny. Zwraca wartość co
 informuje czy powiodła się zmiana.
-cancelAppointmentDate - anulowanie umuwionego spotkania.
+cancelAppointmentDate - anulowanie umówionego spotkania.
 end note
 
 !endif

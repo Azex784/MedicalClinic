@@ -1,0 +1,12 @@
+@startuml
+
+!define UKRYJ_NOTATKI
+
+!include ../model/managers/appointmentManager.puml
+!include ../model/managers/logicManager.puml
+!include ../model/managers/patientManager.puml
+!include ../model/managers/personnelManager.puml
+!include ../model/managers/serviceManager.puml
+!include ../model/managers/roomManager.puml
+
+@enduml

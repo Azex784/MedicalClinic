@@ -9,6 +9,19 @@ class ServiceManager {
   +findAllServices():Service[0..*]
 }
 
+!ifndef UKRYJ_NOTATKI
+
+note right of ServiceManager
+Klasa zarządzająca usługami.
+addConsultation - dodaje kosnultacje
+addTreatment - dodaje zabieg
+removeService - usuwa daną usuługę, jeśli
+nie ma zaplanowanych w przyszłości spotkań.
+end note
+
+!endif
+
+
 ServiceManager *--> ServiceRepository
 ServiceRepository --> Service
 ServiceRepository ..> ServicePredicate

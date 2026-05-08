@@ -2,18 +2,23 @@
 
 abstract class Room{
 -roomNumber:unsigned int
+-isActive:unsigned int
 +{abstract} getInfo(): string
 }
 
 Room <|-- SurgeryRoom
 Room <|-- ConsultationRoom
+Room "0..*" --> "0..*" Appointment : lista aktywnych spotkan - słabe wskazniki >
 
 !ifndef UKRYJ_NOTATKI
 
 note right of Room
 Abstrakcyjna klasa reprezentująca
 sale.
+Klasa ta również przechwywuje liste
+swoich zaplanowanych spotkań.
 roomNumber - numer sali
+isActive - czy sala jest dostępna
 end note
 
 !endif

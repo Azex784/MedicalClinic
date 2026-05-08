@@ -1,0 +1,10 @@
+@startuml
+
+!include ../model/repositories/patientRepository.puml
+!include ../model/repositories/personnelRepository.puml
+!include ../model/repositories/appointmentRepository.puml
+!include ../model/repositories/serviceRepository.puml
+
+
+
+@enduml

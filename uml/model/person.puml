@@ -3,6 +3,7 @@
 abstract class Person{
 -name:string
 -lastName:string
+-isArchive:bool
 + {abstract} getInfo(): string
 }
 
@@ -11,6 +12,7 @@ abstract class Person{
 note right of Person
 Abstrakcyjna klasa reprezentująca
 człowieka.
+isArchive - prezentuje czy dany człowiek jest archiwalny.
 end note
 
 !endif
