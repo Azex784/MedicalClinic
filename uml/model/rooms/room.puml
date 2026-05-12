@@ -6,7 +6,7 @@ abstract class Room{
 +{abstract} getInfo(): string
 }
 
-Room <|-- SurgeryRoom
+Room <|-- RehabillitationRoom
 Room <|-- ConsultationRoom
 
 !ifndef UKRYJ_NOTATKI

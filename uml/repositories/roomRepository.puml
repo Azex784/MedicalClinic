@@ -1,0 +1,16 @@
+@startuml
+
+class RoomRepository{
++get(roomNumber:unigned int):Room
++add(room:Room):void
++remove(room:Room):void
++report():string
++size():int
++findBy(predicate:RoomPredicate):Room[0..*]
++findAll():Room[0..*]
+}
+
+RoomRepository --> Room
+RoomRepository ..> RoomPredicate
+
+@enduml

@@ -3,7 +3,7 @@
 class ServiceManager {
   +getService(serviceID:unsigned int):Service
   +addConsultation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,topic:string):Service
-  +addTreatment(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,isAnaesthesiaNeeded: bool):Service
+  +addRehabillitation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,requiresPhysicalTherapyDevices: bool, requiresKinesitherapySpace: bool, requiresRoboticOrSuspensionSystem: bool):Service
   +findServices(predicate:ServicePredicate):Service[0..*]
   +findAllServices():Service[0..*]
 }
@@ -13,7 +13,7 @@ class ServiceManager {
 note right of ServiceManager
 Klasa zarządzająca usługami.
 addConsultation - dodaje kosnultacje
-addTreatment - dodaje zabieg
+addRehabillitation - dodaje zabieg
 end note
 
 !endif

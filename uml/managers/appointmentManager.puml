@@ -21,13 +21,12 @@ Klasa zarządzająca spotkaniami.
 getAppointmentsCost - wysokość kosztów danego klienta
 arrangeAppointment - metoda służąca do zorganizowania
 spotkania. Dodaje ona spotkanie do repozytrium activeAppointments.
- Musi ona sprawdzić czy personel i dany
+Musi ona sprawdzić czy personel i dany
 pokój jest wolny w danym terminie
 finishAppointment - metoda szukająca dane
 spotkanie klienta, wyliczajacy konćowy koszt.
 Sprawia ona również że klasa Appointment zostaje dodana do
-repozytrium archive. Usuwa również siebie z aktywnych spotkań
-personelu.
+repozytrium archive.
 end note
 
 !endif

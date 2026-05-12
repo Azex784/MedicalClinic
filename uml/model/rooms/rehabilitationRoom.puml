@@ -1,0 +1,26 @@
+@startuml
+
+class RehabillitationRoom{
+-hasPhysicalTherapyDevices: bool
+-hasKinesitherapySpace: bool
+-hasRoboticOrSuspensionSystem: bool
+-maxCapacity: int
++getInfo():string
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of RehabillitationRoom
+Klasa reprezentująca sale przeznaczoną
+do przeprowadzania zabiegów.
+Klasa ta dziedziczy z klasy Room.
+hasPhysicalTherapyDevices - informuje czy jest zapewniona fizykoterapii.
+hasKinesitherapySpace - informuje czy jest zapewniona kinezyterapia.
+hasRoboticOrSuspensionSystem - informuje czy umożilwia rehabilitacje neuromotoryczna
+maxCapacity - informuje ile maksymalnie personelu
+może się zmieścić w sali.
+end note
+
+!endif
+
+@enduml

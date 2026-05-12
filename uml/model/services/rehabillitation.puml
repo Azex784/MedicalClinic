@@ -1,0 +1,26 @@
+@startuml
+
+class Rehabillitation{
+-requiresPhysicalTherapyDevices: bool
+-requiresKinesitherapySpace: bool
+-requiresRoboticOrSuspensionSystem: bool
+-requiredNurseSize: unsigned int
++getInfo():string
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Rehabillitation
+Klasa reprezentująca zabieg.
+requiresPhysicalTherapyDevices - czy potrzeba
+fizykoterapii.
+requiresKinesitherapySpace - czy potrzebny jest terapia manualna
+requiresRoboticOrSuspensionSystem - czy potrzebna jest rehabilitacja neuromotoryczna
+requiredNurseSize - liczba potrzbnych pięleniarek do przeprowadzenia
+zabiegu
+end note
+
+!endif
+
+
+@enduml

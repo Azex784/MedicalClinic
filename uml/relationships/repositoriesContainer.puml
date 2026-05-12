@@ -1,9 +1,13 @@
 @startuml
 
-!include ../model/repositories/patientRepository.puml
-!include ../model/repositories/personnelRepository.puml
-!include ../model/repositories/appointmentRepository.puml
-!include ../model/repositories/serviceRepository.puml
+!define UKRYJ_NOTATKI
+
+!include ../repositories/patientRepository.puml
+!include ../repositories/personnelRepository.puml
+!include ../repositories/appointmentRepository.puml
+!include ../repositories/serviceRepository.puml
+!include ../repositories/roomRepository.puml
+!include ../repositories/storageContainer.puml
 
 
 

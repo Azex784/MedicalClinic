@@ -1,0 +1,20 @@
+@startuml
+
+!define UKRYJ_NOTATKI
+!include ../model/personnel/doctor.puml
+!include ../model/services/service.puml
+
+enum specialisation {
+    PHYSIOTHERAPIST,
+    ORTHOPEDIST,
+    NEUROLOGIST,
+    SPORTS_MEDICINE,
+    OSTEOPATH,
+    MASSAGE_THERAPIST,
+    RHEUMATOLOGIST
+}
+
+Doctor .up.> specialisation : używa >
+Service .up.> specialisation : potrzebuje >
+
+@enduml

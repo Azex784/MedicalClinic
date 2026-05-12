@@ -1,7 +1,7 @@
 @startuml
 
 class PatientRepository{
-+get(i:int):Patient
++get(personalNumber:string):Patient
 +add(patient:Patient):void
 +remove(patient:Patient):void
 +report():string

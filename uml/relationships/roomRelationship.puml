@@ -3,7 +3,7 @@
 !define UKRYJ_NOTATKI
 
 !include ../model/rooms/room.puml
-!include ../model/rooms/consultingRoom.puml
-!include ../model/rooms/surgeryRoom.puml
+!include ../model/rooms/consultationRoom.puml
+!include ../model/rooms/rehabilitationRoom.puml
 
 @enduml

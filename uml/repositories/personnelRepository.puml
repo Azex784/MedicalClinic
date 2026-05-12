@@ -1,7 +1,7 @@
 @startuml
 
 class PersonnelRepository{
-+get(i:int):Personnel
++get(personnelId:usnigned int):Personnel
 +add(personnel:Personnel):void
 +remove(personnel:Personnel):void
 +report():string

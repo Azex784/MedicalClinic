@@ -36,7 +36,7 @@ archiwalny jeśli nie ma żadnych spotkań
 removeRoom - sprawia że pokój staje się nieaktywny i anuluje
 wszsytkie spotkania
 removeService - sprawia że dana usługa
-staje się archiwlna,
+staje się nie dostępna archiwlna,
 jeśli nie ma zaplanowynych już terminów
 związanych z tą usługą.
 

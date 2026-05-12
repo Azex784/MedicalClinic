@@ -2,8 +2,8 @@
 
 class RoomManager {
 +getRoom(roomNumber:unsigned int):Room
-+addSurgeryRoom(roomNumber:unsigned int):void
-+addConsultingRoom(roomNumber:unsigned int,hasLaser: bool, hasXRay: bool, maxCapacity: int):void
++addConsultationRoom(roomNumber:unsigned int):void
++addRehabillitationRoom(roomNumber:unsigned int, hasPhysicalTherapyDevices: bool, hasKinesitherapySpace: bool, hasRoboticOrSuspensionSystem: bool, maxCapacity: int):void
 +findRooms(predicate:RoomPredicate):Room[0..*]
 +findAll():Rooml[0..*]
 }
@@ -12,8 +12,8 @@ class RoomManager {
 
 note right of RoomManager
 Klasa zarządzająca pomieszczeniami.
-addSurgeryRoom dodaje pokój zabiegowy
-addConsultingRoom dodaje pokój konsultacyjny
+addRehabillitationRoom dodaje pokój zabiegowy
+addConsultationRoom dodaje pokój konsultacyjny
 end note
 
 !endif

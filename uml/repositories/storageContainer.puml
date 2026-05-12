@@ -1,0 +1,35 @@
+@startuml
+
+class StorageContainer {
+  - patientRepository: PatientRepository
+  - personnelRepository: PersonnelRepository
+  - roomRepository: RoomRepository
+  - serviceRepository: ServiceRepository
+  - appointmentRepository: AppointmentRepository
+
+  + getPatientRepository(): PatientRepository
+  + getPersonnelRepository(): PersonnelRepository
+  + getRoomRepository(): RoomRepository
+  + getServiceRepository(): ServiceRepository
+  + getAppointmentRepository(): AppointmentRepository
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of StorageContainer
+  Klasa narzędziowa:
+  - tworzy i przechowuje instancje repozytoriów
+  - zarządza ich pamięcią (kompozycja)
+  - jej przeznaczenie to głównie testy
+end note
+
+!endif
+
+
+StorageContainer *--> PatientRepository
+StorageContainer *--> PersonnelRepository
+StorageContainer *--> RoomRepository
+StorageContainer *--> ServiceRepository
+StorageContainer *--> AppointmentRepository
+
+@enduml

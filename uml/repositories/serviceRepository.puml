@@ -1,7 +1,7 @@
 @startuml
 
 class ServiceRepository{
-+get(i:int):Service
++get(serviceId:usnigned int):Service
 +add(service:Service):void
 +remove(service:Service):void
 +report():string
