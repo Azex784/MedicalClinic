@@ -17,7 +17,7 @@ personnel.
 Klasa ta dziedziczy z klasy person.
 isActive - reprezuntuje czy dany
 człowiek przynależący do personelu
-jest teraz dostępny.Jesli nie jest
+jest teraz dostępny. Jesli nie jest
 moze byc przyporzadkowany do uslugi.
 personnelId - specjalny
 identyfikator pracownika personelu.

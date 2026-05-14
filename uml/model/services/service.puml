@@ -24,7 +24,7 @@ serviceName - nazwa usługi
 serviceId - unikalny numer usługi
 requiredDoctorSize - wymagana liczba lekarzy
 requiredDoctorSpec - wymagane specjalności lekarza
-isAvailble - czy jest dostępna
+isAvailble - czy jest dostępna dana usługa
 potrzebne do przeprowadzenia usługi
 end note
 

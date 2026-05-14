@@ -14,8 +14,8 @@ note right of RehabillitationRoom
 Klasa reprezentująca sale przeznaczoną
 do przeprowadzania zabiegów.
 Klasa ta dziedziczy z klasy Room.
-hasPhysicalTherapyDevices - informuje czy jest zapewniona fizykoterapii.
-hasKinesitherapySpace - informuje czy jest zapewniona kinezyterapia.
+hasPhysicalTherapyDevices - informuje czy jest zapewniona fizykoterapii - zabiegi "na prąd", światło, zimno i fale.
+hasKinesitherapySpace - informuje czy jest zapewniona kinezyterapia - leczenie ruchem / gimnastyka.
 hasRoboticOrSuspensionSystem - informuje czy umożilwia rehabilitacje neuromotoryczna
 maxCapacity - informuje ile maksymalnie personelu
 może się zmieścić w sali.
