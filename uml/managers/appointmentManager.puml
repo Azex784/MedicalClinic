@@ -7,7 +7,7 @@ class AppointmentManager {
   +getAppointmentsCost(patient:Patient):unsigned int
   +getRoomAppointments(room:Room):Appointment[0..*]
 
-  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime)
+  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime):Appointment
   +finishAppointment(patient:Patient, beginTime:ptime):unsigned int
 
   +findAppointments(predicate:AppointmentPredicate):Appointment[0..*]
@@ -23,8 +23,10 @@ arrangeAppointment - metoda służąca do zorganizowania
 spotkania. Dodaje ona spotkanie do repozytrium activeAppointments.
 Musi ona sprawdzić czy personel i dany
 pokój jest wolny w danym terminie
+W przypadku braku dopasowania odpowiednich pararmtrów
+zostaje zwrócony nullptr.
 finishAppointment - metoda szukająca dane
-spotkanie klienta, wyliczajacy konćowy koszt.
+spotkanie klienta, wyliczajacy końcowy koszt.
 Sprawia ona również że klasa Appointment zostaje dodana do
 repozytrium archive.
 end note

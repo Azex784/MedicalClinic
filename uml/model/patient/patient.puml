@@ -14,9 +14,6 @@ Klasa reprezentująca pacjenta.
 Klasa ta dziedziczy z klasy person.
 personalNumber jest unikatowym pararmetrem
 pacjenta.
-Klasa pacjenta zawiera w sobie adres jako
-share_pointer - wiele kilentów może mieć
-taki sam adres.
 end note
 
 !endif
