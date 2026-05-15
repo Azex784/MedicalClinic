@@ -7,7 +7,7 @@ class ConsultationRoom{
 !ifndef UKRYJ_NOTATKI
 
 note right of ConsultationRoom
-Klasa reprezentująca sale przeznaczoną
+Klasa reprezentująca salę przeznaczoną
 do przeprowadzania konsultacji.
 Klasa ta dziedziczy z klasy Room.
 end note

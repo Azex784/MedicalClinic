@@ -11,8 +11,7 @@ class Doctor{
 note right of Doctor
 Klasa reprezentująca doktora.
 Klasa ta dziedziczy z klasy Personnel.
-specialisation określa jakie specjalizacje
-doktor - jakie zabiegi może dokonać.
+specialisation określa jakie specjalizacje ma doktor - jakie zabiegi może dokonać.
 doctorCost - określa koszt lekarza w zależności od prestiżu lekarza.
 end note
 

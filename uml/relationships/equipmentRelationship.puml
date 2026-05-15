@@ -1,0 +1,27 @@
+@startuml
+
+!define UKRYJ_NOTATKI
+
+enum equipment {
+    NONE,
+    PHYSICAL_THERAPY_DEVICE,
+    KINESITHERAPY_SPACE,
+    ROBOTIC_SYSTEM
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of specialisation
+Typ wyliczeniowy zawierający cały sprzęt mogący
+być potrzebny przez daną rehabilitacje.
+Informuje on również w klasie RehabillitationRoom
+czy dany pokój zawiera odpowiedni sprzęt.
+end note
+
+!endif
+
+
+RehabillitationRoom .up.> equipment : używa >
+Rehabillitation .up.> equipment : potrzebuje >
+
+@enduml

@@ -5,8 +5,6 @@ class Appointment{
 -appointmentEndDate:ptime
 -appointmentId:usigned int
 -appointmentCost:unsigned int
-+changeAppointmentDate(ptime _date):bool
-+cancelAppointmentDate(ptime _date):void
 +getInfo():string
 }
 
@@ -24,14 +22,11 @@ appointmentBeginDate - data rozpoczęcia spotkania
 appointmentEndDate - data zakończenia spotkania, obliczana
 na podstawie czasu trwania usługi
 appointmentCost - koszt spotkania wyliczony dodając koszt
-przydzielonych lekarzy, koszt usługi.
+prestiżu przydzielonych lekarzy i koszt usługi.
 Klasa ta zawiera wskaznik do pacjenta, usługi i zawiera liste
 przydzielonego personelu do danej usługi i do pokoju w którym
 spotkanie się odbędzie.
-changeAppointmentDate - metoda zmienia date spotkania, jeśli dany
-termin i personel jest w tej dacie wolny. Zwraca wartość co
-informuje czy powiodła się zmiana.
-cancelAppointmentDate - anulowanie umówionego spotkania.
+
 end note
 
 !endif

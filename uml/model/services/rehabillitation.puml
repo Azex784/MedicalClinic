@@ -1,9 +1,7 @@
 @startuml
 
 class Rehabillitation{
--requiresPhysicalTherapyDevices: bool
--requiresKinesitherapySpace: bool
--requiresRoboticOrSuspensionSystem: bool
+-requiredEqupiment: vector<equpiment>
 -requiredNurseSize: unsigned int
 +getInfo():string
 }
@@ -12,10 +10,8 @@ class Rehabillitation{
 
 note right of Rehabillitation
 Klasa reprezentująca zabieg.
-requiresPhysicalTherapyDevices - czy potrzeba
-fizykoterapii.
-requiresKinesitherapySpace - czy potrzebny jest terapia manualna
-requiresRoboticOrSuspensionSystem - czy potrzebna jest rehabilitacja neuromotoryczna
+requiredEqupiment - lista sprzętu,
+potrzebnego do przeprowadzenia zabiegu.
 requiredNurseSize - liczba potrzbnych pięleniarek do przeprowadzenia
 zabiegu
 end note

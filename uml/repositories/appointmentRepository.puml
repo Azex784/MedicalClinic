@@ -10,7 +10,19 @@ class AppointmentRepository{
 +findAll():Appointment[0..*]
 }
 
-AppointmentRepository -->  Appointment
+AppointmentRepository "[0..*]"  -->  Appointment
 AppointmentRepository ..>  AppointmentPredicate
 
+
+!ifndef UKRYJ_NOTATKI
+
+note right of AppointmentRepository
+Klasa pełniąca rolę magazynu danych.
+Zapewnia standardowy interfejs do
+zarządzania obiektami: dodawanie, usuwanie,
+pobieranie oraz zaawansowane wyszukiwanie
+za pomocą predykatów.
+end note
+
+!endif
 @enduml

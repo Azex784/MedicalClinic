@@ -11,15 +11,18 @@ class PersonnelManager {
 !ifndef UKRYJ_NOTATKI
 
 note right of PersonnelManager
-Klasa zarządzająca personelem.
-addDoctor dodaje lekarza
-addNurse dodaje pielęgniarke
+Klasa zarządzająca repozytorium personlu.
+addDoctor - dodaje lekarza
+addNurse - dodaje pielęgniarke
+findPersonnels - predykt zwracający konkrenty niearchiwalny personel
+findAll - zawraca cały niearchiwalny personel
 end note
 
 !endif
 
 PersonnelManager *--> PersonnelRepository
-PersonnelRepository --> Personnel
-PersonnelRepository ..> PersonnelPredicate
+
+PersonnelManager  ..>Personnel
+PersonnelManager ..> PersonnelPredicate
 
 @enduml

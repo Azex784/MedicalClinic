@@ -1,10 +1,8 @@
 @startuml
 
 !define UKRYJ_NOTATKI
-!include ../model/personnel/doctor.puml
-!include ../model/services/service.puml
 
-enum specialisation {
+enum  specialisation {
     PHYSIOTHERAPIST,
     ORTHOPEDIST,
     NEUROLOGIST,
@@ -13,6 +11,16 @@ enum specialisation {
     MASSAGE_THERAPIST,
     RHEUMATOLOGIST
 }
+
+!ifndef UKRYJ_NOTATKI
+
+note right of specialisation
+Typ wyliczeniowy zawierająćy wszystkie
+specjalności.
+end note
+
+!endif
+
 
 Doctor .up.> specialisation : używa >
 Service .up.> specialisation : potrzebuje >

@@ -10,7 +10,19 @@ class PersonnelRepository{
 +findAll():Personnel[0..*]
 }
 
-PersonnelRepository --> Personnel
+PersonnelRepository  "[0..*]" --> Personnel
 PersonnelRepository ..> PersonnelPredicate
+
+!ifndef UKRYJ_NOTATKI
+
+note right of PersonnelRepository
+Klasa pełniąca rolę magazynu danych.
+Zapewnia standardowy interfejs do
+zarządzania obiektami: dodawanie, usuwanie,
+pobieranie oraz zaawansowane wyszukiwanie
+za pomocą predykatów.
+end note
+
+!endif
 
 @enduml

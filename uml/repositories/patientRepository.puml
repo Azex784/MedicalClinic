@@ -10,6 +10,18 @@ class PatientRepository{
 +findAll():Patient[0..*]
 }
 
-PatientRepository --> Patient
+PatientRepository "[0..*]" --> Patient
 PatientRepository ..> PatientPredicate
+
+!ifndef UKRYJ_NOTATKI
+
+note right of PatientRepository
+Klasa pełniąca rolę magazynu danych.
+Zapewnia standardowy interfejs do
+zarządzania obiektami: dodawanie, usuwanie,
+pobieranie oraz zaawansowane wyszukiwanie
+za pomocą predykatów.
+end note
+
+!endif
 @enduml

@@ -10,7 +10,19 @@ class ServiceRepository{
 +findAll():Service[0..*]
 }
 
-ServiceRepository --> Service
+ServiceRepository  "[0..*]" --> Service
 ServiceRepository ..> ServicePredicate
+
+!ifndef UKRYJ_NOTATKI
+
+note right of ServiceRepository
+Klasa pełniąca rolę magazynu danych.
+Zapewnia standardowy interfejs do
+zarządzania obiektami: dodawanie, usuwanie,
+pobieranie oraz zaawansowane wyszukiwanie
+za pomocą predykatów.
+end note
+
+!endif
 
 @enduml

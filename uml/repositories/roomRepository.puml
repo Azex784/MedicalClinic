@@ -10,7 +10,19 @@ class RoomRepository{
 +findAll():Room[0..*]
 }
 
-RoomRepository --> Room
+RoomRepository  "[0..*]" --> Room
 RoomRepository ..> RoomPredicate
+
+!ifndef UKRYJ_NOTATKI
+
+note right of RoomRepository
+Klasa pełniąca rolę magazynu danych.
+Zapewnia standardowy interfejs do
+zarządzania obiektami: dodawanie, usuwanie,
+pobieranie oraz zaawansowane wyszukiwanie
+za pomocą predykatów.
+end note
+
+!endif
 
 @enduml

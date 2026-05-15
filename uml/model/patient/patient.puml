@@ -5,7 +5,7 @@ class Patient{
 +getInfo():string
 }
 
-Patient --> Address
+Patient "zawiera" -->  Address
 
 !ifndef UKRYJ_NOTATKI
 

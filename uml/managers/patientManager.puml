@@ -14,12 +14,13 @@ Klasa zarządzająca pacjentami.
 registerPatient - dodaje pacjenta do repozytorium
 co może się odbyć gdy pacjent nie ma zaplanowanego żadnego
 spotkania.
+findPatients - predykt zwracający konkretnych aktywnych  pacjentów
+findAllPatients - zawraca wszystkich aktywnych pacjentów
 end note
 
 !endif
 
-PatientManager *--> PatientRepository
-PatientRepository --> Patient
-PatientRepository ..> PatientPredicate
-
+PatientManager *-> PatientRepository
+PatientManager ..>Patient
+PatientManager ..> PatientPredicate
 @enduml

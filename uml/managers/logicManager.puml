@@ -9,7 +9,7 @@ class LogicManager {
 +removePersonnel(personnelId:unsigned int):void
 +unregisterPatient(personalID:string):void
 +removeRoom(roomNumber:unsigned int):void
-+removeService(serviceID:unsigned int):void
++removeService(serviceID:unsigned int):bool
 }
 
 LogicManager *--> AppointmentManager
@@ -26,20 +26,21 @@ Klasa zawierającą wszystkie obiekty zarządców.
 Klasa ta również obsługuje wszelkiego rodzaju archiwzacje/
 usuwanie danych z uwagi na dostęp do zasobów
 potrzebnych do zadecydowania czy dany
-zasób można usunąć lub by ewntualnie
+zasób można usunąć lub by ewentualnie
 dokonać jakiś czyności przed
 usunięciem.
 removePersonnel - sprawia że osobe z personelu
-staje się archiwalna i anuluje wszsytkie spotkania tej osoby
+staje się archiwalna, anuluje wszystkie spotkania tej osoby i
+staje się nieaktywna i archiwalna.
 unregisterPatient - sprawia że pacjent staje się
 archiwalny jeśli nie ma żadnych spotkań
-removeRoom - sprawia że pokój staje się nieaktywny i anuluje
-wszsytkie spotkania
+removeRoom - sprawia że pokój staje się nieaktywny, archiwalny i anuluje
+wszystkie spotkania tego pokoju.
 removeService - sprawia że dana usługa
-staje się nie dostępna archiwlna,
+staje się nie dostępna i archiwlna,
 jeśli nie ma zaplanowynych już terminów
-związanych z tą usługą.
-
+związanych z tą usługą. W zależności od sukcesu
+usunięcia jest zwracany bool.
 end note
 
 !endif

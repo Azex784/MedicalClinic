@@ -12,6 +12,8 @@ abstract class Person{
 note right of Person
 Abstrakcyjna klasa reprezentująca
 człowieka.
+name - imie
+lastName - nazwisko
 isArchive - prezentuje czy dany człowiek jest archiwalny.
 end note
 

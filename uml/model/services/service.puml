@@ -8,24 +8,27 @@ abstract class Service{
 -requiredDoctorSize: unsigned int
 -requiredDoctorSpec:specialisation
 -isAvailble:bool
+-isArchive:bool
 +{abstract}getInfo():string
 }
 
 Service <|-- Consultation
-Service <|-- Treatment
+Service <|-- Rehabillitation
 
 !ifndef UKRYJ_NOTATKI
 
 note right of Service
 Abstrakcyjna klasa reprezentująca usługę.
-serviceCost - koszt usługi, wliczając koszt pięlegniarekm Doktora
+serviceCost - koszt usługi, wliczającą koszt pielęgniarek i
+podstawową stawkę doktora
 serviceDuration - czas w minutach trwania usługi
 serviceName - nazwa usługi
 serviceId - unikalny numer usługi
 requiredDoctorSize - wymagana liczba lekarzy
 requiredDoctorSpec - wymagane specjalności lekarza
-isAvailble - czy jest dostępna dana usługa
+isAvailable - czy jest dostępna dana usługa -
 potrzebne do przeprowadzenia usługi
+isArchive - czy jest archiwalna
 end note
 
 !endif
