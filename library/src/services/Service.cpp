@@ -70,8 +70,10 @@ Service::Service(const unsigned int service_cost, const unsigned int service_dur
 
 const std::string Service::getInfo() const
 {
-    return "Nazwa usługi: " + getServiceName() + " koszt usług: " + to_string(getServiceCost()) +
-        " czas trwania" + to_string(getServiceDuration()) + " idetyfikator: " + to_string(getServiceId())
-        + " liczba lekarzy: " + to_string(getRequiredDoctorSize()) + " specjalziacja lekarza/y" + specialisationToString(getRequiredDoctorSpec());
+    return "Nazwa usługi: " + getServiceName() + ", koszt usług: " + to_string(getServiceCost()) +
+        ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getServiceId())
+        + ", liczba lekarzy: " + to_string(getRequiredDoctorSize()) + ", specjalizacja lekarza/y: " + specialisationToString(getRequiredDoctorSpec());
     ;
 }
+
+Service::~Service() = default;

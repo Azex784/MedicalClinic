@@ -12,7 +12,6 @@ bool Consultation::getIsOnline() const
 	return isOnline;
 }
 
-
 Consultation::Consultation(const unsigned service_cost, const unsigned service_duration,
                            const std::string& service_name, const unsigned service_id,
                            const unsigned required_doctor_size,

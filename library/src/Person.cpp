@@ -4,6 +4,7 @@
 Person::Person(const std::string& name, const std::string& last_name) : name(name),
                                                                         lastName(last_name)
 {
+    setIsArchive(false);
 }
 
 const std::string& Person::getName() const

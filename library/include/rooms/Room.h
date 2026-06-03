@@ -25,7 +25,7 @@ public:
 	/**
 	 * Domyślny destruktor klasy.
 	 */
-	~Room() = default;
+	virtual ~Room() = default;
 
 	/**
 	 * Metoda wirtualna zwracająca podstawowe informacje o sali.

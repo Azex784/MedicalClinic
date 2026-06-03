@@ -34,7 +34,7 @@ public:
 	/**
 	 * Domyślny destruktor klasy.
 	 */
-	~Service() = default;
+	virtual ~Service() =  0;
 
 	/**
 	 * Metoda wirtualna zwracająca pełne informacje o usłudze.

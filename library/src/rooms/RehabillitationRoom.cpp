@@ -7,10 +7,12 @@ using namespace std;
 const std::string RehabillitationRoom::getInfo() const
 {
 	ostringstream oss;
-	for (int i = 0; i < getAccessibleEqupiment().size(); i++)
+	int i;
+	for (i = 0; i < getAccessibleEqupiment().size() - 1; i++)
 	{
-		oss << equipmentToString(getAccessibleEqupiment()[i]) << " ";
+		oss << equipmentToString(getAccessibleEqupiment()[i]) << ", ";
 	}
+	oss << equipmentToString(getAccessibleEqupiment()[i]);
 	return Room::getInfo() + " pokoj rehabilitacyjny co moze maskymalnie pomiescic " + to_string(getMaxCapacity()) +
 		" osob z personulu, sprzęt dostępny w pokoju: " + oss.str();
 }

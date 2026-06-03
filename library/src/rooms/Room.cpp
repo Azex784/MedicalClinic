@@ -14,11 +14,21 @@ void Room::setIsArchive(const bool is_archive)
 
 Room::Room(const unsigned int room_number): roomNumber(room_number)
 {
+    setIsActive(true);
+    setIsArchive(false);
 }
 
 const std::string Room::getInfo() const
 {
-    return "Pokoj o numerze pokoju: " + to_string( getRoomNumber()) + ", dostepnosc: " + to_string(getIsActive());
+    string tmp;
+    if (getIsActive())
+    {
+        tmp = "aktywna";
+    }else
+    {
+        tmp = "nieaktywna";
+    }
+    return "Pokoj o numerze pokoju: " + to_string( getRoomNumber()) + ", dostepnosc: " + tmp;
 }
 
 unsigned int Room::getRoomNumber() const

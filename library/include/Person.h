@@ -30,7 +30,7 @@ public:
     /**
      * Domyślny destruktor klasy.
      */
-    ~Person() = default;
+    virtual ~Person() = default;
 
     /**
      * Pobiera imię osoby.

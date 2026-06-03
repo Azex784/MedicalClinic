@@ -12,7 +12,7 @@ enum class Specialisation;
  */
 class Personnel : public Person{
 private:
-    bool isActive;
+    bool isActive = 1;
     unsigned int personnelId;
 public:
     /**
@@ -26,7 +26,7 @@ public:
     /**
      * Domyślny destruktor klasy.
      */
-    ~Personnel() = default;
+    virtual ~Personnel() = default;
 
     /**
      * Zmienia status aktywności zawodowej pracownika.

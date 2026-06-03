@@ -14,6 +14,5 @@ const string specialisationToString(Specialisation spec)
 	case Specialisation::OSTEOPATH: return "Osteopata";
 	case Specialisation::MASSAGE_THERAPIST: return "Masażysta";
 	case Specialisation::RHEUMATOLOGIST: return "Reumatolog";
-	default: return "Nieznana specjalizacja";
 	}
 }

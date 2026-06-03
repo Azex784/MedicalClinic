@@ -31,19 +31,30 @@ include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${Boost_INCLUDE_DIRS}
 )
-#dla testów
-set(SOURCE_TEST_FILES
 
+set(SOURCE_TEST_FILES
+        test/master.cpp
+        test/PersonTest.cpp
+        test/patient/AddressTest.cpp
+        test/patient/PatientTest.cpp
+        test/personnel/PersonnelTest.cpp
+        test/personnel/DoctorTest.cpp
+        test/personnel/NurseTest.cpp
+        test/rooms/ConsultationRoomTest.cpp
+        test/rooms/RehabillitationRoomTest.cpp
+        test/rooms/RoomTest.cpp
+        test/services/ServiceTest.cpp
+        test/services/ConsultationTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 
-#add_executable (LibraryTester ${SOURCE_TEST_FILES})
+add_executable (LibraryTester ${SOURCE_TEST_FILES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
-#target_link_libraries (LibraryTester
-#        Library
-#        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-#)
+target_link_libraries (LibraryTester
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+)
 
 #dodaj test LibraryTest. Instrukcji cmake add_test może być wiele.
 #Dodatkowe parametry wpływają na szczegółowość generowanego raportu. Standardowo znajduje się on w Testing/Temporary.

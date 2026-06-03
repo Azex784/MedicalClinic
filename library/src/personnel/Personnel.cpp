@@ -26,5 +26,14 @@ void Personnel::setIsActive(const bool is_active)
 
 const std::string Personnel::getInfo() const
 {
-	return Person::getInfo() + " personel, aktywny zawodowo " + to_string(getPersonnelId()) ;
+	string tmp;
+	if (getIsActive())
+	{
+		tmp = "aktywyny zawodowo";
+	}else
+	{
+		tmp = "niedostępny";
+	}
+
+	return Person::getInfo() + " pracownik personelu, " + tmp;
 }

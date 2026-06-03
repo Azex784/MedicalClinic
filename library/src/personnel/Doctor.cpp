@@ -44,8 +44,15 @@ const std::string Doctor::getInfo() const
 	ostringstream ss;
 	for (int i = 0; i < getSpecialisation().size(); i++)
 	{
-		ss << specialisationToString(getSpecialisation()[i]) << " ";
+		if (i != getSpecialisation().size() - 1)
+		{
+			ss << specialisationToString(getSpecialisation()[i]) << " ";
+		}
+		else
+		{
+			ss << specialisationToString(getSpecialisation()[i]);
+		}
 	}
-	return Personnel::getInfo() + " doktor o cenie prestizu: " + to_string(getDoctorCost()) + " specjalności: " + ss.
+	return Personnel::getInfo() + " doktor o cenie prestizu: " + to_string(getDoctorCost()) + " specjalnosci: " + ss.
 		str();
 };
