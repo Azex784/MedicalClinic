@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 set(SOURCE_FILES
         include/typedefs.h
-        include/enums/Specialisation.h
-        include/enums/Equipment.h
+        src/enums/Specialisation.h
+        src/enums/Equipment.h
         src/patient/Patient.cpp
         src/patient/Address.cpp
         src/Person.cpp
@@ -17,6 +17,7 @@ set(SOURCE_FILES
         src/services/Consultation.cpp
         src/services/Rehabillitation.cpp
         src/Appointment.cpp
+        src/enums/Specialisation.cpp
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł

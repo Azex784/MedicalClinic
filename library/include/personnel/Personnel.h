@@ -11,21 +11,54 @@ enum class Specialisation;
  * Klasa reprezentująca personel
  */
 class Personnel : public Person{
-public:
-    Personnel(const std::string& name, const std::string& last_name, const unsigned int personnel_id);
-    ~Personnel() = default;
-
 private:
     bool isActive;
     unsigned int personnelId;
 public:
+    /**
+    * Konstruktor tworzący nowy obiekt personelu.
+    * @param name Imię pracownika.
+    * @param last_name Nazwisko pracownika.
+    * @param personnel_id Unikalny identyfikator przypisany do pracownika.
+    */
+    Personnel(const std::string& name, const std::string& last_name, const unsigned int personnel_id);
+
+    /**
+     * Domyślny destruktor klasy.
+     */
+    ~Personnel() = default;
+
+    /**
+     * Zmienia status aktywności zawodowej pracownika.
+     * * @param is_active Flaga aktywności: true - pracuje, false - nie pracuje.
+     */
     void setIsActive(const bool is_active);
+
+    /**
+     * Sprawdza, czy pracownik jest obecnie aktywny zawodowo.
+     * @return Flaga aktywności: true - pracuje, false - nie pracuje.
+     */
     bool getIsActive() const;
+
+    /**
+     * Pobiera unikalny identyfikator pracownika.
+     * @return Identyfikator personelu jako liczba całkowita.
+     */
     unsigned int getPersonnelId() const;
+
+    /**
+     * Czysto wirtualna metoda sprawdzająca, czy pracownik posiada uprawnienia do przeprowadzenia danego leczenia.
+     * @param specjalizacja Wymagana specjalizacja do weryfikacji.
+     * @return Wartość true, jeśli pracownik może przeprowadzić zabieg, w przeciwnym razie false.
+     */
     virtual bool canConductTreatment(Specialisation specjalizacja) const = 0;
+
+    /**
+     * Metoda zwracająca pełne informacje o pracowniku personelu.
+     * Nadpisuje metodę wirtualną z klasy bazowej.
+     * @return Sformatowany łańcuch znaków zawierający dane osobowe, identyfikator oraz status aktywności.
+     */
     const std::string getInfo() const override;
 };
-
-
 
 #endif //REHABILITATIONCENTRE_PERSONNEL_H

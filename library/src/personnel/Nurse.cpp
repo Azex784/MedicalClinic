@@ -1,4 +1,4 @@
-#include "../../include/personnel/Nurse.h"
+#include "personnel/Nurse.h"
 #include "enums/Specialisation.h"
 
 using namespace std;

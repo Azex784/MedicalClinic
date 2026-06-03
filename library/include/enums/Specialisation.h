@@ -1,6 +1,8 @@
 #ifndef REHABILITATIONCENTRE_SPECIALISATION_H
 #define REHABILITATIONCENTRE_SPECIALISATION_H
 
+#include <string>
+
 /**
  * Typ wyliczeniowy zawierajcy specjalizacje
  */
@@ -13,5 +15,9 @@ enum class Specialisation {
     MASSAGE_THERAPIST,
     RHEUMATOLOGIST
 };
+
+
+const std::string specialisationToString(Specialisation spec);
+
 
 #endif //REHABILITATIONCENTRE_SPECIALISATION_H

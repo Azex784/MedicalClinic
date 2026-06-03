@@ -1,8 +1,8 @@
 #include "Person.h"
 
 
-Person::Person(const std::string& name, const std::string& last_name): name(name),
-                                                                       lastName(last_name)
+Person::Person(const std::string& name, const std::string& last_name) : name(name),
+                                                                        lastName(last_name)
 {
 }
 
@@ -32,7 +32,7 @@ const std::string& Person::getLastName() const
     return lastName;
 }
 
-bool Person::getArchive() const
+bool Person::getIsArchive() const
 {
     return isArchive;
 }

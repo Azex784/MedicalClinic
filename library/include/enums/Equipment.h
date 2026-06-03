@@ -11,4 +11,6 @@ enum class Equipment {
     ROBOTIC_SYSTEM
 };
 
+const std::string equipmentToString(Equipment eq);
+
 #endif //REHABILITATIONCENTRE_EQUIPMENT_H
