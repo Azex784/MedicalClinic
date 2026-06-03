@@ -10,7 +10,10 @@ private:
     std::string topic;
     bool isOnline;
 public:
-    Consultation(const std::string& topic, const bool is_online);
+    Consultation(const unsigned service_cost, const unsigned service_duration, const std::string& service_name,
+        const unsigned service_id, const unsigned required_doctor_size, const Specialisation required_doctor_spec,
+        const std::string& topic, const bool is_online);
+
     ~Consultation() = default;
     const std::string getInfo() const override;
     const std::string& getTopic() const;
