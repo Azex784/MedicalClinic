@@ -1,8 +1,32 @@
 cmake_minimum_required(VERSION 3.4)
 project(Library)
 set(SOURCE_FILES
+        include/typedefs.h
+        include/enums/Specialisation.h
+        include/enums/Equipment.h
+        src/patient/Patient.cpp
+        src/patient/Address.cpp
+        src/Person.cpp
+        src/personnel/Personnel.cpp
+        src/personnel/Doctor.cpp
+        src/personnel/Nurse.cpp
+        include/personnel/Nurse.h
+        src/rooms/Room.cpp
+        include/rooms/Room.h
+        src/rooms/RehabillitationRoom.cpp
+        include/rooms/RehabillitationRoom.h
+        src/rooms/ConsultationRoom.cpp
+        include/rooms/ConsultationRoom.h
+        src/services/Service.cpp
+        include/services/Service.h
+        src/services/Consultation.cpp
+        include/services/Consultation.h
+        src/services/Rehabillitation.cpp
+        include/services/Rehabillitation.h
+        src/Appointment.cpp
+        include/Appointment.h
 
-)# tu będą dodawan pliki zrodlowe 
+)# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC include)
@@ -14,18 +38,19 @@ include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${Boost_INCLUDE_DIRS}
 )
-
+#dla testów
 set(SOURCE_TEST_FILES
-       
+
+
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 
-add_executable (LibraryTester ${SOURCE_TEST_FILES})
+#add_executable (LibraryTester ${SOURCE_TEST_FILES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
-target_link_libraries (LibraryTester
-        Library
-        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-)
+#target_link_libraries (LibraryTester
+#        Library
+#        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+#)
 
 #dodaj test LibraryTest. Instrukcji cmake add_test może być wiele.
 #Dodatkowe parametry wpływają na szczegółowość generowanego raportu. Standardowo znajduje się on w Testing/Temporary.
