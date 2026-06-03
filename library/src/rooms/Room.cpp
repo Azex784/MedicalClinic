@@ -1,7 +1,16 @@
 #include "rooms/Room.h"
 
-
 using namespace std;
+
+void Room::setIsActive(const bool is_active)
+{
+    isActive = is_active;
+}
+
+void Room::setIsArchive(const bool is_archive)
+{
+    isArchive = is_archive;
+}
 
 Room::Room(const unsigned int room_number): roomNumber(room_number)
 {

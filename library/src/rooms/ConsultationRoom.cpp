@@ -3,20 +3,20 @@
 
 using namespace std;
 
-ConsultationRoom::ConsultationRoom(const unsigned room_number): Room(room_number)
+ConsultationRoom::ConsultationRoom(const unsigned room_number) : Room(room_number)
 {
 }
 
 const std::string ConsultationRoom::getInfo() const
 {
-    return Room::getInfo() + " pokoj do przeprowadzania konsultacji";
+	return Room::getInfo() + " pokoj do przeprowadzania konsultacji";
 }
 
 bool ConsultationRoom::canBeUsed(Equipment equipment) const
 {
-    if (equipment == Equipment::NONE)
-    {
-        return true;
-    }
-    return false;
+	if (equipment == Equipment::NONE)
+	{
+		return true;
+	}
+	return false;
 }
