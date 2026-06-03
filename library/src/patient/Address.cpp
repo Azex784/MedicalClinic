@@ -23,5 +23,6 @@ Address::Address(const std::string& city, const std::string& street, const std::
 
 const std::string Address::getInfo() const
 {
+    return "Miasto: " + getCity() + ", ulica" + getStreet() + ", numer budynku" + getNumber();
 }
 

@@ -7,7 +7,7 @@
 #include "typedefs.h"
 
 /**
- * Klasa reprezentujaca spotkanie
+ * Klasa reprezentująca spotkanie
  */
 class Appointment
 {

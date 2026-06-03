@@ -20,5 +20,5 @@ const std::string& Patient::getPersonalNumber() const
 
 const std::string Patient::getInfo() const
 {
-    return Person::getInfo() + " pacjent o adresie: " + getAddress()->getInfo();
+    return Person::getInfo() + " pacjent o adresie: \n" + getAddress()->getInfo();
 }
