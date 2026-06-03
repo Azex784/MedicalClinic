@@ -17,7 +17,7 @@ Appointment --> Room
 
 note right of Appointment
 Klasa reprezentująca spotkanie z personelem.
-appointmentId - idetyfikator spotkania.
+appointmentId - identyfikator spotkania.
 appointmentBeginDate - data rozpoczęcia spotkania
 appointmentEndDate - data zakończenia spotkania, obliczana
 na podstawie czasu trwania usługi

@@ -3,6 +3,7 @@
 abstract class Personnel{
 -isActive:bool
 -personnelId:unsigned int
++{abstract} canConductTreatment(specialization:Specialization):bool
 +{abstract} getInfo(): string
 }
 
@@ -13,14 +14,19 @@ Personnel <|-- Nurse
 
 note right of Personnel
 Abstrakcyjna klasa reprezentująca
-personnel.
+personel.
 Klasa ta dziedziczy z klasy person.
-isActive - reprezuntuje czy dany
+isActive - reprezentuje czy dany
 człowiek przynależący do personelu
-jest teraz dostępny. Jesli nie jest
+jest teraz dostępny. Jesli nie jest,
 moze byc przyporzadkowany do uslugi.
 personnelId - specjalny
 identyfikator pracownika personelu.
+canConductTreatment - metoda
+sprawdzająca czy lekarz potrafi
+dokonac zabiegu z dana specjalzaccji,
+w przypadku pielegniarek zakladamy,
+ze potrafi on zawsze zreali
 end note
 
 

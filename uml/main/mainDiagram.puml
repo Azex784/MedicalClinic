@@ -26,6 +26,7 @@
 !include ../model/services/service.puml
 
 !include ../model/appointment.puml
+!include ../model/functions.puml
 !include ../model/person.puml
 
 !include ../repositories/appointmentRepository.puml
