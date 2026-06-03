@@ -1,6 +1,7 @@
 #ifndef REHABILITATIONCENTRE_EQUIPMENT_H
 #define REHABILITATIONCENTRE_EQUIPMENT_H
 
+#include <string>
 /**
  * Typ wyliczeniowy zawierajcy sprzet
  */

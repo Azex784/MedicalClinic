@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 set(SOURCE_FILES
         include/typedefs.h
-        src/enums/Specialisation.h
-        src/enums/Equipment.h
+        src/enums/Specialisation.cpp
+        src/enums/Equipment.cpp
         src/patient/Patient.cpp
         src/patient/Address.cpp
         src/Person.cpp

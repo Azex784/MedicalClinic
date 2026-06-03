@@ -28,12 +28,12 @@ unsigned int Service::getRequiredDoctorSize() const
     return requiredDoctorSize;
 }
 
-Specialisation Service::getRequiredDoctorSpec() const
+const Specialisation Service::getRequiredDoctorSpec() const
 {
     return requiredDoctorSpec;
 }
 
-bool Service::getIsAvailble() const
+bool Service::getIsAvailable() const
 {
     return isAvailble;
 }
@@ -48,7 +48,7 @@ void Service::setServiceCost(const unsigned int service_cost)
     serviceCost = service_cost;
 }
 
-void Service::setIsAvailble(const bool is_availble)
+void Service::setIsAvailable(const bool is_availble)
 {
     isAvailble = is_availble;
 }
@@ -70,5 +70,8 @@ Service::Service(const unsigned int service_cost, const unsigned int service_dur
 
 const std::string Service::getInfo() const
 {
-
+    return "Nazwa usługi: " + getServiceName() + " koszt usług: " + to_string(getServiceCost()) +
+        " czas trwania" + to_string(getServiceDuration()) + " idetyfikator: " + to_string(getServiceId())
+        + " liczba lekarzy: " + to_string(getRequiredDoctorSize()) + " specjalziacja lekarza/y" + specialisationToString(getRequiredDoctorSpec());
+    ;
 }

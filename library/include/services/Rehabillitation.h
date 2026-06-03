@@ -1,27 +1,41 @@
 #ifndef REHABILITATIONCENTRE_REHABILLITATION_H
 #define REHABILITATIONCENTRE_REHABILLITATION_H
 
-#include "rooms/Room.h"
 #include <string>
 #include <vector>
+#include "Service.h"
 
 enum class Equipment;
 
-class Rehabillitation : public Room
+/**
+ * Klasa reprezentująca zabieg rehabilitacji.
+ * Dziedzczy ona z klasy Service.
+ */
+class Rehabillitation : public Service
 {
 private:
-    std::vector<Equipment> requiredEqupiment;
-    unsigned int requiredNurseSize;
+	std::vector<Equipment> requiredEqupiment;
+	unsigned int requiredNurseSize;
 
 public:
-    Rehabillitation(const unsigned room_number, const std::vector<Equipment>& required_equpiment,
-        const unsigned int required_nurse_size);
-    ~Rehabillitation() = default;
-    const std::string getInfo() const override;
-    bool canBeUsed(Equipment equipment) const override;
-    const std::vector<Equipment>& getRequiredEqupiment() const;
-    unsigned int getRequiredNurseSize() const;
-};
+	/**
+	 * Metoda zwracająca pełne informacje o usłudze rehabilitacyjnej.
+	 * Nadpisuje metodę wirtualną z klasy bazowej (Service).
+	 * @return Sformatowany łańcuch znaków zawierający specyfikację zabiegu, wymagany sprzęt i potrzebny personel.
+	*/
+	const std::string getInfo() const override;
 
+	/**
+	 * Zwraca wymaganą liczbę pielęgniarek niezbędną do  przeprowadzenia usługi rehabilitacyjnej.
+	 * @return Wymagana liczba personelu pomocniczego jako unsigned int.
+	 */
+	unsigned int getRequiredNurseSize() const;
+
+	/**
+	 * Zwraca listę specjalistycznego wyposażenia niezbędnego do realizacji tej usługi rehabilitacyjnej.
+	 * @return Stała referencja do wektora przechowującego wymagany sprzęt.
+	 */
+	const std::vector<Equipment>& getRequiredEqupiment() const;
+};
 
 #endif //REHABILITATIONCENTRE_REHABILLITATION_H
