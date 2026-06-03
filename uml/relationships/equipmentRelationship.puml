@@ -1,6 +1,5 @@
 @startuml
 
-!define UKRYJ_NOTATKI
 
 enum equipment {
     NONE,
@@ -9,16 +8,12 @@ enum equipment {
     ROBOTIC_SYSTEM
 }
 
-!ifndef UKRYJ_NOTATKI
 
-note right of specialisation
+note right of equipment
 Typ wyliczeniowy zawierający cały sprzęt mogący
-być potrzebny przez daną rehabilitacje.
-Informuje on również w klasie RehabillitationRoom
-czy dany pokój zawiera odpowiedni sprzęt.
+być potrzebny przez daną rehabilitacje i będący
+dostępny w danym pokoju.
 end note
-
-!endif
 
 
 RehabillitationRoom .up.> equipment : używa >

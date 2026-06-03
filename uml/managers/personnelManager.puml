@@ -4,7 +4,7 @@ class PersonnelManager {
 +getPersonnel(personnelId:unsigned int):Personnel
 +addDoctor(firstName:string, lastName:string, personnelId:unsigned int, specialisation:vector<specialisation>):Personnel
 +addNurse(firstName:string, lastName:string, personnelId:unsigned int):Personnel
-+findPersonnels(predicate:PersonnelPredicate):Personnel[0..*]
++findPersonnel(predicate:PersonnelPredicate):Personnel[0..*]
 +findAll():Personnel[0..*]
 }
 
@@ -14,7 +14,7 @@ note right of PersonnelManager
 Klasa zarządzająca repozytorium personlu.
 addDoctor - dodaje lekarza
 addNurse - dodaje pielęgniarke
-findPersonnels - predykt zwracający konkrenty niearchiwalny personel
+findPersonnel - predykt zwracający konkrente niearchiwalny osoby z persolnelu
 findAll - zawraca cały niearchiwalny personel
 end note
 

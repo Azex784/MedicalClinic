@@ -3,7 +3,7 @@
 class ServiceManager {
   +getService(serviceID:unsigned int):Service
   +addConsultation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,topic:string):Service
-  +addRehabillitation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredEqupiment:vector<equipment>):Service
+  +addRehabillitation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredEqupiment:vector<equipment>, requiredSpecialisation:specialisation):Service
   +findServices(predicate:ServicePredicate):Service[0..*]
   +findAllServices():Service[0..*]
 }

@@ -1,0 +1,14 @@
+@startuml
+
+class  AppointmentPredicate <<function>> {
+}
+class  PatientPredicate <<function>> {
+}
+class  PersonnelPredicate <<function>> {
+}
+class  RoomPredicate <<function>> {
+}
+class  ServicePredicate <<function>> {
+}
+
+@enduml

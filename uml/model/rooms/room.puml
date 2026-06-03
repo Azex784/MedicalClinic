@@ -4,6 +4,7 @@ abstract class Room{
 -roomNumber:unsigned int
 -isActive:bool
 -isArchive:bool
++{abstract} canBeUsed():bool
 +{abstract} getInfo(): string
 }
 
@@ -13,8 +14,7 @@ Room <|-- ConsultationRoom
 !ifndef UKRYJ_NOTATKI
 
 note right of Room
-Abstrakcyjna klasa reprezentująca
-sale.
+Abstrakcyjna klasa reprezentująca sale.
 roomNumber - numer sali
 isActive - czy sala jest dostępna
 isArchive - czy jest archiwalny

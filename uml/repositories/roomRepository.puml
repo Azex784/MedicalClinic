@@ -1,7 +1,7 @@
 @startuml
 
 class RoomRepository{
-+get(roomNumber:unigned int):Room
++get(roomNumber:unsigned int):Room
 +add(room:Room):void
 +remove(room:Room):void
 +report():string

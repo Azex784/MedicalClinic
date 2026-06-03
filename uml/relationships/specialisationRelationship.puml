@@ -1,6 +1,6 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+
 
 enum  specialisation {
     PHYSIOTHERAPIST,
@@ -15,7 +15,7 @@ enum  specialisation {
 !ifndef UKRYJ_NOTATKI
 
 note right of specialisation
-Typ wyliczeniowy zawierająćy wszystkie
+Typ wyliczeniowy zawierający wszystkie
 specjalności.
 end note
 
