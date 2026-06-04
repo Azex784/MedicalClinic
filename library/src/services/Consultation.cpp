@@ -35,5 +35,5 @@ const std::string Consultation::getInfo() const
 		tmp = "w trybie stacjonarnym";
 	}
 
-	return Service::getInfo() + " pokoj do konsultacji, " + tmp + " o temacie: " + getTopic();
+	return Service::getInfo() + " konsultacje, " + tmp + " o temacie: " + getTopic();
 }

@@ -45,6 +45,8 @@ set(SOURCE_TEST_FILES
         test/rooms/RoomTest.cpp
         test/services/ServiceTest.cpp
         test/services/ConsultationTest.cpp
+        test/services/RehabillitationTest.cpp
+        test/AppointmentTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

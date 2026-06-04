@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 BOOST_AUTO_TEST_CASE(GetInfoOnlineTest)
 {
     std::string expectedBaseInfo = testConsultation.Service::getInfo();
-    std::string expectedInfo = expectedBaseInfo + " pokoj do konsultacji, w trybie online o temacie: Ból kolana";
+    std::string expectedInfo = expectedBaseInfo + " konsultacje, w trybie online o temacie: Ból kolana";
 
     //Upewniamy sie ze spotkanie jest w trybie online
     BOOST_TEST_REQUIRE(testConsultation.getIsOnline());
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(GetInfoOfflineTest)
                            Specialisation::ORTHOPEDIST, "Ból kolana", false);
 
     std::string expectedBaseInfo = offlineConsultation.Service::getInfo();
-    std::string expectedInfo = expectedBaseInfo + " pokoj do konsultacji, w trybie stacjonarnym o temacie: Ból kolana";
+    std::string expectedInfo = expectedBaseInfo + " konsultacje, w trybie stacjonarnym o temacie: Ból kolana";
 
     //Upewniamy sie ze spotkanie jest w trybie stacjonarnym
     BOOST_TEST_REQUIRE(!offlineConsultation.getIsOnline());
