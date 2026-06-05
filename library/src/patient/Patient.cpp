@@ -13,7 +13,7 @@ Patient::Patient(const std::string& name, const std::string& last_name, const st
 {
 }
 
-const std::string& Patient::getPersonalNumber() const
+const std::string& Patient::getUniqueParameter() const
 {
     return personalNumber;
 }

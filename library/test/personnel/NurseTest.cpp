@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
     // Constructor check
     BOOST_TEST(testNurse.getName() == "Elzbieta");
     BOOST_TEST(testNurse.getLastName() == "Kowalczyk");
-    BOOST_TEST(testNurse.getPersonnelId() == 12341);
+    BOOST_TEST(testNurse.getUniqueParameter() == 12341);
 }
 
 BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)

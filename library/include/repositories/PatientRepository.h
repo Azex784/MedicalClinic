@@ -1,0 +1,55 @@
+#ifndef REHABILITATIONCENTRE_PATIENTREPOSITORY_H
+#define REHABILITATIONCENTRE_PATIENTREPOSITORY_H
+
+#include "repositories/RepositoryTemplate.h"
+#include "typedefs.h"
+
+/**
+ * Klasa przechwująca dane o pacjentach
+ */
+class PatientRepository : public RepositoryTemplate<PatientPtr,PatientPredicate,const std::string>
+{
+
+private:
+	//Sciezka rozpoczyna sie od cmake-build-debug/library
+	const std::string fileName = "../../program/data/PatientRepository.txt";
+
+public:
+	/**
+	 * Metoda zwracająca nazwe pliku
+	 * @return Nazwa pliku
+	 */
+	const std::string& getFileName() const;
+
+	/**
+	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
+	 * @param file_name
+	 */
+	PatientRepository(const std::string& file_name);
+
+	/**
+	 * Domyślny konstrukotr
+	 */
+	PatientRepository() = default;
+	/**
+	 * Destrukotr
+	 */
+	~PatientRepository() = default;
+
+	/**
+	* Wczytuje dane z pliku tekstowego na dysku do pamięci operacyjnej RAM.
+	* @return true Jeśli plik został pomyślnie otwarty, a dane załadowane do RAM-u.
+	* @return false Jeśli nie udało się wczytac danych/otworzyc pliku.
+	*/
+	bool loadData();
+
+	/**
+	 * Zapisuje aktualny stan kolekcji z pamięci ulotnej do trwalej pamieci fizycznej.
+	 * @return true Jeśli proces zapisu na dysku zakończył się sukcesem.
+	 * @return false Jeśli wystąpił błąd przy zapisie.
+	 */
+	bool saveData() const;
+};
+
+
+#endif //REHABILITATIONCENTRE_PATIENTREPOSITORY_H

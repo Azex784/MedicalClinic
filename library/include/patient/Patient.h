@@ -17,7 +17,7 @@ private:
 public:
     /**
     * Konstruktor tworzący nowy obiekt pacjenta.
-    * * @param name Imię pacjenta.
+    * @param name Imię pacjenta.
     * @param last_name Nazwisko pacjenta.
     * @param personal_number PESEL pacjenta - niezmienialny.
     * @param address Wskaźnik na obiekt adresu przypisany do pacjenta.
@@ -34,7 +34,7 @@ public:
      * Pobiera unikalny numer identyfikacyjny pacjenta.
      * @return Stała referencja do łańcucha znaków przechowującego numer pacjenta.
      */
-    const std::string& getPersonalNumber() const;
+    const std::string& getUniqueParameter() const;
 
     /**
      * Pobiera adres przypisany do pacjenta.

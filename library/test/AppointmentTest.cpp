@@ -48,7 +48,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointment, TestSuiteAppointmentFixture)
 	BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 	{
 		//Sprawdzenie prawidlowe dzialanie getterów i konstruktora
-		BOOST_TEST(testAppointment.getAppointmentId() == 999);
+		BOOST_TEST(testAppointment.getUniqueParameter() == 999);
 		BOOST_TEST(testAppointment.getAppointmentBeginDate() == startTime);
 		BOOST_TEST(testAppointment.getPatient() == testPatient);
 		BOOST_TEST(testAppointment.getService() == testService);
@@ -77,7 +77,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointment, TestSuiteAppointmentFixture)
 	{
 		std::stringstream ss;
 
-		ss << "Wizyta: ID: " << testAppointment.getAppointmentId() << ")\n";
+		ss << "Wizyta: ID: " << testAppointment.getUniqueParameter() << ")\n";
 		ss << "Koszt: " << testAppointment.getAppointmentCost() << " PLN\n";
 		ss << "Rozpoczęcie: " << testAppointment.getAppointmentBeginDate() << "\n";
 		ss << "Zakończenie: " << testAppointment.getAppointmentEndDate() << "\n";

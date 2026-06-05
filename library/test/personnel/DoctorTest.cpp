@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
     // Constructor check
     BOOST_TEST(testDoctor.getName() == "Maciej");
     BOOST_TEST(testDoctor.getLastName() == "Kowalczyk");
-    BOOST_TEST(testDoctor.getPersonnelId() == 9876);
+    BOOST_TEST(testDoctor.getUniqueParameter() == 9876);
 
     // Sprawdzenie zmiennych klasy Doctor
     BOOST_TEST(testDoctor.getDoctorCost() == 250);

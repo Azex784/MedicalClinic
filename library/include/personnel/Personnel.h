@@ -44,7 +44,7 @@ public:
      * Pobiera unikalny identyfikator pracownika.
      * @return Identyfikator personelu jako liczba całkowita.
      */
-    unsigned int getPersonnelId() const;
+    unsigned int getUniqueParameter() const;
 
     /**
      * Czysto wirtualna metoda sprawdzająca, czy pracownik posiada uprawnienia do przeprowadzenia danego leczenia.

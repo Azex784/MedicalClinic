@@ -18,6 +18,9 @@ set(SOURCE_FILES
         src/services/Rehabillitation.cpp
         src/Appointment.cpp
         src/enums/Specialisation.cpp
+        src/repositories/PatientRepository.cpp
+        src/repositories/PersonnelRepository.cpp
+        #src/repositories/AppointmentRepository.cpp
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -47,6 +50,9 @@ set(SOURCE_TEST_FILES
         test/services/ConsultationTest.cpp
         test/services/RehabillitationTest.cpp
         test/AppointmentTest.cpp
+        test/repositories/RepositoryTemplateTest.cpp
+        test/repositories/PatientRepositoryTest.cpp
+        test/repositories/PersonnelRepositoryTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

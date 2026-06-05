@@ -28,10 +28,10 @@ const std::string Room::getInfo() const
     {
         tmp = "nieaktywna";
     }
-    return "Pokoj o numerze pokoju: " + to_string( getRoomNumber()) + ", dostepnosc: " + tmp;
+    return "Pokoj o numerze pokoju: " + to_string( getUniqueParameter()) + ", dostepnosc: " + tmp;
 }
 
-unsigned int Room::getRoomNumber() const
+unsigned int Room::getUniqueParameter() const
 {
     return roomNumber;
 }

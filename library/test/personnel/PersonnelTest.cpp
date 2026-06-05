@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 	BOOST_TEST(testPersonnel.getIsActive() == 1);
 
 	// Sprawdzenie metod z klasy pochodnej (Patient)
-	BOOST_TEST(testPersonnel.getPersonnelId() == 2137);
+	BOOST_TEST(testPersonnel.getUniqueParameter() == 2137);
 
 }
 

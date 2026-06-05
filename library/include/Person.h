@@ -11,7 +11,7 @@ class Person
 private:
     std::string name;
     std::string lastName;
-    bool isArchive;
+    bool isArchive = 0;
 
 public:
     /**

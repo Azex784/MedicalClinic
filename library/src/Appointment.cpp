@@ -66,7 +66,7 @@ const boost::posix_time::ptime& Appointment::getAppointmentEndDate() const
 	return appointmentEndDate;
 }
 
-unsigned int Appointment::getAppointmentId() const
+unsigned int Appointment::getUniqueParameter() const
 {
 	return appointmentId;
 }
@@ -101,7 +101,7 @@ const std::string Appointment::getInfo() const
 	std::stringstream ss;
 
 	// Podstawowe dane wizyty
-	ss << "Wizyta: ID: " << getAppointmentId() << ")\n";
+	ss << "Wizyta: ID: " << getUniqueParameter() << ")\n";
 	ss << "Koszt: " << getAppointmentCost() << " PLN\n";
 
 	ss << "Rozpoczęcie: " << getAppointmentBeginDate() << "\n";

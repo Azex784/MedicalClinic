@@ -2,6 +2,7 @@
 #define REHABILITATIONCENTRE_TYPEDEFS_H
 
 #include <memory>
+#include <functional>
 
 class Person;
 typedef std::shared_ptr<Person> PersonPtr;
@@ -9,11 +10,15 @@ typedef std::shared_ptr<Person> PersonPtr;
 class Patient;
 typedef std::shared_ptr<Patient> PatientPtr;
 
+typedef std::function<bool(PatientPtr)> PatientPredicate;
+
 class Address;
 typedef std::shared_ptr<Address> AddressPtr;
 
 class Personnel;
 typedef std::shared_ptr<Personnel> PersonnelPtr;
+
+typedef std::function<bool(PersonnelPtr)> PersonnelPredicate;
 
 class Nurse;
 typedef std::shared_ptr<Nurse> NursePtr;
@@ -24,6 +29,8 @@ typedef std::shared_ptr<Doctor> DoctorPtr;
 class Room;
 typedef std::shared_ptr<Room> RoomPtr;
 
+typedef std::function<bool(RoomPtr)> RoomPredicate;
+
 class ConsultationRoom;
 typedef std::shared_ptr<ConsultationRoom> ConsultationRoomPtr;
 
@@ -33,6 +40,8 @@ typedef std::shared_ptr<RehabilitationRoom> RehabilitationRoomPtr;
 class Service;
 typedef std::shared_ptr<Service> ServicePtr;
 
+typedef std::function<bool(ServicePtr)> ServicePredicate;
+
 class Rehabilitation;
 typedef std::shared_ptr<Rehabilitation> RehabilitationPtr;
 
@@ -41,6 +50,8 @@ typedef std::shared_ptr<Consultation> ConsultationPtr;
 
 class Appointment;
 typedef std::shared_ptr<Appointment> AppointmentPtr;
+
+typedef std::function<bool(AppointmentPtr)> AppointmentPredicate;
 
 class PatientRepository;
 typedef std::shared_ptr<PatientRepository> PatientRepositoryPtr;

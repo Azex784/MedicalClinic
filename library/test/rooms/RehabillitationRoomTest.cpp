@@ -21,7 +21,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRehabillitationRoom, TestSuiteRehabillitationR
 
 BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 {
-    BOOST_TEST(testRoom.getRoomNumber() == 202);
+    BOOST_TEST(testRoom.getUniqueParameter() == 202);
     BOOST_TEST(testRoom.getIsActive() == true);
     BOOST_TEST(testRoom.getIsArchive() == false);
 

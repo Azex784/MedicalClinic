@@ -8,7 +8,7 @@ bool Personnel::getIsActive() const
 	return isActive;
 }
 
-unsigned int Personnel::getPersonnelId() const
+unsigned int Personnel::getUniqueParameter() const
 {
 	return personnelId;
 }

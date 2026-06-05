@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(ConstructorTest)
 	BOOST_TEST(testPatient.getIsArchive() == false);
 
 	// Sprawdzenie metod z klasy pochodnej (Patient)
-	BOOST_TEST(testPatient.getPersonalNumber() == "90010112345");
+	BOOST_TEST(testPatient.getUniqueParameter() == "90010112345");
 
 	// Weryfikacja, czy adres został poprawnie przypisany i czy wskazuje na dobre dane
 	BOOST_TEST_REQUIRE(testPatient.getAddress() == testAddress);
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(InheritedSettersTest)
 	BOOST_TEST(testPatient.getIsArchive() == true);
 
 	//czy pesel jest ten sam
-	BOOST_TEST(testPatient.getPersonalNumber() == "90010112345");
+	BOOST_TEST(testPatient.getUniqueParameter() == "90010112345");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

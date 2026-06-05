@@ -19,7 +19,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteConsultationRoom, TestSuiteConsultationRoomFix
 BOOST_AUTO_TEST_CASE(ConstructorTest)
 {
     //sprawdzenie poprawne dzialanie konstruktora
-    BOOST_TEST(testRoom.getRoomNumber() == 303);
+    BOOST_TEST(testRoom.getUniqueParameter() == 303);
     BOOST_TEST(testRoom.getIsActive() == true);
     BOOST_TEST(testRoom.getIsArchive() == false);
 }

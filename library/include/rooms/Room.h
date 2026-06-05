@@ -44,7 +44,7 @@ public:
 	 * Pobiera numer sali.
 	 * @return Numer sali jako unsigned int.
 	 */
-	unsigned int getRoomNumber() const;
+	unsigned int getUniqueParameter() const;
 
 	/**
 	 * Sprawdza, czy sala jest obecnie dostępna.

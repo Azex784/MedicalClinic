@@ -62,7 +62,7 @@ public:
      * Pobiera unikalny identyfikator wizyty.
      * @return ID wizyty jako int
      */
-    unsigned int getAppointmentId() const;
+    unsigned int getUniqueParameter() const;
 
     /**.
      * @return Koszt wizyty.
