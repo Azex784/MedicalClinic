@@ -23,6 +23,17 @@ set(SOURCE_FILES
         src/repositories/AppointmentRepository.cpp
         src/repositories/RoomRepository.cpp
         src/repositories/ServiceRepository.cpp
+        src/managers/RoomManager.cpp
+        include/managers/RoomManager.h
+        src/managers/AppointmentManager.cpp
+        include/managers/AppointmentManager.h
+        src/managers/ServiceManager.cpp
+        include/managers/ServiceManager.h
+        src/managers/PatientManager.cpp
+        include/managers/PatientManager.h
+        src/managers/PersonnelManager.cpp
+        include/managers/PersonnelManager.h
+        include/managers/ManagerTemplate.h
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -58,6 +69,7 @@ set(SOURCE_TEST_FILES
         test/repositories/RoomRepositoryTest.cpp
         test/repositories/ServiceRepositoryTest.cpp
         test/repositories/AppointmentRepositoryTest.cpp
+        test/managers/ManagerTemplateTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

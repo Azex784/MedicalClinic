@@ -34,10 +34,12 @@ bool ServiceRepository::loadData()
 	{
 		return false;
 	}
-
+	//Zapobiega to podwojnemu zliczeniu elementów
+	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
+
 
 		//Ladujemy do strumienia
 		stringstream ss(line);
@@ -153,7 +155,7 @@ bool ServiceRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName());
+	outFile.open(getFileName(),std::ios::trunc);
 
 	if (outFile.good())
 	{

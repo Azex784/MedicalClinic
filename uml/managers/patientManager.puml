@@ -12,8 +12,7 @@ class PatientManager {
 note right of PatientManager
 Klasa zarządzająca pacjentami.
 registerPatient - dodaje pacjenta do repozytorium
-co może się odbyć gdy pacjent nie ma zaplanowanego żadnego
-spotkania.
+co może się odbyć gdy nie ma już takiego pacjenta
 findPatients - predykt zwracający konkretnych aktywnych  pacjentów
 findAllPatients - zawraca wszystkich aktywnych pacjentów
 end note

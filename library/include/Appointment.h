@@ -94,10 +94,10 @@ public:
     /**
      * Ustawia nową datę i czas zakończenia wizyty
      * wylicza to na podstawie czasu trwania usługi tylko raz
-     * @param appointment_end_date Docelowa data zakończenia.
+     * @param appointmentEndDate Docelowa data zakończenia.
      * @return Zwraca ustawioną datę zakończenia w zależności od sukcesu.
      */
-    const boost::posix_time::ptime setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate^tment_end_date);
+    const boost::posix_time::ptime setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate);
 
     /**
      * Przelicza całkowity koszt wizyty dodajc koszt prestizu lekarzy i uslugi

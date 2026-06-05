@@ -10,7 +10,7 @@ struct TmpTemplate :  RepositoryTemplate<PatientPtr, PatientPredicate, const std
 {
 
 	TmpTemplate()
-		: RepositoryTemplate<std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string
+		: RepositoryTemplate<PatientPtr, PatientPredicate, const std::string
 		>("<placeholder>")
 	{
 	}

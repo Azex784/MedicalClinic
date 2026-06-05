@@ -11,6 +11,7 @@ PersonnelRepository::PersonnelRepository(const std::string& file_name)
 		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned
 		>(file_name)
 {
+
 }
 
 PersonnelRepository::PersonnelRepository()
@@ -30,7 +31,8 @@ bool PersonnelRepository::loadData()
 	{
 		return false;
 	}
-
+	//Zapobiega to podwojnemu zliczeniu elementów
+	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
@@ -116,7 +118,7 @@ bool PersonnelRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName());
+	outFile.open(getFileName(),std::ios::trunc);
 
 	if (outFile.good())
 	{

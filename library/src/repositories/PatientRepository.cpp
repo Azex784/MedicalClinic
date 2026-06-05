@@ -10,6 +10,7 @@ using namespace std;
 PatientRepository::PatientRepository(const std::string& file_name) : RepositoryTemplate<
 	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(file_name)
 {
+
 }
 
 PatientRepository::PatientRepository() : RepositoryTemplate<
@@ -27,7 +28,8 @@ bool PatientRepository::loadData()
 	{
 		return false;
 	}
-
+	//Zapobiega to podwojnemu zliczeniu elementów
+	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
@@ -62,7 +64,7 @@ bool PatientRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName());
+	outFile.open(getFileName(),std::ios::trunc);
 
 	if (outFile.good())
 	{

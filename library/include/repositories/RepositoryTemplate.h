@@ -25,7 +25,17 @@ public:
 	/**
 	 * Domyślny destruktor klasy szablonowej repozytorium.
 	 */
-	~RepositoryTemplate() = default;
+	~RepositoryTemplate()
+	{
+	}
+
+	/**
+	 * Metoda czysci wektor z danymi
+	 */
+	void clearVectorOfData()
+	{
+		vectorOfData.clear();
+	}
 
 	/**
 	 * Getter do fileName

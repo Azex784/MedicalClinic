@@ -73,6 +73,8 @@ bool AppointmentRepository::loadData()
 		return false;
 	}
 
+	//Zapobiega to podwojnemu zliczeniu elementów
+	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
@@ -142,7 +144,7 @@ bool AppointmentRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName());
+	outFile.open(getFileName(),std::ios::trunc);
 
 	if (outFile.good())
 	{

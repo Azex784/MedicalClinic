@@ -30,7 +30,8 @@ bool RoomRepository::loadData()
 	{
 		return false;
 	}
-
+	//Zapobiega to podwojnemu zliczeniu elementów
+	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
@@ -105,7 +106,7 @@ bool RoomRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName());
+	outFile.open(getFileName(),std::ios::trunc);
 
 	if (outFile.good())
 	{
