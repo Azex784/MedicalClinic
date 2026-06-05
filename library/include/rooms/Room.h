@@ -60,13 +60,13 @@ public:
 
 	/**
 	* Zmienia status aktywności sali.
-	* @param is_active Flaga określająca
+	* @param is_active
 	*/
 	void setIsActive(const bool is_active);
 
 	/**
 	 * Zmienia status archiwizacji sali.
-	 * @param is_archive Flaga logiki
+	 * @param is_archive
 	 */
 	void setIsArchive(const bool is_archive);
 };

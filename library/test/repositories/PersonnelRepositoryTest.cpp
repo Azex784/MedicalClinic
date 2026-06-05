@@ -43,16 +43,10 @@ struct TestSuitePersonnelRepositoryFixture
 
 BOOST_FIXTURE_TEST_SUITE(TestSuitePersonnelRepository, TestSuitePersonnelRepositoryFixture)
 
-BOOST_AUTO_TEST_CASE(GetTest)
-{
-    // Sprawdzamy dzialanie metody dla get dla PersonnelId
-    BOOST_TEST(personnelRepo->get((unsigned int)101)->getName() == "Walter");
-    BOOST_TEST(personnelRepo->get((unsigned int)202)->getName() == "Taylor");
-    //BOOST_TEST(personnelRepo->get(999) == nullptr);
-}
 
 BOOST_AUTO_TEST_CASE(SaveDataTest)
 {
+    //Czy zapis się powiódł
     BOOST_TEST_REQUIRE(personnelRepo->saveData() == true);
 
     ifstream inFile(fileName);
@@ -98,11 +92,10 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
         PersonnelPtr loadedPerson = personnelRepo1->getVectorOfData()[i];
         PersonnelPtr originalPerson = personnelRepo->getVectorOfData()[i];
 
-        //Sprawdazmy podsatawowe paramtry wpsolne dla lekarza i pielegniarki
+        //Sprawdzamy podstawowe parametry wspólne dla lekarza i pielegniarki
         BOOST_TEST(loadedPerson->getName() == originalPerson->getName());
         BOOST_TEST(loadedPerson->getLastName() == originalPerson->getLastName());
         BOOST_TEST(loadedPerson->getUniqueParameter() == originalPerson->getUniqueParameter());
-
         BOOST_TEST(loadedPerson->getIsActive() == originalPerson->getIsActive());
         BOOST_TEST(loadedPerson->getIsArchive() == originalPerson->getIsArchive());
 

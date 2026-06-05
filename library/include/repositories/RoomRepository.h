@@ -5,7 +5,7 @@
 #include "typedefs.h"
 
 /**
- * Klasa przechwująca dane o pacjentach
+ * Klasa przechwująca dane o pokojach
  */
 class RoomRepository : public RepositoryTemplate<RoomPtr,RoomPredicate, const unsigned int>
 {
@@ -51,7 +51,6 @@ public:
 	 * @return false Jeśli wystąpił błąd przy zapisie.
 	 */
 	bool saveData() const;
-
 };
 
 

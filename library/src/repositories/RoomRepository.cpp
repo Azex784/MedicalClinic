@@ -1,5 +1,10 @@
 #include "repositories/RoomRepository.h"
+#include "rooms/RehabillitationRoom.h"
+#include "rooms/ConsultationRoom.h"
+#include "enums/Equipment.h"
+
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -9,7 +14,7 @@ const std::string& RoomRepository::getFileName() const
 	return fileName;
 }
 
-RoomRepository::RoomRepository(const std::string& file_name): fileName(file_name)
+RoomRepository::RoomRepository(const std::string& file_name) : fileName(file_name)
 {
 }
 
@@ -19,38 +24,81 @@ bool RoomRepository::loadData()
 	inFile.open(getFileName());
 	string line;
 
-	if (!inFile.is_open()) {
+	if (!inFile.is_open())
+	{
 		return false;
 	}
 
-	while (getline(inFile, line)) {
+	while (getline(inFile, line))
+	{
 		if (line.empty()) continue;
 
 		//Ladujemy do strumienia
 		stringstream ss(line);
 
-		string firstName, lastName, personalNumber, city, street, number,tmp;
+		string tmp;
+		bool isActive, isArchive;
 
-		getline(ss, firstName, ';');
-		getline(ss, lastName, ';');
-		getline(ss, personalNumber, ';');
-		getline(ss, city, ';');
-		getline(ss, street, ';');
-		getline(ss, number, ';');
-		getline(ss, tmp);
+		getline(ss, tmp, ';');
+		unsigned int roomNumber;
 
-		bool isArchived = stoi(tmp);
+		RoomPtr room;
+		//Wczytujemy dane dla pokoju rehabilitacyjnego
+		if (tmp == "R")
+		{
+			unsigned int maxCapacity;
+			vector<Equipment> equipment;
 
-		//Tworzenie nowych obiektow z wczytanymi danymi
-		AddressPtr nowyAdress = make_shared<Address>(city,street,number);
-		RoomPtr nowyPacjent =  make_shared<Room>(firstName,lastName,personalNumber,nowyAdress);
+			getline(ss, tmp, ';');
+			roomNumber = stoi(tmp);
 
-		nowyPacjent->setIsArchive(isArchived);
-		add(nowyPacjent);
+			getline(ss, tmp, ';');
+			isActive = stoi(tmp);
+
+			getline(ss, tmp, ';');
+			isArchive = stoi(tmp);
+
+			getline(ss, tmp, ';');
+			stringstream equipmentStream(tmp);
+
+			while (getline(equipmentStream, tmp, ','))
+			{
+				int enumValue = stoi(tmp);
+				Equipment spec = static_cast<Equipment>(enumValue);
+				equipment.push_back(spec);
+			}
+
+			getline(ss, tmp, ';');
+			maxCapacity = stoi(tmp);
+
+			room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
+			//Wczytujemy dane dla pokoju konsultacyjnego
+		}
+		else if (tmp == "C")
+		{
+			getline(ss, tmp, ';');
+			roomNumber = stoi(tmp);
+
+			getline(ss, tmp, ';');
+			isActive = stoi(tmp);
+
+			getline(ss, tmp, ';');
+			isArchive = stoi(tmp);
+			room = make_shared<ConsultationRoom>(roomNumber);
+		}
+		else
+		{
+			return false;
+		}
+
+		room->setIsArchive(isArchive);
+		room->setIsActive(isActive);
+		add(room);
 	}
 	inFile.close();
 	return true;
 }
+
 bool RoomRepository::saveData() const
 {
 	ofstream outFile;
@@ -59,15 +107,37 @@ bool RoomRepository::saveData() const
 
 	if (outFile.good())
 	{
-		for (const auto& Room : getVectorOfData())
+		for (const RoomPtr& room : getVectorOfData())
 		{
-			outFile << Room->getName() << ";";
-			outFile << Room->getLastName() << ";";
-			outFile << Room->getPersonalNumber() << ";";
-			outFile << Room->getAddress()->getCity() << ";";
-			outFile << Room->getAddress()->getStreet() << ";";
-			outFile << Room->getAddress()->getNumber() << ';';
-			outFile << Room->getIsArchive() << '\n';
+			RehabillitationRoomPtr rehabilitationRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
+
+			if (rehabilitationRoom != nullptr)
+			{
+				//Pokoj rehabilitacyjny
+				outFile << "R" << ";";
+
+				outFile << rehabilitationRoom->getUniqueParameter() << ";";
+				outFile << rehabilitationRoom->getIsActive() << ";";
+				outFile << rehabilitationRoom->getIsArchive() << ";";
+
+				int i;
+				//Zapisujemy enuma za pomocą inta
+				for (i = 0; rehabilitationRoom->getAccessibleEqupiment().size() - 1 > i; i++)
+				{
+					outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ",";
+				}
+				outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ";";
+				outFile << rehabilitationRoom->getMaxCapacity() << "\n";
+			}
+			else if (rehabilitationRoom == nullptr)
+			{
+				//Pokoj konsultacyjny
+				outFile << "C" << ";";
+
+				outFile << room->getUniqueParameter() << ";";
+				outFile << room->getIsActive() << ";";
+				outFile << room->getIsArchive() << '\n';
+			}
 		}
 		outFile.close();
 		return true;
@@ -75,4 +145,3 @@ bool RoomRepository::saveData() const
 	//wyczucamy wyjatek
 	return false;
 }
-

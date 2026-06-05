@@ -34,8 +34,8 @@ typedef std::function<bool(RoomPtr)> RoomPredicate;
 class ConsultationRoom;
 typedef std::shared_ptr<ConsultationRoom> ConsultationRoomPtr;
 
-class RehabilitationRoom;
-typedef std::shared_ptr<RehabilitationRoom> RehabilitationRoomPtr;
+class RehabillitationRoom;
+typedef std::shared_ptr<RehabillitationRoom> RehabillitationRoomPtr;
 
 class Service;
 typedef std::shared_ptr<Service> ServicePtr;

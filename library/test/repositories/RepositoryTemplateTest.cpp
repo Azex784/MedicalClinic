@@ -33,6 +33,18 @@ bool predicatePatinet(PatientPtr v)
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRepository, TestSuitRepositoryTemplateFixture)
 
+	BOOST_AUTO_TEST_CASE(GetTest)
+	{
+		pacjentRepo.add(testPatient);
+		pacjentRepo.add(testPatient1);
+		pacjentRepo.add(testPatient2);
+		pacjentRepo.add(testPatient3);
+
+		BOOST_TEST(pacjentRepo.get("40010112345")->getName() == "Walter");
+		BOOST_TEST(pacjentRepo.get("91110112345")->getLastName() == "Fring");
+		BOOST_TEST(pacjentRepo.get("93010112345")->getName() == "Skyler");
+	}
+
 	BOOST_AUTO_TEST_CASE(AddGetRemoveSizeTest)
 	{
 		pacjentRepo.add(testPatient);
@@ -79,7 +91,6 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRepository, TestSuitRepositoryTemplateFixture)
 		BOOST_TEST(pacjentRepo.findBy(pacjentPredykat).size() == 2);
 
 		BOOST_TEST(pacjentRepo.findAll().size() == 4);
-
 	}
 
 

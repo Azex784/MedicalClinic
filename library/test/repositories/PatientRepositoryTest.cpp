@@ -38,11 +38,6 @@ struct TestSuitPatientRepositoryFixture
 
 BOOST_FIXTURE_TEST_SUITE(TestSuitePatientRepository, TestSuitPatientRepositoryFixture)
 
-	BOOST_AUTO_TEST_CASE(GetTest)
-	{
-		BOOST_TEST(pacjentRepo->get("40010112345")->getName() == "Walter");
-	}
-
 	BOOST_AUTO_TEST_CASE(SaveDataTest)
 	{
 

@@ -21,6 +21,7 @@ set(SOURCE_FILES
         src/repositories/PatientRepository.cpp
         src/repositories/PersonnelRepository.cpp
         #src/repositories/AppointmentRepository.cpp
+        src/repositories/RoomRepository.cpp
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -53,6 +54,7 @@ set(SOURCE_TEST_FILES
         test/repositories/RepositoryTemplateTest.cpp
         test/repositories/PatientRepositoryTest.cpp
         test/repositories/PersonnelRepositoryTest.cpp
+        test/repositories/RoomRepositoryTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

@@ -38,7 +38,7 @@ bool PersonnelRepository::loadData()
 		string name, lastName, job, tmp;
 		unsigned int personnel_id;
 		PersonnelPtr newPersonnel;
-		bool isActive,isArchive;
+		bool isActive, isArchive;
 
 		getline(ss, job, ';');
 
@@ -60,12 +60,10 @@ bool PersonnelRepository::loadData()
 			isArchive = stoi(tmp);
 
 			getline(ss, tmp, ';');
-
 			personnel_id = stoul(tmp);
 
 
 			getline(ss, specjalizajce, ';');
-
 			stringstream specializationsStream(specjalizajce);
 
 			while (getline(specializationsStream, tmp, ','))
@@ -91,7 +89,6 @@ bool PersonnelRepository::loadData()
 
 			getline(ss, tmp, ';');
 			isArchive = stoi(tmp);
-
 
 			getline(ss, tmp, ';');
 			//Do unsigned longa(inta)
