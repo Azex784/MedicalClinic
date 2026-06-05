@@ -14,8 +14,8 @@ private:
 	unsigned int serviceId;
 	unsigned int requiredDoctorSize;
 	Specialisation requiredDoctorSpec;
-	bool isAvailble;
-	bool isArchive;
+	bool isAvailble = 1;
+	bool isArchive = 0;
 
 public:
 	/**
@@ -64,7 +64,7 @@ public:
 	 * Zwraca unikalny identyfikator usługi.
 	 * @return Identyfikator usługi jako liczba całkowita bez znaku.
 	 */
-	unsigned int getServiceId() const;
+	unsigned int getUniqueParameter() const;
 
 	/**
 	 * Zwraca wymaganą liczbę lekarzy do przeprowadzenia usługi.

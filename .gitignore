@@ -1,4 +1,4 @@
 .idea
 cmake-build-debug
 uml/main
-library/test/data
+library/test/data/*.txt

@@ -10,17 +10,31 @@ template <typename T, typename PredicateT, typename UniqueParameter>
 class RepositoryTemplate
 {
 private:
+	std::string fileName;
 	std::vector<T> vectorOfData;
+
 public:
 	/**
-	 * Domyślny konstruktor klasy szablonowej repozytorium.
-	 */
-	RepositoryTemplate() = default;
+	* Domyślny konstruktor klasy szablonowej repozytorium.
+	*/
+	RepositoryTemplate(const std::string& file_name)
+		: fileName(file_name)
+	{
+	}
 
 	/**
 	 * Domyślny destruktor klasy szablonowej repozytorium.
 	 */
 	~RepositoryTemplate() = default;
+
+	/**
+	 * Getter do fileName
+	 * @return nazwa pliku do którego bedzię odbywał się zapis danych.
+	 */
+	const std::string& getFileName() const
+	{
+		return fileName;
+	}
 
 	/**
 	 * Pobiera konkretny obiekt z repozytorium na podstawie pozycji w wektorze.
@@ -100,12 +114,20 @@ public:
 		return vectorOfData;
 	}
 
-
+	/**
+	 * Getter do vectorOfData
+	 * @return Stała referencja do wektora vectorOfData
+	 */
 	const std::vector<T>& getVectorOfData() const
 	{
 		return vectorOfData;
 	}
 
+	/**
+	 * Metoda pozwalająca znaleźć klasę na podstawie uniklane parametru
+	 * @param up
+	 * @return
+	 */
 	const T get(UniqueParameter up) const
 	{
 		return findBy([up](const T t) -> bool
@@ -116,6 +138,17 @@ public:
 		})[0];
 	}
 
+	/**
+	* Czysto abstrakcyjna metoda odczytująca dane na dysku
+	* @return Zwraca wartosc określającą czy doszło do prawidłowego odczytu
+	*/
+	virtual bool loadData() = 0;
+
+	/**
+	 * Czysto abstrakcyjna metoda zapisująca dane na dysku
+	 * @return Zwraca wartosc określającą czy doszło do prawidłowego zapisu
+	 */
+	virtual bool saveData() const = 0;
 };
 
 #endif //REHABILITATIONCENTRE_REPOSITORYTEMPLATE_H

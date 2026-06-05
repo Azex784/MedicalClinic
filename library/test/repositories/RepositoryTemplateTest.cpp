@@ -4,9 +4,31 @@
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
+
+//Struktura tymczasowa, potrzebna tylko by sprawdzic prawidłowe działanie klasy abstrakcyjnej RepositoryTemplate
+struct TmpTemplate :  RepositoryTemplate<PatientPtr, PatientPredicate, const std::string>
+{
+
+	TmpTemplate()
+		: RepositoryTemplate<std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string
+		>("<placeholder>")
+	{
+	}
+
+	~TmpTemplate() = default;
+	bool loadData() override
+	{
+		return true;
+	}
+	bool saveData() const override
+	{
+		return true;
+	}
+};
+
 struct TestSuitRepositoryTemplateFixture
 {
-	RepositoryTemplate<PatientPtr, PatientPredicate, const std::string> pacjentRepo;
+	TmpTemplate pacjentRepo;
 	AddressPtr testAddress;
 	PatientPtr testPatient;
 	PatientPtr testPatient1;
@@ -19,7 +41,6 @@ struct TestSuitRepositoryTemplateFixture
 		  testPatient1(std::make_shared<Patient>("Jesse", "Pinkman", "20010112345", testAddress)),
 		  testPatient2(std::make_shared<Patient>("Skyler", "White", "93010112345", testAddress)),
 		  testPatient3(std::make_shared<Patient>("Gustavo", "Fring", "91110112345", testAddress))
-
 	{
 	}
 

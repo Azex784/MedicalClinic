@@ -7,15 +7,18 @@
 
 using namespace std;
 
-
-const std::string& PersonnelRepository::getFileName() const
-{
-	return fileName;
-}
-
-PersonnelRepository::PersonnelRepository(const std::string& file_name) : fileName(file_name)
+PersonnelRepository::PersonnelRepository(const std::string& file_name)
+		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned
+		>(file_name)
 {
 }
+
+PersonnelRepository::PersonnelRepository()
+		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned
+		>("../../program/data/PersonnelRepository.txt")
+{
+}
+
 
 bool PersonnelRepository::loadData()
 {
@@ -74,7 +77,7 @@ bool PersonnelRepository::loadData()
 				specialisations.push_back(spec);
 			}
 			tmp = "";
-			getline(ss, tmp, ';');
+			getline(ss, tmp, '\n');
 			doctor_cost = stoul(tmp);
 			newPersonnel = make_shared<Doctor>(name, lastName, personnel_id, specialisations, doctor_cost);
 			//Gdy mamy pielegniarke
@@ -90,7 +93,7 @@ bool PersonnelRepository::loadData()
 			getline(ss, tmp, ';');
 			isArchive = stoi(tmp);
 
-			getline(ss, tmp, ';');
+			getline(ss, tmp, '\n');
 			//Do unsigned longa(inta)
 			personnel_id = stoul(tmp);
 

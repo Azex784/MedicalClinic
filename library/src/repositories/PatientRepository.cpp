@@ -1,17 +1,19 @@
 #include "repositories/PatientRepository.h"
+#include "patient/Address.h"
+#include "patient/Patient.h"
+
 #include <fstream>
-#include <patient/Address.h>
-#include <patient/Patient.h>
 
 using namespace std;
 
 
-const std::string& PatientRepository::getFileName() const
+PatientRepository::PatientRepository(const std::string& file_name) : RepositoryTemplate<
+	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(file_name)
 {
-	return fileName;
 }
 
-PatientRepository::PatientRepository(const std::string& file_name): fileName(file_name)
+PatientRepository::PatientRepository() : RepositoryTemplate<
+	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>("../../program/data/PatientRepository.txt")
 {
 }
 
@@ -21,17 +23,19 @@ bool PatientRepository::loadData()
 	inFile.open(getFileName());
 	string line;
 
-	if (!inFile.is_open()) {
+	if (!inFile.is_open())
+	{
 		return false;
 	}
 
-	while (getline(inFile, line)) {
+	while (getline(inFile, line))
+	{
 		if (line.empty()) continue;
 
 		//Ladujemy do strumienia
 		stringstream ss(line);
 
-		string firstName, lastName, personalNumber, city, street, number,tmp;
+		string firstName, lastName, personalNumber, city, street, number, tmp;
 
 		getline(ss, firstName, ';');
 		getline(ss, lastName, ';');
@@ -39,13 +43,13 @@ bool PatientRepository::loadData()
 		getline(ss, city, ';');
 		getline(ss, street, ';');
 		getline(ss, number, ';');
-		getline(ss, tmp);
+		getline(ss, tmp, '\n');
 
 		bool isArchived = stoi(tmp);
 
 		//Tworzenie nowych obiektow z wczytanymi danymi
-		AddressPtr nowyAdress = make_shared<Address>(city,street,number);
-		PatientPtr nowyPacjent =  make_shared<Patient>(firstName,lastName,personalNumber,nowyAdress);
+		AddressPtr nowyAdress = make_shared<Address>(city, street, number);
+		PatientPtr nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
 
 		nowyPacjent->setIsArchive(isArchived);
 		add(nowyPacjent);
@@ -53,6 +57,7 @@ bool PatientRepository::loadData()
 	inFile.close();
 	return true;
 }
+
 bool PatientRepository::saveData() const
 {
 	ofstream outFile;

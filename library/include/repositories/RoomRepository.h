@@ -14,15 +14,9 @@ public:
 
 private:
 	//Sciezka rozpoczyna sie od cmake-build-debug/library
-	const std::string fileName = "../../program/data/RoomRepository.txt";
+	//const std::string fileName = "../../program/data/RoomRepository.txt";
 
 public:
-	/**
-	 * Metoda zwracająca nazwe pliku
-	 * @return Nazwa pliku
-	 */
-	const std::string& getFileName() const;
-
 	/**
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
 	 * @param file_name
@@ -30,9 +24,10 @@ public:
 	RoomRepository(const std::string& file_name);
 
 	/**
-	 * Domyślny konstrukotr
+	 * Domyślny konstrukotr, domyślna ścieżka: "../../program/data/RoomRepository.txt"
 	 */
-	RoomRepository() = default;
+	RoomRepository();
+
 	/**
 	 * Destrukotr
 	 */
@@ -43,14 +38,14 @@ public:
 	* @return true Jeśli plik został pomyślnie otwarty, a dane załadowane do RAM-u.
 	* @return false Jeśli nie udało się wczytac danych/otworzyc pliku.
 	*/
-	bool loadData();
+	bool loadData() override;
 
 	/**
 	 * Zapisuje aktualny stan kolekcji z pamięci ulotnej do trwalej pamieci fizycznej.
 	 * @return true Jeśli proces zapisu na dysku zakończył się sukcesem.
 	 * @return false Jeśli wystąpił błąd przy zapisie.
 	 */
-	bool saveData() const;
+	bool saveData() const override;
 };
 
 

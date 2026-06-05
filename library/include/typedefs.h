@@ -42,8 +42,8 @@ typedef std::shared_ptr<Service> ServicePtr;
 
 typedef std::function<bool(ServicePtr)> ServicePredicate;
 
-class Rehabilitation;
-typedef std::shared_ptr<Rehabilitation> RehabilitationPtr;
+class Rehabillitation;
+typedef std::shared_ptr<Rehabillitation> RehabillitationPtr;
 
 class Consultation;
 typedef std::shared_ptr<Consultation> ConsultationPtr;

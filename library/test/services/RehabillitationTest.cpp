@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
     BOOST_TEST(testRehabillitation.getServiceCost() == 200);
     BOOST_TEST(testRehabillitation.getServiceDuration() == 45);
     BOOST_TEST(testRehabillitation.getServiceName() == "Masaaż fizyczno-kregowy");
-    BOOST_TEST(testRehabillitation.getServiceId() == 1);
+    BOOST_TEST(testRehabillitation.getUniqueParameter() == 1);
     BOOST_TEST(specialisationToString(testRehabillitation.getRequiredDoctorSpec()) == specialisationToString(Specialisation::ORTHOPEDIST));
     BOOST_TEST(testRehabillitation.getRequiredDoctorSize() == 1);
     BOOST_TEST(testRehabillitation.getRequiredNurseSize() == 2);

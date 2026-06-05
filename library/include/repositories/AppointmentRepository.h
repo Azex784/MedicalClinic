@@ -7,12 +7,9 @@
 /**
  * Klasa przechwująca dane o wizytach
  */
-class AppointmentRepository : public RepositoryTemplate<AppointmentPtr,AppointmentPredicate>
+class AppointmentRepository : public RepositoryTemplate<AppointmentPtr,AppointmentPredicate,const unsigned int>
 {
 private:
-	//Sciezka rozpoczyna sie od cmake-build-debug/library
-	const std::string fileName = "../../program/data/AppointmentRepository.txt";
-
 	//Potrzebne by odnalezc obiekty w innych repozyteriach -
 	// w appointment zapisujemy tylko unikalne identyfikatory
 	PatientRepositoryPtr patientRepository;
@@ -45,22 +42,23 @@ public:
 	 * @return const ServiceRepositoryPtr& Stała referencja do inteligentnego wskaźnika repozytorium usług.
 	 */
 	const ServiceRepositoryPtr& getServiceRepository() const;
-	/**
-	 * Metoda zwracająca nazwe pliku
-	 * @return Nazwa pliku
-	 */
-	const std::string& getFileName() const;
 
 	/**
-	 * Konstruktor do testów lub do zapisu archive, by nie zapisywać danych tetowych w pliku programu
+	* Domyślny konstrukotr, domyslna sciezka: "../../program/data/AppointmentRepository.txt"
+	*/
+	AppointmentRepository(const PatientRepositoryPtr& patient_repository,
+		const PersonnelRepositoryPtr& personnel_repository, const RoomRepositoryPtr& room_repository,
+		const ServiceRepositoryPtr& service_repository);
+
+
+	/**
+	 * Konstruktor do testów lub do zapisu archive, by nie zapisywać danych testowych w pliku programu
 	 * @param file_name
 	 */
-	AppointmentRepository(const std::string& file_name);
+	AppointmentRepository(const std::string& file_name, const PatientRepositoryPtr& patient_repository,
+		const PersonnelRepositoryPtr& personnel_repository, const RoomRepositoryPtr& room_repository,
+		const ServiceRepositoryPtr& service_repository);
 
-	/**
-	 * Domyślny konstrukotr
-	 */
-	AppointmentRepository() = default;
 	/**
 	 * Destrukotr
 	 */
@@ -71,21 +69,14 @@ public:
 	* @return true Jeśli plik został pomyślnie otwarty, a dane załadowane do RAM-u.
 	* @return false Jeśli nie udało się wczytac danych/otworzyc pliku.
 	*/
-	bool loadData();
+	bool loadData() override;
 
 	/**
 	 * Zapisuje aktualny stan kolekcji z pamięci ulotnej do trwalej pamieci fizycznej.
 	 * @return true Jeśli proces zapisu na dysku zakończył się sukcesem.
 	 * @return false Jeśli wystąpił błąd przy zapisie.
 	 */
-	bool saveData() const;
-
-	/**
-	 * Metoda zwracająca wartość danego czlowieka personelu na podsatwie wartosci AppointmentId
-	 * @param appointmentId
-	 * @return AppointmentPtr
-	 */
-	const AppointmentPtr get(const int &appointmentId) const;
+	bool saveData() const override;
 };
 
 

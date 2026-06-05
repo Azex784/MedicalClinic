@@ -1,17 +1,17 @@
 #include "repositories/AppointmentRepository.h"
-
-#include <Appointment.h>
-#include <fstream>
-#include <boost/date_time.hpp>
-#include <patient/Patient.h>
-#include <personnel/Personnel.h>
 #include <repositories/PersonnelRepository.h>
 #include <repositories/PatientRepository.h>
 #include <repositories/ServiceRepository.h>
 #include <repositories/RoomRepository.h>
-#include <rooms/Room.h>
-#include <services/Service.h>
 
+#include "Appointment.h"
+#include "patient/Patient.h"
+#include "personnel/Personnel.h"
+#include "rooms/Room.h"
+#include "services/Service.h"
+
+#include <fstream>
+#include <boost/date_time.hpp>
 
 using namespace std;
 
@@ -35,12 +35,25 @@ const ServiceRepositoryPtr& AppointmentRepository::getServiceRepository() const
 	return serviceRepository;
 }
 
-const std::string& AppointmentRepository::getFileName() const
+AppointmentRepository::AppointmentRepository(const std::string& file_name,
+	const PatientRepositoryPtr& patient_repository, const PersonnelRepositoryPtr& personnel_repository,
+	const RoomRepositoryPtr& room_repository, const ServiceRepositoryPtr& service_repository): RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
+		unsigned>(file_name),
+	patientRepository(patient_repository),
+	personnelRepository(personnel_repository),
+	roomRepository(room_repository),
+	serviceRepository(service_repository)
 {
-	return fileName;
 }
 
-AppointmentRepository::AppointmentRepository(const std::string& file_name) : fileName(file_name)
+AppointmentRepository::AppointmentRepository(
+	const PatientRepositoryPtr& patient_repository, const PersonnelRepositoryPtr& personnel_repository,
+	const RoomRepositoryPtr& room_repository, const ServiceRepositoryPtr& service_repository): RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
+		unsigned>("../../program/data/AppointmentRepository.txt"),
+	patientRepository(patient_repository),
+	personnelRepository(personnel_repository),
+	roomRepository(room_repository),
+	serviceRepository(service_repository)
 {
 }
 
@@ -64,7 +77,8 @@ bool AppointmentRepository::loadData()
 
 		string tmp;
 		boost::posix_time::ptime appointmentBeginDate;
-		unsigned int appointmentId, personnelId, personalId, serviceId, roomNumber;
+		unsigned int appointmentId, serviceId, roomNumber,personnelId;
+		string personalId;
 
 		AppointmentPtr newAppointment;
 		vector<PersonnelPtr> personnel;
@@ -87,13 +101,13 @@ bool AppointmentRepository::loadData()
 
 		while (getline(personnelIdStream, tmp, ','))
 		{
-			personalId = stoul(tmp);
-			personnel.push_back(getPersonnelRepository()->get(personalId));
+			personnelId = stoul(tmp);
+			personnel.push_back(getPersonnelRepository()->get(personnelId));
 		}
 
 		//wczytanie pacjenta
 		getline(ss, tmp, ';');
-		personalId = stoul(tmp);
+		personalId = tmp;
 
 		patient = getPatientRepository()->get(personalId);
 
@@ -104,7 +118,7 @@ bool AppointmentRepository::loadData()
 		service = getServiceRepository()->get(serviceId);
 
 		//wczytanie pokoju
-		getline(ss, tmp, ';');
+		getline(ss, tmp, '\n');
 		roomNumber = stoul(tmp);
 
 		room = getRoomRepository()->get(roomNumber);
@@ -112,7 +126,6 @@ bool AppointmentRepository::loadData()
 		//Tworzymy nową wizytę
 		newAppointment = make_shared<Appointment>(appointmentBeginDate, appointmentId, personnel, patient, service,
 		                                          room);
-
 
 		add(newAppointment);
 	}
@@ -128,23 +141,22 @@ bool AppointmentRepository::saveData() const
 
 	if (outFile.good())
 	{
-		for (const auto& appointment : getVectorOfData())
+		for (const AppointmentPtr appointment : getVectorOfData())
 		{
-			outFile << appointment->getAppointmentBeginDate() << ";";
-
-			outFile << appointment->getAppointmentId() << ";";
+			outFile << boost::posix_time::to_iso_string(appointment->getAppointmentBeginDate()) << ";";
+			outFile << appointment->getUniqueParameter() << ";";
 
 			int i;
 			//Zapisujemy kazdy unikalny numer osoby z personelu
 			for (i = 0; appointment->getPersonnel().size() - 1 > i; i++)
 			{
-				outFile << appointment->getPersonnel()[i]->getPersonnelId() << ",";
+				outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ",";
 			}
-			outFile << appointment->getPersonnel()[i]->getPersonnelId() << ";";
+			outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ";";
 
-			outFile << appointment->getPatient()->getPersonalNumber()<< ";";
-			outFile << appointment->getService()->getServiceId()<< ";";
-			outFile << appointment->getRoom()->getRoomNumber()<< "\n";
+			outFile << appointment->getPatient()->getUniqueParameter()<< ";";
+			outFile << appointment->getService()->getUniqueParameter()<< ";";
+			outFile << appointment->getRoom()->getUniqueParameter()<< "\n";
 
 		}
 		outFile.close();

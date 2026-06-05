@@ -35,7 +35,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteService, TestSuiteServiceFixture)
 		BOOST_TEST(testService.getServiceCost() == 213);
 		BOOST_TEST(testService.getServiceDuration() == 60);
 		BOOST_TEST(testService.getServiceName() == "Masaz stop");
-		BOOST_TEST(testService.getServiceId() == 1);
+		BOOST_TEST(testService.getUniqueParameter() == 1);
 		BOOST_TEST(specialisationToString(testService.getRequiredDoctorSpec()) == specialisationToString(Specialisation::MASSAGE_THERAPIST));
 		BOOST_TEST(testService.getRequiredDoctorSize() == 1);
 	}
@@ -51,9 +51,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteService, TestSuiteServiceFixture)
 		testService.setIsArchive(true);
 		BOOST_TEST(testService.getIsArchive() == true);
 
-		BOOST_TEST_REQUIRE(testService.getIsAvailable() == false);
-		testService.setIsAvailable(1);
-		BOOST_TEST(testService.getIsAvailable() == true);
+		BOOST_TEST_REQUIRE(testService.getIsAvailable() == true);
+		testService.setIsAvailable(0);
+		BOOST_TEST(testService.getIsAvailable() == false);
 	}
 
 	BOOST_AUTO_TEST_CASE(GetInfoTest)

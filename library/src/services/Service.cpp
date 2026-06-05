@@ -18,7 +18,7 @@ const std::string& Service::getServiceName() const
     return serviceName;
 }
 
-unsigned int Service::getServiceId() const
+unsigned int Service::getUniqueParameter() const
 {
     return serviceId;
 }
@@ -71,7 +71,7 @@ Service::Service(const unsigned int service_cost, const unsigned int service_dur
 const std::string Service::getInfo() const
 {
     return "Nazwa usługi: " + getServiceName() + ", koszt usług: " + to_string(getServiceCost()) +
-        ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getServiceId())
+        ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getUniqueParameter())
         + ", liczba lekarzy: " + to_string(getRequiredDoctorSize()) + ", specjalizacja lekarza/y: " + specialisationToString(getRequiredDoctorSpec());
     ;
 }

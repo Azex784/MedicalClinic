@@ -8,13 +8,15 @@
 
 using namespace std;
 
-
-const std::string& RoomRepository::getFileName() const
+RoomRepository::RoomRepository(const std::string& file_name)
+		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned
+		>(file_name)
 {
-	return fileName;
 }
 
-RoomRepository::RoomRepository(const std::string& file_name) : fileName(file_name)
+RoomRepository::RoomRepository()
+		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned
+		>("../../program/data/RoomRepository.txt")
 {
 }
 
@@ -68,7 +70,7 @@ bool RoomRepository::loadData()
 				equipment.push_back(spec);
 			}
 
-			getline(ss, tmp, ';');
+			getline(ss, tmp, '\n');
 			maxCapacity = stoi(tmp);
 
 			room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
@@ -82,7 +84,7 @@ bool RoomRepository::loadData()
 			getline(ss, tmp, ';');
 			isActive = stoi(tmp);
 
-			getline(ss, tmp, ';');
+			getline(ss, tmp, '\n');
 			isArchive = stoi(tmp);
 			room = make_shared<ConsultationRoom>(roomNumber);
 		}
