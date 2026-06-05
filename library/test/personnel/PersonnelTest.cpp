@@ -4,8 +4,8 @@
 //tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
 struct TmpPersonnel : public Personnel
 {
-	TmpPersonnel(const std::string& name, const std::string& last_name, unsigned int id)
-		: Personnel(name, last_name, id) {}
+	TmpPersonnel(const std::string& name, const std::string& lastName, unsigned int id)
+		: Personnel(name, lastName, id) {}
 
 	bool canConductTreatment(Specialisation) const override {
 		return true; 

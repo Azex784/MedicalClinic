@@ -13,10 +13,10 @@ public:
     /**
     * Konstruktor tworzący nowy obiekt pielęgniarki.
     * @param name Imię pielęgniarki.
-    * @param last_name Nazwisko pielęgniarki.
-    * @param personnel_id Unikalny identyfikator przypisany do pracownika.
+    * @param lastName Nazwisko pielęgniarki.
+    * @param personnelId Unikalny identyfikator przypisany do pracownika.
     */
-    Nurse(const std::string& name, const std::string& last_name, const unsigned personnel_id);
+    Nurse(const std::string& name, const std::string& lastName, const unsigned personnelId);
 
     /**
      * Domyślny destruktor klasy.

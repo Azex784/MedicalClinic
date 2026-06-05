@@ -18,11 +18,11 @@ public:
     /**
     * Konstruktor tworzący nowy obiekt pacjenta.
     * @param name Imię pacjenta.
-    * @param last_name Nazwisko pacjenta.
-    * @param personal_number PESEL pacjenta - niezmienialny.
+    * @param lastName Nazwisko pacjenta.
+    * @param personalNumber PESEL pacjenta - niezmienialny.
     * @param address Wskaźnik na obiekt adresu przypisany do pacjenta.
     */
-    Patient(const std::string& name, const std::string& last_name, const std::string& personal_number,
+    Patient(const std::string& name, const std::string& lastName, const std::string& personalNumber,
             const AddressPtr& address);
 
     /**

@@ -4,7 +4,7 @@
 //struct sluzacy do sprawdzenia dzialania metod klasy bazowej
 struct TmpRoom : public Room
 {
-    TmpRoom(const unsigned int room_number) : Room(room_number) {}
+    TmpRoom(const unsigned int roomNumber) : Room(roomNumber) {}
 
     //wypelnienie metody czysto wirtualnemj
     bool canBeUsed(Equipment equipment) const override

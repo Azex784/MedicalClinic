@@ -1,8 +1,8 @@
 #include "Person.h"
 
 
-Person::Person(const std::string& name, const std::string& last_name) : name(name),
-                                                                        lastName(last_name)
+Person::Person(const std::string& name, const std::string& lastName) : name(name),
+                                                                        lastName(lastName)
 {
     setIsArchive(false);
 }
@@ -17,14 +17,14 @@ void Person::setName(const std::string& name)
     this->name = name;
 }
 
-void Person::setLastName(const std::string& last_name)
+void Person::setLastName(const std::string& lastName1)
 {
-    lastName = last_name;
+    lastName = lastName1;
 }
 
-void Person::setIsArchive(const bool is_archive)
+void Person::setIsArchive(const bool isArchive1)
 {
-    isArchive = is_archive;
+    isArchive = isArchive1;
 }
 
 

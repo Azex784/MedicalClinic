@@ -17,10 +17,10 @@ const std::string RehabillitationRoom::getInfo() const
 		" osob z personulu, sprzęt dostępny w pokoju: " + oss.str();
 }
 
-RehabillitationRoom::RehabillitationRoom(const unsigned room_number, const std::vector<Equipment>& accessible_equpiment,
-                                         const unsigned int max_capacity) : Room(room_number),
-                                                                            accessibleEqupiment(accessible_equpiment),
-                                                                            maxCapacity(max_capacity)
+RehabillitationRoom::RehabillitationRoom(const unsigned roomNumber, const std::vector<Equipment>& accessibleEqupiment,
+                                         const unsigned int maxCapacity) : Room(roomNumber),
+                                                                            accessibleEqupiment(accessibleEqupiment),
+                                                                            maxCapacity(maxCapacity)
 {
 }
 

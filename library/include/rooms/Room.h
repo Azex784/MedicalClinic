@@ -18,9 +18,9 @@ private:
 public:
 	/**
 	* Konstruktor tworzący nowy obiekt sali.
-	* @param room_number Numer przypisany do sali.
+	* @param roomNumber Numer przypisany do sali.
 	*/
-	Room(const unsigned int room_number);
+	Room(const unsigned int roomNumber);
 
 	/**
 	 * Domyślny destruktor klasy.
@@ -60,15 +60,15 @@ public:
 
 	/**
 	* Zmienia status aktywności sali.
-	* @param is_active
+	* @param isActive
 	*/
-	void setIsActive(const bool is_active);
+	void setIsActive(const bool isActive);
 
 	/**
 	 * Zmienia status archiwizacji sali.
-	 * @param is_archive
+	 * @param isArchive
 	 */
-	void setIsArchive(const bool is_archive);
+	void setIsArchive(const bool isArchive);
 };
 
 

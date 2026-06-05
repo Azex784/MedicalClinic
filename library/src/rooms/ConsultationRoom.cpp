@@ -3,7 +3,7 @@
 
 using namespace std;
 
-ConsultationRoom::ConsultationRoom(const unsigned room_number) : Room(room_number)
+ConsultationRoom::ConsultationRoom(const unsigned roomNumber) : Room(roomNumber)
 {
 }
 

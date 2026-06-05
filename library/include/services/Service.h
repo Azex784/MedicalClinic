@@ -20,16 +20,16 @@ private:
 public:
 	/**
 	 * Konstruktor tworzący nowy obiekt usługi medycznej.
-	 * @param service_cost Koszt wykonania usługi.
-	 * @param service_duration Czas trwania usługi w minutach.
-	 * @param service_name Nazwa świadczonej usługi.
-	 * @param service_id Unikalny identyfikator usługi.
-	 * @param required_doctor_size Wymagana liczba lekarzy do przeprowadzenia usługi.
-	 * @param required_doctor_spec Wymagana specjalizacja lekarza wykonującego usługę.
+	 * @param serviceCost Koszt wykonania usługi.
+	 * @param serviceDuration Czas trwania usługi w minutach.
+	 * @param serviceName Nazwa świadczonej usługi.
+	 * @param serviceId Unikalny identyfikator usługi.
+	 * @param requiredDoctorSize Wymagana liczba lekarzy do przeprowadzenia usługi.
+	 * @param requiredDoctorSpec Wymagana specjalizacja lekarza wykonującego usługę.
 	 */
-	Service(const unsigned int service_cost, const unsigned int service_duration, const std::string& service_name,
-	        const unsigned int service_id, const unsigned int required_doctor_size,
-	        const Specialisation required_doctor_spec);
+	Service(const unsigned int serviceCost, const unsigned int serviceDuration, const std::string& serviceName,
+	        const unsigned int serviceId, const unsigned int requiredDoctorSize,
+	        const Specialisation requiredDoctorSpec);
 
 	/**
 	 * Domyślny destruktor klasy.
@@ -92,21 +92,21 @@ public:
 
 	/**
 	 * Ustawia nowy koszt wykonania usługi.
-	 * @param service_cost Nowa wartość kosztu.
+	 * @param serviceCost1 Nowa wartość kosztu.
 	 */
-	void setServiceCost(const unsigned int service_cost);
+	void setServiceCost(const unsigned int serviceCost1);
 
 	/**
 	 * Zmienia status dostępności usługi.
 	 * @param is_availble.
 	 */
-	void setIsAvailable(const bool is_availble);
+	void setIsAvailable(const bool isAvailble1);
 
 	/**
 	 * Zmienia status archiwizacji usługi.
-	 * @param is_archive
+	 * @param isArchive1
 	 */
-	void setIsArchive(const bool is_archive);
+	void setIsArchive(const bool isArchive1);
 };
 
 

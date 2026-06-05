@@ -13,9 +13,9 @@ unsigned int Personnel::getUniqueParameter() const
 	return personnelId;
 }
 
-Personnel::Personnel(const std::string& name, const std::string& last_name, const unsigned int personnel_id) :
-	Person(name, last_name),
-	personnelId(personnel_id)
+Personnel::Personnel(const std::string& name, const std::string& lastName, const unsigned int personnelId) :
+	Person(name, lastName),
+	personnelId(personnelId)
 {
 }
 

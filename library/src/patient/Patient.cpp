@@ -6,9 +6,9 @@ const AddressPtr& Patient::getAddress() const
     return address;
 }
 
-Patient::Patient(const std::string& name, const std::string& last_name, const std::string& personal_number,
-                 const AddressPtr& address) : Person(name, last_name),
-                                              personalNumber(personal_number),
+Patient::Patient(const std::string& name, const std::string& lastName, const std::string& personalNumber,
+                 const AddressPtr& address) : Person(name, lastName),
+                                              personalNumber(personalNumber),
                                               address(address)
 {
 }

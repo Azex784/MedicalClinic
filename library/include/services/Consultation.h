@@ -17,19 +17,19 @@ private:
 public:
 	/**
 	 * Konstruktor tworzący nowy obiekt konsultacji.
-	 * @param service_cost Koszt przeprowadzenia konsultacji.
-	 * @param service_duration Przewidywany czas trwania konsultacji w minutach.
-	 * @param service_name Nazwa usługi konsultacyjnej.
-	 * @param service_id Unikalny identyfikator usługi.
-	 * @param required_doctor_size Wymagana liczba lekarzy do przeprowadzenia konsultacji.
-	 * @param required_doctor_spec Wymagana specjalizacja lekarza prowadzącego konsultację.
+	 * @param serviceCost Koszt przeprowadzenia konsultacji.
+	 * @param serviceDuration Przewidywany czas trwania konsultacji w minutach.
+	 * @param serviceName Nazwa usługi konsultacyjnej.
+	 * @param serviceId Unikalny identyfikator usługi.
+	 * @param requiredDoctorSize Wymagana liczba lekarzy do przeprowadzenia konsultacji.
+	 * @param requiredDoctorSpec Wymagana specjalizacja lekarza prowadzącego konsultację.
 	 * @param topic Główny temat.
-	 * @param is_online Flaga logiki: true oznacza, że konsultacja odbywa się zdalnie (online), false oznacza wizytę stacjonarną.
+	 * @param isOnline Flaga logiki: true oznacza, że konsultacja odbywa się zdalnie (online), false oznacza wizytę stacjonarną.
 	 */
-	Consultation(const unsigned service_cost, const unsigned service_duration, const std::string& service_name,
-	             const unsigned service_id, const unsigned required_doctor_size,
-	             const Specialisation required_doctor_spec,
-	             const std::string& topic, const bool is_online);
+	Consultation(const unsigned serviceCost, const unsigned serviceDuration, const std::string& serviceName,
+	             const unsigned serviceId, const unsigned requiredDoctorSize,
+	             const Specialisation requiredDoctorSpec,
+	             const std::string& topic, const bool isOnline);
 
 	/**
 	 * Domyślny destruktor klasy.

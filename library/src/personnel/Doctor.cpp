@@ -4,11 +4,11 @@
 
 using namespace std;
 
-Doctor::Doctor(const std::string& name, const std::string& last_name, const unsigned personnel_id,
+Doctor::Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
                const std::vector<Specialisation>& specialisation,
-               const unsigned int doctor_cost) : Personnel(name, last_name, personnel_id),
+               const unsigned int doctorCost) : Personnel(name, lastName, personnelId),
                                                  specialisation(specialisation),
-                                                 doctorCost(doctor_cost)
+                                                 doctorCost(doctorCost)
 {
 }
 

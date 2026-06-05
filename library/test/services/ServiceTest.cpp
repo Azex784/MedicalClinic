@@ -5,10 +5,10 @@
 //Tymczasowa struktura potrzebna do testow
 struct TmpService : public Service
 {
-	TmpService(const unsigned service_cost, const unsigned service_duration, const std::string& service_name,
-	           const unsigned service_id, const unsigned required_doctor_size,
-	           const Specialisation required_doctor_spec)
-		: Service(service_cost, service_duration, service_name, service_id, required_doctor_size, required_doctor_spec)
+	TmpService(const unsigned serviceCost, const unsigned serviceDuration, const std::string& serviceName,
+	           const unsigned serviceId, const unsigned requiredDoctorSize,
+	           const Specialisation requiredDoctorSpec)
+		: Service(serviceCost, serviceDuration, serviceName, serviceId, requiredDoctorSize, requiredDoctorSpec)
 	{
 	}
 

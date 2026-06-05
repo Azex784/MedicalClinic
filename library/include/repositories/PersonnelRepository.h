@@ -15,7 +15,7 @@ public:
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
 	 * @param file_name
 	 */
-	PersonnelRepository(const std::string& file_name);
+	PersonnelRepository(const std::string& fileName);
 
 	/**
 	 * Domyślny konstrukotr, domyślna ścieżka "../../program/data/PersonnelRepository.txt"

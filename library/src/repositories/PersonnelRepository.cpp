@@ -39,7 +39,7 @@ bool PersonnelRepository::loadData()
 		stringstream ss(line);
 
 		string name, lastName, job, tmp;
-		unsigned int personnel_id;
+		unsigned int personnelId;
 		PersonnelPtr newPersonnel;
 		bool isActive, isArchive;
 
@@ -63,7 +63,7 @@ bool PersonnelRepository::loadData()
 			isArchive = stoi(tmp);
 
 			getline(ss, tmp, ';');
-			personnel_id = stoul(tmp);
+			personnelId = stoul(tmp);
 
 
 			getline(ss, specjalizajce, ';');
@@ -79,7 +79,7 @@ bool PersonnelRepository::loadData()
 			tmp = "";
 			getline(ss, tmp, '\n');
 			doctor_cost = stoul(tmp);
-			newPersonnel = make_shared<Doctor>(name, lastName, personnel_id, specialisations, doctor_cost);
+			newPersonnel = make_shared<Doctor>(name, lastName, personnelId, specialisations, doctor_cost);
 			//Gdy mamy pielegniarke
 		}
 		else if (job == "N")
@@ -95,9 +95,9 @@ bool PersonnelRepository::loadData()
 
 			getline(ss, tmp, '\n');
 			//Do unsigned longa(inta)
-			personnel_id = stoul(tmp);
+			personnelId = stoul(tmp);
 
-			newPersonnel = make_shared<Nurse>(name, lastName, personnel_id);
+			newPersonnel = make_shared<Nurse>(name, lastName, personnelId);
 		}
 		else
 		{
@@ -120,7 +120,7 @@ bool PersonnelRepository::saveData() const
 
 	if (outFile.good())
 	{
-		for (const auto& personnel : getVectorOfData())
+		for (const PersonnelPtr& personnel : getVectorOfData())
 		{
 			DoctorPtr doctor = dynamic_pointer_cast<Doctor>(personnel);
 			if (doctor != nullptr)

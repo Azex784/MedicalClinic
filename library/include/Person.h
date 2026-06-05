@@ -23,9 +23,9 @@ public:
     /**
      * Konstruktor tworzący nowy obiekt osoby.
      * @param name Imię osoby.
-     * @param last_name Nazwisko osoby.
+     * @param lastName Nazwisko osoby.
      */
-    Person(const std::string& name, const std::string& last_name);
+    Person(const std::string& name, const std::string& lastName);
 
     /**
      * Domyślny destruktor klasy.
@@ -46,15 +46,15 @@ public:
 
     /**
      * Ustawia nowe nazwisko osoby.
-     * @param last_name Nowe nazwisko, które ma zostać przypisane do zmiennej nazwisko.
+     * @param lastName1 Nowe nazwisko, które ma zostać przypisane do zmiennej nazwisko.
      */
-    void setLastName(const std::string& last_name);
+    void setLastName(const std::string& lastName1);
 
     /**
      * Zmienia status archiwizacji osoby.
-     * @param is_archive
+     * @param isArchive1
      */
-    void setIsArchive(const bool is_archive);
+    void setIsArchive(const bool isArchive1);
 
     /**
      * Pobiera nazwisko osoby.

@@ -8,9 +8,9 @@
 
 using namespace std;
 
-RoomRepository::RoomRepository(const std::string& file_name)
+RoomRepository::RoomRepository(const std::string& fileName)
 		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned
-		>(file_name)
+		>(fileName)
 {
 }
 

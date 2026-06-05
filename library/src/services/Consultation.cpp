@@ -12,14 +12,14 @@ bool Consultation::getIsOnline() const
 	return isOnline;
 }
 
-Consultation::Consultation(const unsigned service_cost, const unsigned service_duration,
-                           const std::string& service_name, const unsigned service_id,
-                           const unsigned required_doctor_size,
-                           const Specialisation required_doctor_spec, const std::string& topic,
-                           const bool is_online) : Service(service_cost, service_duration, service_name, service_id,
-                                                           required_doctor_size, required_doctor_spec),
+Consultation::Consultation(const unsigned serviceCost, const unsigned serviceDuration,
+                           const std::string& serviceName, const unsigned serviceId,
+                           const unsigned requiredDoctorSize,
+                           const Specialisation requiredDoctorSpec, const std::string& topic,
+                           const bool isOnline) : Service(serviceCost, serviceDuration, serviceName, serviceId,
+                                                           requiredDoctorSize, requiredDoctorSpec),
                                                    topic(topic),
-                                                   isOnline(is_online)
+                                                   isOnline(isOnline)
 {
 }
 

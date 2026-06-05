@@ -7,12 +7,12 @@
 
 using namespace std;
 
-const boost::posix_time::ptime Appointment::setAppointmentEndDate(const boost::posix_time::ptime& appointment_end_date)
+const boost::posix_time::ptime Appointment::setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate1)
 {
 	// mozna tylko raz wyznaczyć datę zakończenia
 	if (getAppointmentEndDate() == boost::posix_time::not_a_date_time)
 	{
-		appointmentEndDate = appointment_end_date;
+		appointmentEndDate = appointmentEndDate1;
 		return getAppointmentEndDate();
 	}
 	else
@@ -39,11 +39,11 @@ const int unsigned Appointment::setAppointmentCost()
 	return 0;
 }
 
-Appointment::Appointment(const boost::posix_time::ptime& appointment_begin_date, const unsigned int appointment_id,
+Appointment::Appointment(const boost::posix_time::ptime& appointmentBeginDate, const unsigned int appointmentId,
                          const std::vector<PersonnelPtr>& personnel, const PatientPtr& patient,
                          const ServicePtr& service,
-                         const RoomPtr& room) : appointmentBeginDate(appointment_begin_date),
-                                                appointmentId(appointment_id),
+                         const RoomPtr& room) : appointmentBeginDate(appointmentBeginDate),
+                                                appointmentId(appointmentId),
                                                 personnel(personnel),
                                                 patient(patient),
                                                 service(service),

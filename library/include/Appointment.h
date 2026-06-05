@@ -24,14 +24,14 @@ private:
 public:
     /**
      * Konstruktor tworzący nowy obiekt spotkania i wylicza odrazu date zakonczenia
-     * @param appointment_begin_date Data i czas rozpoczęcia wizyty.
-     * @param appointment_id Unikalny identyfikator przypisany do wizyty.
+     * @param appointmentBeginDate Data i czas rozpoczęcia wizyty.
+     * @param appointmentId Unikalny identyfikator przypisany do wizyty.
      * @param personnel Wektor wskaźników na personel przypisany do realizacji usługi.
      * @param patient Wskaźnik na pacjenta biorącego udział w wizycie.
      * @param service Wskaźnik na realizowaną usługę.
      * @param room Wskaźnik na przypisaną salę.
      */
-    Appointment(const boost::posix_time::ptime& appointment_begin_date, const unsigned int appointment_id,
+    Appointment(const boost::posix_time::ptime& appointmentBeginDate, const unsigned int appointmentId,
                 const std::vector<PersonnelPtr>& personnel, const PatientPtr& patient, const ServicePtr& service,
                 const RoomPtr& room);
 
@@ -97,7 +97,7 @@ public:
      * @param appointment_end_date Docelowa data zakończenia.
      * @return Zwraca ustawioną datę zakończenia w zależności od sukcesu.
      */
-    const boost::posix_time::ptime setAppointmentEndDate(const boost::posix_time::ptime& appointment_end_date);
+    const boost::posix_time::ptime setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate^tment_end_date);
 
     /**
      * Przelicza całkowity koszt wizyty dodajc koszt prestizu lekarzy i uslugi

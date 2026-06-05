@@ -21,18 +21,18 @@ public:
 
 	/**
 	 * Konstruktor tworzący nowy obiekt zabiegu rehabilitacyjnego.
-	 * @param service_cost Koszt wykonania zabiegu.
-	 * @param service_duration Czas trwania zabiegu w minutach.
-	 * @param service_name Nazwa zabiegu rehabilitacyjnego.
-	 * @param service_id Unikalny identyfikator usługi.
-	 * @param required_doctor_size Wymagana liczba lekarzy nadzorujących zabieg.
-	 * @param required_doctor_spec Wymagana specjalizacja lekarza do przeprowadzenia zabiegu.
-	 * @param required_equpiment Wektor przechowujący listę specjalistycznego sprzętu niezbędnego do wykonania zabiegu.
-	 * @param required_nurse_size Wymagana liczba pielęgniarek lub personelu pomocniczego niezbędna do obsługi zabiegu.
+	 * @param serviceCost Koszt wykonania zabiegu.
+	 * @param serviceDuration Czas trwania zabiegu w minutach.
+	 * @param serviceName Nazwa zabiegu rehabilitacyjnego.
+	 * @param serviceId Unikalny identyfikator usługi.
+	 * @param requiredDoctorSize Wymagana liczba lekarzy nadzorujących zabieg.
+	 * @param requiredDoctorSpec Wymagana specjalizacja lekarza do przeprowadzenia zabiegu.
+	 * @param requiredEqupiment Wektor przechowujący listę specjalistycznego sprzętu niezbędnego do wykonania zabiegu.
+	 * @param requiredNurseSize Wymagana liczba pielęgniarek lub personelu pomocniczego niezbędna do obsługi zabiegu.
 	 */
-	Rehabillitation(const unsigned service_cost, const unsigned service_duration, const std::string& service_name,
-		const unsigned service_id, const unsigned required_doctor_size, const Specialisation required_doctor_spec,
-		const std::vector<Equipment>& required_equpiment, const unsigned int required_nurse_size);
+	Rehabillitation(const unsigned serviceCost, const unsigned serviceDuration, const std::string& serviceName,
+		const unsigned serviceId, const unsigned requiredDoctorSize, const Specialisation requiredDoctorSpec,
+		const std::vector<Equipment>& requiredEqupiment, const unsigned int requiredNurseSize);
 
 	/**
 	 * Domyślny destruktor klasy.

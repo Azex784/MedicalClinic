@@ -12,9 +12,9 @@
 
 using namespace std;
 
-ServiceRepository::ServiceRepository(const std::string& file_name)
+ServiceRepository::ServiceRepository(const std::string& fileName)
 		: RepositoryTemplate<std::shared_ptr<Service>, std::function<bool(std::shared_ptr<Service>)>, const unsigned
-		>(file_name)
+		>(fileName)
 {
 }
 
@@ -53,8 +53,8 @@ bool ServiceRepository::loadData()
 		//Wczytujemy dane rehabilitacji
 		if (tmp == "R")
 		{
-			unsigned int required_nurse_size;
-			vector<Equipment> required_equpiment;
+			unsigned int requiredNurseSize;
+			vector<Equipment> requiredEqupiment;
 
 			getline(ss, tmp, ';');
 			serviceCost = stoi(tmp);
@@ -89,13 +89,13 @@ bool ServiceRepository::loadData()
 			{
 				int enumValue = stoi(tmp);
 				Equipment equ = static_cast<Equipment>(enumValue);
-				required_equpiment.push_back(equ);
+				requiredEqupiment.push_back(equ);
 			}
 
 			getline(ss, tmp, '\n');
-			required_nurse_size = stoul(tmp);
+			requiredNurseSize = stoul(tmp);
 
-			service = make_shared<Rehabillitation>(serviceCost,serviceDuration,serviceName,serviceId,requiredDoctorSize,requiredDoctorSpec,required_equpiment,required_nurse_size);
+			service = make_shared<Rehabillitation>(serviceCost,serviceDuration,serviceName,serviceId,requiredDoctorSize,requiredDoctorSpec,requiredEqupiment,requiredNurseSize);
 			//Wczytujemy dane dla konsultacji
 		}
 		else if (tmp == "C")

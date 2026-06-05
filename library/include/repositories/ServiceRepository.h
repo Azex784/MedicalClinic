@@ -14,7 +14,7 @@ public:
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
 	 * @param file_name
 	 */
-	ServiceRepository(const std::string& file_name);
+	ServiceRepository(const std::string& fileName);
 
 	/**
 	 * Domyślny konstrukotr, ustawia fileName na ../../program/data/ServiceRepository.txt

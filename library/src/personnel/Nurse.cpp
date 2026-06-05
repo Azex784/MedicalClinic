@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Nurse::Nurse(const std::string& name, const std::string& last_name, const unsigned personnel_id): Personnel(name, last_name, personnel_id)
+Nurse::Nurse(const std::string& name, const std::string& lastName, const unsigned personnelId): Personnel(name, lastName, personnelId)
 {
 }
 

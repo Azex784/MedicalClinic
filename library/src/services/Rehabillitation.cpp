@@ -14,12 +14,12 @@ unsigned int Rehabillitation::getRequiredNurseSize() const
     return requiredNurseSize;
 }
 
-Rehabillitation::Rehabillitation(const unsigned service_cost, const unsigned service_duration,
-    const std::string& service_name, const unsigned service_id, const unsigned required_doctor_size,
-    const Specialisation required_doctor_spec, const std::vector<Equipment>& required_equpiment,
-    const unsigned int required_nurse_size): Service(service_cost, service_duration, service_name, service_id, required_doctor_size, required_doctor_spec),
-                                             requiredEqupiment(required_equpiment),
-                                             requiredNurseSize(required_nurse_size)
+Rehabillitation::Rehabillitation(const unsigned serviceCost, const unsigned serviceDuration,
+    const std::string& serviceName, const unsigned serviceId, const unsigned requiredDoctorSize,
+    const Specialisation requiredDoctorSpec, const std::vector<Equipment>& requiredEqupiment,
+    const unsigned int requiredNurseSize): Service(serviceCost, serviceDuration, serviceName, serviceId, requiredDoctorSize, requiredDoctorSpec),
+                                             requiredEqupiment(requiredEqupiment),
+                                             requiredNurseSize(requiredNurseSize)
 {
 }
 

@@ -48,23 +48,23 @@ void Service::setServiceCost(const unsigned int service_cost)
     serviceCost = service_cost;
 }
 
-void Service::setIsAvailable(const bool is_availble)
+void Service::setIsAvailable(const bool isAvailble1)
 {
-    isAvailble = is_availble;
+    isAvailble = isAvailble1;
 }
 
-void Service::setIsArchive(const bool is_archive)
+void Service::setIsArchive(const bool isArchive1)
 {
-    isArchive = is_archive;
+    isArchive = isArchive1;
 }
 
-Service::Service(const unsigned int service_cost, const unsigned int service_duration, const std::string& service_name,
-    const unsigned int service_id, const unsigned int required_doctor_size, const Specialisation required_doctor_spec): serviceCost(service_cost),
-    serviceDuration(service_duration),
-    serviceName(service_name),
-    serviceId(service_id),
-    requiredDoctorSize(required_doctor_size),
-    requiredDoctorSpec(required_doctor_spec)
+Service::Service(const unsigned int serviceCost, const unsigned int serviceDuration, const std::string& serviceName,
+    const unsigned int serviceId, const unsigned int requiredDoctorSize, const Specialisation requiredDoctorSpec): serviceCost(serviceCost),
+    serviceDuration(serviceDuration),
+    serviceName(serviceName),
+    serviceId(serviceId),
+    requiredDoctorSize(requiredDoctorSize),
+    requiredDoctorSpec(requiredDoctorSpec)
 {
 }
 

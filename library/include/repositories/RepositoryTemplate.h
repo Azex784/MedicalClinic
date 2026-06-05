@@ -17,8 +17,8 @@ public:
 	/**
 	* Domyślny konstruktor klasy szablonowej repozytorium.
 	*/
-	RepositoryTemplate(const std::string& file_name)
-		: fileName(file_name)
+	RepositoryTemplate(const std::string& fileName)
+		: fileName(fileName)
 	{
 	}
 

@@ -46,18 +46,18 @@ public:
 	/**
 	* Domyślny konstrukotr, domyslna sciezka: "../../program/data/AppointmentRepository.txt"
 	*/
-	AppointmentRepository(const PatientRepositoryPtr& patient_repository,
-		const PersonnelRepositoryPtr& personnel_repository, const RoomRepositoryPtr& room_repository,
-		const ServiceRepositoryPtr& service_repository);
+	AppointmentRepository(const PatientRepositoryPtr& patientRepository,
+		const PersonnelRepositoryPtr& personnelRepository, const RoomRepositoryPtr& roomRepository,
+		const ServiceRepositoryPtr& serviceRepository);
 
 
 	/**
 	 * Konstruktor do testów lub do zapisu archive, by nie zapisywać danych testowych w pliku programu
-	 * @param file_name
+	 * @param fileName
 	 */
-	AppointmentRepository(const std::string& file_name, const PatientRepositoryPtr& patient_repository,
-		const PersonnelRepositoryPtr& personnel_repository, const RoomRepositoryPtr& room_repository,
-		const ServiceRepositoryPtr& service_repository);
+	AppointmentRepository(const std::string& fileName, const PatientRepositoryPtr& patientRepository,
+		const PersonnelRepositoryPtr& personnelRepository, const RoomRepositoryPtr& roomRepository,
+		const ServiceRepositoryPtr& serviceRepository);
 
 	/**
 	 * Destrukotr

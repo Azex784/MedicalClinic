@@ -15,7 +15,7 @@ public:
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
 	 * @param file_name
 	 */
-	PatientRepository(const std::string& file_name);
+	PatientRepository(const std::string& fileName);
 
 	/**
 	 * Domyślny konsturktor, które ustawia fileNaame na "../../program/data/PatientRepository.txt"

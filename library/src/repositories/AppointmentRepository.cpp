@@ -35,25 +35,30 @@ const ServiceRepositoryPtr& AppointmentRepository::getServiceRepository() const
 	return serviceRepository;
 }
 
-AppointmentRepository::AppointmentRepository(const std::string& file_name,
-	const PatientRepositoryPtr& patient_repository, const PersonnelRepositoryPtr& personnel_repository,
-	const RoomRepositoryPtr& room_repository, const ServiceRepositoryPtr& service_repository): RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
-		unsigned>(file_name),
-	patientRepository(patient_repository),
-	personnelRepository(personnel_repository),
-	roomRepository(room_repository),
-	serviceRepository(service_repository)
+AppointmentRepository::AppointmentRepository(const std::string& fileName,
+                                             const PatientRepositoryPtr& patientRepository,
+                                             const PersonnelRepositoryPtr& personnelRepository,
+                                             const RoomRepositoryPtr& roomRepository,
+                                             const ServiceRepositoryPtr& serviceRepository) :
+	RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
+	                   unsigned>("../../program/data/AppointmentRepository.txt"),
+	patientRepository(patientRepository),
+	personnelRepository(personnelRepository),
+	roomRepository(roomRepository),
+	serviceRepository(serviceRepository)
 {
 }
 
 AppointmentRepository::AppointmentRepository(
-	const PatientRepositoryPtr& patient_repository, const PersonnelRepositoryPtr& personnel_repository,
-	const RoomRepositoryPtr& room_repository, const ServiceRepositoryPtr& service_repository): RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
-		unsigned>("../../program/data/AppointmentRepository.txt"),
-	patientRepository(patient_repository),
-	personnelRepository(personnel_repository),
-	roomRepository(room_repository),
-	serviceRepository(service_repository)
+	const PatientRepositoryPtr& patientRepository, const PersonnelRepositoryPtr& personnelRepository,
+	const RoomRepositoryPtr& roomRepository,
+	const ServiceRepositoryPtr& serviceRepository) :
+	RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
+	                   unsigned>("../../program/data/AppointmentRepository.txt"),
+	patientRepository(patientRepository),
+	personnelRepository(personnelRepository),
+	roomRepository(roomRepository),
+	serviceRepository(serviceRepository)
 {
 }
 
@@ -77,7 +82,7 @@ bool AppointmentRepository::loadData()
 
 		string tmp;
 		boost::posix_time::ptime appointmentBeginDate;
-		unsigned int appointmentId, serviceId, roomNumber,personnelId;
+		unsigned int appointmentId, serviceId, roomNumber, personnelId;
 		string personalId;
 
 		AppointmentPtr newAppointment;
@@ -147,17 +152,17 @@ bool AppointmentRepository::saveData() const
 			outFile << appointment->getUniqueParameter() << ";";
 
 			int i;
-			//Zapisujemy kazdy unikalny numer osoby z personelu
+			//Zapisujemy kazdy unikalny numer osoby z personelu, by móc na podsatwie tego zidetyfikować itersujące nas
+			//obiekty
 			for (i = 0; appointment->getPersonnel().size() - 1 > i; i++)
 			{
 				outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ",";
 			}
 			outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ";";
 
-			outFile << appointment->getPatient()->getUniqueParameter()<< ";";
-			outFile << appointment->getService()->getUniqueParameter()<< ";";
-			outFile << appointment->getRoom()->getUniqueParameter()<< "\n";
-
+			outFile << appointment->getPatient()->getUniqueParameter() << ";";
+			outFile << appointment->getService()->getUniqueParameter() << ";";
+			outFile << appointment->getRoom()->getUniqueParameter() << "\n";
 		}
 		outFile.close();
 		return true;

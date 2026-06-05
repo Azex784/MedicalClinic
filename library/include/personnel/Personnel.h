@@ -18,10 +18,10 @@ public:
     /**
     * Konstruktor tworzący nowy obiekt personelu.
     * @param name Imię pracownika.
-    * @param last_name Nazwisko pracownika.
-    * @param personnel_id Unikalny identyfikator przypisany do pracownika.
+    * @param lastName Nazwisko pracownika.
+    * @param personnelId Unikalny identyfikator przypisany do pracownika.
     */
-    Personnel(const std::string& name, const std::string& last_name, const unsigned int personnel_id);
+    Personnel(const std::string& name, const std::string& lastName, const unsigned int personnelId);
 
     /**
      * Domyślny destruktor klasy.
@@ -32,7 +32,7 @@ public:
      * Zmienia status aktywności zawodowej pracownika.
      * * @param is_active Flaga aktywności: true - pracuje, false - nie pracuje.
      */
-    void setIsActive(const bool is_active);
+    void setIsActive(const bool isActive);
 
     /**
      * Sprawdza, czy pracownik jest obecnie aktywny zawodowo.

@@ -8,9 +8,9 @@ class ConsultationRoom : public Room
 public:
 	/**
 	 * Konstruktor tworzący nowy obiekt sali konsultacyjnej.
-	 * * @param room_number Numer przypisany do gabinetu konsultacyjnego.
+	 * * @param roomNumber Numer przypisany do gabinetu konsultacyjnego.
 	 */
-	ConsultationRoom(const unsigned room_number);
+	ConsultationRoom(const unsigned roomNumber);
 
 	/**
 	 * Domyślny destruktor klasy.

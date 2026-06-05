@@ -2,17 +2,17 @@
 
 using namespace std;
 
-void Room::setIsActive(const bool is_active)
+void Room::setIsActive(const bool isActive1)
 {
-    isActive = is_active;
+    isActive = isActive1;
 }
 
-void Room::setIsArchive(const bool is_archive)
+void Room::setIsArchive(const bool isArchive1)
 {
-    isArchive = is_archive;
+    isArchive = isArchive1;
 }
 
-Room::Room(const unsigned int room_number): roomNumber(room_number)
+Room::Room(const unsigned int roomNumber): roomNumber(roomNumber)
 {
     setIsActive(true);
     setIsArchive(false);

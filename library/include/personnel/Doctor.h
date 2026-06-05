@@ -16,13 +16,13 @@ public:
     /**
      * Konstruktor tworzący nowy obiekt lekarza.
      * @param name Imię lekarza.
-     * @param last_name Nazwisko lekarza.
-     * @param personnel_id Unikalny identyfikator przypisany do pracownika.
+     * @param lastName Nazwisko lekarza.
+     * @param personnelId Unikalny identyfikator przypisany do pracownika.
      * @param specialisation Wektor przechowujący listę specjalności lekarza.
-     * @param doctor_cost Koszt prestiżu lekarza.
+     * @param doctorCost Koszt prestiżu lekarza.
      */
-    Doctor(const std::string& name, const std::string& last_name, const unsigned personnel_id,
-           const std::vector<Specialisation>& specialisation, const unsigned int doctor_cost);
+    Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
+           const std::vector<Specialisation>& specialisation, const unsigned int doctorCost);
 
     /**
      * Domyślny destruktor klasy.
@@ -33,7 +33,7 @@ public:
     * Ustawia koszt prestiżu lekarza.
     * @param doctor_cost Nowy koszt.
     */
-    void setDoctorCost(const unsigned int doctor_cost);
+    void setDoctorCost(const unsigned int doctorCost);
 
     /**
      * Pobiera listę specjalizacji posiadanych przez lekarza.

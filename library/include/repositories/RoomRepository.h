@@ -21,7 +21,7 @@ public:
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
 	 * @param file_name
 	 */
-	RoomRepository(const std::string& file_name);
+	RoomRepository(const std::string& fileName);
 
 	/**
 	 * Domyślny konstrukotr, domyślna ścieżka: "../../program/data/RoomRepository.txt"
