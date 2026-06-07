@@ -67,7 +67,7 @@ public:
 	 * @param up Predykat.
 	 * @return Wektor zawierający obiekty spełniające kryteria predykatu.
 	 */
-	const std::vector<UniqueClass> findBy(PredicateT up)
+	const std::vector<UniqueClass> findBy(PredicateT up) const
 	{
 		return getRepository()->findBy(up);
 	}
@@ -77,7 +77,7 @@ public:
 	 * Zwraca wszystkie obiekty znajdujące się obecnie w repozytorium.
 	 * @return Wektor zawierający wszystkie obiekty.
 	 */
-	const std::vector<UniqueClass> findAll()
+	const std::vector<UniqueClass> findAll() const
 	{
 		return getRepository()->findAll();
 	}

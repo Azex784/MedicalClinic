@@ -16,7 +16,7 @@ void PersonnelManager::addDoctor(const std::string& firstName, const std::string
 {
 	if (getRepository()->get(personnelId) == nullptr)
 	{
-		PersonnelPtr doctor = std::make_shared<Doctor>(firstName, lastName, personnelId,specialistaion, doctorCost);
+		PersonnelPtr doctor = std::make_shared<Doctor>(firstName, lastName, personnelId, specialistaion, doctorCost);
 	}
 	return;
 }

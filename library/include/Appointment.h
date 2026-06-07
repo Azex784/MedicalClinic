@@ -41,6 +41,12 @@ public:
     ~Appointment() = default;
 
     /**
+     * Setter appointment beginDate
+     * @param appointmentBeginDate
+     */
+    void setAppointmentBeginDate(const boost::posix_time::ptime& appointmentBeginDate);
+
+    /**
      * Metoda zwracająca informacje o klasie.
      * @return Sformatowany łańcuch znaków zawierający szczegóły wizyty.
      */
@@ -92,12 +98,10 @@ public:
     const RoomPtr& getRoom() const;
 
     /**
-     * Ustawia nową datę i czas zakończenia wizyty
-     * wylicza to na podstawie czasu trwania usługi tylko raz
-     * @param appointmentEndDate Docelowa data zakończenia.
-     * @return Zwraca ustawioną datę zakończenia w zależności od sukcesu.
+     * Ustawia  czasu zakończenia wizyty
+     * Automatycznie wylicza tą datę
      */
-    const boost::posix_time::ptime setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate);
+    void setAppointmentEndDate();
 
     /**
      * Przelicza całkowity koszt wizyty dodajc koszt prestizu lekarzy i uslugi

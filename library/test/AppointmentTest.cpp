@@ -57,7 +57,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointment, TestSuiteAppointmentFixture)
 		BOOST_TEST(testAppointment.getPersonnel().size() == 1);
 		BOOST_TEST(testAppointment.getAppointmentCost() == 0);
 
-		BOOST_TEST(testAppointment.getAppointmentEndDate() == boost::posix_time::time_from_string("2025-06-15 11:00:00"));
+		BOOST_TEST(
+			testAppointment.getAppointmentEndDate() == boost::posix_time::time_from_string("2025-06-15 11:00:00"));
 	}
 
 	BOOST_AUTO_TEST_CASE(SettersTest)
@@ -71,6 +72,23 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointment, TestSuiteAppointmentFixture)
 
 		//Czy niemozliwa bedzie zmiana?
 		BOOST_TEST(testAppointment.setAppointmentCost() == 0);
+
+		//Za jednym razem sprawdzamy poprawność settera zmieniającego datę rozpoczęcia i zakończenia, bo
+		// metoda rozpoczenia wywoulje zmiane zakonczenia
+
+		BOOST_TEST_REQUIRE(
+			testAppointment.getAppointmentBeginDate() == boost::posix_time::time_from_string("2025-06-15 10:30:00"));
+
+		BOOST_TEST_REQUIRE(
+			testAppointment.getAppointmentEndDate() == boost::posix_time::time_from_string("2025-06-15 11:00:00"));
+
+		testAppointment.setAppointmentBeginDate(boost::posix_time::time_from_string("2025-06-15 12:00:00"));
+
+
+		BOOST_TEST(
+			testAppointment.getAppointmentBeginDate() == boost::posix_time::time_from_string("2025-06-15 12:00:00"));
+		BOOST_TEST(
+			testAppointment.getAppointmentEndDate() == boost::posix_time::time_from_string("2025-06-15 12:30:00"));
 	}
 
 	BOOST_AUTO_TEST_CASE(GetInfoTest)

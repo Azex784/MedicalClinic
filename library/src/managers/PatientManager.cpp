@@ -13,7 +13,22 @@ PatientManager::PatientManager(const std::string& fileName): ManagerTemplate<std
 void PatientManager::registerPatient(const std::string& firstName, const std::string& lastName,
                                                  const std::string& personalID, const std::string& city, const std::string& street, const std::string& number) const
 {
-	AddressPtr adres = make_shared<Address>(city, street, number);
+	AddressPtr adres;
+
+	PatientPredicate func = [city, street, number](const PatientPtr patient) -> bool
+	{
+		if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient->getAddress()->getNumber() == number)
+		{return true;}
+		return false;
+	};
+	adres  = findBy(func)[0]->getAddress();
+
+	if (adres == nullptr)
+	{
+		adres = make_shared<Address>(city, street, number);
+	};
+
+
 	PatientPtr patient = make_shared<Patient>(firstName, lastName, personalID, adres);
 
 	if (getRepository()->get(personalID) != nullptr)

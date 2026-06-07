@@ -7,18 +7,10 @@
 
 using namespace std;
 
-const boost::posix_time::ptime Appointment::setAppointmentEndDate(const boost::posix_time::ptime& appointmentEndDate1)
+void Appointment::setAppointmentEndDate()
 {
-	// mozna tylko raz wyznaczyć datę zakończenia
-	if (getAppointmentEndDate() == boost::posix_time::not_a_date_time)
-	{
-		appointmentEndDate = appointmentEndDate1;
-		return getAppointmentEndDate();
-	}
-	else
-	{
-		return boost::posix_time::not_a_date_time;
-	}
+	appointmentEndDate = getAppointmentBeginDate() +
+		boost::posix_time::minutes(service->getServiceDuration());
 }
 
 const int unsigned Appointment::setAppointmentCost()
@@ -50,9 +42,7 @@ Appointment::Appointment(const boost::posix_time::ptime& appointmentBeginDate, c
                                                 room(room)
 {
 	// od razu ustalamy date zakonczenia
-	boost::posix_time::ptime tmp = getAppointmentBeginDate() +
-		boost::posix_time::minutes(service->getServiceDuration());
-	setAppointmentEndDate(tmp);
+	setAppointmentEndDate();
 }
 
 
@@ -94,6 +84,13 @@ const ServicePtr& Appointment::getService() const
 const RoomPtr& Appointment::getRoom() const
 {
 	return room;
+}
+
+void Appointment::setAppointmentBeginDate(const boost::posix_time::ptime& appointmentBeginDate)
+{
+	this->appointmentBeginDate = appointmentBeginDate;
+
+	setAppointmentEndDate();
 }
 
 const std::string Appointment::getInfo() const
