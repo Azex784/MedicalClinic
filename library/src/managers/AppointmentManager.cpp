@@ -30,13 +30,19 @@ AppointmentManager::AppointmentManager(const PatientRepositoryPtr& patientReposi
 	getArchiveRepository()->loadData();
 }
 
-AppointmentManager::AppointmentManager(const std::string& fileName, const PatientRepositoryPtr& patientRepository,
+AppointmentManager::AppointmentManager(const std::string& fileName, const std::string& fileNameArchive,
+                                       const PatientRepositoryPtr& patientRepository,
                                        const PersonnelRepositoryPtr& personnelRepository,
                                        const RoomRepositoryPtr& roomRepository,
                                        const ServiceRepositoryPtr& serviceRepository)
 {
-	repository = std::make_shared<AppointmentRepository>(patientRepository, personnelRepository, roomRepository,
+	repository = std::make_shared<AppointmentRepository>(fileName, patientRepository, personnelRepository,
+	                                                     roomRepository,
 	                                                     serviceRepository);
+
+	archiveRepository = std::make_shared<AppointmentRepository>(fileNameArchive,
+	                                                            patientRepository, personnelRepository, roomRepository,
+	                                                            serviceRepository);
 	getRepository()->loadData();
 	getArchiveRepository()->loadData();
 }
@@ -59,7 +65,7 @@ const std::shared_ptr<AppointmentRepository>& AppointmentManager::getRepository(
 
 const AppointmentPtr AppointmentManager::get(const unsigned int up) const
 {
-	return repository->get(up);
+	return getRepository()->get(up);
 }
 
 const std::vector<AppointmentPtr> AppointmentManager::findBy(AppointmentPredicate up) const
@@ -158,9 +164,10 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 	std::vector<PersonnelPtr> nurses;
 	std::vector<DoctorPtr> doctors;
 
+	if (get(appointmentId) != nullptr) return nullptr;
+
 	//Pacjenta
 	if (isDate(getPatientAppointments(patient), appointmentBeginDate, duration)) return nullptr;
-
 	//Personelu
 	for (auto& personel : personnel)
 	{
@@ -175,15 +182,13 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 		}
 		else
 		{
-			if (personel->canConductTreatment(service->getRequiredDoctorSpec())) return nullptr;
+			if (!personel->canConductTreatment(service->getRequiredDoctorSpec())) return nullptr;
 			nurses.push_back(personel);
 		}
 		if (isDate(getPersonnelAppointments(personel), appointmentBeginDate, duration)) return nullptr;
 	}
-
 	//Rozmiar lekarzy
 	if (service->getRequiredDoctorSize() != doctors.size()) return nullptr;
-
 	//Pokoju
 	if (isDate(getRoomAppointments(room), appointmentBeginDate, duration)) return nullptr;
 	if (room->getIsActive() != true) return nullptr;
@@ -195,12 +200,13 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 	RehabillitationRoomPtr rehabRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
 	RehabillitationPtr rehab = dynamic_pointer_cast<Rehabillitation>(service);
 
-
 	if (rehab != nullptr)
 	{
 		if (rehab->getRequiredNurseSize() != nurses.size()) return nullptr;
 
+		//Nie może być reahilitacja gdy nie ma pokoju rehabilitacyjnego!!!
 		if (rehabRoom == nullptr) return nullptr;
+		if (rehabRoom->getMaxCapacity() < personnel.size()) return nullptr;
 
 		for (auto& serviceEq : rehab->getRequiredEqupiment())
 		{
@@ -232,8 +238,10 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
 		}
 		return false;
 	};
+	auto foundAppointments = findBy(func);
+	if (foundAppointments.empty()) return 0;
 
-	AppointmentPtr appointment = findBy(func)[0];
+	AppointmentPtr appointment = foundAppointments[0];
 
 	getArchiveRepository()->add(appointment);
 	getRepository()->remove(appointment);

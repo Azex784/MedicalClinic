@@ -6,7 +6,6 @@
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
 
-
 struct TestSuitManagerTemplateFixture
 {
 	AddressPtr testAddress;
@@ -24,14 +23,14 @@ struct TestSuitManagerTemplateFixture
 		  testPatient1(std::make_shared<Patient>("Jesse", "Pinkman", "20010112345", testAddress)),
 		  testPatient2(std::make_shared<Patient>("Skyler", "White", "93010112345", testAddress)),
 		  testPatient3(std::make_shared<Patient>("Gustavo", "Fring", "91110112345", testAddress)),
-		  testPatientRepository(std::make_shared<PatientRepository>("../../library/test/data/PatientRepository1"))
+		  testPatientRepository(std::make_shared<PatientRepository>("../../library/test/data/ManagerTemplate.txt"))
 	{
 		testPatientRepository->add(testPatient);
 		testPatientRepository->add(testPatient1);
 		testPatientRepository->add(testPatient2);
 		testPatientRepository->add(testPatient3);
 		testPatientRepository->saveData();
-		pacjentManager = ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string>("../../library/test/data/PatientRepository1");
+		pacjentManager = ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string>("../../library/test/data/ManagerTemplate.txt");
 
 	}
 	~TestSuitManagerTemplateFixture()
@@ -51,6 +50,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitManagerTemplate, TestSuitManagerTemplateFixture
 		BOOST_TEST(pacjentManager.get("40010112345")->getName() == "Walter");
 		BOOST_TEST(pacjentManager.get("91110112345")->getLastName() == "Fring");
 		BOOST_TEST(pacjentManager.get("93010112345")->getName() == "Skyler");
+		BOOST_TEST(pacjentManager.get("40010112345")->getName() == "Walter");
 	}
 
 	BOOST_AUTO_TEST_CASE(FindByFindAllTest)

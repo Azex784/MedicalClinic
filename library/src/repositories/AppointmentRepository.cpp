@@ -41,7 +41,7 @@ AppointmentRepository::AppointmentRepository(const std::string& fileName,
                                              const RoomRepositoryPtr& roomRepository,
                                              const ServiceRepositoryPtr& serviceRepository) :
 	RepositoryTemplate<std::shared_ptr<Appointment>, std::function<bool(std::shared_ptr<Appointment>)>, const
-	                   unsigned>("../../program/data/AppointmentRepository.txt"),
+	                   unsigned>(fileName),
 	patientRepository(patientRepository),
 	personnelRepository(personnelRepository),
 	roomRepository(roomRepository),

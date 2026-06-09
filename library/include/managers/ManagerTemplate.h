@@ -1,6 +1,5 @@
 #ifndef REHABILITATIONCENTRE_MANAGERTEMPLATE_H
 #define REHABILITATIONCENTRE_MANAGERTEMPLATE_H
-
 /**
  * Szablon klasy dla menadzerow
  *
@@ -55,11 +54,11 @@ public:
 	/**
 	 * Zwraca pojedynczy obiekt z repozytorium na podstawie unikalnego parametru.
 	 * @param up Unikalny parametr identyfikujący obiekt.
-	 * @return Stała referencja do znalezionego obiektu.
+	 * @return Referencja do znalezionego obiektu.
 	 */
 	const UniqueClass get(UniqueParameter up) const
 	{
-		return repository->get(up);
+		return getRepository()->get(up);
 	}
 
 	/**

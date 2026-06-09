@@ -98,6 +98,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitePatientRepository, TestSuitPatientRepositoryFi
 		BOOST_TEST(pacjentRepo1->getVectorOfData()[i]->getAddress()->getNumber() == pacjentRepo->getVectorOfData()[i]->getAddress()->getNumber());
 		BOOST_TEST(pacjentRepo1->getVectorOfData()[i]->getIsArchive() == pacjentRepo->getVectorOfData()[i]->getIsArchive());
 	};
+
+	//czy zostal przypisany ten sam adres?
+	BOOST_TEST(pacjentRepo1->getVectorOfData()[0]->getAddress() == pacjentRepo1->getVectorOfData()[1]->getAddress());
 }
 
 

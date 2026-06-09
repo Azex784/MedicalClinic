@@ -50,8 +50,24 @@ bool PatientRepository::loadData()
 		bool isArchived = stoi(tmp);
 
 		//Tworzenie nowych obiektow z wczytanymi danymi
-		AddressPtr nowyAdress = make_shared<Address>(city, street, number);
-		PatientPtr nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
+
+		PatientPredicate func = [&city, &street, &number](const PatientPtr patient) -> bool
+		{
+			if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient->getAddress()->getNumber() == number)
+			{return true;}
+			return false;
+		};
+		PatientPtr nowyPacjent;
+
+		auto found = findBy(func);
+		if (found.empty())
+		{
+			AddressPtr nowyAdress = make_shared<Address>(city, street, number);
+			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
+		}else
+		{
+			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, found[0]->getAddress());
+		}
 
 		nowyPacjent->setIsArchive(isArchived);
 		add(nowyPacjent);

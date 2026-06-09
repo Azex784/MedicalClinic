@@ -2,11 +2,11 @@
 #define REHABILITATIONCENTRE_PERSONNELMANAGER_H
 
 #include "Personnel/Personnel.h"
-#include <repositories/PatientRepository.h>
+#include <repositories/PersonnelRepository.h>
 #include "typedefs.h"
 #include "managers/ManagerTemplate.h"
 
-class PersonnelManager : public ManagerTemplate<PersonnelPtr, PatientRepository, PersonnelPredicate, const unsigned int>
+class PersonnelManager : public ManagerTemplate<PersonnelPtr, PersonnelRepository, PersonnelPredicate, const unsigned int>
 {
 public:
 	/**

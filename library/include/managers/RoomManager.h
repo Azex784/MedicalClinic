@@ -33,7 +33,7 @@ public:
 	 * Metoda dodająca nowy pokój konsultacyjny do systemu.
 	 * @param roomNumber Unikalny numer pokoju.
 	 */
-	void addConsultationRoom(const unsigned int &roomNumber) const;
+	void addConsultationRoom(const unsigned int roomNumber) const;
 
 	/**
 	 * Metoda dodająca nową salę rehabilitacyjną do systemu.
@@ -41,7 +41,7 @@ public:
 	 * @param equipment Wektor określający dostępne wyposażenie sali.
 	 * @param maxCapacity Maksymalna pojemność sali(maksymlana liczba personelu).
 	 */
-	void addRehabillitationRoom(const unsigned int &roomNumber, std::vector<Equipment> equipment, const unsigned int &maxCapacity);
+	void addRehabillitationRoom(const unsigned int roomNumber, std::vector<Equipment> equipment, const unsigned int maxCapacity);
 
 };
 

@@ -64,6 +64,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRepository, TestSuitRepositoryTemplateFixture)
 		BOOST_TEST(pacjentRepo.get("40010112345")->getName() == "Walter");
 		BOOST_TEST(pacjentRepo.get("91110112345")->getLastName() == "Fring");
 		BOOST_TEST(pacjentRepo.get("93010112345")->getName() == "Skyler");
+		BOOST_TEST(pacjentRepo.get("930101123ew5") == nullptr);
 	}
 
 	BOOST_AUTO_TEST_CASE(AddGetRemoveSizeTest)

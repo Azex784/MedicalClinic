@@ -15,6 +15,8 @@ using namespace std;
 
 struct TestSuiteServiceRepositoryFixture
 {
+	std::vector<Equipment> eq1;
+	std::vector<Equipment> eq2;
 	const string fileName = "../../library/test/data/ServiceRepository.txt";
 	ServiceRepositoryPtr serviceRepo = make_shared<ServiceRepository>(fileName);
 
@@ -23,21 +25,17 @@ struct TestSuiteServiceRepositoryFixture
 	ServicePtr rehab1;
 	ServicePtr rehab2;
 
-	TestSuiteServiceRepositoryFixture()
+	TestSuiteServiceRepositoryFixture() :
+		eq1({Equipment::NONE, Equipment::KINESITHERAPY_SPACE}),
+		eq2({Equipment::PHYSICAL_THERAPY_DEVICE}),
+		cons1(std::make_shared<Consultation>(150, 30, "Konsultacja odnosnie masażu", 101, 1,
+		                                     Specialisation::MASSAGE_THERAPIST, "Omowienie wynikow", false)),
+		cons2(std::make_shared<Consultation>(200, 45, "Neurologiczna online porada", 102, 1,
+		                                     Specialisation::NEUROLOGIST, "Omowienie wynikow", true)),
+		rehab1(std::make_shared<Rehabillitation>(100, 60, "Masaz kregoslupa", 201, 0, Specialisation::MASSAGE_THERAPIST,
+		                                         eq1, 1)),
+		rehab2(std::make_shared<Rehabillitation>(250, 90, "Fizykoterapia", 202, 1, Specialisation::ORTHOPEDIST, eq2, 2))
 	{
-		vector<Equipment> eq1 = {Equipment::NONE, Equipment::KINESITHERAPY_SPACE};
-		vector<Equipment> eq2 = {Equipment::PHYSICAL_THERAPY_DEVICE};
-
-		cons1 = make_shared<Consultation>(150, 30, "Konsultacja odnosnie masażu", 101, 1,
-		                                  Specialisation::MASSAGE_THERAPIST, "Omowienie wynikow", false);
-		cons2 = make_shared<Consultation>(200, 45, "Neurologiczna online porada", 102, 1,
-		                                  Specialisation::NEUROLOGIST, "Omowienie wynikow", true);
-
-		rehab1 = make_shared<Rehabillitation>(100, 60, "Masaz kregoslupa", 201, 0,
-		                                      Specialisation::MASSAGE_THERAPIST, eq1, 1);
-		rehab2 = make_shared<Rehabillitation>(250, 90, "Fizykoterapia", 202, 1,
-		                                      Specialisation::ORTHOPEDIST, eq2, 2);
-		//Dodanie usług
 		serviceRepo->add(cons1);
 		serviceRepo->add(cons2);
 		serviceRepo->add(rehab1);

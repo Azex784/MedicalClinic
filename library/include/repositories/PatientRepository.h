@@ -13,7 +13,7 @@ public:
 
 	/**
 	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
-	 * @param file_name
+	 * @param fileName
 	 */
 	PatientRepository(const std::string& fileName);
 

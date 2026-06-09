@@ -25,7 +25,7 @@ public:
 	 * Konstruktor menedżera wizyt z niestandardową ścieżką do pliku danych(głownie testy i do archive).
 	 * @param fileName Ścieżka do pliku tekstowego.
 	 */
-	AppointmentManager(const std::string& fileName, const PatientRepositoryPtr& patientRepository,
+	AppointmentManager(const std::string& fileName,const std::string& fileNameArchive, const PatientRepositoryPtr& patientRepository,
 	                   const PersonnelRepositoryPtr& personnelRepository, const RoomRepositoryPtr& roomRepository,
 	                   const ServiceRepositoryPtr& serviceRepository);
 

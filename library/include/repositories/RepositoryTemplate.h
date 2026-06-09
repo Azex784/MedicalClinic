@@ -106,9 +106,11 @@ public:
 	const std::vector<T> findBy(PredicateT predicate) const
 	{
 		std::vector<T> found;
-		for (unsigned int i = 0; i < size(); i++) {
+		for (unsigned int i = 0; i < size(); i++)
+		{
 			T t = getVectorOfData()[i];
-			if (predicate(t)) {
+			if (predicate(t))
+			{
 				found.push_back(t);
 			}
 		}
@@ -134,18 +136,27 @@ public:
 	}
 
 	/**
-	 * Metoda pozwalająca znaleźć klasę na podstawie uniklane parametru
+	 * Metoda pozwalająca znaleźć klasę na podstawie uniklane parametru.
+	 * Jeśli nie odnzalziona zwracany jest nullptr.
 	 * @param up
 	 * @return
 	 */
 	const T get(UniqueParameter up) const
 	{
-		return findBy([up](const T t) -> bool
+		auto found = findBy([up](const T t) -> bool
 		{
 			if (t->getUniqueParameter() == up)
 				return true;
 			return false;
-		})[0];
+		});
+		if (found.empty())
+		{
+			return nullptr;
+		}
+		else
+		{
+			return found[0];
+		}
 	}
 
 	/**

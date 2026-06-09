@@ -21,6 +21,8 @@ void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsi
 	{
 		ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
 		                                               requiredDocSize, requiredSpecialisation, topic, isOnline);
+		getRepository()->add(service);
+
 	}
 	return;
 }
@@ -37,6 +39,7 @@ void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const un
 		                                                  requiredDocSize
 		                                                  , requiredSpecialisation, requiredEquipment,
 		                                                  requiredNurseSize);
+		getRepository()->add(service);
 	}
 	return;
 }

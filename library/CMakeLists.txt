@@ -70,6 +70,11 @@ set(SOURCE_TEST_FILES
         test/repositories/ServiceRepositoryTest.cpp
         test/repositories/AppointmentRepositoryTest.cpp
         test/managers/ManagerTemplateTest.cpp
+        test/managers/PatientManagerTest.cpp
+        test/managers/RoomManagerTest.cpp
+        test/managers/PersonnelManagerTest.cpp
+        test/managers/AppointmentManagerTest.cpp
+        test/managers/ServiceManagerTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

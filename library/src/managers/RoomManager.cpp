@@ -8,7 +8,7 @@ RoomManager::RoomManager(const std::string& fileName): ManagerTemplate<std::shar
 {
 }
 
-void RoomManager::addConsultationRoom(const unsigned int& roomNumber) const
+void RoomManager::addConsultationRoom(const unsigned int roomNumber) const
 {
 	RoomPtr room = make_shared<ConsultationRoom>(roomNumber);
 	if (getRepository()->get(roomNumber) == nullptr)
@@ -19,8 +19,8 @@ void RoomManager::addConsultationRoom(const unsigned int& roomNumber) const
 	return;
 }
 
-void RoomManager::addRehabillitationRoom(const unsigned int& roomNumber, std::vector<Equipment> equipment,
-	const unsigned int& maxCapacity)
+void RoomManager::addRehabillitationRoom(const unsigned int roomNumber, std::vector<Equipment> equipment,
+	const unsigned int maxCapacity)
 {
 	RoomPtr room = make_shared<RehabillitationRoom>(roomNumber,equipment, maxCapacity);
 	if (getRepository()->get(roomNumber) == nullptr)
