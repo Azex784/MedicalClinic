@@ -3,7 +3,7 @@
 #include <services/Consultation.h>
 #include <services/Rehabillitation.h>
 
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 
 using namespace std;
@@ -19,6 +19,14 @@ void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsi
                                      Specialisation requiredSpecialisation,
                                      const std::string& topic, const unsigned int& requiredDocSize, bool isOnline)
 {
+	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+	if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
+		topic.find_first_not_of(ALLOWEDCHARS) != string::npos)
+	{
+		throw LogicException("Wprowadzono nieprawidłowy znak.");
+	}
+
+
 	if (getRepository()->get(serviceId) == nullptr)
 	{
 		ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
@@ -35,6 +43,14 @@ void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const un
                                        Specialisation requiredSpecialisation, const unsigned int& requiredDocSize,
                                        const unsigned int& requiredNurseSize)
 {
+
+	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+	if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos)
+	{
+		throw LogicException("Wprowadzono nieprawidłowy znak.");
+	}
+
+
 	if (requiredEquipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
 
 	if (getRepository()->get(serviceId) == nullptr)

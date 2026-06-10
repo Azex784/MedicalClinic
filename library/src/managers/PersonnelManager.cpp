@@ -3,7 +3,7 @@
 #include <personnel/Doctor.h>
 #include <personnel/Nurse.h>
 #include "typedefs.h"
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -17,6 +17,15 @@ void PersonnelManager::addDoctor(const std::string& firstName, const std::string
                                  const unsigned int& personnelId, std::vector<Specialisation> specialistaion,
                                  const unsigned int& doctorCost)
 {
+	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+	if (firstName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
+		lastName.find_first_not_of(ALLOWEDCHARS) != string::npos)
+	{
+		throw LogicException("Wprowadzono nieprawidłowy znak.");
+	}
+
+
+
 	if (specialistaion.empty())
 	throw LogicException("Wpisano nieprawidłowe puste specjalizacje.");
 
@@ -32,10 +41,18 @@ void PersonnelManager::addDoctor(const std::string& firstName, const std::string
 void PersonnelManager::addNurse(const std::string& firstName, const std::string& lastName,
                                 const unsigned int& personnelId)
 {
+
+	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+	if (firstName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
+		lastName.find_first_not_of(ALLOWEDCHARS) != string::npos)
+	{
+		throw LogicException("Wprowadzono nieprawidłowy znak.");
+	}
+
 	if (getRepository()->get(personnelId) == nullptr)
 	{
-		PersonnelPtr doctor = std::make_shared<Nurse>(firstName, lastName, personnelId);
-		getRepository()->add(doctor);
+		PersonnelPtr nurse = std::make_shared<Nurse>(firstName, lastName, personnelId);
+		getRepository()->add(nurse);
 		return;
 
 	}

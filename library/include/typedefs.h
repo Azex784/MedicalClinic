@@ -4,6 +4,9 @@
 #include <memory>
 #include <functional>
 
+
+const std::string ALLOWEDCHARS = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/.ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
+
 class Person;
 typedef std::shared_ptr<Person> PersonPtr;
 

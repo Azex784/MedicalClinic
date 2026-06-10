@@ -154,7 +154,7 @@ bool AppointmentRepository::saveData() const
 			outFile << appointment->getUniqueParameter() << ";";
 
 			int i;
-			//Zapisujemy kazdy unikalny numer osoby z personelu, by móc na podsatwie tego zidetyfikować itersujące nas
+			//Zapisujemy kazdy unikalny numer osoby z personelu, by móc na podstawie tego zidetyfikować interesujące nas
 			//obiekty
 			for (i = 0; appointment->getPersonnel().size() - 1 > i; i++)
 			{
