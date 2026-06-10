@@ -1,4 +1,7 @@
 #include "repositories/PatientRepository.h"
+
+#include <Exceptions.h>
+
 #include "patient/Address.h"
 #include "patient/Patient.h"
 
@@ -10,11 +13,11 @@ using namespace std;
 PatientRepository::PatientRepository(const std::string& file_name) : RepositoryTemplate<
 	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(file_name)
 {
-
 }
 
 PatientRepository::PatientRepository() : RepositoryTemplate<
-	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>("../../program/data/PatientRepository.txt")
+	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(
+	"../../program/data/PatientRepository.txt")
 {
 }
 
@@ -53,8 +56,11 @@ bool PatientRepository::loadData()
 
 		PatientPredicate func = [&city, &street, &number](const PatientPtr patient) -> bool
 		{
-			if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient->getAddress()->getNumber() == number)
-			{return true;}
+			if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient->
+				getAddress()->getNumber() == number)
+			{
+				return true;
+			}
 			return false;
 		};
 		PatientPtr nowyPacjent;
@@ -64,7 +70,8 @@ bool PatientRepository::loadData()
 		{
 			AddressPtr nowyAdress = make_shared<Address>(city, street, number);
 			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
-		}else
+		}
+		else
 		{
 			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, found[0]->getAddress());
 		}
@@ -80,9 +87,17 @@ bool PatientRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName(),std::ios::trunc);
+	outFile.open(getFileName(), std::ios::trunc);
 
-	if (outFile.good())
+	if (!outFile.is_open())
+	{
+		throw OpeningException(getFileName());
+	}
+	if (getVectorOfData().empty())
+	{
+		outFile << "";
+	}
+	else
 	{
 		for (const auto& patient : getVectorOfData())
 		{
@@ -93,10 +108,13 @@ bool PatientRepository::saveData() const
 			outFile << patient->getAddress()->getStreet() << ";";
 			outFile << patient->getAddress()->getNumber() << ';';
 			outFile << patient->getIsArchive() << '\n';
+
+			if (outFile.fail())
+			{
+				throw WriteException(getFileName());
+			}
 		}
 		outFile.close();
-		return true;
 	}
-	//wyczucamy wyjatek
-	return false;
+	return true;
 }

@@ -54,4 +54,26 @@ public:
 	explicit ExistException(const std::string& name,const std::string& uniqueParametr) : std::logic_error("Istnieje " + name + " o takim paramtrze: " + uniqueParametr +  ".") {};
 };
 
+/**
+ * Wyjątki gdy jest nieprawidłowe otworzenie pliku
+ */
+class OpeningException : public std::logic_error {
+public:
+	explicit OpeningException(const std::string& fileName) : std::logic_error("Nie udało się otworzyć pliku: " + fileName) {};
+};
+
+/**
+ * Wyjątki gdy jest nieprawidłowa wielkość wektora
+ */
+class EmptyRecordException : public std::logic_error {
+public:
+	explicit EmptyRecordException(const std::string& name) : std::logic_error("Próba zapisu pustego wetkora:" + name) {};
+};
+
+
+class WriteException : public std::logic_error {
+public:
+	explicit WriteException(const std::string& fileName) : std::logic_error("Błąd strumienia podczas zapisywania do pliku." + fileName) {};
+};
+
 #endif //REHABILITATIONCENTRE_EXCEPTIONS_H

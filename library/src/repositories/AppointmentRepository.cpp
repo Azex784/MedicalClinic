@@ -1,4 +1,6 @@
 #include "repositories/AppointmentRepository.h"
+
+#include <Exceptions.h>
 #include <repositories/PersonnelRepository.h>
 #include <repositories/PatientRepository.h>
 #include <repositories/ServiceRepository.h>
@@ -93,15 +95,15 @@ bool AppointmentRepository::loadData()
 		RoomPtr room;
 		PatientPtr patient;
 
-
 		getline(ss, tmp, ';');
 
 		appointmentBeginDate = boost::posix_time::from_iso_string(tmp);
 
 		getline(ss, tmp, ';');
+
 		appointmentId = stoul(tmp);
 
-		//Linjka do ; z identyfiakorami personelu
+		//Linijka do ; z identyfiakorami personelu
 		getline(ss, tmp, ';');
 
 		stringstream personnelIdStream(tmp);
@@ -144,19 +146,34 @@ bool AppointmentRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName(),std::ios::trunc);
+	outFile.open(getFileName(), std::ios::trunc);
 
-	if (outFile.good())
+	if (!outFile.is_open())
+	{
+		throw OpeningException(getFileName());
+	}
+
+	if (getVectorOfData().empty())
+	{
+		outFile << "";
+	}
+	else
 	{
 		for (const AppointmentPtr appointment : getVectorOfData())
 		{
 			outFile << boost::posix_time::to_iso_string(appointment->getAppointmentBeginDate()) << ";";
 			outFile << appointment->getUniqueParameter() << ";";
+			auto& personnel = appointment->getPersonnel();
+
+			if (personnel.empty())
+			{
+				throw EmptyRecordException("Personnel");
+			}
 
 			int i;
 			//Zapisujemy kazdy unikalny numer osoby z personelu, by móc na podstawie tego zidetyfikować interesujące nas
 			//obiekty
-			for (i = 0; appointment->getPersonnel().size() - 1 > i; i++)
+			for (i = 0; personnel.size() - 1 > i; i++)
 			{
 				outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ",";
 			}
@@ -165,9 +182,13 @@ bool AppointmentRepository::saveData() const
 			outFile << appointment->getPatient()->getUniqueParameter() << ";";
 			outFile << appointment->getService()->getUniqueParameter() << ";";
 			outFile << appointment->getRoom()->getUniqueParameter() << "\n";
+
+			if (outFile.fail())
+			{
+				throw WriteException(getFileName());
+			}
 		}
-		outFile.close();
-		return true;
 	}
-	return false;
+	outFile.close();
+	return true;
 }

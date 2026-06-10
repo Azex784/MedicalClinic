@@ -1,4 +1,7 @@
 #include "repositories/RoomRepository.h"
+
+#include <Exceptions.h>
+
 #include "rooms/RehabillitationRoom.h"
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
@@ -9,14 +12,13 @@
 using namespace std;
 
 RoomRepository::RoomRepository(const std::string& fileName)
-		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned
-		>(fileName)
+	: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned>(fileName)
 {
 }
 
 RoomRepository::RoomRepository()
-		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned
-		>("../../program/data/RoomRepository.txt")
+	: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned>(
+		"../../program/data/RoomRepository.txt")
 {
 }
 
@@ -106,9 +108,18 @@ bool RoomRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName(),std::ios::trunc);
+	outFile.open(getFileName(), std::ios::trunc);
 
-	if (outFile.good())
+	if (!outFile.is_open())
+	{
+		throw OpeningException(getFileName());
+	}
+
+	if (getVectorOfData().empty())
+	{
+		outFile << "";
+	}
+	else
 	{
 		for (const RoomPtr& room : getVectorOfData())
 		{
@@ -123,9 +134,15 @@ bool RoomRepository::saveData() const
 				outFile << rehabilitationRoom->getIsActive() << ";";
 				outFile << rehabilitationRoom->getIsArchive() << ";";
 
+				auto eqp = rehabilitationRoom->getAccessibleEqupiment();
+
+				if (eqp.empty())
+				{
+					throw EmptyRecordException("Equipment");
+				}
 				int i;
 				//Zapisujemy enuma za pomocą inta
-				for (i = 0; rehabilitationRoom->getAccessibleEqupiment().size() - 1 > i; i++)
+				for (i = 0; eqp.size() - 1 > i; i++)
 				{
 					outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ",";
 				}
@@ -141,10 +158,13 @@ bool RoomRepository::saveData() const
 				outFile << room->getIsActive() << ";";
 				outFile << room->getIsArchive() << '\n';
 			}
+
+			if (outFile.fail())
+			{
+				throw WriteException(getFileName());
+			}
 		}
 		outFile.close();
-		return true;
 	}
-	//wyczucamy wyjatek
-	return false;
+	return true;
 }

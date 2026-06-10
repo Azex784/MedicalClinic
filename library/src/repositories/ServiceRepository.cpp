@@ -1,5 +1,7 @@
 #include "repositories/ServiceRepository.h"
 
+#include <Exceptions.h>
+
 #include "services/Service.h"
 #include "services/Rehabillitation.h"
 #include "services/Consultation.h"
@@ -13,14 +15,14 @@
 using namespace std;
 
 ServiceRepository::ServiceRepository(const std::string& fileName)
-		: RepositoryTemplate<std::shared_ptr<Service>, std::function<bool(std::shared_ptr<Service>)>, const unsigned
-		>(fileName)
+	: RepositoryTemplate<std::shared_ptr<Service>, std::function<bool(std::shared_ptr<Service>)>, const
+	                     unsigned>(fileName)
 {
 }
 
 ServiceRepository::ServiceRepository()
-		: RepositoryTemplate<std::shared_ptr<Service>, std::function<bool(std::shared_ptr<Service>)>, const unsigned
-		>("../../program/data/ServiceRepository.txt")
+	: RepositoryTemplate<std::shared_ptr<Service>, std::function<bool(std::shared_ptr<Service>)>, const unsigned>(
+		"../../program/data/ServiceRepository.txt")
 {
 }
 
@@ -44,7 +46,7 @@ bool ServiceRepository::loadData()
 		//Ladujemy do strumienia
 		stringstream ss(line);
 
-		string serviceName,tmp;
+		string serviceName, tmp;
 		unsigned int serviceCost, serviceDuration, serviceId, requiredDoctorSize;
 
 		bool isActive, isArchive;
@@ -97,7 +99,9 @@ bool ServiceRepository::loadData()
 			getline(ss, tmp, '\n');
 			requiredNurseSize = stoul(tmp);
 
-			service = make_shared<Rehabillitation>(serviceCost,serviceDuration,serviceName,serviceId,requiredDoctorSize,requiredDoctorSpec,requiredEqupiment,requiredNurseSize);
+			service = make_shared<Rehabillitation>(serviceCost, serviceDuration, serviceName, serviceId,
+			                                       requiredDoctorSize, requiredDoctorSpec, requiredEqupiment,
+			                                       requiredNurseSize);
 			//Wczytujemy dane dla konsultacji
 		}
 		else if (tmp == "C")
@@ -135,8 +139,8 @@ bool ServiceRepository::loadData()
 
 			getline(ss, tmp, '\n');
 			isOnline = stoi(tmp);
-			service = make_shared<Consultation>(serviceCost,serviceDuration,serviceName,serviceId,requiredDoctorSize,requiredDoctorSpec,topic,isOnline);
-
+			service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
+			                                    requiredDoctorSize, requiredDoctorSpec, topic, isOnline);
 		}
 		else
 		{
@@ -155,9 +159,18 @@ bool ServiceRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName(),std::ios::trunc);
+	outFile.open(getFileName(), std::ios::trunc);
 
-	if (outFile.good())
+	if (!outFile.is_open())
+	{
+		throw OpeningException(getFileName());
+	}
+
+	if (getVectorOfData().empty())
+	{
+		outFile << "";
+	}
+	else
 	{
 		for (const ServicePtr& service : getVectorOfData())
 		{
@@ -180,7 +193,14 @@ bool ServiceRepository::saveData() const
 
 				int i;
 				//Zapisujemy enuma za pomocą inta
-				for (i = 0; rehabilitationService->getRequiredEqupiment().size() - 1 > i; i++)
+				auto eqp = rehabilitationService->getRequiredEqupiment();
+
+				if (eqp.empty())
+				{
+					throw EmptyRecordException("Equipment");
+				};
+
+				for (i = 0; eqp.size() - 1 > i; i++)
 				{
 					outFile << static_cast<int>(rehabilitationService->getRequiredEqupiment()[i]) << ",";
 				}
@@ -204,12 +224,14 @@ bool ServiceRepository::saveData() const
 				outFile << consultationService->getIsArchive() << ";";
 				outFile << consultationService->getTopic() << ";";
 				outFile << consultationService->getIsOnline() << "\n";
+			}
 
+			if (outFile.fail())
+			{
+				throw WriteException(getFileName());
 			}
 		}
 		outFile.close();
-		return true;
 	}
-	//wyczucamy wyjatek
-	return false;
+	return true;
 }

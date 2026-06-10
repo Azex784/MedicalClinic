@@ -1,4 +1,6 @@
 #include "repositories/PersonnelRepository.h"
+
+#include <Exceptions.h>
 #include <fstream>
 #include <personnel/Doctor.h>
 #include <personnel/Nurse.h>
@@ -8,15 +10,14 @@
 using namespace std;
 
 PersonnelRepository::PersonnelRepository(const std::string& file_name)
-		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned
-		>(file_name)
+	: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const
+	                     unsigned>(file_name)
 {
-
 }
 
 PersonnelRepository::PersonnelRepository()
-		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned
-		>("../../program/data/PersonnelRepository.txt")
+	: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned>(
+		"../../program/data/PersonnelRepository.txt")
 {
 }
 
@@ -118,9 +119,17 @@ bool PersonnelRepository::saveData() const
 {
 	ofstream outFile;
 
-	outFile.open(getFileName(),std::ios::trunc);
+	outFile.open(getFileName(), std::ios::trunc);
 
-	if (outFile.good())
+	if (!outFile.is_open())
+	{
+		throw OpeningException(getFileName());
+	}
+	if (getVectorOfData().empty())
+	{
+		outFile << "";
+	}
+	else
 	{
 		for (const PersonnelPtr& personnel : getVectorOfData())
 		{
@@ -154,10 +163,14 @@ bool PersonnelRepository::saveData() const
 				outFile << personnel->getIsArchive() << ";";
 				outFile << personnel->getUniqueParameter() << "\n";
 			}
+
+			if (outFile.fail())
+			{
+				throw WriteException(getFileName());
+			}
+
 		}
 		outFile.close();
-		return true;
 	}
-	//wyczucamy wyjatek
-	return false;
+	return true;
 }
