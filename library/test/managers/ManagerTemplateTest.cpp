@@ -15,7 +15,7 @@ struct TestSuitManagerTemplateFixture
 	PatientPtr testPatient3;
 	PatientRepositoryPtr testPatientRepository;
 
-	ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string> pacjentManager;
+	std::shared_ptr<ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string>> pacjentManager;
 
 	TestSuitManagerTemplateFixture()
 		: testAddress(std::make_shared<Address>("Albuquerqe", "Juan Poet", "10/15")),
@@ -30,7 +30,7 @@ struct TestSuitManagerTemplateFixture
 		testPatientRepository->add(testPatient2);
 		testPatientRepository->add(testPatient3);
 		testPatientRepository->saveData();
-		pacjentManager = ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string>("../../library/test/data/ManagerTemplate.txt");
+		pacjentManager = std::make_shared<ManagerTemplate<PatientPtr, PatientRepository, PatientPredicate, const std::string>>("../../library/test/data/ManagerTemplate.txt");
 
 	}
 	~TestSuitManagerTemplateFixture()
@@ -47,18 +47,18 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitManagerTemplate, TestSuitManagerTemplateFixture
 
 	BOOST_AUTO_TEST_CASE(GetTest)
 	{
-		BOOST_TEST(pacjentManager.get("40010112345")->getName() == "Walter");
-		BOOST_TEST(pacjentManager.get("91110112345")->getLastName() == "Fring");
-		BOOST_TEST(pacjentManager.get("93010112345")->getName() == "Skyler");
-		BOOST_TEST(pacjentManager.get("40010112345")->getName() == "Walter");
+		BOOST_TEST(pacjentManager->get("40010112345")->getName() == "Walter");
+		BOOST_TEST(pacjentManager->get("91110112345")->getLastName() == "Fring");
+		BOOST_TEST(pacjentManager->get("93010112345")->getName() == "Skyler");
+		BOOST_TEST(pacjentManager->get("40010112345")->getName() == "Walter");
 	}
 
 	BOOST_AUTO_TEST_CASE(FindByFindAllTest)
 	{
 		PatientPredicate pacjentPredykat = predicatePatinet1;
 
-		BOOST_TEST(pacjentManager.findBy(pacjentPredykat).size() == 2);
-		BOOST_TEST(pacjentManager.findAll().size() == 4);
+		BOOST_TEST(pacjentManager->findBy(pacjentPredykat).size() == 2);
+		BOOST_TEST(pacjentManager->findAll().size() == 4);
 	}
 
 

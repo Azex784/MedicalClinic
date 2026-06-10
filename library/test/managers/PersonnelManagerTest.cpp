@@ -9,7 +9,7 @@
 
 #include "repositories/PersonnelRepository.h"
 #include "typedefs.h"
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ struct TestSuitPersonnelManagerFixture
 	PersonnelPtr testPersonnel1;
 	PersonnelPtr testPersonnel2;
 	PersonnelRepositoryPtr testPersonnelRepository;
-	PersonnelManager personnelManager;
+	PersonnelManagerPtr personnelManager;
 
 	TestSuitPersonnelManagerFixture()
 		:
@@ -32,12 +32,11 @@ struct TestSuitPersonnelManagerFixture
 		testPersonnelRepository->add(testPersonnel1);
 		testPersonnelRepository->add(testPersonnel2);
 		testPersonnelRepository->saveData();
-		personnelManager = PersonnelManager("../../library/test/data/PersonnelManager.txt");
+		personnelManager = make_shared<PersonnelManager>("../../library/test/data/PersonnelManager.txt");
 	}
 
 	~TestSuitPersonnelManagerFixture()
 	{
-
 	}
 };
 
@@ -46,29 +45,29 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitPersonnelManager, TestSuitPersonnelManagerFixtu
 	BOOST_AUTO_TEST_CASE(AddPersonnelTest)
 	{
 		// Sprawdzenie stanu początkowego
-		BOOST_TEST_REQUIRE(personnelManager.getRepository()->get((unsigned int)123) != nullptr);
-		BOOST_TEST_REQUIRE(personnelManager.getRepository()->getVectorOfData().size() == 2);
+		BOOST_TEST_REQUIRE(personnelManager->getRepository()->get((unsigned int)123) != nullptr);
+		BOOST_TEST_REQUIRE(personnelManager->getRepository()->getVectorOfData().size() == 2);
 
 		// Próba dodania już istniejącego personela
-		BOOST_CHECK_THROW(personnelManager.addNurse("Marie", "Schrader", 123), ExistException);
-		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 2);
+		BOOST_CHECK_THROW(personnelManager->addNurse("Marie", "Schrader", 123), ExistException);
+		BOOST_TEST(personnelManager->getRepository()->getVectorOfData().size() == 2);
 
 		// Zwykłe dodanie nowej personela
-		personnelManager.addNurse("Marie", "Schrader", 125);
-		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 3);
-		BOOST_TEST(personnelManager.getRepository()->get((unsigned int)125) != nullptr);
+		personnelManager->addNurse("Marie", "Schrader", 125);
+		BOOST_TEST(personnelManager->getRepository()->getVectorOfData().size() == 3);
+		BOOST_TEST(personnelManager->getRepository()->get((unsigned int)125) != nullptr);
 
 		// Dodanie nowego lekarza
-		personnelManager.addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
+		personnelManager->addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
 
-		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 4);
-		BOOST_TEST(personnelManager.getRepository()->get((unsigned int)126) != nullptr);
+		BOOST_TEST(personnelManager->getRepository()->getVectorOfData().size() == 4);
+		BOOST_TEST(personnelManager->getRepository()->get((unsigned int)126) != nullptr);
 
 		// Próba dodania istniejącego lekarza
-		BOOST_CHECK_THROW(personnelManager.addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
+		BOOST_CHECK_THROW(personnelManager->addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
 		                  , ExistException);
 
-		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 4);
+		BOOST_TEST(personnelManager->getRepository()->getVectorOfData().size() == 4);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

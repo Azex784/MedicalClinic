@@ -72,7 +72,7 @@ bool AppointmentRepository::loadData()
 
 	if (!inFile.is_open())
 	{
-		return false;
+		throw OpeningException(getFileName());
 	}
 
 	//Zapobiega to podwojnemu zliczeniu elementów
@@ -137,6 +137,11 @@ bool AppointmentRepository::loadData()
 		                                          room);
 
 		add(newAppointment);
+
+		if (inFile.fail())
+		{
+			throw WriteException(getFileName());
+		}
 	}
 	inFile.close();
 	return true;

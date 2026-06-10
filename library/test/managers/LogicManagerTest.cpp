@@ -17,7 +17,7 @@
 #include "enums/Specialisation.h"
 #include "managers/LogicManager.h"
 
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 using namespace boost::posix_time;
 

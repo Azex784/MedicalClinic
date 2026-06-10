@@ -70,10 +70,17 @@ public:
 	explicit EmptyRecordException(const std::string& name) : std::logic_error("Próba zapisu pustego wetkora:" + name) {};
 };
 
-
+/**
+ * Wyjątki podczas zapisu
+ */
 class WriteException : public std::logic_error {
 public:
 	explicit WriteException(const std::string& fileName) : std::logic_error("Błąd strumienia podczas zapisywania do pliku." + fileName) {};
 };
 
+
+class UnexpectedCharacterException : public std::logic_error {
+public:
+	explicit UnexpectedCharacterException(const std::string& clas) : std::logic_error(clas + "Wczytano nieoczekiwany znak.") {};
+};
 #endif //REHABILITATIONCENTRE_EXCEPTIONS_H

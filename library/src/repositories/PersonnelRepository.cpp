@@ -30,8 +30,9 @@ bool PersonnelRepository::loadData()
 
 	if (!inFile.is_open())
 	{
-		return false;
+		throw OpeningException(getFileName());
 	}
+
 	//Zapobiega to podwojnemu zliczeniu elementów
 	clearVectorOfData();
 	while (getline(inFile, line))
@@ -104,12 +105,18 @@ bool PersonnelRepository::loadData()
 		}
 		else
 		{
-			return false;
+			throw UnexpectedCharacterException("Personnel");
 		}
 		newPersonnel->setIsActive(isActive);
 		newPersonnel->setIsArchive(isArchive);
 
 		add(newPersonnel);
+
+		if (inFile.fail())
+		{
+			throw WriteException(getFileName());
+		}
+
 	}
 	inFile.close();
 	return true;

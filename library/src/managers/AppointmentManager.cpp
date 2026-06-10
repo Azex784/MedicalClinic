@@ -28,8 +28,16 @@ AppointmentManager::AppointmentManager(const PatientRepositoryPtr& patientReposi
 	                                                            patientRepository, personnelRepository, roomRepository,
 	                                                            serviceRepository);
 
-	getRepository()->loadData();
-	getArchiveRepository()->loadData();
+	try
+	{
+		getRepository()->loadData();
+		getArchiveRepository()->loadData();
+	}
+	catch (const OpeningException& e)
+	{
+		getRepository()->saveData();
+		getArchiveRepository()->saveData();
+	}
 }
 
 AppointmentManager::AppointmentManager(const std::string& fileName, const std::string& fileNameArchive,
@@ -45,8 +53,17 @@ AppointmentManager::AppointmentManager(const std::string& fileName, const std::s
 	archiveRepository = std::make_shared<AppointmentRepository>(fileNameArchive,
 	                                                            patientRepository, personnelRepository, roomRepository,
 	                                                            serviceRepository);
-	getRepository()->loadData();
-	getArchiveRepository()->loadData();
+	try
+	{
+		getRepository()->loadData();
+		getArchiveRepository()->loadData();
+	}
+	catch (const OpeningException& e)
+	{
+		getRepository()->saveData();
+		getArchiveRepository()->saveData();
+
+	}
 }
 
 AppointmentManager::~AppointmentManager()
@@ -283,7 +300,8 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
 
 	if (getArchiveRepository()->get((unsigned int)appointment->getUniqueParameter()) != nullptr)
 	{
-		throw LogicException("Próba dodania spotkania do ArchiveRepository o unikalnym numerze, który juz jest w systemie.");
+		throw LogicException(
+			"Próba dodania spotkania do ArchiveRepository o unikalnym numerze, który juz jest w systemie.");
 	}
 	else
 	{

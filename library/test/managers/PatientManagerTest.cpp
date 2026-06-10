@@ -7,7 +7,7 @@
 
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 
 struct TestSuitPatientTemplateFixture
@@ -19,7 +19,7 @@ struct TestSuitPatientTemplateFixture
 	PatientPtr testPatient3;
 	PatientRepositoryPtr testPatientRepository;
 
-	PatientManager pacjentManager;
+	PatientManagerPtr pacjentManager;
 
 	TestSuitPatientTemplateFixture()
 		: testAddress(std::make_shared<Address>("Albuquerqe", "Juan Poet", "10/15")),
@@ -35,7 +35,7 @@ struct TestSuitPatientTemplateFixture
 		testPatientRepository->add(testPatient2);
 		testPatientRepository->add(testPatient3);
 		testPatientRepository->saveData();
-		pacjentManager = PatientManager("../../library/test/data/PatientManager.txt");
+		pacjentManager = std::make_shared<PatientManager>("../../library/test/data/PatientManager.txt");
 	}
 
 	~TestSuitPatientTemplateFixture()
@@ -48,28 +48,28 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitPatientTemplate, TestSuitPatientTemplateFixture
 
 	BOOST_AUTO_TEST_CASE(RegisterPatientTest)
 	{
-		BOOST_TEST_REQUIRE(pacjentManager.getRepository()->get("40010112345") != nullptr);
-		BOOST_TEST_REQUIRE(pacjentManager.getRepository()->getVectorOfData().size() == 4);
+		BOOST_TEST_REQUIRE(pacjentManager->getRepository()->get("40010112345") != nullptr);
+		BOOST_TEST_REQUIRE(pacjentManager->getRepository()->getVectorOfData().size() == 4);
 		//Testy wyjątku
-		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "40010112345", "Albuquerqe", "Juan Poet", "10/15"),ExistException);
-		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "2", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
-		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "Walthu", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
+		BOOST_CHECK_THROW(pacjentManager->registerPatient("Walter", "White", "40010112345", "Albuquerqe", "Juan Poet", "10/15"),ExistException);
+		BOOST_CHECK_THROW(pacjentManager->registerPatient("Walter", "White", "2", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
+		BOOST_CHECK_THROW(pacjentManager->registerPatient("Walter", "White", "Walthu", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
 
-		BOOST_TEST(pacjentManager.getRepository()->getVectorOfData().size() == 4);
+		BOOST_TEST(pacjentManager->getRepository()->getVectorOfData().size() == 4);
 
-		pacjentManager.registerPatient("Walter Junior", "White", "40010112346", "Albuquerqe", "Juan Poet", "10/15");
+		pacjentManager->registerPatient("Walter Junior", "White", "40010112346", "Albuquerqe", "Juan Poet", "10/15");
 
-		BOOST_TEST(pacjentManager.getRepository()->getVectorOfData().size() == 5);
+		BOOST_TEST(pacjentManager->getRepository()->getVectorOfData().size() == 5);
 		//Czy poprawnie taki sam adres zostal przypisany?
-		BOOST_TEST(pacjentManager.getRepository()->get("40010112346") != nullptr);
+		BOOST_TEST(pacjentManager->getRepository()->get("40010112346") != nullptr);
 		BOOST_TEST(
-			pacjentManager.getRepository()->get("40010112345")->getAddress() == pacjentManager.getRepository()->get(
+			pacjentManager->getRepository()->get("40010112345")->getAddress() == pacjentManager->getRepository()->get(
 				"40010112346")->getAddress());
 
 		// Zwykłe dodanie
-		pacjentManager.registerPatient("Kim", "Wexler", "40010112347", "Albuquerqe", "Crimson Street", "1/25");
-		BOOST_TEST(pacjentManager.getRepository()->get("40010112347") != nullptr);
-		BOOST_TEST(pacjentManager.getRepository()->getVectorOfData().size() == 6);
+		pacjentManager->registerPatient("Kim", "Wexler", "40010112347", "Albuquerqe", "Crimson Street", "1/25");
+		BOOST_TEST(pacjentManager->getRepository()->get("40010112347") != nullptr);
+		BOOST_TEST(pacjentManager->getRepository()->getVectorOfData().size() == 6);
 	}
 
 

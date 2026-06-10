@@ -29,8 +29,9 @@ bool PatientRepository::loadData()
 
 	if (!inFile.is_open())
 	{
-		return false;
+		throw OpeningException(getFileName());
 	}
+
 	//Zapobiega to podwojnemu zliczeniu elementów
 	clearVectorOfData();
 	while (getline(inFile, line))
@@ -78,6 +79,11 @@ bool PatientRepository::loadData()
 
 		nowyPacjent->setIsArchive(isArchived);
 		add(nowyPacjent);
+
+		if (inFile.fail())
+		{
+			throw WriteException(getFileName());
+		}
 	}
 	inFile.close();
 	return true;

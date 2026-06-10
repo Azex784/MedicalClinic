@@ -30,7 +30,7 @@ bool RoomRepository::loadData()
 
 	if (!inFile.is_open())
 	{
-		return false;
+		throw OpeningException(getFileName());
 	}
 	//Zapobiega to podwojnemu zliczeniu elementów
 	clearVectorOfData();
@@ -93,12 +93,18 @@ bool RoomRepository::loadData()
 		}
 		else
 		{
-			return false;
+			throw UnexpectedCharacterException("Room");
 		}
 
 		room->setIsArchive(isArchive);
 		room->setIsActive(isActive);
 		add(room);
+
+		if (inFile.fail())
+		{
+			throw WriteException(getFileName());
+		}
+
 	}
 	inFile.close();
 	return true;

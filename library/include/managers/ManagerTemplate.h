@@ -21,7 +21,15 @@ public:
 	ManagerTemplate()
 	{
 		repository = std::make_shared<UniqueRepoClass>();
-		getRepository()->loadData();
+		try
+		{
+			getRepository()->loadData();
+		}
+		catch (const OpeningException& e)
+		{
+			//Utworzenie pliku przy jego braku
+			getRepository()->saveData();
+		}
 	}
 
 	/**
@@ -32,7 +40,16 @@ public:
 	ManagerTemplate(std::string fileName)
 	{
 		repository = std::make_shared<UniqueRepoClass>(fileName);
-		getRepository()->loadData();
+
+		try
+		{
+			getRepository()->loadData();
+		}
+		catch (const OpeningException& e)
+		{
+			//Utworzenie pliku przy jego braku
+			getRepository()->saveData();
+		}
 	}
 
 	/**

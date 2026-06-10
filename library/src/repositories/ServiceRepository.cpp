@@ -34,14 +34,13 @@ bool ServiceRepository::loadData()
 
 	if (!inFile.is_open())
 	{
-		return false;
+		throw OpeningException(getFileName());
 	}
 	//Zapobiega to podwojnemu zliczeniu elementów
 	clearVectorOfData();
 	while (getline(inFile, line))
 	{
 		if (line.empty()) continue;
-
 
 		//Ladujemy do strumienia
 		stringstream ss(line);
@@ -144,12 +143,17 @@ bool ServiceRepository::loadData()
 		}
 		else
 		{
-			return false;
+			throw UnexpectedCharacterException("Service");
 		}
 
 		service->setIsArchive(isArchive);
 		service->setIsAvailable(isActive);
 		add(service);
+
+		if (inFile.fail())
+		{
+			throw WriteException(getFileName());
+		}
 	}
 	inFile.close();
 	return true;

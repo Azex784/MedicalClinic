@@ -17,8 +17,6 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
                                      const std::string& personalID, const std::string& city, const std::string& street,
                                      const std::string& number) const
 {
-
-
 	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
 	if (firstName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
 		lastName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
@@ -32,11 +30,12 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
 
 	if (get(personalID) != nullptr)
 	{
-		throw ExistException("Pacjent",personalID);
+		throw ExistException("Pacjent", personalID);
 	}
 
 	//Szybkie sprawdzenie czy pesel to same cyfry i czy size sie zgadza
-	if (personalID.size() != 11 || !all_of(personalID.begin(), personalID.end(), [](unsigned char c) {
+	if (personalID.size() != 11 || !all_of(personalID.begin(), personalID.end(), [](unsigned char c)
+	{
 		return isdigit(c);
 	}))
 	{
