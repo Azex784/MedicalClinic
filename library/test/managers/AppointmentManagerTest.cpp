@@ -250,28 +250,66 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, time_from_string(
 				"2024-08-15 10:30:00"), testRoom1, 2) != nullptr);
 
-		// //Czy zwaracany jest prawidłowy koszt?
-		// BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-06-15 10:30:00")) == 100);
-		// //Czy zostało dodane do repozytorium archive?
-		// BOOST_TEST(
-		// 	appointmentManager->getArchiveRepository()->get((unsigned int)1)->getAppointmentBeginDate() ==
-		// 	time_from_string("2024-06-15 10:30:00"));
-		//
-		// BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-08-15 10:30:00")) == 350);
-		//
-		// //Czy zostało dodane do repozytorium archive?
-		// BOOST_TEST(
-		// 	appointmentManager->getArchiveRepository()->get((unsigned int)2)->getAppointmentBeginDate() ==
-		// 	time_from_string("2024-08-15 10:30:00"));
-		//
-		// ptime now = second_clock::local_time();
-		// BOOST_TEST_REQUIRE(
-		// 	appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, now, testRoom1, 3) != nullptr);
-		// //Czy niemożliwe jest zakończenie wizyty podczas trwania wizyty?
-		// BOOST_TEST(appointmentManager->finishAppointment(testPatient,now) == 0);
-		//
-		// //Czy nie został dodany nowy obiekt?
-		// BOOST_TEST(appointmentManager->getArchiveRepository()->size() == 2);
+		//Czy zwaracany jest prawidłowy koszt?
+		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-06-15 10:30:00")) == 100);
+		//Czy zostało dodane do repozytorium archive?
+		BOOST_TEST(
+			appointmentManager->getArchiveRepository()->get((unsigned int)1)->getAppointmentBeginDate() ==
+			time_from_string("2024-06-15 10:30:00"));
+
+		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-08-15 10:30:00")) == 350);
+
+
+		//Czy zostało dodane do repozytorium archive?
+		BOOST_TEST(
+			appointmentManager->getArchiveRepository()->get((unsigned int)2)->getAppointmentBeginDate() ==
+			time_from_string("2024-08-15 10:30:00"));
+		//Sprawdzenie metody getAppointmentsCost
+		BOOST_TEST(appointmentManager->getAppointmentsCost(testPatient) == 450);
+
+		ptime now = time_from_string("2137-08-15 10:30:00");
+		BOOST_TEST_REQUIRE(
+			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, now, testRoom1, 3) != nullptr);
+		//Czy niemożliwe jest zakończenie wizyty podczas trwania wizyty?
+		BOOST_TEST(appointmentManager->finishAppointment(testPatient,now) == 0);
+
+		//Czy nie został dodany nowy obiekt?
+		BOOST_TEST(appointmentManager->getArchiveRepository()->size() == 2);
 	}
+
+	BOOST_AUTO_TEST_CASE(ChangeAppointmentTest)
+	{
+		BOOST_TEST_REQUIRE(appointmentManager->arrangeAppointment(testPatient,
+			rehab1,
+			personnel,
+			time_from_string("2024-06-15 10:30:00"),
+			testRoom2,
+			1) != nullptr);
+
+		BOOST_TEST_REQUIRE(
+			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, time_from_string(
+				"2024-08-15 10:30:00"), testRoom1, 2) != nullptr);
+
+		//Poprawna zmiana
+		BOOST_TEST(appointmentManager->changeAppointment(time_from_string("2027-06-15 10:30:00"),1) == true);
+
+		//Nieprawidłowa zmiana
+		BOOST_TEST(!appointmentManager->changeAppointment(time_from_string("2024-08-15 10:30:00"),1));
+	}
+
+	BOOST_AUTO_TEST_CASE(CancelAppointmentTest)
+	{
+		BOOST_TEST_REQUIRE(appointmentManager->arrangeAppointment(testPatient,
+			rehab1,
+			personnel,
+			time_from_string("2024-06-15 10:30:00"),
+			testRoom2,
+			1) != nullptr);
+		BOOST_TEST(appointmentManager->get((unsigned int)1) != nullptr);
+
+		appointmentManager->cancelAppointment(time_from_string("2024-06-15 10:30:00"), 1);
+		BOOST_TEST(appointmentManager->get((unsigned int)1) == nullptr);
+	}
+
 
 BOOST_AUTO_TEST_SUITE_END()

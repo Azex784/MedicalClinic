@@ -73,6 +73,11 @@ const std::vector<AppointmentPtr> AppointmentManager::findBy(AppointmentPredicat
 	return getRepository()->findBy(up);
 }
 
+const std::vector<AppointmentPtr> AppointmentManager::findByArchive(AppointmentPredicate up) const
+{
+	return getArchiveRepository()->findBy(up);
+}
+
 const std::vector<AppointmentPtr> AppointmentManager::findAll() const
 {
 	return getRepository()->findAll();
@@ -146,8 +151,9 @@ unsigned int AppointmentManager::getAppointmentsCost(const PatientPtr& patient) 
 
 	unsigned int cost = 0;
 
-	for (auto appointment : findBy(func))
+	for (auto& appointment : findByArchive(func))
 	{
+		appointment->setAppointmentCost();
 		cost += appointment->getAppointmentCost();
 	}
 
@@ -226,7 +232,6 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
                                                    const boost::posix_time::ptime& beginTime)
 {
 	boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
-
 	if (teraz < beginTime) return 0;
 
 	AppointmentPredicate func = [beginTime,patient](const AppointmentPtr appointment) -> bool
@@ -238,12 +243,20 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
 		}
 		return false;
 	};
+
 	auto foundAppointments = findBy(func);
 	if (foundAppointments.empty()) return 0;
 
 	AppointmentPtr appointment = foundAppointments[0];
 
-	getArchiveRepository()->add(appointment);
+	if (getArchiveRepository()->get((unsigned int)appointment->getUniqueParameter()) != nullptr)
+	{
+	}
+	else
+	{
+		getArchiveRepository()->add(appointment);
+	}
+
 	getRepository()->remove(appointment);
 
 	return appointment->setAppointmentCost();

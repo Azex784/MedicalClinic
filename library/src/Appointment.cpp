@@ -19,13 +19,16 @@ const int unsigned Appointment::setAppointmentCost()
 	// zmiana może nastapić gdy koszt nie był zmieniany i jest już po dacie zakończenia wizyty
 	if (getAppointmentCost() == 0 && teraz >= getAppointmentEndDate())
 	{
-		for (unsigned int i = 0; i < getPersonnel().size(); i++)
+		for (int i = 0; i < getPersonnel().size(); i++)
 		{
 			shared_ptr<Doctor> person = dynamic_pointer_cast<Doctor>(getPersonnel()[i]);
-			appointmentCost += person->getDoctorCost();
+			if (person != nullptr)
+			{
+				appointmentCost += person->getDoctorCost();
+			}
 		}
-		appointmentCost += getService()->getServiceCost();
 
+		appointmentCost += getService()->getServiceCost();
 		return getAppointmentCost();
 	}
 	return 0;

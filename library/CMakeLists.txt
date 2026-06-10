@@ -34,6 +34,8 @@ set(SOURCE_FILES
         src/managers/PersonnelManager.cpp
         include/managers/PersonnelManager.h
         include/managers/ManagerTemplate.h
+        include/managers/LogicManager.h
+        src/managers/LogicManger.cpp
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -75,6 +77,7 @@ set(SOURCE_TEST_FILES
         test/managers/PersonnelManagerTest.cpp
         test/managers/AppointmentManagerTest.cpp
         test/managers/ServiceManagerTest.cpp
+        test/managers/LogicManagerTest.cpp
 
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 

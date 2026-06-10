@@ -41,7 +41,12 @@ public:
 	*/
 	const std::shared_ptr<AppointmentRepository>& getArchiveRepository() const;
 
-
+	/**
+	 * Wyszukuje obiekty w repozytorium ARCHIWALNYM spełniające zadany warunek.
+	 * @param up Predykat.
+	 * @return Wektor zawierający obiekty spełniające kryteria predykatu.
+	 */
+	const std::vector<AppointmentPtr> findByArchive(AppointmentPredicate up) const;
 	/**
 	* Zwraca obiekt repozytorium przypisany do tego menedżera.
 	* @return Stała referencja do obiektu repozytorium.

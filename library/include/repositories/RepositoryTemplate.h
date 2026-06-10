@@ -62,6 +62,10 @@ public:
 	 */
 	void add(T t)
 	{
+		if (get(t->getUniqueParameter()) != nullptr)
+		{
+			return;
+		}
 		vectorOfData.push_back(t);
 	}
 
