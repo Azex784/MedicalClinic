@@ -35,7 +35,7 @@ const Specialisation Service::getRequiredDoctorSpec() const
 
 bool Service::getIsAvailable() const
 {
-    return isAvailble;
+    return isAvailable;
 }
 
 bool Service::getIsArchive() const
@@ -50,12 +50,12 @@ void Service::setServiceCost(const unsigned int service_cost)
 
 void Service::setIsAvailable(const bool isAvailble1)
 {
-    isAvailble = isAvailble1;
+    isAvailable = isAvailble1;
 }
 
-void Service::setIsArchive(const bool isArchive1)
+void Service::setIsArchive(const bool isArchive)
 {
-    isArchive = isArchive1;
+    this->isArchive = isArchive;
 }
 
 Service::Service(const unsigned int serviceCost, const unsigned int serviceDuration, const std::string& serviceName,
@@ -66,6 +66,8 @@ Service::Service(const unsigned int serviceCost, const unsigned int serviceDurat
     requiredDoctorSize(requiredDoctorSize),
     requiredDoctorSpec(requiredDoctorSpec)
 {
+    setIsAvailable(1);
+    setIsArchive(0);
 }
 
 const std::string Service::getInfo() const

@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 set(SOURCE_FILES
         include/typedefs.h
+        include/managers/ManagerTemplate.h
+        include/managers/LogicManager.h
+        include/Exceptions.h
         src/enums/Specialisation.cpp
         src/enums/Equipment.cpp
         src/patient/Patient.cpp
@@ -24,17 +27,10 @@ set(SOURCE_FILES
         src/repositories/RoomRepository.cpp
         src/repositories/ServiceRepository.cpp
         src/managers/RoomManager.cpp
-        include/managers/RoomManager.h
         src/managers/AppointmentManager.cpp
-        include/managers/AppointmentManager.h
         src/managers/ServiceManager.cpp
-        include/managers/ServiceManager.h
         src/managers/PatientManager.cpp
-        include/managers/PatientManager.h
         src/managers/PersonnelManager.cpp
-        include/managers/PersonnelManager.h
-        include/managers/ManagerTemplate.h
-        include/managers/LogicManager.h
         src/managers/LogicManger.cpp
 
 )# tu będą dodawan pliki zrodlowe

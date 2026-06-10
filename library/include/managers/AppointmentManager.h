@@ -145,10 +145,9 @@ public:
 	/**
 	 * Metoda anulująca wizytę zaplanowaną na dany termin.
 	 * Usuwa ona ją z repozytrium(pliku).
-	 * @param _date Termin anulowanej wizyty.
-	 *  * @param appointmentId Unikalny paramter spotkania.
+	 * @param appointmentId Unikalny paramter spotkania.
 	 */
-	void cancelAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId);
+	void cancelAppointment(const unsigned int appointmentId);
 
 	/**
 	 * Metoda sprawdzająca czy terminy danego spotkania nie kolidują ze spotkaniami np. personelu czy pacjenta

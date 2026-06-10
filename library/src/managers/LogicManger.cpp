@@ -1,7 +1,8 @@
-#include <Appointment.h>
-
+#include "Appointment.h"
 #include "managers/LogicManager.h"
 #include "services/Service.h"
+#include "Exceptions.h"
+
 using namespace std;
 
 LogicManager::LogicManager()
@@ -35,7 +36,8 @@ void LogicManager::removePersonnel(unsigned int personnelId)
 {
 	auto personnel = getPersonnelManager()->get((unsigned int)personnelId);
 
-	if (personnel == nullptr) return;
+	if (personnel == nullptr)
+		throw NoExistException("Specjalista", to_string(personnelId));
 
 	auto appointmens = getAppointmentManager()->getPersonnelAppointments(personnel);
 
@@ -43,8 +45,7 @@ void LogicManager::removePersonnel(unsigned int personnelId)
 	{
 		for (auto appointment : appointmens)
 		{
-			getAppointmentManager()->cancelAppointment(appointment->getAppointmentBeginDate(),
-			                                           appointment->getUniqueParameter());
+			getAppointmentManager()->cancelAppointment(appointment->getUniqueParameter());
 		}
 	}
 	personnel->setIsActive(false);
@@ -55,13 +56,14 @@ bool LogicManager::unregisterPatient(const std::string& personalID)
 {
 	auto patient = getPatientManager()->get(personalID);
 
-	if (patient == nullptr) return false;
+	if (patient == nullptr)
+		throw NoExistException("Pacjent", personalID);
 
 	auto appointmens = getAppointmentManager()->getPatientAppointments(patient);
 
 	if (!appointmens.empty())
 	{
-		return false;
+		throw DateException("Pacjent");
 	}
 
 	patient->setIsArchive(true);
@@ -70,8 +72,9 @@ bool LogicManager::unregisterPatient(const std::string& personalID)
 
 void LogicManager::removeRoom(unsigned int roomNumber)
 {
-	auto room = getRoomManager()->get((unsigned int)roomNumber);
-	if (room == nullptr) return;
+	auto room = getRoomManager()->get(roomNumber);
+	if (room == nullptr)
+		throw NoExistException("Sala", to_string(roomNumber));
 
 	auto appointmens = getAppointmentManager()->getRoomAppointments(room);
 
@@ -79,8 +82,7 @@ void LogicManager::removeRoom(unsigned int roomNumber)
 	{
 		for (auto appointment : appointmens)
 		{
-			getAppointmentManager()->cancelAppointment(appointment->getAppointmentBeginDate(),
-			                                           appointment->getUniqueParameter());
+			getAppointmentManager()->cancelAppointment(appointment->getUniqueParameter());
 		}
 	}
 	room->setIsActive(false);
@@ -90,13 +92,14 @@ void LogicManager::removeRoom(unsigned int roomNumber)
 bool LogicManager::removeService(unsigned int serviceID)
 {
 	auto service = getServiceManager()->get(serviceID);
-	if (service == nullptr) return false;
+	if (service == nullptr)
+		throw NoExistException("Usługa", to_string(serviceID));
 
 	auto appointmens = getAppointmentManager()->getServiceAppointments(service);
 
 	if (!appointmens.empty())
 	{
-		return false;
+		throw DateException("Sala");
 	}
 
 	service->setIsAvailable(false);
@@ -107,25 +110,45 @@ bool LogicManager::removeService(unsigned int serviceID)
 
 const std::shared_ptr<PersonnelManager>& LogicManager::getPersonnelManager() const
 {
+	if (personnelManager == nullptr)
+	{
+		throw NullPointerException("personnelManager");
+	}
 	return personnelManager;
 }
 
 const std::shared_ptr<PatientManager>& LogicManager::getPatientManager() const
 {
+	if (patientManager == nullptr)
+	{
+		throw NullPointerException("patientManager");
+	}
 	return patientManager;
 }
 
 const std::shared_ptr<ServiceManager>& LogicManager::getServiceManager() const
 {
+	if (serviceManager == nullptr)
+	{
+		throw NullPointerException("serviceManager");
+	}
 	return serviceManager;
 }
 
 const std::shared_ptr<AppointmentManager>& LogicManager::getAppointmentManager() const
 {
+	if (appointmentManager == nullptr)
+	{
+		throw NullPointerException("appointmentManager");
+	}
 	return appointmentManager;
 }
 
 const std::shared_ptr<RoomManager>& LogicManager::getRoomManager() const
 {
+	if (roomManager == nullptr)
+	{
+		throw NullPointerException("roomManager");
+	}
 	return roomManager;
 }

@@ -1,4 +1,7 @@
 #include "Appointment.h"
+
+#include <../include/Exceptions.h>
+
 #include "services/Service.h"
 #include "personnel/Doctor.h"
 #include "rooms/Room.h"
@@ -76,16 +79,28 @@ const std::vector<PersonnelPtr>& Appointment::getPersonnel() const
 
 const PatientPtr& Appointment::getPatient() const
 {
+	if (patient == nullptr)
+	{
+		throw NullPointerException("patient");
+	}
 	return patient;
 }
 
 const ServicePtr& Appointment::getService() const
 {
+	if (service == nullptr)
+	{
+		throw NullPointerException("service");
+	}
 	return service;
 }
 
 const RoomPtr& Appointment::getRoom() const
 {
+	if (room == nullptr)
+	{
+		throw NullPointerException("room");
+	}
 	return room;
 }
 

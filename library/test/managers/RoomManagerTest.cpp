@@ -8,6 +8,7 @@
 
 #include "repositories/RoomRepository.h"
 #include "typedefs.h"
+#include "../../include/Exceptions.h"
 
 using namespace std;
 
@@ -35,9 +36,6 @@ struct TestSuitRoomManagerFixture
 
 	~TestSuitRoomManagerFixture()
 	{
-		testRoomRepository->remove(testRoom1);
-		testRoomRepository->remove(testRoom2);
-		testRoomRepository->saveData();
 	}
 };
 
@@ -50,7 +48,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitRoomManager, TestSuitRoomManagerFixture)
 		BOOST_TEST_REQUIRE(roomManager.getRepository()->getVectorOfData().size() == 2);
 
 		// Próba dodania już istniejącego gabinetu
-		roomManager.addConsultationRoom(101);
+		BOOST_CHECK_THROW(roomManager.addConsultationRoom(101), ExistException);
 		BOOST_TEST(roomManager.getRepository()->getVectorOfData().size() == 2);
 
 		// Zwykłe dodanie nowej sali
@@ -65,7 +63,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitRoomManager, TestSuitRoomManagerFixture)
 		BOOST_TEST(roomManager.getRepository()->get((unsigned int)104) != nullptr);
 
 		// Próba dodania istniejącej sali rehabilitacyjnej
-		roomManager.addRehabillitationRoom(104, wyposazenie, 5);
+		BOOST_CHECK_THROW(roomManager.addRehabillitationRoom(104, wyposazenie, 5);, ExistException);
 		BOOST_TEST(roomManager.getRepository()->getVectorOfData().size() == 4);
 	}
 

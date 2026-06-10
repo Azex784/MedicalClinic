@@ -3,6 +3,8 @@
 #include <services/Consultation.h>
 #include <services/Rehabillitation.h>
 
+#include "../../include/Exceptions.h"
+
 
 using namespace std;
 
@@ -22,9 +24,9 @@ void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsi
 		ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
 		                                               requiredDocSize, requiredSpecialisation, topic, isOnline);
 		getRepository()->add(service);
-
+		return;
 	}
-	return;
+	throw ExistException("Konsultacja", to_string(serviceId));
 }
 
 void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
@@ -33,6 +35,8 @@ void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const un
                                        Specialisation requiredSpecialisation, const unsigned int& requiredDocSize,
                                        const unsigned int& requiredNurseSize)
 {
+	if (requiredEquipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
+
 	if (getRepository()->get(serviceId) == nullptr)
 	{
 		ServicePtr service = make_shared<Rehabillitation>(serviceCost, serviceDuration, serviceName, serviceId,
@@ -40,6 +44,7 @@ void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const un
 		                                                  , requiredSpecialisation, requiredEquipment,
 		                                                  requiredNurseSize);
 		getRepository()->add(service);
+		return;
 	}
-	return;
+	throw ExistException("Rehabilitacja", to_string(serviceId));
 }

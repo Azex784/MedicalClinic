@@ -17,11 +17,12 @@ Personnel::Personnel(const std::string& name, const std::string& lastName, const
 	Person(name, lastName),
 	personnelId(personnelId)
 {
+	setIsActive(1);
 }
 
-void Personnel::setIsActive(const bool is_active)
+void Personnel::setIsActive(const bool isActive)
 {
-	isActive = is_active;
+	this->isActive = isActive;
 }
 
 const std::string Personnel::getInfo() const

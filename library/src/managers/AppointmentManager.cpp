@@ -11,6 +11,8 @@
 #include "services/Service.h"
 #include "services/Rehabillitation.h"
 
+#include "../../include/Exceptions.h"
+
 
 using namespace std;
 
@@ -55,11 +57,19 @@ AppointmentManager::~AppointmentManager()
 
 const std::shared_ptr<AppointmentRepository>& AppointmentManager::getArchiveRepository() const
 {
+	if (archiveRepository == nullptr)
+	{
+		throw NullPointerException("archiveRepository");
+	}
 	return archiveRepository;
 }
 
 const std::shared_ptr<AppointmentRepository>& AppointmentManager::getRepository() const
 {
+	if (repository == nullptr)
+	{
+		throw NullPointerException("repository");
+	}
 	return repository;
 }
 
@@ -170,37 +180,52 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 	std::vector<PersonnelPtr> nurses;
 	std::vector<DoctorPtr> doctors;
 
-	if (get(appointmentId) != nullptr) return nullptr;
+	if (get(appointmentId) != nullptr)
+	{
+		throw LogicException("Wizytą o tym AppointmentId już istnieje.");
+	}
 
 	//Pacjenta
-	if (isDate(getPatientAppointments(patient), appointmentBeginDate, duration)) return nullptr;
+	if (isDate(getPatientAppointments(patient), appointmentBeginDate, duration))
+		throw DateException("Pacjent: " + patient->getInfo());
+
+
 	//Personelu
 	for (auto& personel : personnel)
 	{
-		if (personel->getIsActive() != true) return nullptr;
+		if (personel->getIsActive() != true) throw ActivityException("Specjalista: " + personel->getInfo());
 
 		DoctorPtr doctor = dynamic_pointer_cast<Doctor>(personel);
+
 		if (doctor != nullptr)
 		{
-			if (doctor->canConductTreatment(service->getRequiredDoctorSpec()))doctors.push_back(doctor);
-
-			else return nullptr;
+			if (doctor->canConductTreatment(service->getRequiredDoctorSpec()))
+				doctors.push_back(doctor);
+			else throw LogicException("Lekarz " + doctor->getInfo() + " nie może przeprowadzić zabiegu.");
 		}
 		else
 		{
-			if (!personel->canConductTreatment(service->getRequiredDoctorSpec())) return nullptr;
+			if (!personel->canConductTreatment(service->getRequiredDoctorSpec()))
+				throw LogicException("Pielęgniarka " + personel->getInfo() + " nie może przeprowadzić zabiegu.");
 			nurses.push_back(personel);
 		}
-		if (isDate(getPersonnelAppointments(personel), appointmentBeginDate, duration)) return nullptr;
+		if (isDate(getPersonnelAppointments(personel), appointmentBeginDate, duration))
+			throw DateException("Specjalista: " + personel->getInfo());
 	}
 	//Rozmiar lekarzy
-	if (service->getRequiredDoctorSize() != doctors.size()) return nullptr;
+	if (service->getRequiredDoctorSize() != doctors.size())
+		throw LogicException("Przydzielono niepoprawną ilość specjalistów.");;
+
 	//Pokoju
-	if (isDate(getRoomAppointments(room), appointmentBeginDate, duration)) return nullptr;
-	if (room->getIsActive() != true) return nullptr;
+	if (isDate(getRoomAppointments(room), appointmentBeginDate, duration))
+		throw DateException("Pokój: " + room->getInfo());
+	if (room->getIsActive() != true)
+		throw ActivityException("Pokój: " + room->getInfo());
 
 	//Usluga
-	if (service->getIsAvailable() != true) return nullptr;
+	if (service->getIsAvailable() != true)
+
+		throw ActivityException("Usługa: " + service->getInfo());
 
 	//Sprawdzenie czy wyposażenie jest odpowiednie
 	RehabillitationRoomPtr rehabRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
@@ -208,15 +233,20 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 
 	if (rehab != nullptr)
 	{
-		if (rehab->getRequiredNurseSize() != nurses.size()) return nullptr;
+		if (rehab->getRequiredNurseSize() != nurses.size())
+			throw LogicException("Przydzielono niepoprawną ilość pielęgniarek.");
 
-		//Nie może być reahilitacja gdy nie ma pokoju rehabilitacyjnego!!!
-		if (rehabRoom == nullptr) return nullptr;
-		if (rehabRoom->getMaxCapacity() < personnel.size()) return nullptr;
+		//Nie może być rehabilitacja gdy nie ma pokoju rehabilitacyjnego!!!
+		if (rehabRoom == nullptr)
+			throw LogicException("Przydzielono rehabilitacje do pokoju konsultacyjnego.");
+
+		if (rehabRoom->getMaxCapacity() < personnel.size())
+			throw LogicException("Przekroczono maksymalny rozmiar sali. Liczba specjalistów jest zbyt duża.");
 
 		for (auto& serviceEq : rehab->getRequiredEqupiment())
 		{
-			if (!rehabRoom->canBeUsed(serviceEq)) return nullptr;
+			if (!rehabRoom->canBeUsed(serviceEq))
+				throw LogicException("Sala nie ma wymaganego sprzętu.");
 		}
 	}
 
@@ -232,7 +262,8 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
                                                    const boost::posix_time::ptime& beginTime)
 {
 	boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
-	if (teraz < beginTime) return 0;
+	if (teraz < beginTime)
+		throw LogicException("Nie można przejść do podsumowania bez zakończenia spotkania.");
 
 	AppointmentPredicate func = [beginTime,patient](const AppointmentPtr appointment) -> bool
 	{
@@ -245,12 +276,14 @@ unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
 	};
 
 	auto foundAppointments = findBy(func);
-	if (foundAppointments.empty()) return 0;
+	if (foundAppointments.empty())
+		throw LogicException("Nie znaleziono podanego spotkania.");
 
 	AppointmentPtr appointment = foundAppointments[0];
 
 	if (getArchiveRepository()->get((unsigned int)appointment->getUniqueParameter()) != nullptr)
 	{
+		throw LogicException("Próba dodania spotkania do ArchiveRepository o unikalnym numerze, który juz jest w systemie.");
 	}
 	else
 	{
@@ -267,23 +300,24 @@ bool AppointmentManager::changeAppointment(const boost::posix_time::ptime& _date
 	AppointmentPtr appointment = getRepository()->get((unsigned int)appointmentId);
 	unsigned int duration = appointment->getService()->getServiceDuration();
 
-
-	if (isDate(getPatientAppointments(appointment->getPatient()), _date, duration)) return false;
-
-	if (isDate(getRoomAppointments(appointment->getRoom()), _date, duration)) return false;
+	if (isDate(getPatientAppointments(appointment->getPatient()), _date, duration))
+		throw DateException("Pacjent " + appointment->getPatient()->getInfo());
+	if (isDate(getRoomAppointments(appointment->getRoom()), _date, duration))
+		throw DateException("Sala " + appointment->getRoom()->getInfo());
 
 	for (auto& personel : appointment->getPersonnel())
 	{
-		if (isDate(getPersonnelAppointments(personel), _date, duration)) return false;
+		if (isDate(getPersonnelAppointments(personel), _date, duration))
+			throw DateException("Specjalista " + personel->getInfo());
 	}
 
 	appointment->setAppointmentBeginDate(_date);
 	return true;
 }
 
-void AppointmentManager::cancelAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId)
+void AppointmentManager::cancelAppointment(const unsigned int appointmentId)
 {
-	AppointmentPtr appointment = getRepository()->get((unsigned int)appointmentId);
+	AppointmentPtr appointment = getRepository()->get(appointmentId);
 	getRepository()->remove(appointment);
 }
 

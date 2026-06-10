@@ -7,6 +7,7 @@
 
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
+#include "../../include/Exceptions.h"
 
 
 struct TestSuitPatientTemplateFixture
@@ -49,8 +50,10 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitPatientTemplate, TestSuitPatientTemplateFixture
 	{
 		BOOST_TEST_REQUIRE(pacjentManager.getRepository()->get("40010112345") != nullptr);
 		BOOST_TEST_REQUIRE(pacjentManager.getRepository()->getVectorOfData().size() == 4);
-
-		pacjentManager.registerPatient("Walter", "White", "40010112345", "Albuquerqe", "Juan Poet", "10/15");
+		//Testy wyjątku
+		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "40010112345", "Albuquerqe", "Juan Poet", "10/15"),ExistException);
+		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "2", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
+		BOOST_CHECK_THROW(pacjentManager.registerPatient("Walter", "White", "Walthu", "Albuquerqe", "Juan Poet", "10/15"),LogicException);
 
 		BOOST_TEST(pacjentManager.getRepository()->getVectorOfData().size() == 4);
 

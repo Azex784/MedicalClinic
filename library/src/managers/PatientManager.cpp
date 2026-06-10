@@ -1,8 +1,8 @@
 #include "managers/PatientManager.h"
 
 #include <iostream>
-#include <patient/Address.h>
-
+#include "patient/Address.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -18,9 +18,17 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
 {
 	if (get(personalID) != nullptr)
 	{
-		return;
+		throw ExistException("Pacjent",personalID);
 	}
 
+
+	//Szybkie sprawdzenie czy pesel to same cyfry i czy size sie zgadza
+	if (personalID.size() != 11 || !all_of(personalID.begin(), personalID.end(), [](unsigned char c) {
+		return isdigit(c);
+	}))
+	{
+		throw LogicException("Wpisany pesel jest nieprawidłowy.");
+	};
 
 	PatientPredicate func = [&city, &street, &number](const PatientPtr patient) -> bool
 	{
@@ -44,7 +52,6 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
 		AddressPtr adres = make_shared<Address>(city, street, number);
 		patient = make_shared<Patient>(firstName, lastName, personalID, adres);
 	}
-
 
 	getRepository()->add(patient);
 };

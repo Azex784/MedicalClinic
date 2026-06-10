@@ -1,8 +1,13 @@
 #include "patient/Patient.h"
+#include "Exceptions.h"
 #include "patient/Address.h"
 
 const AddressPtr& Patient::getAddress() const
 {
+    if (address == nullptr)
+    {
+        throw NullPointerException("archiveRepository");
+    }
     return address;
 }
 

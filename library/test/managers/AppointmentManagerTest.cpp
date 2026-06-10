@@ -20,6 +20,7 @@
 
 #include "enums/Equipment.h"
 #include "enums/Specialisation.h"
+#include "../../include/Exceptions.h"
 
 using namespace boost::posix_time;
 
@@ -149,9 +150,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 
 	BOOST_AUTO_TEST_CASE(GetTest)
 	{
-		BOOST_TEST(appointmentManager->get((unsigned int)999)->getAppointmentBeginDate() == startTime);
-		BOOST_TEST(appointmentManager->get((unsigned int)978)->getAppointmentBeginDate() == startTime2);
-		BOOST_TEST(appointmentManager->get((unsigned int)2137) == nullptr);
+		BOOST_TEST(appointmentManager->get(999)->getAppointmentBeginDate() == startTime);
+		BOOST_TEST(appointmentManager->get(978)->getAppointmentBeginDate() == startTime2);
+		BOOST_TEST(appointmentManager->get(2137) == nullptr);
 	}
 
 	BOOST_AUTO_TEST_CASE(FindByFindAllTest)
@@ -203,40 +204,50 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 				"2024-08-15 10:30:00"), testRoom1, 2) != nullptr);
 		BOOST_TEST(appointmentManager->get(2)->getAppointmentBeginDate() == time_from_string("2024-08-15 10:30:00"));
 
+
+		testRoom2->setIsActive(false);
 		//Niemozliwe ustalenie terminów:
-		BOOST_TEST(appointmentManager->arrangeAppointment(testPatient,
-			cons1,
-			personnel,
-			time_from_string("2024-06-15 10:30:00"),
-			testRoom2,
-			1) == nullptr);
+		BOOST_CHECK_THROW(appointmentManager->arrangeAppointment(testPatient,
+			                  cons1,
+			                  personnel,
+			                  time_from_string("2004-06-15 10:30:00"),
+			                  testRoom2,
+			                  32), LogicException);
 
-		BOOST_TEST(appointmentManager->arrangeAppointment(testPatient,
-			rehab1,
-			personnel1,
-			time_from_string("2024-06-15 10:30:00"),
-			testRoom2,
-			1) == nullptr);
-
-		BOOST_TEST(appointmentManager->arrangeAppointment(testPatient,
-			rehab1,
-			personnel,
-			time_from_string("2024-06-15 10:10:00"),
-			testRoom2,
-			1) == nullptr);
-
-		BOOST_TEST(appointmentManager->arrangeAppointment(testPatient,
-			rehab1,
-			personnel,
-			time_from_string("2024-06-15 10:30:00"),
-			testRoom2,
-			1) == nullptr);
+		BOOST_CHECK_THROW(appointmentManager->arrangeAppointment(testPatient,
+			                  rehab1,
+			                  personnel,
+			                  time_from_string("2024-08-15 10:30:00"),
+			                  testRoom2,
+			                  1), LogicException);
 	}
 
 	BOOST_AUTO_TEST_CASE(FinishAppointmentTest)
 	{
-		//Czy dobrze zostanie obsłuzone brak danego wizyty?
-		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-02-15 11:30:00")) == 0);
+		//Czy dobrze zostanie obsłuzone brak da;nego wizyty?
+		BOOST_CHECK_THROW(appointmentManager->finishAppointment(testPatient,time_from_string("2024-02-15 11:30:00")),
+		                  LogicException);
+
+		//Upewniamy sie ze nie ma juz spotkania o tym numerze
+
+		if (appointmentManager->getArchiveRepository()->get((unsigned int)100) != nullptr)
+		{
+			appointmentManager->getArchiveRepository()->remove(
+				appointmentManager->getArchiveRepository()->get((unsigned int)100));
+		}
+
+		if (appointmentManager->getArchiveRepository()->get((unsigned int)30) != nullptr)
+		{
+			appointmentManager->getArchiveRepository()->remove(
+				appointmentManager->getArchiveRepository()->get((unsigned int)30));
+		}
+
+
+		if (appointmentManager->getArchiveRepository()->get((unsigned int)99) != nullptr)
+		{
+			appointmentManager->getArchiveRepository()->remove(
+				appointmentManager->getArchiveRepository()->get((unsigned int)99));
+		}
 
 		//Wymagane jest prawidłowe dodanie wizyt
 		BOOST_TEST_REQUIRE(appointmentManager->arrangeAppointment(testPatient,
@@ -244,17 +255,17 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 			personnel,
 			time_from_string("2024-06-15 10:30:00"),
 			testRoom2,
-			1) != nullptr);
+			100) != nullptr);
 
 		BOOST_TEST_REQUIRE(
 			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, time_from_string(
-				"2024-08-15 10:30:00"), testRoom1, 2) != nullptr);
+				"2024-08-15 10:30:00"), testRoom1, 30) != nullptr);
 
-		//Czy zwaracany jest prawidłowy koszt?
+		//Czy zwracany jest prawidłowy koszt?
 		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-06-15 10:30:00")) == 100);
 		//Czy zostało dodane do repozytorium archive?
 		BOOST_TEST(
-			appointmentManager->getArchiveRepository()->get((unsigned int)1)->getAppointmentBeginDate() ==
+			appointmentManager->getArchiveRepository()->get((unsigned int)100)->getAppointmentBeginDate() ==
 			time_from_string("2024-06-15 10:30:00"));
 
 		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-08-15 10:30:00")) == 350);
@@ -262,16 +273,18 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 
 		//Czy zostało dodane do repozytorium archive?
 		BOOST_TEST(
-			appointmentManager->getArchiveRepository()->get((unsigned int)2)->getAppointmentBeginDate() ==
+			appointmentManager->getArchiveRepository()->get((unsigned int)30)->getAppointmentBeginDate() ==
 			time_from_string("2024-08-15 10:30:00"));
 		//Sprawdzenie metody getAppointmentsCost
 		BOOST_TEST(appointmentManager->getAppointmentsCost(testPatient) == 450);
 
 		ptime now = time_from_string("2137-08-15 10:30:00");
+
 		BOOST_TEST_REQUIRE(
-			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, now, testRoom1, 3) != nullptr);
+			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, now, testRoom1, 99) != nullptr);
+
 		//Czy niemożliwe jest zakończenie wizyty podczas trwania wizyty?
-		BOOST_TEST(appointmentManager->finishAppointment(testPatient,now) == 0);
+		BOOST_CHECK_THROW(appointmentManager->finishAppointment(testPatient,now), LogicException);
 
 		//Czy nie został dodany nowy obiekt?
 		BOOST_TEST(appointmentManager->getArchiveRepository()->size() == 2);
@@ -294,7 +307,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 		BOOST_TEST(appointmentManager->changeAppointment(time_from_string("2027-06-15 10:30:00"),1) == true);
 
 		//Nieprawidłowa zmiana
-		BOOST_TEST(!appointmentManager->changeAppointment(time_from_string("2024-08-15 10:30:00"),1));
+		BOOST_CHECK_THROW(appointmentManager->changeAppointment(time_from_string("2024-08-15 10:30:00"),1),
+		                  DateException);
 	}
 
 	BOOST_AUTO_TEST_CASE(CancelAppointmentTest)
@@ -305,10 +319,10 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 			time_from_string("2024-06-15 10:30:00"),
 			testRoom2,
 			1) != nullptr);
-		BOOST_TEST(appointmentManager->get((unsigned int)1) != nullptr);
+		BOOST_TEST(appointmentManager->get(1) != nullptr);
 
-		appointmentManager->cancelAppointment(time_from_string("2024-06-15 10:30:00"), 1);
-		BOOST_TEST(appointmentManager->get((unsigned int)1) == nullptr);
+		appointmentManager->cancelAppointment(1);
+		BOOST_TEST(appointmentManager->get(1) == nullptr);
 	}
 
 

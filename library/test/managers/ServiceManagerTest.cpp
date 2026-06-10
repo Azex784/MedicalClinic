@@ -10,6 +10,7 @@
 
 #include "repositories/ServiceRepository.h"
 #include "typedefs.h"
+#include "../../include/Exceptions.h"
 
 using namespace std;
 
@@ -57,11 +58,7 @@ struct TestSuitServiceManagerFixture
 
 	~TestSuitServiceManagerFixture()
 	{
-		serviceRepo->remove(cons1);
-		serviceRepo->remove(cons2);
-		serviceRepo->remove(rehab1);
-		serviceRepo->remove(rehab2);
-		serviceRepo->saveData();
+
 	}
 };
 
@@ -74,8 +71,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitServiceManager, TestSuitServiceManagerFixture)
 		BOOST_TEST_REQUIRE(serviceManager.getRepository()->getVectorOfData().size() == 4);
 
 		// Próba dodania już istniejącego zabiegu
-		serviceManager.addConsultation(150, 30, "Konsultacja odnosnie masażu", 101, Specialisation::MASSAGE_THERAPIST,
-		                               "Omowienie wynikow", 1, false);
+		BOOST_CHECK_THROW(serviceManager.addConsultation(150, 30, "Konsultacja odnosnie masażu", 101, Specialisation::MASSAGE_THERAPIST,
+		                               "Omowienie wynikow", 1, false),ExistException);
 		BOOST_TEST(serviceManager.getRepository()->getVectorOfData().size() == 4);
 
 		// Zwykłe dodanie nowego zabiegu
@@ -92,8 +89,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitServiceManager, TestSuitServiceManagerFixture)
 		BOOST_TEST(serviceManager.getRepository()->get((unsigned int)302) != nullptr);
 
 		// Próba dodania istniejącej sali rehabilitacyjnej
-		serviceManager.addRehabilitation(250, 90, "Fizykoterapia", 202, eq2, Specialisation::ORTHOPEDIST, 1,
-		                                 2);
+		BOOST_CHECK_THROW(serviceManager.addRehabilitation(250, 90, "Fizykoterapia", 202, eq2, Specialisation::ORTHOPEDIST, 1,
+		                                 2),ExistException);
 		BOOST_TEST(serviceManager.getRepository()->getVectorOfData().size() == 6);
 	}
 

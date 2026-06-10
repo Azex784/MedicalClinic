@@ -3,7 +3,7 @@
 #include <personnel/Doctor.h>
 #include <personnel/Nurse.h>
 #include "typedefs.h"
-
+#include "../../include/Exceptions.h"
 
 using namespace std;
 
@@ -17,12 +17,16 @@ void PersonnelManager::addDoctor(const std::string& firstName, const std::string
                                  const unsigned int& personnelId, std::vector<Specialisation> specialistaion,
                                  const unsigned int& doctorCost)
 {
+	if (specialistaion.empty())
+	throw LogicException("Wpisano nieprawidłowe puste specjalizacje.");
+
 	if (getRepository()->get(personnelId) == nullptr)
 	{
 		PersonnelPtr doctor = std::make_shared<Doctor>(firstName, lastName, personnelId, specialistaion, doctorCost);
 		getRepository()->add(doctor);
+		return;
 	}
-	return;
+	throw ExistException("Lekarz",to_string(personnelId));
 }
 
 void PersonnelManager::addNurse(const std::string& firstName, const std::string& lastName,
@@ -32,6 +36,8 @@ void PersonnelManager::addNurse(const std::string& firstName, const std::string&
 	{
 		PersonnelPtr doctor = std::make_shared<Nurse>(firstName, lastName, personnelId);
 		getRepository()->add(doctor);
+		return;
+
 	}
-	return;
+	throw ExistException("Pielęgniarka",to_string(personnelId));
 }

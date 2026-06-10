@@ -17,6 +17,8 @@
 #include "enums/Specialisation.h"
 #include "managers/LogicManager.h"
 
+#include "../../include/Exceptions.h"
+
 using namespace boost::posix_time;
 
 struct TestSuitLogicManagerFixture
@@ -107,6 +109,11 @@ struct TestSuitLogicManagerFixture
 		logicManager->getRoomManager()->getRepository()->add(testRoom1);
 		logicManager->getRoomManager()->getRepository()->add(testRoom2);
 
+		if (logicManager->getAppointmentManager()->get(1) != nullptr)
+		{
+			logicManager->getAppointmentManager()->cancelAppointment(1);
+		}
+
 		logicManager->getAppointmentManager()->arrangeAppointment(testPatient,
 		                                                          rehab1,
 		                                                          personnel,
@@ -164,7 +171,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitLogicManager, TestSuitLogicManagerFixture)
 		BOOST_TEST_REQUIRE(logicManager->getPatientManager()->get("20010112345")->getIsArchive() == false);
 
 		//Nieprawidłowe
-		BOOST_TEST(!logicManager->unregisterPatient("40010112345"));
+		BOOST_CHECK_THROW(logicManager->unregisterPatient("40010112345"),DateException);
 		BOOST_TEST(logicManager->getPatientManager()->get("40010112345")->getIsArchive() == false);
 
 		//Prawidłowe
@@ -199,7 +206,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitLogicManager, TestSuitLogicManagerFixture)
 		// Wywołanie akcji dla pokoju z spotkaniami
 		logicManager->removeRoom(102);
 
-		// Personel staje się archiwalny i nieaktywny
+		// Sala staje się archiwalny i nieaktywny
 		BOOST_TEST(logicManager->getRoomManager()->get(102)->getIsArchive() == true);
 		BOOST_TEST(logicManager->getRoomManager()->get(102)->getIsActive() == false);
 	}
@@ -221,7 +228,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitLogicManager, TestSuitLogicManagerFixture)
 		BOOST_TEST_REQUIRE(logicManager->getServiceManager()->get(201)->getIsAvailable() == true);
 
 		//Nieprawidłowe
-		BOOST_TEST(!logicManager->removeService(201));
+		BOOST_CHECK_THROW(logicManager->removeService(201),DateException);
 		BOOST_TEST(logicManager->getServiceManager()->get(201)->getIsArchive() == false);
 		BOOST_TEST(logicManager->getServiceManager()->get(201)->getIsAvailable() == true);
 

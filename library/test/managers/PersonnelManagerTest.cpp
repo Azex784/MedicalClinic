@@ -9,6 +9,7 @@
 
 #include "repositories/PersonnelRepository.h"
 #include "typedefs.h"
+#include "../../include/Exceptions.h"
 
 using namespace std;
 
@@ -36,9 +37,7 @@ struct TestSuitPersonnelManagerFixture
 
 	~TestSuitPersonnelManagerFixture()
 	{
-		testPersonnelRepository->remove(testPersonnel1);
-		testPersonnelRepository->remove(testPersonnel2);
-		testPersonnelRepository->saveData();
+
 	}
 };
 
@@ -51,7 +50,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitPersonnelManager, TestSuitPersonnelManagerFixtu
 		BOOST_TEST_REQUIRE(personnelManager.getRepository()->getVectorOfData().size() == 2);
 
 		// Próba dodania już istniejącego personela
-		personnelManager.addNurse("Marie", "Schrader", 123);
+		BOOST_CHECK_THROW(personnelManager.addNurse("Marie", "Schrader", 123), ExistException);
 		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 2);
 
 		// Zwykłe dodanie nowej personela
@@ -66,7 +65,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitPersonnelManager, TestSuitPersonnelManagerFixtu
 		BOOST_TEST(personnelManager.getRepository()->get((unsigned int)126) != nullptr);
 
 		// Próba dodania istniejącego lekarza
-		personnelManager.addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
+		BOOST_CHECK_THROW(personnelManager.addDoctor("Hank", "Schrader", 126, specjalizacje, 400);
+		                  , ExistException);
+
 		BOOST_TEST(personnelManager.getRepository()->getVectorOfData().size() == 4);
 	}
 

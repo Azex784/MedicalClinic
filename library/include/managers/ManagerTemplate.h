@@ -1,5 +1,7 @@
 #ifndef REHABILITATIONCENTRE_MANAGERTEMPLATE_H
 #define REHABILITATIONCENTRE_MANAGERTEMPLATE_H
+
+#include "../Exceptions.h"
 /**
  * Szablon klasy dla menadzerow
  *
@@ -48,6 +50,10 @@ public:
 	 */
 	const std::shared_ptr<UniqueRepoClass>& getRepository() const
 	{
+		if (repository == nullptr)
+		{
+			throw NullPointerException("repository");
+		}
 		return repository;
 	}
 

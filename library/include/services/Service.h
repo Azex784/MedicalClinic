@@ -14,8 +14,8 @@ private:
 	unsigned int serviceId;
 	unsigned int requiredDoctorSize;
 	Specialisation requiredDoctorSpec;
-	bool isAvailble = 1;
-	bool isArchive = 0;
+	bool isAvailable;
+	bool isArchive;
 
 public:
 	/**
@@ -104,9 +104,9 @@ public:
 
 	/**
 	 * Zmienia status archiwizacji usługi.
-	 * @param isArchive1
+	 * @param isArchive
 	 */
-	void setIsArchive(const bool isArchive1);
+	void setIsArchive(const bool isArchive);
 };
 
 

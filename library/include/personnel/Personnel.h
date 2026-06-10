@@ -12,7 +12,7 @@ enum class Specialisation;
  */
 class Personnel : public Person{
 private:
-    bool isActive = 1;
+    bool isActive;
     unsigned int personnelId;
 public:
     /**

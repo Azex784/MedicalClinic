@@ -12,9 +12,9 @@ Doctor::Doctor(const std::string& name, const std::string& lastName, const unsig
 {
 }
 
-void Doctor::setDoctorCost(const unsigned int doctor_cost)
+void Doctor::setDoctorCost(const unsigned int doctorCost)
 {
-	doctorCost = doctor_cost;
+	this->doctorCost = doctorCost;
 }
 
 const std::vector<Specialisation>& Doctor::getSpecialisation() const
