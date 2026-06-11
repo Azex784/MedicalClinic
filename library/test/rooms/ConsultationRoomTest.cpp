@@ -1,7 +1,9 @@
 #include <boost/test/unit_test.hpp>
-#include <vector>
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
+
+using namespace RehabClinic;
+
 
 struct TestSuiteConsultationRoomFixture
 {

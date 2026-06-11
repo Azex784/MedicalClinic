@@ -1,4 +1,6 @@
-#include "menu/TextMenu.h"
+#include "menu/TerminalMenu.h"
+
+using namespace RehabClinic;
 
 int main(){
 

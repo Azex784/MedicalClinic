@@ -2,17 +2,24 @@
 #include <enums/Specialisation.h>
 #include "services/Service.h"
 
+using namespace RehabClinic;
+
 //Tymczasowa struktura potrzebna do testow
 struct TmpService : public Service
 {
-	TmpService(const unsigned serviceCost, const unsigned serviceDuration, const std::string& serviceName,
-	           const unsigned serviceId, const unsigned requiredDoctorSize,
-	           const Specialisation requiredDoctorSpec)
-		: Service(serviceCost, serviceDuration, serviceName, serviceId, requiredDoctorSize, requiredDoctorSpec)
+	TmpService(const unsigned serviceCost, const unsigned serviceDuration, const std::string & serviceName,
+
+	const unsigned serviceId,
+	const unsigned requiredDoctorSize,
+
+	const Specialisation requiredDoctorSpec
+	)
+	:
+	Service(serviceCost, serviceDuration, serviceName, serviceId, requiredDoctorSize, requiredDoctorSpec)
 	{
 	}
 
-	~TmpService() override{};
+	~TmpService() override = default;
 };
 
 

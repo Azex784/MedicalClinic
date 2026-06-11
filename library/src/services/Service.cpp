@@ -1,81 +1,89 @@
 #include "services/Service.h"
 #include "enums/Specialisation.h"
 
-using namespace std;
-
-unsigned int Service::getServiceCost() const
+namespace RehabClinic
 {
-    return serviceCost;
-}
 
-unsigned int Service::getServiceDuration() const
-{
-    return serviceDuration;
-}
+    using namespace std;
 
-const std::string& Service::getServiceName() const
-{
-    return serviceName;
-}
+    unsigned int Service::getServiceCost() const
+    {
+        return serviceCost;
+    }
 
-unsigned int Service::getUniqueParameter() const
-{
-    return serviceId;
-}
+    unsigned int Service::getServiceDuration() const
+    {
+        return serviceDuration;
+    }
 
-unsigned int Service::getRequiredDoctorSize() const
-{
-    return requiredDoctorSize;
-}
+    const std::string& Service::getServiceName() const
+    {
+        return serviceName;
+    }
 
-const Specialisation Service::getRequiredDoctorSpec() const
-{
-    return requiredDoctorSpec;
-}
+    unsigned int Service::getUniqueParameter() const
+    {
+        return serviceId;
+    }
 
-bool Service::getIsAvailable() const
-{
-    return isAvailable;
-}
+    unsigned int Service::getRequiredDoctorSize() const
+    {
+        return requiredDoctorSize;
+    }
 
-bool Service::getIsArchive() const
-{
-    return isArchive;
-}
+    const Specialisation Service::getRequiredDoctorSpec() const
+    {
+        return requiredDoctorSpec;
+    }
 
-void Service::setServiceCost(const unsigned int service_cost)
-{
-    serviceCost = service_cost;
-}
+    bool Service::getIsAvailable() const
+    {
+        return isAvailable;
+    }
 
-void Service::setIsAvailable(const bool isAvailble1)
-{
-    isAvailable = isAvailble1;
-}
+    bool Service::getIsArchive() const
+    {
+        return isArchive;
+    }
 
-void Service::setIsArchive(const bool isArchive)
-{
-    this->isArchive = isArchive;
-}
+    void Service::setServiceCost(const unsigned int service_cost)
+    {
+        serviceCost = service_cost;
+    }
 
-Service::Service(const unsigned int serviceCost, const unsigned int serviceDuration, const std::string& serviceName,
-    const unsigned int serviceId, const unsigned int requiredDoctorSize, const Specialisation requiredDoctorSpec): serviceCost(serviceCost),
-    serviceDuration(serviceDuration),
-    serviceName(serviceName),
-    serviceId(serviceId),
-    requiredDoctorSize(requiredDoctorSize),
-    requiredDoctorSpec(requiredDoctorSpec)
-{
-    setIsAvailable(1);
-    setIsArchive(0);
-}
+    void Service::setIsAvailable(const bool isAvailble1)
+    {
+        isAvailable = isAvailble1;
+    }
 
-const std::string Service::getInfo() const
-{
-    return "Nazwa usługi: " + getServiceName() + ", koszt usług: " + to_string(getServiceCost()) +
-        ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getUniqueParameter())
-        + ", liczba lekarzy: " + to_string(getRequiredDoctorSize()) + ", specjalizacja lekarza/y: " + specialisationToString(getRequiredDoctorSpec());
-    ;
-}
+    void Service::setIsArchive(const bool isArchive)
+    {
+        this->isArchive = isArchive;
+    }
 
-Service::~Service() = default;
+    Service::Service(const unsigned int serviceCost, const unsigned int serviceDuration, const std::string& serviceName,
+                     const unsigned int serviceId, const unsigned int requiredDoctorSize,
+                     const Specialisation requiredDoctorSpec) : serviceCost(serviceCost),
+                                                                serviceDuration(serviceDuration),
+                                                                serviceName(serviceName),
+                                                                serviceId(serviceId),
+                                                                requiredDoctorSize(requiredDoctorSize),
+                                                                requiredDoctorSpec(requiredDoctorSpec)
+    {
+        setIsAvailable(1);
+        setIsArchive(0);
+    }
+
+    Service::~Service()
+    {
+    }
+
+    const std::string Service::getInfo() const
+    {
+        return "Nazwa usługi: " + getServiceName() + ", koszt usług: " + to_string(getServiceCost()) +
+            ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getUniqueParameter())
+            + ", liczba lekarzy: " + to_string(getRequiredDoctorSize()) + ", specjalizacja lekarza/y: " +
+            specialisationToString(getRequiredDoctorSpec());;
+    }
+
+}

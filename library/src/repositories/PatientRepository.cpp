@@ -7,118 +7,123 @@
 
 #include <fstream>
 
-using namespace std;
-
-
-PatientRepository::PatientRepository(const std::string& file_name) : RepositoryTemplate<
-	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(file_name)
+namespace RehabClinic
 {
-}
 
-PatientRepository::PatientRepository() : RepositoryTemplate<
-	std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(
-	"../../program/data/PatientRepository.txt")
-{
-}
+	using namespace std;
 
-void PatientRepository::loadData()
-{
-	ifstream inFile;
-	inFile.open(getFileName());
-	string line;
 
-	if (!inFile.is_open())
+	PatientRepository::PatientRepository(const std::string& file_name) : RepositoryTemplate<
+		std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(file_name)
 	{
-		throw OpeningException(getFileName());
 	}
 
-	//Zapobiega to podwojnemu zliczeniu elementów
-	clearVectorOfData();
-	while (getline(inFile, line))
+	PatientRepository::PatientRepository() : RepositoryTemplate<
+		std::shared_ptr<Patient>, std::function<bool(std::shared_ptr<Patient>)>, const std::string>(
+		"../../program/data/PatientRepository.txt")
 	{
-		if (line.empty()) continue;
+	}
 
-		//Ladujemy do strumienia
-		stringstream ss(line);
+	void PatientRepository::loadData()
+	{
+		ifstream inFile;
+		inFile.open(getFileName());
+		string line;
 
-		string firstName, lastName, personalNumber, city, street, number, tmp;
-
-		getline(ss, firstName, ';');
-		getline(ss, lastName, ';');
-		getline(ss, personalNumber, ';');
-		getline(ss, city, ';');
-		getline(ss, street, ';');
-		getline(ss, number, ';');
-		getline(ss, tmp, '\n');
-
-		bool isArchived = stoi(tmp);
-
-		//Tworzenie nowych obiektow z wczytanymi danymi
-
-		PatientPredicate func = [&city, &street, &number](const PatientPtr patient) -> bool
+		if (!inFile.is_open())
 		{
-			if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient->
-				getAddress()->getNumber() == number)
+			throw OpeningException(getFileName());
+		}
+
+		//Zapobiega to podwojnemu zliczeniu elementów
+		clearVectorOfData();
+		while (getline(inFile, line))
+		{
+			if (line.empty()) continue;
+
+			//Ladujemy do strumienia
+			stringstream ss(line);
+
+			string firstName, lastName, personalNumber, city, street, number, tmp;
+
+			getline(ss, firstName, ';');
+			getline(ss, lastName, ';');
+			getline(ss, personalNumber, ';');
+			getline(ss, city, ';');
+			getline(ss, street, ';');
+			getline(ss, number, ';');
+			getline(ss, tmp, '\n');
+
+			bool isArchived = stoi(tmp);
+
+			//Tworzenie nowych obiektow z wczytanymi danymi
+
+			PatientPredicate func = [&city, &street, &number](const PatientPtr patient) -> bool
 			{
-				return true;
+				if (patient->getAddress()->getCity() == city && patient->getAddress()->getStreet() == street && patient
+					->
+					getAddress()->getNumber() == number)
+				{
+					return true;
+				}
+				return false;
+			};
+			PatientPtr nowyPacjent;
+
+			auto found = findBy(func);
+			if (found.empty())
+			{
+				AddressPtr nowyAdress = make_shared<Address>(city, street, number);
+				nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
 			}
-			return false;
-		};
-		PatientPtr nowyPacjent;
+			else
+			{
+				nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, found[0]->getAddress());
+			}
 
-		auto found = findBy(func);
-		if (found.empty())
-		{
-			AddressPtr nowyAdress = make_shared<Address>(city, street, number);
-			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, nowyAdress);
-		}
-		else
-		{
-			nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, found[0]->getAddress());
-		}
+			nowyPacjent->setIsArchive(isArchived);
+			add(nowyPacjent);
 
-		nowyPacjent->setIsArchive(isArchived);
-		add(nowyPacjent);
-
-		if (inFile.fail())
-		{
-			throw WriteException(getFileName());
-		}
-	}
-	inFile.close();
-}
-
-void PatientRepository::saveData() const
-{
-	ofstream outFile;
-
-	outFile.open(getFileName(), std::ios::trunc);
-
-	if (!outFile.is_open())
-	{
-		throw OpeningException(getFileName());
-	}
-	if (getVectorOfData().empty())
-	{
-		outFile << "";
-	}
-	else
-	{
-		for (const auto& patient : getVectorOfData())
-		{
-			outFile << patient->getName() << ";";
-			outFile << patient->getLastName() << ";";
-			outFile << patient->getUniqueParameter() << ";";
-			outFile << patient->getAddress()->getCity() << ";";
-			outFile << patient->getAddress()->getStreet() << ";";
-			outFile << patient->getAddress()->getNumber() << ';';
-			outFile << patient->getIsArchive() << '\n';
-
-			if (outFile.fail())
+			if (inFile.fail())
 			{
 				throw WriteException(getFileName());
 			}
 		}
-		outFile.close();
+		inFile.close();
+	}
+
+	void PatientRepository::saveData() const
+	{
+		ofstream outFile;
+
+		outFile.open(getFileName(), std::ios::trunc);
+
+		if (!outFile.is_open())
+		{
+			throw OpeningException(getFileName());
+		}
+		if (getVectorOfData().empty())
+		{
+			outFile << "";
+		}
+		else
+		{
+			for (const auto& patient : getVectorOfData())
+			{
+				outFile << patient->getName() << ";";
+				outFile << patient->getLastName() << ";";
+				outFile << patient->getUniqueParameter() << ";";
+				outFile << patient->getAddress()->getCity() << ";";
+				outFile << patient->getAddress()->getStreet() << ";";
+				outFile << patient->getAddress()->getNumber() << ';';
+				outFile << patient->getIsArchive() << '\n';
+
+				if (outFile.fail())
+				{
+					throw WriteException(getFileName());
+				}
+			}
+			outFile.close();
+		}
 	}
 }

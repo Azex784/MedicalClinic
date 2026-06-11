@@ -1,18 +1,19 @@
 #include <boost/test/unit_test.hpp>
 #include "rooms/Room.h"
 
+using namespace RehabClinic;
+
 //struct sluzacy do sprawdzenia dzialania metod klasy bazowej
 struct TmpRoom : public Room
 {
     TmpRoom(const unsigned int roomNumber) : Room(roomNumber) {}
 
-    //wypelnienie metody czysto wirtualnemj
+    //Wypelnienie metody czysto wirtualnej
     bool canBeUsed(Equipment equipment) const override
     {
-        return true; 
+        return true;
     }
 };
-
 struct TestSuiteRoomFixture
 {
     TmpRoom testRoom;

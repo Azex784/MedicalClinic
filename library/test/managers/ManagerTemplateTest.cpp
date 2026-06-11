@@ -6,6 +6,8 @@
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
 
+using namespace RehabClinic;
+
 struct TestSuitManagerTemplateFixture
 {
 	AddressPtr testAddress;

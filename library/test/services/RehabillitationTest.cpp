@@ -3,6 +3,8 @@
 #include <enums/Specialisation.h>
 #include "services/Rehabillitation.h"
 
+using namespace RehabClinic;
+
 struct TestSuiteRehabillitationFixture
 {
     std::vector<Equipment> tmp = {Equipment::PHYSICAL_THERAPY_DEVICE};

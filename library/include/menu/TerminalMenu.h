@@ -3,9 +3,10 @@
 
 #include "managers/LogicManager.h"
 
-/**
- * Klasa zapewniające tekstowe menu do obsługi centrum rehabilitacji
- */
+namespace RehabClinic
+{/**
+* Klasa zapewniające tekstowe menu do obsługi centrum rehabilitacji
+*/
 class TerminalMenu
 {
 private:
@@ -108,6 +109,6 @@ public:
 	 */
 	void personnel() const;
 };
-
+}
 
 #endif //REHABILITATIONCENTRE_TERMINALMENU_H

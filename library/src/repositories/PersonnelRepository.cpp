@@ -7,175 +7,178 @@
 
 #include "enums/Specialisation.h"
 
-using namespace std;
-
-PersonnelRepository::PersonnelRepository(const std::string& file_name)
-	: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const
-	                     unsigned>(file_name)
+namespace RehabClinic
 {
-}
 
-PersonnelRepository::PersonnelRepository()
-	: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const unsigned>(
-		"../../program/data/PersonnelRepository.txt")
-{
-}
+	using namespace std;
 
-
-void PersonnelRepository::loadData()
-{
-	ifstream inFile;
-	inFile.open(getFileName());
-	string line;
-
-	if (!inFile.is_open())
+	PersonnelRepository::PersonnelRepository(const std::string& file_name)
+		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const
+		                     unsigned>(file_name)
 	{
-		throw OpeningException(getFileName());
 	}
 
-	//Zapobiega to podwojnemu zliczeniu elementów
-	clearVectorOfData();
-	while (getline(inFile, line))
+	PersonnelRepository::PersonnelRepository()
+		: RepositoryTemplate<std::shared_ptr<Personnel>, std::function<bool(std::shared_ptr<Personnel>)>, const
+		                     unsigned>(
+			"../../program/data/PersonnelRepository.txt")
 	{
-		if (line.empty()) continue;
+	}
 
-		//Ladujemy do strumienia
-		stringstream ss(line);
 
-		string name, lastName, job, tmp;
-		unsigned int personnelId;
-		PersonnelPtr newPersonnel;
-		bool isActive, isArchive;
+	void PersonnelRepository::loadData()
+	{
+		ifstream inFile;
+		inFile.open(getFileName());
+		string line;
 
-		getline(ss, job, ';');
-
-		//Gdy mamy doktora
-		if (job == "D")
+		if (!inFile.is_open())
 		{
-			unsigned int doctor_cost;
-			vector<Specialisation> specialisations;
-			string specjalizajce;
+			throw OpeningException(getFileName());
+		}
 
+		//Zapobiega to podwojnemu zliczeniu elementów
+		clearVectorOfData();
+		while (getline(inFile, line))
+		{
+			if (line.empty()) continue;
 
-			getline(ss, name, ';');
-			getline(ss, lastName, ';');
+			//Ladujemy do strumienia
+			stringstream ss(line);
 
-			getline(ss, tmp, ';');
-			isActive = stoi(tmp);
+			string name, lastName, job, tmp;
+			unsigned int personnelId;
+			PersonnelPtr newPersonnel;
+			bool isActive, isArchive;
 
-			getline(ss, tmp, ';');
-			isArchive = stoi(tmp);
+			getline(ss, job, ';');
 
-			getline(ss, tmp, ';');
-			personnelId = stoul(tmp);
-
-
-			getline(ss, specjalizajce, ';');
-			stringstream specializationsStream(specjalizajce);
-
-			while (getline(specializationsStream, tmp, ','))
+			//Gdy mamy doktora
+			if (job == "D")
 			{
-				int enumValue = stoi(tmp);
-				Specialisation spec = static_cast<Specialisation>(enumValue);
+				unsigned int doctor_cost;
+				vector<Specialisation> specialisations;
+				string specjalizajce;
 
-				specialisations.push_back(spec);
-			}
-			tmp = "";
-			getline(ss, tmp, '\n');
-			doctor_cost = stoul(tmp);
-			newPersonnel = make_shared<Doctor>(name, lastName, personnelId, specialisations, doctor_cost);
-			//Gdy mamy pielegniarke
-		}
-		else if (job == "N")
-		{
-			getline(ss, name, ';');
-			getline(ss, lastName, ';');
 
-			getline(ss, tmp, ';');
-			isActive = stoi(tmp);
+				getline(ss, name, ';');
+				getline(ss, lastName, ';');
 
-			getline(ss, tmp, ';');
-			isArchive = stoi(tmp);
+				getline(ss, tmp, ';');
+				isActive = stoi(tmp);
 
-			getline(ss, tmp, '\n');
-			//Do unsigned longa(inta)
-			personnelId = stoul(tmp);
+				getline(ss, tmp, ';');
+				isArchive = stoi(tmp);
 
-			newPersonnel = make_shared<Nurse>(name, lastName, personnelId);
-		}
-		else
-		{
-			throw UnexpectedCharacterException("Personnel");
-		}
-		newPersonnel->setIsActive(isActive);
-		newPersonnel->setIsArchive(isArchive);
+				getline(ss, tmp, ';');
+				personnelId = stoul(tmp);
 
-		add(newPersonnel);
 
-		if (inFile.fail())
-		{
-			throw WriteException(getFileName());
-		}
+				getline(ss, specjalizajce, ';');
+				stringstream specializationsStream(specjalizajce);
 
-	}
-	inFile.close();
-}
-
-void PersonnelRepository::saveData() const
-{
-	ofstream outFile;
-
-	outFile.open(getFileName(), std::ios::trunc);
-
-	if (!outFile.is_open())
-	{
-		throw OpeningException(getFileName());
-	}
-	if (getVectorOfData().empty())
-	{
-		outFile << "";
-	}
-	else
-	{
-		for (const PersonnelPtr& personnel : getVectorOfData())
-		{
-			DoctorPtr doctor = dynamic_pointer_cast<Doctor>(personnel);
-			if (doctor != nullptr)
-			{
-				outFile << "D" << ";";
-
-				outFile << personnel->getName() << ";";
-				outFile << personnel->getLastName() << ";";
-				outFile << personnel->getIsActive() << ";";
-				outFile << personnel->getIsArchive() << ";";
-				outFile << personnel->getUniqueParameter() << ";";
-
-				int i;
-				//Zapisujemy enuma za pomocą inta
-				for (i = 0; doctor->getSpecialisation().size() - 1 > i; i++)
+				while (getline(specializationsStream, tmp, ','))
 				{
-					outFile << static_cast<int>(doctor->getSpecialisation()[i]) << ",";
+					int enumValue = stoi(tmp);
+					Specialisation spec = static_cast<Specialisation>(enumValue);
+
+					specialisations.push_back(spec);
 				}
-				outFile << static_cast<int>(doctor->getSpecialisation()[i]) << ";";
-				outFile << doctor->getDoctorCost() << "\n";
+				tmp = "";
+				getline(ss, tmp, '\n');
+				doctor_cost = stoul(tmp);
+				newPersonnel = make_shared<Doctor>(name, lastName, personnelId, specialisations, doctor_cost);
+				//Gdy mamy pielegniarke
+			}
+			else if (job == "N")
+			{
+				getline(ss, name, ';');
+				getline(ss, lastName, ';');
+
+				getline(ss, tmp, ';');
+				isActive = stoi(tmp);
+
+				getline(ss, tmp, ';');
+				isArchive = stoi(tmp);
+
+				getline(ss, tmp, '\n');
+				//Do unsigned longa(inta)
+				personnelId = stoul(tmp);
+
+				newPersonnel = make_shared<Nurse>(name, lastName, personnelId);
 			}
 			else
 			{
-				outFile << "N" << ";";
-
-				outFile << personnel->getName() << ";";
-				outFile << personnel->getLastName() << ";";
-				outFile << personnel->getIsActive() << ";";
-				outFile << personnel->getIsArchive() << ";";
-				outFile << personnel->getUniqueParameter() << "\n";
+				throw UnexpectedCharacterException("Personnel");
 			}
+			newPersonnel->setIsActive(isActive);
+			newPersonnel->setIsArchive(isArchive);
 
-			if (outFile.fail())
+			add(newPersonnel);
+
+			if (inFile.fail())
 			{
 				throw WriteException(getFileName());
 			}
-
 		}
-		outFile.close();
+		inFile.close();
+	}
+
+	void PersonnelRepository::saveData() const
+	{
+		ofstream outFile;
+
+		outFile.open(getFileName(), std::ios::trunc);
+
+		if (!outFile.is_open())
+		{
+			throw OpeningException(getFileName());
+		}
+		if (getVectorOfData().empty())
+		{
+			outFile << "";
+		}
+		else
+		{
+			for (const PersonnelPtr& personnel : getVectorOfData())
+			{
+				DoctorPtr doctor = dynamic_pointer_cast<Doctor>(personnel);
+				if (doctor != nullptr)
+				{
+					outFile << "D" << ";";
+
+					outFile << personnel->getName() << ";";
+					outFile << personnel->getLastName() << ";";
+					outFile << personnel->getIsActive() << ";";
+					outFile << personnel->getIsArchive() << ";";
+					outFile << personnel->getUniqueParameter() << ";";
+
+					int i;
+					//Zapisujemy enuma za pomocą inta
+					for (i = 0; doctor->getSpecialisation().size() - 1 > i; i++)
+					{
+						outFile << static_cast<int>(doctor->getSpecialisation()[i]) << ",";
+					}
+					outFile << static_cast<int>(doctor->getSpecialisation()[i]) << ";";
+					outFile << doctor->getDoctorCost() << "\n";
+				}
+				else
+				{
+					outFile << "N" << ";";
+
+					outFile << personnel->getName() << ";";
+					outFile << personnel->getLastName() << ";";
+					outFile << personnel->getIsActive() << ";";
+					outFile << personnel->getIsArchive() << ";";
+					outFile << personnel->getUniqueParameter() << "\n";
+				}
+
+				if (outFile.fail())
+				{
+					throw WriteException(getFileName());
+				}
+			}
+			outFile.close();
+		}
 	}
 }

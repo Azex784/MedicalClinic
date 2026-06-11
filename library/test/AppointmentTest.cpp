@@ -11,6 +11,7 @@
 #include "rooms/ConsultationRoom.h"
 #include "sstream"
 
+using namespace RehabClinic;
 
 struct TestSuiteAppointmentFixture
 {

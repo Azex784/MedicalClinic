@@ -9,166 +9,170 @@
 #include <fstream>
 #include <sstream>
 
-using namespace std;
-
-RoomRepository::RoomRepository(const std::string& fileName)
-	: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned>(fileName)
+namespace RehabClinic
 {
-}
 
-RoomRepository::RoomRepository()
-	: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned>(
-		"../../program/data/RoomRepository.txt")
-{
-}
+	using namespace std;
 
-void RoomRepository::loadData()
-{
-	ifstream inFile;
-	inFile.open(getFileName());
-	string line;
-
-	if (!inFile.is_open())
+	RoomRepository::RoomRepository(const std::string& fileName)
+		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const
+		                     unsigned>(fileName)
 	{
-		throw OpeningException(getFileName());
 	}
-	//Zapobiega to podwojnemu zliczeniu elementów
-	clearVectorOfData();
-	while (getline(inFile, line))
+
+	RoomRepository::RoomRepository()
+		: RepositoryTemplate<std::shared_ptr<Room>, std::function<bool(std::shared_ptr<Room>)>, const unsigned>(
+			"../../program/data/RoomRepository.txt")
 	{
-		if (line.empty()) continue;
+	}
 
-		//Ladujemy do strumienia
-		stringstream ss(line);
+	void RoomRepository::loadData()
+	{
+		ifstream inFile;
+		inFile.open(getFileName());
+		string line;
 
-		string tmp;
-		bool isActive, isArchive;
-
-		getline(ss, tmp, ';');
-		unsigned int roomNumber;
-
-		RoomPtr room;
-		//Wczytujemy dane dla pokoju rehabilitacyjnego
-		if (tmp == "R")
+		if (!inFile.is_open())
 		{
-			unsigned int maxCapacity;
-			vector<Equipment> equipment;
+			throw OpeningException(getFileName());
+		}
+		//Zapobiega to podwojnemu zliczeniu elementów
+		clearVectorOfData();
+		while (getline(inFile, line))
+		{
+			if (line.empty()) continue;
+
+			//Ladujemy do strumienia
+			stringstream ss(line);
+
+			string tmp;
+			bool isActive, isArchive;
 
 			getline(ss, tmp, ';');
-			roomNumber = stoi(tmp);
+			unsigned int roomNumber;
 
-			getline(ss, tmp, ';');
-			isActive = stoi(tmp);
-
-			getline(ss, tmp, ';');
-			isArchive = stoi(tmp);
-
-			getline(ss, tmp, ';');
-			stringstream equipmentStream(tmp);
-
-			while (getline(equipmentStream, tmp, ','))
+			RoomPtr room;
+			//Wczytujemy dane dla pokoju rehabilitacyjnego
+			if (tmp == "R")
 			{
-				int enumValue = stoi(tmp);
-				Equipment spec = static_cast<Equipment>(enumValue);
-				equipment.push_back(spec);
-			}
+				unsigned int maxCapacity;
+				vector<Equipment> equipment;
 
-			getline(ss, tmp, '\n');
-			maxCapacity = stoi(tmp);
+				getline(ss, tmp, ';');
+				roomNumber = stoi(tmp);
 
-			room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
-			//Wczytujemy dane dla pokoju konsultacyjnego
-		}
-		else if (tmp == "C")
-		{
-			getline(ss, tmp, ';');
-			roomNumber = stoi(tmp);
+				getline(ss, tmp, ';');
+				isActive = stoi(tmp);
 
-			getline(ss, tmp, ';');
-			isActive = stoi(tmp);
+				getline(ss, tmp, ';');
+				isArchive = stoi(tmp);
 
-			getline(ss, tmp, '\n');
-			isArchive = stoi(tmp);
-			room = make_shared<ConsultationRoom>(roomNumber);
-		}
-		else
-		{
-			throw UnexpectedCharacterException("Room");
-		}
+				getline(ss, tmp, ';');
+				stringstream equipmentStream(tmp);
 
-		room->setIsArchive(isArchive);
-		room->setIsActive(isActive);
-		add(room);
-
-		if (inFile.fail())
-		{
-			throw WriteException(getFileName());
-		}
-
-	}
-	inFile.close();
-}
-
-void RoomRepository::saveData() const
-{
-	ofstream outFile;
-
-	outFile.open(getFileName(), std::ios::trunc);
-
-	if (!outFile.is_open())
-	{
-		throw OpeningException(getFileName());
-	}
-
-	if (getVectorOfData().empty())
-	{
-		outFile << "";
-	}
-	else
-	{
-		for (const RoomPtr& room : getVectorOfData())
-		{
-			RehabillitationRoomPtr rehabilitationRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
-
-			if (rehabilitationRoom != nullptr)
-			{
-				//Pokoj rehabilitacyjny
-				outFile << "R" << ";";
-
-				outFile << rehabilitationRoom->getUniqueParameter() << ";";
-				outFile << rehabilitationRoom->getIsActive() << ";";
-				outFile << rehabilitationRoom->getIsArchive() << ";";
-
-				auto eqp = rehabilitationRoom->getAccessibleEqupiment();
-
-				if (eqp.empty())
+				while (getline(equipmentStream, tmp, ','))
 				{
-					throw EmptyRecordException("Equipment");
+					int enumValue = stoi(tmp);
+					Equipment spec = static_cast<Equipment>(enumValue);
+					equipment.push_back(spec);
 				}
-				int i;
-				//Zapisujemy enuma za pomocą inta
-				for (i = 0; eqp.size() - 1 > i; i++)
-				{
-					outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ",";
-				}
-				outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ";";
-				outFile << rehabilitationRoom->getMaxCapacity() << "\n";
+
+				getline(ss, tmp, '\n');
+				maxCapacity = stoi(tmp);
+
+				room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
+				//Wczytujemy dane dla pokoju konsultacyjnego
 			}
-			else if (rehabilitationRoom == nullptr)
+			else if (tmp == "C")
 			{
-				//Pokoj konsultacyjny
-				outFile << "C" << ";";
+				getline(ss, tmp, ';');
+				roomNumber = stoi(tmp);
 
-				outFile << room->getUniqueParameter() << ";";
-				outFile << room->getIsActive() << ";";
-				outFile << room->getIsArchive() << '\n';
+				getline(ss, tmp, ';');
+				isActive = stoi(tmp);
+
+				getline(ss, tmp, '\n');
+				isArchive = stoi(tmp);
+				room = make_shared<ConsultationRoom>(roomNumber);
+			}
+			else
+			{
+				throw UnexpectedCharacterException("Room");
 			}
 
-			if (outFile.fail())
+			room->setIsArchive(isArchive);
+			room->setIsActive(isActive);
+			add(room);
+
+			if (inFile.fail())
 			{
 				throw WriteException(getFileName());
 			}
 		}
-		outFile.close();
+		inFile.close();
+	}
+
+	void RoomRepository::saveData() const
+	{
+		ofstream outFile;
+
+		outFile.open(getFileName(), std::ios::trunc);
+
+		if (!outFile.is_open())
+		{
+			throw OpeningException(getFileName());
+		}
+
+		if (getVectorOfData().empty())
+		{
+			outFile << "";
+		}
+		else
+		{
+			for (const RoomPtr& room : getVectorOfData())
+			{
+				RehabillitationRoomPtr rehabilitationRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
+
+				if (rehabilitationRoom != nullptr)
+				{
+					//Pokoj rehabilitacyjny
+					outFile << "R" << ";";
+
+					outFile << rehabilitationRoom->getUniqueParameter() << ";";
+					outFile << rehabilitationRoom->getIsActive() << ";";
+					outFile << rehabilitationRoom->getIsArchive() << ";";
+
+					auto eqp = rehabilitationRoom->getAccessibleEqupiment();
+
+					if (eqp.empty())
+					{
+						throw EmptyRecordException("Equipment");
+					}
+					int i;
+					//Zapisujemy enuma za pomocą inta
+					for (i = 0; eqp.size() - 1 > i; i++)
+					{
+						outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ",";
+					}
+					outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ";";
+					outFile << rehabilitationRoom->getMaxCapacity() << "\n";
+				}
+				else if (rehabilitationRoom == nullptr)
+				{
+					//Pokoj konsultacyjny
+					outFile << "C" << ";";
+
+					outFile << room->getUniqueParameter() << ";";
+					outFile << room->getIsActive() << ";";
+					outFile << room->getIsArchive() << '\n';
+				}
+
+				if (outFile.fail())
+				{
+					throw WriteException(getFileName());
+				}
+			}
+			outFile.close();
+		}
 	}
 }

@@ -6,73 +6,76 @@
 
 #include "Exceptions.h"
 
-
-using namespace std;
-
-ServiceManager::ServiceManager(const std::string& fileName) : ManagerTemplate<
-	std::shared_ptr<Service>, ServiceRepository, std::function<bool(std::shared_ptr<Service>)>,
-	const unsigned>(fileName)
+namespace RehabClinic
 {
-}
 
-void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
-                                     const std::string& serviceName, const unsigned int& serviceId,
-                                     Specialisation requiredSpecialisation,
-                                     const std::string& topic, const unsigned int& requiredDocSize, bool isOnline)
-{
-	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
-	if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
-		topic.find_first_not_of(ALLOWEDCHARS) != string::npos)
+	using namespace std;
+
+	ServiceManager::ServiceManager(const std::string& fileName) : ManagerTemplate<
+		std::shared_ptr<Service>, ServiceRepository, std::function<bool(std::shared_ptr<Service>)>,
+		const unsigned>(fileName)
 	{
-		throw LogicException("Wprowadzono nieprawidłowy znak.");
 	}
 
-	if (serviceName.length() > 20)
+	void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
+	                                     const std::string& serviceName, const unsigned int& serviceId,
+	                                     Specialisation requiredSpecialisation,
+	                                     const std::string& topic, const unsigned int& requiredDocSize, bool isOnline)
 	{
-		throw length_error("Nazwa usługi przekracza limit 20 znaków.");
+		//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+		if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos ||
+			topic.find_first_not_of(ALLOWEDCHARS) != string::npos)
+		{
+			throw LogicException("Wprowadzono nieprawidłowy znak.");
+		}
+
+		if (serviceName.length() > 20)
+		{
+			throw length_error("Nazwa usługi przekracza limit 20 znaków.");
+		}
+
+		if (topic.length() > 40)
+		{
+			throw length_error("Temat konsultacji przekracza limit 20 znaków.");
+		}
+		if (getRepository()->get(serviceId) == nullptr)
+		{
+			ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
+			                                               requiredDocSize, requiredSpecialisation, topic, isOnline);
+			getRepository()->add(service);
+			return;
+		}
+		throw ExistException("Konsultacja", to_string(serviceId));
 	}
 
-	if (topic.length() > 40)
+	void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
+	                                       const std::string& serviceName, const unsigned int& serviceId,
+	                                       std::vector<Equipment> requiredEquipment,
+	                                       Specialisation requiredSpecialisation, const unsigned int& requiredDocSize,
+	                                       const unsigned int& requiredNurseSize)
 	{
-		throw length_error("Temat konsultacji przekracza limit 20 znaków.");
-	}
-	if (getRepository()->get(serviceId) == nullptr)
-	{
-		ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,
-		                                               requiredDocSize, requiredSpecialisation, topic, isOnline);
-		getRepository()->add(service);
-		return;
-	}
-	throw ExistException("Konsultacja", to_string(serviceId));
-}
+		//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
+		if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos)
+		{
+			throw LogicException("Wprowadzono nieprawidłowy znak.");
+		}
 
-void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
-                                       const std::string& serviceName, const unsigned int& serviceId,
-                                       std::vector<Equipment> requiredEquipment,
-                                       Specialisation requiredSpecialisation, const unsigned int& requiredDocSize,
-                                       const unsigned int& requiredNurseSize)
-{
-	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
-	if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos)
-	{
-		throw LogicException("Wprowadzono nieprawidłowy znak.");
-	}
+		if (serviceName.length() > 20)
+		{
+			throw length_error("Nazwa usługi przekracza limit 20 znaków.");
+		}
 
-	if (serviceName.length() > 20)
-	{
-		throw length_error("Nazwa usługi przekracza limit 20 znaków.");
-	}
+		if (requiredEquipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
 
-	if (requiredEquipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
-
-	if (getRepository()->get(serviceId) == nullptr)
-	{
-		ServicePtr service = make_shared<Rehabillitation>(serviceCost, serviceDuration, serviceName, serviceId,
-		                                                  requiredDocSize
-		                                                  , requiredSpecialisation, requiredEquipment,
-		                                                  requiredNurseSize);
-		getRepository()->add(service);
-		return;
+		if (getRepository()->get(serviceId) == nullptr)
+		{
+			ServicePtr service = make_shared<Rehabillitation>(serviceCost, serviceDuration, serviceName, serviceId,
+			                                                  requiredDocSize
+			                                                  , requiredSpecialisation, requiredEquipment,
+			                                                  requiredNurseSize);
+			getRepository()->add(service);
+			return;
+		}
+		throw ExistException("Rehabilitacja", to_string(serviceId));
 	}
-	throw ExistException("Rehabilitacja", to_string(serviceId));
 }

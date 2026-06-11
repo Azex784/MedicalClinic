@@ -2,6 +2,8 @@
 #include <enums/Specialisation.h>
 #include "services/Consultation.h"
 
+using namespace RehabClinic;
+
 struct TestSuiteConsultationFixture
 {
     Consultation testConsultation;

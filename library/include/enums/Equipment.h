@@ -2,17 +2,21 @@
 #define REHABILITATIONCENTRE_EQUIPMENT_H
 
 #include <string>
-/**
+
+namespace RehabClinic
+{/**
  * Typ wyliczeniowy zawierajcy sprzet
  */
-enum class Equipment {
-    NONE,
-    PHYSICAL_THERAPY_DEVICE,
-    KINESITHERAPY_SPACE,
-    ROBOTIC_SYSTEM
-};
+    enum class Equipment
+    {
+        NONE,
+        PHYSICAL_THERAPY_DEVICE,
+        KINESITHERAPY_SPACE,
+        ROBOTIC_SYSTEM
+    };
 
-//Konwersja do stringa
-const std::string equipmentToString(Equipment eq);
+    //Konwersja do stringa
+    const std::string equipmentToString(Equipment eq);
+}
 
 #endif //REHABILITATIONCENTRE_EQUIPMENT_H

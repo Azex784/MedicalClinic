@@ -1,6 +1,8 @@
 #include <boost/test/unit_test.hpp>
 #include "Personnel/Personnel.h"
 
+using namespace RehabClinic;
+
 //tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
 struct TmpPersonnel : public Personnel
 {
@@ -8,7 +10,7 @@ struct TmpPersonnel : public Personnel
 		: Personnel(name, lastName, id) {}
 
 	bool canConductTreatment(Specialisation) const override {
-		return true; 
+		return true;
 	}
 };
 

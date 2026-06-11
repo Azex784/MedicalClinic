@@ -2,28 +2,32 @@
 #include "Exceptions.h"
 #include "patient/Address.h"
 
-const AddressPtr& Patient::getAddress() const
+namespace RehabClinic
 {
-    if (address == nullptr)
+
+    const AddressPtr& Patient::getAddress() const
     {
-        throw NullPointerException("archiveRepository");
+        if (address == nullptr)
+        {
+            throw NullPointerException("archiveRepository");
+        }
+        return address;
     }
-    return address;
-}
 
-Patient::Patient(const std::string& name, const std::string& lastName, const std::string& personalNumber,
-                 const AddressPtr& address) : Person(name, lastName),
-                                              personalNumber(personalNumber),
-                                              address(address)
-{
-}
+    Patient::Patient(const std::string& name, const std::string& lastName, const std::string& personalNumber,
+                     const AddressPtr& address) : Person(name, lastName),
+                                                  personalNumber(personalNumber),
+                                                  address(address)
+    {
+    }
 
-const std::string& Patient::getUniqueParameter() const
-{
-    return personalNumber;
-}
+    const std::string& Patient::getUniqueParameter() const
+    {
+        return personalNumber;
+    }
 
-const std::string Patient::getInfo() const
-{
-    return Person::getInfo() + " pacjent o peselu: " + personalNumber +  ", adresie: " + getAddress()->getInfo();
+    const std::string Patient::getInfo() const
+    {
+        return Person::getInfo() + " pacjent o peselu: " + personalNumber + ", adresie: " + getAddress()->getInfo();
+    }
 }

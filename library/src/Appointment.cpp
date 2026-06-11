@@ -8,134 +8,138 @@
 #include "patient/Patient.h"
 #include "sstream"
 
-using namespace std;
-
-void Appointment::setAppointmentEndDate()
+namespace RehabClinic
 {
-	appointmentEndDate = getAppointmentBeginDate() +
-		boost::posix_time::minutes(service->getServiceDuration());
-}
 
-const int unsigned Appointment::setAppointmentCost()
-{
-	boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
-	// zmiana może nastapić gdy koszt nie był zmieniany i jest już po dacie zakończenia wizyty
-	if (getAppointmentCost() == 0 && teraz >= getAppointmentEndDate())
+	using namespace std;
+
+	void Appointment::setAppointmentEndDate()
 	{
+		appointmentEndDate = getAppointmentBeginDate() +
+			boost::posix_time::minutes(service->getServiceDuration());
+	}
+
+	const int unsigned Appointment::setAppointmentCost()
+	{
+		boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
+		// zmiana może nastapić gdy koszt nie był zmieniany i jest już po dacie zakończenia wizyty
+		if (getAppointmentCost() == 0 && teraz >= getAppointmentEndDate())
+		{
+			for (int i = 0; i < getPersonnel().size(); i++)
+			{
+				shared_ptr<Doctor> person = dynamic_pointer_cast<Doctor>(getPersonnel()[i]);
+				if (person != nullptr)
+				{
+					appointmentCost += person->getDoctorCost();
+				}
+			}
+
+			appointmentCost += getService()->getServiceCost();
+			return getAppointmentCost();
+		}
+		return 0;
+	}
+
+	Appointment::Appointment(const boost::posix_time::ptime& appointmentBeginDate, const unsigned int appointmentId,
+	                         const std::vector<PersonnelPtr>& personnel, const PatientPtr& patient,
+	                         const ServicePtr& service,
+	                         const RoomPtr& room) : appointmentBeginDate(appointmentBeginDate),
+	                                                appointmentId(appointmentId),
+	                                                personnel(personnel),
+	                                                patient(patient),
+	                                                service(service),
+	                                                room(room)
+	{
+		appointmentCost = 0;
+		// od razu ustalamy date zakonczenia
+		setAppointmentEndDate();
+	}
+
+
+	const boost::posix_time::ptime& Appointment::getAppointmentBeginDate() const
+	{
+		return appointmentBeginDate;
+	}
+
+	const boost::posix_time::ptime& Appointment::getAppointmentEndDate() const
+	{
+		return appointmentEndDate;
+	}
+
+	unsigned int Appointment::getUniqueParameter() const
+	{
+		return appointmentId;
+	}
+
+	unsigned int Appointment::getAppointmentCost() const
+	{
+		return appointmentCost;
+	}
+
+	const std::vector<PersonnelPtr>& Appointment::getPersonnel() const
+	{
+		return personnel;
+	}
+
+	const PatientPtr& Appointment::getPatient() const
+	{
+		if (patient == nullptr)
+		{
+			throw NullPointerException("patient");
+		}
+		return patient;
+	}
+
+	const ServicePtr& Appointment::getService() const
+	{
+		if (service == nullptr)
+		{
+			throw NullPointerException("service");
+		}
+		return service;
+	}
+
+	const RoomPtr& Appointment::getRoom() const
+	{
+		if (room == nullptr)
+		{
+			throw NullPointerException("room");
+		}
+		return room;
+	}
+
+	void Appointment::setAppointmentBeginDate(const boost::posix_time::ptime& appointmentBeginDate)
+	{
+		this->appointmentBeginDate = appointmentBeginDate;
+
+		setAppointmentEndDate();
+	}
+
+	const std::string Appointment::getInfo() const
+	{
+		stringstream ss;
+
+		ss << "Wizyta: ID: " << getUniqueParameter() << endl;
+		ss << "Rozpoczęcie: " << getAppointmentBeginDate() << endl;
+		ss << "Zakończenie: " << getAppointmentEndDate() << endl;
+
+		// Wyciąganie informacji z obiektów
+		ss << "Pacjent:\n";
+		ss << getPatient()->getInfo() << endl;
+
+		ss << "Usluga:\n";
+		ss << getService()->getInfo() << endl;
+
+		ss << "Sala:\n";
+		ss << getRoom()->getInfo() << endl;
+
+		ss << "Personel przypisany do wizyty:\n";
+
 		for (int i = 0; i < getPersonnel().size(); i++)
 		{
-			shared_ptr<Doctor> person = dynamic_pointer_cast<Doctor>(getPersonnel()[i]);
-			if (person != nullptr)
-			{
-				appointmentCost += person->getDoctorCost();
-			}
+			ss << " * " << getPersonnel()[i]->getInfo() << endl;
 		}
 
-		appointmentCost += getService()->getServiceCost();
-		return getAppointmentCost();
-	}
-	return 0;
+		return ss.str();
+	};
 }
-
-Appointment::Appointment(const boost::posix_time::ptime& appointmentBeginDate, const unsigned int appointmentId,
-                         const std::vector<PersonnelPtr>& personnel, const PatientPtr& patient,
-                         const ServicePtr& service,
-                         const RoomPtr& room) : appointmentBeginDate(appointmentBeginDate),
-                                                appointmentId(appointmentId),
-                                                personnel(personnel),
-                                                patient(patient),
-                                                service(service),
-                                                room(room)
-{
-	appointmentCost = 0;
-	// od razu ustalamy date zakonczenia
-	setAppointmentEndDate();
-}
-
-
-const boost::posix_time::ptime& Appointment::getAppointmentBeginDate() const
-{
-	return appointmentBeginDate;
-}
-
-const boost::posix_time::ptime& Appointment::getAppointmentEndDate() const
-{
-	return appointmentEndDate;
-}
-
-unsigned int Appointment::getUniqueParameter() const
-{
-	return appointmentId;
-}
-
-unsigned int Appointment::getAppointmentCost() const
-{
-	return appointmentCost;
-}
-
-const std::vector<PersonnelPtr>& Appointment::getPersonnel() const
-{
-	return personnel;
-}
-
-const PatientPtr& Appointment::getPatient() const
-{
-	if (patient == nullptr)
-	{
-		throw NullPointerException("patient");
-	}
-	return patient;
-}
-
-const ServicePtr& Appointment::getService() const
-{
-	if (service == nullptr)
-	{
-		throw NullPointerException("service");
-	}
-	return service;
-}
-
-const RoomPtr& Appointment::getRoom() const
-{
-	if (room == nullptr)
-	{
-		throw NullPointerException("room");
-	}
-	return room;
-}
-
-void Appointment::setAppointmentBeginDate(const boost::posix_time::ptime& appointmentBeginDate)
-{
-	this->appointmentBeginDate = appointmentBeginDate;
-
-	setAppointmentEndDate();
-}
-
-const std::string Appointment::getInfo() const
-{
-	stringstream ss;
-
-	ss << "Wizyta: ID: " << getUniqueParameter() << endl;
-	ss << "Rozpoczęcie: " << getAppointmentBeginDate() << endl;
-	ss << "Zakończenie: " << getAppointmentEndDate() << endl;
-
-	// Wyciąganie informacji z obiektów
-	ss << "Pacjent:\n";
-	ss << getPatient()->getInfo() << endl;
-
-	ss << "Usluga:\n";
-	ss << getService()->getInfo() << endl;
-
-	ss << "Sala:\n";
-	ss << getRoom()->getInfo() << endl;
-
-	ss << "Personel przypisany do wizyty:\n";
-
-	for (int i = 0; i < getPersonnel().size(); i++)
-	{
-		ss << " * " << getPersonnel()[i]->getInfo() << endl;
-	}
-
-	return ss.str();
-};

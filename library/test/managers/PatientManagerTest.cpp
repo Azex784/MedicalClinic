@@ -3,12 +3,12 @@
 
 #include "patient/Patient.h"
 #include "patient/Address.h"
-#include "managers/PatientManager.h"
 
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
 #include "Exceptions.h"
 
+using namespace RehabClinic;
 
 struct TestSuitPatientTemplateFixture
 {

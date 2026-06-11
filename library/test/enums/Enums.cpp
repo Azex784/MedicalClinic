@@ -2,6 +2,8 @@
 #include "enums/Specialisation.h"
 #include "enums/Equipment.h"
 
+using namespace RehabClinic;
+
 BOOST_AUTO_TEST_SUITE(EnumsTests)
 
 //testy funkcji enuma

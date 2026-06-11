@@ -3,6 +3,9 @@
 #include "rooms/RehabillitationRoom.h"
 #include "enums/Equipment.h"
 
+using namespace RehabClinic;
+
+
 struct TestSuiteRehabillitationRoomFixture
 {
     std::vector<Equipment> testEquipment;

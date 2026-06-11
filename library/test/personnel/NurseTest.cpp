@@ -2,6 +2,9 @@
 #include "personnel/Nurse.h"
 #include "enums/Specialisation.h"
 
+using namespace RehabClinic;
+
+
 struct TestSuiteNurseFixture
 {
     std::vector<Specialisation> testSpecs;

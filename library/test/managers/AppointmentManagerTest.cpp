@@ -23,6 +23,7 @@
 #include "../../include/Exceptions.h"
 
 using namespace boost::posix_time;
+using namespace RehabClinic;
 
 struct TestSuitAppointmentManagerFixture
 {
@@ -160,7 +161,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 
 	BOOST_AUTO_TEST_CASE(GetAppointmensText)
 	{
-		// Sprawdzamy ilość spotkań czy jest odpowiednia
+		// Sprawdzamy czy ilość spotkań jest odpowiednia
 		BOOST_TEST(appointmentManager->getPatientAppointments(testPatient).size() == 2);
 		BOOST_TEST(appointmentManager->getPersonnelAppointments(testPersonnel1).size() == 1);
 		BOOST_TEST(appointmentManager->getPersonnelAppointments(testPersonnel2).size() == 1);

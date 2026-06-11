@@ -4,64 +4,68 @@
 #include "personnel/Personnel.h"
 #include <vector>
 
-enum class Specialisation;
-
-class Doctor : public Personnel
+namespace RehabClinic
 {
-private:
-    std::vector<Specialisation> specialisation;
-    unsigned int doctorCost;
 
-public:
-    /**
-     * Konstruktor tworzący nowy obiekt lekarza.
-     * @param name Imię lekarza.
-     * @param lastName Nazwisko lekarza.
-     * @param personnelId Unikalny identyfikator przypisany do pracownika.
-     * @param specialisation Wektor przechowujący listę specjalności lekarza.
-     * @param doctorCost Koszt prestiżu lekarza.
-     */
-    Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
-           const std::vector<Specialisation>& specialisation, const unsigned int doctorCost);
+	enum class Specialisation;
 
-    /**
-     * Domyślny destruktor klasy.
-     */
-    ~Doctor() = default;
+	class Doctor : public Personnel
+	{
+	private:
+		std::vector<Specialisation> specialisation;
+		unsigned int doctorCost;
 
-    /**
-    * Ustawia koszt prestiżu lekarza.
-    * @param doctor_cost Nowy koszt.
-    */
-    void setDoctorCost(const unsigned int doctorCost);
+	public:
+		/**
+	     * Konstruktor tworzący nowy obiekt lekarza.
+	     * @param name Imię lekarza.
+	     * @param lastName Nazwisko lekarza.
+	     * @param personnelId Unikalny identyfikator przypisany do pracownika.
+	     * @param specialisation Wektor przechowujący listę specjalności lekarza.
+	     * @param doctorCost Koszt prestiżu lekarza.
+	     */
+		Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
+		       const std::vector<Specialisation>& specialisation, const unsigned int doctorCost);
 
-    /**
-     * Pobiera listę specjalizacji posiadanych przez lekarza.
-     * @return Stała referencja do wektora przechowującego specjalizacje.
-     */
-    const std::vector<Specialisation>& getSpecialisation() const;
+		/**
+	     * Domyślny destruktor klasy.
+	     */
+		~Doctor() = default;
 
-    /**
-     * Pobiera aktualny koszt usługi przypisany do lekarza.
-     * @return Koszt przypisany do lekarza jako unsigned int.
-     */
-    unsigned int getDoctorCost() const;
+		/**
+	    * Ustawia koszt prestiżu lekarza.
+	    * @param doctor_cost Nowy koszt.
+	    */
+		void setDoctorCost(const unsigned int doctorCost);
 
-    /**
-     * Sprawdza, czy lekarz posiada odpowiednią specjalizację do przeprowadzenia danego zabiegu.
-     * Nadpisuje metodę wirtualną z klasy bazowej.
-     * @param specjalizacja Wymagana specjalizacja do weryfikacji.
-     * @return Wartość true, jeśli lekarz może przeprowadzic zabieg, w przeciwnym razie false.
-     */
-    bool canConductTreatment(Specialisation specjalizacja) const override;
+		/**
+	     * Pobiera listę specjalizacji posiadanych przez lekarza.
+	     * @return Stała referencja do wektora przechowującego specjalizacje.
+	     */
+		const std::vector<Specialisation>& getSpecialisation() const;
 
-    /**
-     * Metoda zwracająca pełne informacje o lekarzu.
-     * Nadpisuje metodę wirtualną z klasy bazowej.
-     * @return Sformatowany łańcuch znaków zawierający dane osobowe lekarza, jego koszt oraz specjalizacje.
-     */
-    const std::string getInfo() const override;
-};
+		/**
+	     * Pobiera aktualny koszt usługi przypisany do lekarza.
+	     * @return Koszt przypisany do lekarza jako unsigned int.
+	     */
+		unsigned int getDoctorCost() const;
+
+		/**
+	     * Sprawdza, czy lekarz posiada odpowiednią specjalizację do przeprowadzenia danego zabiegu.
+	     * Nadpisuje metodę wirtualną z klasy bazowej.
+	     * @param specjalizacja Wymagana specjalizacja do weryfikacji.
+	     * @return Wartość true, jeśli lekarz może przeprowadzic zabieg, w przeciwnym razie false.
+	     */
+		bool canConductTreatment(Specialisation specjalizacja) const override;
+
+		/**
+	     * Metoda zwracająca pełne informacje o lekarzu.
+	     * Nadpisuje metodę wirtualną z klasy bazowej.
+	     * @return Sformatowany łańcuch znaków zawierający dane osobowe lekarza, jego koszt oraz specjalizacje.
+	     */
+		const std::string getInfo() const override;
+	};
+}
 
 
 #endif //REHABILITATIONCENTRE_DOCTOR_H

@@ -20,6 +20,7 @@
 #include "Exceptions.h"
 
 using namespace boost::posix_time;
+using namespace RehabClinic;
 
 struct TestSuitLogicManagerFixture
 {
@@ -44,8 +45,7 @@ struct TestSuitLogicManagerFixture
 	ServicePtr cons1;
 	ServicePtr rehab1;
 
-	//Spotkanie
-
+	//Spotkania
 	AppointmentPtr testAppointment;
 	AppointmentPtr testAppointment1;
 	AppointmentPtr testAppointment2;

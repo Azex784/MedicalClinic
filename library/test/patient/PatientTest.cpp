@@ -3,6 +3,9 @@
 #include "patient/Patient.h"
 #include "patient/Address.h"
 
+using namespace RehabClinic;
+
+
 struct TestSuitePatientFixture
 {
 	std::shared_ptr<Address> testAddress;

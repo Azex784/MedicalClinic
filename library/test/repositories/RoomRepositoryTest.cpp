@@ -10,6 +10,8 @@
 #include <vector>
 
 using namespace std;
+using namespace RehabClinic;
+
 
 struct TestSuiteRoomRepositoryFixture
 {

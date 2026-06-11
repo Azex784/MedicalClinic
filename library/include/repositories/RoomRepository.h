@@ -4,45 +4,43 @@
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-/**
- * Klasa przechwująca dane o pokojach
- */
-class RoomRepository : public RepositoryTemplate<RoomPtr,RoomPredicate, const unsigned int>
+namespace RehabClinic
 {
-public:
-
-
-private:
-	//Sciezka rozpoczyna sie od cmake-build-debug/library
-	//const std::string fileName = "../../program/data/RoomRepository.txt";
-
-public:
 	/**
-	 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
-	 * @param file_name
+	 * Klasa przechwująca dane o pokojach
 	 */
-	RoomRepository(const std::string& fileName);
+	class RoomRepository : public RepositoryTemplate<RoomPtr, RoomPredicate, const unsigned int>
+	{
+		//Sciezka rozpoczyna sie od cmake-build-debug/library
+		//const std::string fileName = "../../program/data/RoomRepository.txt";
 
-	/**
-	 * Domyślny konstrukotr, domyślna ścieżka: "../../program/data/RoomRepository.txt"
-	 */
-	RoomRepository();
+	public:
+		/**
+		 * Konstruktor do testów, by nie zapisywać danych tetowych w pliku programu
+		 * @param file_name
+		 */
+		RoomRepository(const std::string& fileName);
 
-	/**
-	 * Destrukotr
-	 */
-	~RoomRepository() = default;
+		/**
+		 * Domyślny konstrukotr, domyślna ścieżka: "../../program/data/RoomRepository.txt"
+		 */
+		RoomRepository();
 
-	/**
-	* Wczytuje dane z pliku tekstowego na dysku do pamięci operacyjnej RAM.
-	*/
-	void loadData() override;
+		/**
+		 * Destrukotr
+		 */
+		~RoomRepository() = default;
 
-	/**
-	 * Zapisuje aktualny stan kolekcji z pamięci ulotnej do trwalej pamieci fizycznej.
-	 */
-	void saveData() const override;
-};
+		/**
+		* Wczytuje dane z pliku tekstowego na dysku do pamięci operacyjnej RAM.
+		*/
+		void loadData() override;
 
+		/**
+		 * Zapisuje aktualny stan kolekcji z pamięci ulotnej do trwalej pamieci fizycznej.
+		 */
+		void saveData() const override;
+	};
+}
 
 #endif //REHABILITATIONCENTRE_RoomREPOSITORY_H

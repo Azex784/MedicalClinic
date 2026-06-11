@@ -1,6 +1,9 @@
 #include <boost/test/unit_test.hpp>
 #include "Person.h"
 
+using namespace RehabClinic;
+
+
 struct TestSuitePersonFixture
 {
 	Person testPerson;
@@ -12,7 +15,6 @@ struct TestSuitePersonFixture
 	{
 	}
 };
-
 BOOST_FIXTURE_TEST_SUITE(TestSuitePerson, TestSuitePersonFixture)
 
 BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)

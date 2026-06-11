@@ -4,8 +4,10 @@
 #include <memory>
 #include <functional>
 
-
-const std::string ALLOWEDCHARS = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/.ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
+namespace RehabClinic
+{
+const std::string ALLOWEDCHARS =
+" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/.ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
 
 class Person;
 typedef std::shared_ptr<Person> PersonPtr;
@@ -88,5 +90,6 @@ typedef std::shared_ptr<PersonnelManager> PersonnelManagerPtr;
 
 class ServiceManager;
 typedef std::shared_ptr<ServiceManager> ServiceManagerPtr;
+}
 
 #endif //REHABILITATIONCENTRE_TYPEDEFS_H
