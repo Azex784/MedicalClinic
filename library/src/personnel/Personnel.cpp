@@ -30,11 +30,11 @@ const std::string Personnel::getInfo() const
 	string tmp;
 	if (getIsActive())
 	{
-		tmp = "aktywyny zawodowo";
+		tmp = ", aktywyny zawodowo";
 	}else
 	{
-		tmp = "niedostępny";
+		tmp = ", niedostępny";
 	}
 
-	return Person::getInfo() + " pracownik personelu, " + tmp;
+	return Person::getInfo() + " pracownik personelu o numerze pracownika: " + to_string(personnelId) + tmp;
 }

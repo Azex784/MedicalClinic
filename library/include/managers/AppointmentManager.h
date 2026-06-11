@@ -128,11 +128,10 @@ public:
 	 * Metoda kończąca trwającą wizytę i podsumowująca jej stan.
 	 * Metoda ta może być użyta raz i sprawia, że wizyta staje się archiwalna,
 	 * zwraca koszt wizyty.
-	 * @param patient Wskaźnik na pacjenta uczestniczącego w wizycie.
-	 * @param beginTime Czas rozpoczęcia kończonej wizyty.
+	 * @param appointmentId Unikalny paramter.
 	 * @return Koszt zakończonej wizyty.
 	 */
-	unsigned int finishAppointment(const PatientPtr& patient, const boost::posix_time::ptime& beginTime);
+	unsigned int finishAppointment(unsigned int appointmentId);
 
 	/**
 	 * Metoda zmieniająca datę wybranej wizyty.

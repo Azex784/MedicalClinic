@@ -39,9 +39,14 @@ private:
 
 	bool specialisationLoad(Specialisation& spec) const;
 	template <typename type, typename ManagerPtr>
-	bool findByInt(const std::string &msg, ManagerPtr manage,type returnValue = nullptr) const;
+	bool findByInt(const std::string &msg, ManagerPtr manage) const;
+
+	template <typename type, typename ManagerPtr>
+	bool findByInt(const std::string& msg, ManagerPtr manager, type &returnValue) const;
 
 	bool isContinue() const;
+
+	bool checkDate(const std::string& dateInput, const std::string& timeInput, boost::posix_time::ptime& parsedTime) const;
 
 public:
 	TerminalMenu();

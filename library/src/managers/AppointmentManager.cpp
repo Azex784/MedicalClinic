@@ -280,28 +280,18 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 	return newAppointment;
 }
 
-unsigned int AppointmentManager::finishAppointment(const PatientPtr& patient,
-                                                   const boost::posix_time::ptime& beginTime)
+unsigned int AppointmentManager::finishAppointment(unsigned int appointmentId)
 {
 	boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
-	if (teraz < beginTime)
-		throw LogicException("Nie można przejść do podsumowania bez zakończenia spotkania.");
+	auto appointment = get(appointmentId);
 
-	AppointmentPredicate func = [beginTime,patient](const AppointmentPtr appointment) -> bool
-	{
-		if (appointment->getAppointmentBeginDate() == beginTime && appointment->getPatient()->getUniqueParameter() ==
-			patient->getUniqueParameter())
-		{
-			return true;
-		}
-		return false;
-	};
 
-	auto foundAppointments = findBy(func);
-	if (foundAppointments.empty())
+	if (appointment == nullptr)
 		throw LogicException("Nie znaleziono podanego spotkania.");
 
-	AppointmentPtr appointment = foundAppointments[0];
+	if (teraz < appointment->getAppointmentBeginDate())
+		throw LogicException("Nie można przejść do podsumowania bez zakończenia spotkania.");
+
 
 	if (getArchiveRepository()->get((unsigned int)appointment->getUniqueParameter()) != nullptr)
 	{

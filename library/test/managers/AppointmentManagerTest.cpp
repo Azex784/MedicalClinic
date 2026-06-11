@@ -220,8 +220,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 
 	BOOST_AUTO_TEST_CASE(FinishAppointmentTest)
 	{
-		//Czy dobrze zostanie obsłuzone brak da;nego wizyty?
-		BOOST_CHECK_THROW(appointmentManager->finishAppointment(testPatient,time_from_string("2024-02-15 11:30:00")),
+		//Czy dobrze zostanie obsłuzone brak danego wizyty?
+		BOOST_CHECK_THROW(appointmentManager->finishAppointment((unsigned)91399),
 		                  LogicException);
 
 		//Upewniamy sie ze nie ma juz spotkania o tym numerze
@@ -258,13 +258,13 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 				"2024-08-15 10:30:00"), testRoom1, 30) != nullptr);
 
 		//Czy zwracany jest prawidłowy koszt?
-		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-06-15 10:30:00")) == 100);
+		BOOST_TEST(appointmentManager->finishAppointment((unsigned int)100));
 		//Czy zostało dodane do repozytorium archive?
 		BOOST_TEST(
 			appointmentManager->getArchiveRepository()->get((unsigned int)100)->getAppointmentBeginDate() ==
 			time_from_string("2024-06-15 10:30:00"));
 
-		BOOST_TEST(appointmentManager->finishAppointment(testPatient,time_from_string("2024-08-15 10:30:00")) == 350);
+		BOOST_TEST(appointmentManager->finishAppointment((unsigned int)30) == 350);
 
 
 		//Czy zostało dodane do repozytorium archive?
@@ -280,7 +280,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 			appointmentManager->arrangeAppointment(testPatient, cons1, personnel1, now, testRoom1, 99) != nullptr);
 
 		//Czy niemożliwe jest zakończenie wizyty podczas trwania wizyty?
-		BOOST_CHECK_THROW(appointmentManager->finishAppointment(testPatient,now), LogicException);
+		BOOST_CHECK_THROW(appointmentManager->finishAppointment((unsigned int)99), LogicException);
 
 		//Czy nie został dodany nowy obiekt?
 		BOOST_TEST(appointmentManager->getArchiveRepository()->size() == 2);

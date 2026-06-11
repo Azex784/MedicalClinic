@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-    std::string expectedInfo = "Osoba: Elzbieta Kowalczyk pracownik personelu, aktywyny zawodowo pielegniarka";
+    std::string expectedInfo = "Osoba: Elzbieta Kowalczyk pracownik personelu o numerze pracownika: 12341, aktywyny zawodowo pielegniarka";
     BOOST_TEST(testNurse.getInfo() == expectedInfo);
 }
 

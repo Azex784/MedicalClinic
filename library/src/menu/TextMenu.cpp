@@ -1,5 +1,9 @@
 #include "menu/TextMenu.h"
+
+#include <Appointment.h>
 #include <iostream>
+#include <boost/date_time/posix_time/time_parsers.hpp>
+
 #include "services/Service.h"
 
 using namespace std;
@@ -251,33 +255,64 @@ bool TerminalMenu::jointLoadPersonnel(std::string& firstName, std::string& lastN
 
 
 template <typename type, typename ManagerPtr>
-bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type returnValue) const
+bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager) const
 {
 	string tmp2;
 	unsigned int uniqeParamter = 0;
 
-	cout << "Podaj identyfikator " + msg + ", która ma być wyświetlona: ";
+	cout << "Podaj identyfikator " + msg + ", która ma być wyświetlony: ";
 	getline(cin, tmp2);
 
 	if (!checkInt(tmp2, uniqeParamter)) return false;
 
-	if (returnValue != nullptr)
-	{
-		returnValue = manager->get(uniqeParamter);
-	}
-	auto& thing = manager->get(uniqeParamter);
+	auto thing = manager->get(uniqeParamter);
 	if (!displaySpecific<type>(thing, "identyfikator" + msg)) return false;
 
 	return true;
 }
 
 
+template <typename type, typename ManagerPtr>
+bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type &returnValue) const
+{
+	string tmp2;
+	unsigned int uniqeParamter = 0;
+
+	cout << "Podaj identyfikator " + msg + ", która ma być wyświetlony: ";
+	getline(cin, tmp2);
+
+	if (!checkInt(tmp2, uniqeParamter)) return false;
+
+	returnValue = manager->get(uniqeParamter);
+
+	if (!displaySpecific<type>(returnValue, "identyfikator" + msg)) return false;
+
+	return true;
+}
+
+bool TerminalMenu::checkDate(const string& dateInput, const string& timeInput,
+                             boost::posix_time::ptime& parsedTime) const
+{
+	try
+	{
+		string fullDateTime = dateInput + " " + timeInput + ":00";
+		parsedTime = boost::posix_time::time_from_string(fullDateTime);
+
+		return true;
+	}
+	catch (const exception& e)
+	{
+		cerr << "Niepoprawny format daty lub czasu." << endl;
+		return false;
+	}
+}
+
 TerminalMenu::TerminalMenu() :
 	logicManger(make_shared<LogicManager>())
 {
 }
 
-//Zrobione
+//Do optymalizacji
 void TerminalMenu::start() const
 {
 	cout << "Witaj w centrum rehabilitacji!" << endl;
@@ -325,7 +360,7 @@ void TerminalMenu::start() const
 	}
 }
 
-//Zrobione
+//Do optymalizacji
 void TerminalMenu::patient() const
 {
 	cout << "Wybrałeś obsługę pacjenta!" << endl;
@@ -437,7 +472,7 @@ void TerminalMenu::patient() const
 				cout << "Podaj PESEL pacjenta: ";
 				getline(cin, personalId);
 
-				auto& patient = logicManger->getPatientManager()->get(personalId);
+				auto patient = logicManger->getPatientManager()->get(personalId);
 				if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
 
 				break;
@@ -448,6 +483,7 @@ void TerminalMenu::patient() const
 	}
 }
 
+//Do optymalizacji
 void TerminalMenu::appointment() const
 {
 	cout << "Wybrałeś obsługę wizyty!" << endl;
@@ -461,10 +497,11 @@ void TerminalMenu::appointment() const
 		cout << "<1> - dodaj nową wizytę" << endl;
 		cout << "<2> - zmień termin wizyty" << endl;
 		cout << "<3> - anuluj wizytę" << endl;
-		cout << "<4> - wyświetl wszystkie wizyty konkretnego specjalisty" << endl;
-		cout << "<5> - wyświetl wszystkie wizyty konkretnej sali" << endl;
-		cout << "<6> - wyświetl wszystkie wizyty konkretnego pacjenta" << endl;
-		cout << "<7> - wyświetl wszystkie wizyty konkretnej usługi" << endl;
+		cout << "<4> - zakończ spotkanie" << endl;
+		cout << "<5> - wyświetl wszystkie wizyty konkretnego specjalisty" << endl;
+		cout << "<6> - wyświetl wszystkie wizyty konkretnej sali" << endl;
+		cout << "<7> - wyświetl wszystkie wizyty konkretnego pacjenta" << endl;
+		cout << "<8> - wyświetl wszystkie wizyty konkretnej usługi" << endl;
 
 		getline(cin, tmp);
 
@@ -478,66 +515,195 @@ void TerminalMenu::appointment() const
 			break;
 		case 1:
 			{
-				string personalId;
+				string personalId, date, hour;
 				unsigned int appointmentId;
+				boost::posix_time::ptime beginDate;
+				vector<PersonnelPtr> personnel;
 
-				cout << "Podaj odpowiednie unikalne wartości poszczeólnych atrybutów spotkania." << endl;
+				cout << "Podaj odpowiednie unikalne wartości poszczególnych atrybutów spotkania." << endl;
 
 				cout << "Podaj PESEL pacjenta: ";
 				getline(cin, personalId);
 
-				auto& patient = logicManger->getPatientManager()->get(personalId);
+				auto patient = logicManger->getPatientManager()->get(personalId);
 				if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
 
-
-				cout << "Podaj uniklane parametry personelu, który chesz przypisać do wizyty" << endl;
+				cout << "Podaj unikalne parametry personelu, który chesz przypisać do wizyty" << endl;
 
 				while (true)
 				{
-					PersonnelPtr searchedPersonnel = nullptr;
+					PersonnelPtr searchedPersonnel;
 					if (!findByInt<PersonnelPtr>("specjalisty", logicManger->getPersonnelManager(), searchedPersonnel))
 						continue;
+					if (contains<PersonnelPtr>(personnel, searchedPersonnel, "specjalisty"))
+					{
+						if (!isContinue()) break;
+						else continue;
+					}
+					personnel.push_back(searchedPersonnel);
 
 					if (!isContinue()) break;
 				}
 
-
-				RoomPtr searchedRoom = nullptr;
+				RoomPtr searchedRoom;
 				if (!findByInt<RoomPtr>("sali", logicManger->getRoomManager(), searchedRoom)) continue;
 
-				ServicePtr searchedService = nullptr;
+				ServicePtr searchedService;
 				if (!findByInt<ServicePtr>("usługi", logicManger->getServiceManager(), searchedService)) continue;
 
 				cout << "Podaj unikalny parametr spotkania" << endl;
 				getline(cin, tmp);
 				if (!checkInt(tmp, appointmentId)) continue;
 
+
+				cout << "Podaj date rozpoczęcia spotkania (format: YYYY-MM-DD)" << endl;
+				getline(cin, date);
+
+				cout << "Podaj godzinę rozpoczęcia spotkania (format: HH:MM)" << endl;
+				getline(cin, hour);
+
+				if (!checkDate(date, hour, beginDate)) continue;
+
+
+				try
+				{
+					logicManger->getAppointmentManager()->arrangeAppointment(
+						patient, searchedService, personnel, beginDate, searchedRoom, appointmentId);
+
+					cout << "Sukces! Dodano nową wizytę: " << logicManger->getAppointmentManager()->get(appointmentId)->getInfo() << endl;
+					break;
+				}
+				catch (LogicException& le)
+				{
+					cout << le.what() << endl;
+					continue;
+				}
+				catch (DateException& de)
+				{
+					cout << de.what() << endl;
+					continue;
+				}
+				catch (ActivityException& ae)
+				{
+					cout << ae.what() << endl;
+					continue;
+				}
+
 			}
 		case 2:
 			{
+				unsigned int appointmentId;
+				string date, time;
+				boost::posix_time::ptime beginDate;
+
+				cout << "Podaj unikalny parametr spotkania" << endl;
+				getline(cin, tmp);
+				if (!checkInt(tmp, appointmentId)) continue;
+
+				cout << "Podaj date rozpoczęcia spotkania (format - 'YYYY-MM-DD')" << endl;
+				getline(cin, date);
+
+				cout << "Podaj godzinę rozpoczęcia spotkania (format - 'HH:MM')" << endl;
+				getline(cin, time);
+
+				if (!checkDate(date, time, beginDate)) continue;
+
+				try
+				{
+					logicManger->getAppointmentManager()->changeAppointment(beginDate, appointmentId);
+					cout << "Sukces! Zmieniono termin wizyty: " << logicManger->getAppointmentManager()->
+						get(appointmentId)->getInfo() << endl;
+					break;
+				}
+				catch (DateException& de)
+				{
+					cerr << de.what() << endl;
+					continue;
+				}
 			}
 		case 3:
 			{
+				unsigned int appointmentId;
+
+				cout << "Podaj unikalny parametr spotkania" << endl;
+				getline(cin, tmp);
+				if (!checkInt(tmp, appointmentId)) continue;
+				try
+				{
+					logicManger->getAppointmentManager()->cancelAppointment(appointmentId);
+					cout << "Sukces! Udało się anulować spotkanie " << endl;
+					break;
+				}
+				catch (LogicException& de)
+				{
+					cerr << de.what() << endl;
+					continue;
+				}
 			}
 		case 4:
 			{
+				unsigned int appointmentId;
+
+				cout << "Podaj unikalny parametr spotkania" << endl;
+				getline(cin, tmp);
+				if (!checkInt(tmp, appointmentId)) continue;
+				try
+				{
+					int cost = logicManger->getAppointmentManager()->finishAppointment(appointmentId);
+					cout << "Sukces! Udało się zakończyć spotaknie" << endl;
+					cout << "Suma do zapłaty wynosi: " << to_string(cost) << endl;
+					break;
+				}
+				catch (LogicException& de)
+				{
+					cerr << de.what() << endl;
+					continue;
+				}
 			}
 		case 5:
 			{
+				string personalId;
+				cout << "Podaj PESEL pacjenta: ";
+				getline(cin, personalId);
+
+				auto& patient = logicManger->getPatientManager()->get(personalId);
+				if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
+
+				auto appointments = logicManger->getAppointmentManager()->getPatientAppointments(patient);
+				displayAll(appointments);
+				break;
 			}
 		case 6:
 			{
+				PersonnelPtr searchedPersonnel = nullptr;
+				if (!findByInt<PersonnelPtr>("specjalisty", logicManger->getPersonnelManager(), searchedPersonnel))
+					continue;
+				auto appointments = logicManger->getAppointmentManager()->getPersonnelAppointments(searchedPersonnel);
+				displayAll(appointments);
+				break;
 			}
 		case 7:
 			{
+				RoomPtr searchedRoom = nullptr;
+				if (!findByInt<RoomPtr>("sali", logicManger->getRoomManager(), searchedRoom)) continue;
+				auto appointments = logicManger->getAppointmentManager()->getRoomAppointments(searchedRoom);
+				displayAll(appointments);
+				break;
 			}
-		default:
+		case 8:
+			{
+				ServicePtr searchedService = nullptr;
+				if (!findByInt<ServicePtr>("usługi", logicManger->getServiceManager(), searchedService)) continue;
+				auto appointments = logicManger->getAppointmentManager()->getServiceAppointments(searchedService);
+				displayAll(appointments);
+				break;
+			}
 			continue;
 		}
 	}
 }
 
-//Zrobione
+//Do optymalizacji
 void TerminalMenu::room() const
 {
 	cout << "Wybrałeś obsługe sali!" << endl;
@@ -669,7 +835,7 @@ void TerminalMenu::room() const
 	}
 }
 
-//Zrobione
+//Do optymalizacji
 void TerminalMenu::service() const
 {
 	cout << "Wybrałeś obsługę usługi!" << endl;
@@ -847,7 +1013,7 @@ void TerminalMenu::service() const
 	}
 }
 
-
+//Do optymalizacji
 void TerminalMenu::personnel() const
 {
 	cout << "Wybrałeś obsługe personelu!" << endl;
