@@ -1,6 +1,6 @@
 #include "managers/RoomManager.h"
 
-#include "../../include/Exceptions.h"
+#include "Exceptions.h"
 
 
 using namespace std;

@@ -5,7 +5,7 @@
 #include "typedefs.h"
 
 
-//Struktura tymczasowa, potrzebna tylko by sprawdzic prawidłowe działanie klasy abstrakcyjnej RepositoryTemplate
+//Struktura tymczasowa, potrzebna tylko by sprawdzic prawidłowe działanie template klasy abstrakcyjnej RepositoryTemplate
 struct TmpTemplate :  RepositoryTemplate<PatientPtr, PatientPredicate, const std::string>
 {
 
@@ -47,10 +47,6 @@ struct TestSuitRepositoryTemplateFixture
 	~TestSuitRepositoryTemplateFixture() = default;
 };
 
-bool predicatePatinet(PatientPtr v)
-{
-	return v->getLastName() == "White";
-}
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRepository, TestSuitRepositoryTemplateFixture)
 
@@ -108,7 +104,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRepository, TestSuitRepositoryTemplateFixture)
 		pacjentRepo.add(testPatient1);
 		pacjentRepo.add(testPatient2);
 		pacjentRepo.add(testPatient3);
-		PatientPredicate pacjentPredykat = predicatePatinet;
+
+		PatientPredicate pacjentPredykat = [](PatientPtr v) -> bool {return v->getLastName() == "White";};
 
 		BOOST_TEST(pacjentRepo.findBy(pacjentPredykat).size() == 2);
 

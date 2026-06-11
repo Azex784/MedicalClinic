@@ -71,12 +71,12 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitServiceManager, TestSuitServiceManagerFixture)
 		BOOST_TEST_REQUIRE(serviceManager->getRepository()->getVectorOfData().size() == 4);
 
 		// Próba dodania już istniejącego zabiegu
-		BOOST_CHECK_THROW(serviceManager->addConsultation(150, 30, "Konsultacja odnosnie masażu", 101, Specialisation::MASSAGE_THERAPIST,
+		BOOST_CHECK_THROW(serviceManager->addConsultation(150, 30, "Masaż", 101, Specialisation::MASSAGE_THERAPIST,
 		                               "Omowienie wynikow", 1, false),ExistException);
 		BOOST_TEST(serviceManager->getRepository()->getVectorOfData().size() == 4);
 
 		// Zwykłe dodanie nowego zabiegu
-		serviceManager->addConsultation(150, 30, "Konsultacja odnosnie masażu", 118, Specialisation::MASSAGE_THERAPIST,
+		serviceManager->addConsultation(150, 30, "Masaż", 118, Specialisation::MASSAGE_THERAPIST,
 		                               "Omowienie wynikow", 1, false);
 		BOOST_TEST(serviceManager->getRepository()->getVectorOfData().size() == 5);
 		BOOST_TEST(serviceManager->getRepository()->get((unsigned int)118) != nullptr);

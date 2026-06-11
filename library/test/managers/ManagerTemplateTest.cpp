@@ -38,11 +38,6 @@ struct TestSuitManagerTemplateFixture
 	}
 };
 
-bool predicatePatinet1(PatientPtr v)
-{
-	return v->getLastName() == "White";
-}
-
 BOOST_FIXTURE_TEST_SUITE(TestSuitManagerTemplate, TestSuitManagerTemplateFixture)
 
 	BOOST_AUTO_TEST_CASE(GetTest)
@@ -55,7 +50,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitManagerTemplate, TestSuitManagerTemplateFixture
 
 	BOOST_AUTO_TEST_CASE(FindByFindAllTest)
 	{
-		PatientPredicate pacjentPredykat = predicatePatinet1;
+		PatientPredicate pacjentPredykat = [](PatientPtr v) -> bool {return v->getLastName() == "White";};
 
 		BOOST_TEST(pacjentManager->findBy(pacjentPredykat).size() == 2);
 		BOOST_TEST(pacjentManager->findAll().size() == 4);

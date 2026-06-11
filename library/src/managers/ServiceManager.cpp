@@ -26,6 +26,10 @@ void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsi
 		throw LogicException("Wprowadzono nieprawidłowy znak.");
 	}
 
+	if (serviceName.length() > 20)
+	{
+		throw length_error("Nazwa usługi przekracza limit 20 znaków.");
+	}
 
 	if (getRepository()->get(serviceId) == nullptr)
 	{
@@ -43,13 +47,16 @@ void ServiceManager::addRehabilitation(const unsigned int& serviceCost, const un
                                        Specialisation requiredSpecialisation, const unsigned int& requiredDocSize,
                                        const unsigned int& requiredNurseSize)
 {
-
 	//find_first_not_of - szuka znaku z poza listy jesli znajdzie to zwraca npos
 	if (serviceName.find_first_not_of(ALLOWEDCHARS) != string::npos)
 	{
 		throw LogicException("Wprowadzono nieprawidłowy znak.");
 	}
 
+	if (serviceName.length() > 20)
+	{
+		throw length_error("Nazwa usługi przekracza limit 20 znaków.");
+	}
 
 	if (requiredEquipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
 

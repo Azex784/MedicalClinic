@@ -32,7 +32,8 @@ set(SOURCE_FILES
         src/managers/PatientManager.cpp
         src/managers/PersonnelManager.cpp
         src/managers/LogicManger.cpp
-
+        src/menu/TextMenu.cpp
+        include/menu/TextMenu.h
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})

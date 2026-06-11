@@ -24,7 +24,10 @@ void PersonnelManager::addDoctor(const std::string& firstName, const std::string
 		throw LogicException("Wprowadzono nieprawidłowy znak.");
 	}
 
-
+	if (firstName.length() > 20 || lastName.length() > 20)
+	{
+		throw length_error("Imię lub nazwisko przekracza limit 20 znaków.");
+	}
 
 	if (specialistaion.empty())
 	throw LogicException("Wpisano nieprawidłowe puste specjalizacje.");
@@ -47,6 +50,11 @@ void PersonnelManager::addNurse(const std::string& firstName, const std::string&
 		lastName.find_first_not_of(ALLOWEDCHARS) != string::npos)
 	{
 		throw LogicException("Wprowadzono nieprawidłowy znak.");
+	}
+
+	if (firstName.length() > 20 || lastName.length() > 20)
+	{
+		throw length_error("Imię lub nazwisko przekracza limit 20 znaków.");
 	}
 
 	if (getRepository()->get(personnelId) == nullptr)

@@ -19,16 +19,28 @@ using namespace std;
 
 const PatientRepositoryPtr& AppointmentRepository::getPatientRepository() const
 {
+	if (patientRepository == nullptr)
+	{
+		throw NullPointerException("patientRepository");
+	}
 	return patientRepository;
 }
 
 const PersonnelRepositoryPtr& AppointmentRepository::getPersonnelRepository() const
 {
+	if (personnelRepository == nullptr)
+	{
+		throw NullPointerException("personnelRepository");
+	}
 	return personnelRepository;
 }
 
 const RoomRepositoryPtr& AppointmentRepository::getRoomRepository() const
 {
+	if (roomRepository == nullptr)
+	{
+		throw NullPointerException("roomRepository");
+	}
 	return roomRepository;
 }
 

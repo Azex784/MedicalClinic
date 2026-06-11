@@ -1,10 +1,10 @@
 #ifndef REHABILITATIONCENTRE_MANAGERTEMPLATE_H
 #define REHABILITATIONCENTRE_MANAGERTEMPLATE_H
 
-#include "../Exceptions.h"
+#include "Exceptions.h"
+
 /**
  * Szablon klasy dla menadzerow
- *
  */
 template <typename UniqueClass, typename UniqueRepoClass, typename PredicateT, typename UniqueParameter>
 class ManagerTemplate

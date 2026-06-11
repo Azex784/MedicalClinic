@@ -141,10 +141,6 @@ struct TestSuitAppointmentManagerFixture
 	}
 };
 
-bool predicateAppointment(AppointmentPtr v)
-{
-	return v->getPatient()->getLastName() == "White";
-}
 
 BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerFixture)
 
@@ -157,7 +153,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 
 	BOOST_AUTO_TEST_CASE(FindByFindAllTest)
 	{
-		AppointmentPredicate appointmentPredicate = predicateAppointment;
+		AppointmentPredicate appointmentPredicate = [] (AppointmentPtr v) -> bool {return v->getPatient()->getLastName() == "White";};
 		appointmentManager->get((unsigned int)0);
 		BOOST_TEST(appointmentManager->findAll()[0] != nullptr);
 	}

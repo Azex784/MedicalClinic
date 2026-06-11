@@ -59,6 +59,9 @@ bool LogicManager::unregisterPatient(const std::string& personalID)
 	if (patient == nullptr)
 		throw NoExistException("Pacjent", personalID);
 
+	if (patient->getIsArchive())
+		throw LogicException("Nie można zaarchiwiować zarchiwizowanego pacjenta.");
+
 	auto appointmens = getAppointmentManager()->getPatientAppointments(patient);
 
 	if (!appointmens.empty())

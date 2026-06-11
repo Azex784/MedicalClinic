@@ -2,3 +2,4 @@
 cmake-build-debug
 uml/main
 library/test/data/*.txt
+program/data/*.txt

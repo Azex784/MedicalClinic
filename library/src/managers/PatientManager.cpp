@@ -28,6 +28,16 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
 		throw LogicException("Wprowadzono nieprawidłowy znak.");
 	}
 
+	if (firstName.length() > 20 ||
+		lastName.length() > 20 ||
+		personalID.length() > 20 ||
+		city.length() > 20 ||
+		street.length() > 20 ||
+		number.length() > 20)
+	{
+		throw length_error("Jedno z pól pacjenta przekracza 20 znaków.");
+	}
+
 	if (get(personalID) != nullptr)
 	{
 		throw ExistException("Pacjent", personalID);
