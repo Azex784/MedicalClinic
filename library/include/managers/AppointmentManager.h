@@ -157,6 +157,13 @@ public:
 	 * @return True jesli nie koliduje, false jesli koliduje
 	 */
 	bool isDate(std::vector<AppointmentPtr> appointments, const boost::posix_time::ptime beginDate, unsigned int duration) const;
+
+
+	/**
+	 * Zwraca wszystkie obiekty znajdujące się obecnie w repozytorium archive.
+	 * @return Wektor zawierający wszystkie obiekty.
+	 */
+	const std::vector<AppointmentPtr> findAllArchive() const;
 };
 
 

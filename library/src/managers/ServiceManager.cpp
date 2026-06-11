@@ -2,6 +2,7 @@
 
 #include <services/Consultation.h>
 #include <services/Rehabillitation.h>
+#include <services/Service.h>
 
 #include "Exceptions.h"
 

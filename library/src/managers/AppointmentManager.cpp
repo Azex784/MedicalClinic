@@ -105,6 +105,11 @@ const std::vector<AppointmentPtr> AppointmentManager::findByArchive(AppointmentP
 	return getArchiveRepository()->findBy(up);
 }
 
+const std::vector<AppointmentPtr> AppointmentManager::findAllArchive() const
+{
+	return getArchiveRepository()->findAll();
+}
+
 const std::vector<AppointmentPtr> AppointmentManager::findAll() const
 {
 	return getRepository()->findAll();
@@ -336,6 +341,10 @@ bool AppointmentManager::changeAppointment(const boost::posix_time::ptime& _date
 void AppointmentManager::cancelAppointment(const unsigned int appointmentId)
 {
 	AppointmentPtr appointment = getRepository()->get(appointmentId);
+
+	if (appointment == nullptr)
+		throw LogicException("Nie znaleziono podanego spotkania.");
+
 	getRepository()->remove(appointment);
 }
 

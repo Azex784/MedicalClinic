@@ -39,6 +39,10 @@ void LogicManager::removePersonnel(unsigned int personnelId)
 	if (personnel == nullptr)
 		throw NoExistException("Specjalista", to_string(personnelId));
 
+
+	if (personnel->getIsArchive())
+		throw ArchiveArchivedException("specjalisty");
+
 	auto appointmens = getAppointmentManager()->getPersonnelAppointments(personnel);
 
 	if (!appointmens.empty())
@@ -60,7 +64,7 @@ bool LogicManager::unregisterPatient(const std::string& personalID)
 		throw NoExistException("Pacjent", personalID);
 
 	if (patient->getIsArchive())
-		throw LogicException("Nie można zaarchiwiować zarchiwizowanego pacjenta.");
+		throw ArchiveArchivedException("pacjenta");
 
 	auto appointmens = getAppointmentManager()->getPatientAppointments(patient);
 
@@ -78,6 +82,9 @@ void LogicManager::removeRoom(unsigned int roomNumber)
 	auto room = getRoomManager()->get(roomNumber);
 	if (room == nullptr)
 		throw NoExistException("Sala", to_string(roomNumber));
+
+	if (room->getIsArchive())
+		throw ArchiveArchivedException("sali");
 
 	auto appointmens = getAppointmentManager()->getRoomAppointments(room);
 
@@ -97,6 +104,9 @@ bool LogicManager::removeService(unsigned int serviceID)
 	auto service = getServiceManager()->get(serviceID);
 	if (service == nullptr)
 		throw NoExistException("Usługa", to_string(serviceID));
+
+	if (service->getIsArchive())
+		throw ArchiveArchivedException("usługi");
 
 	auto appointmens = getAppointmentManager()->getServiceAppointments(service);
 

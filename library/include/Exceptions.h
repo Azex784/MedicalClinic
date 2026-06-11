@@ -78,9 +78,22 @@ public:
 	explicit WriteException(const std::string& fileName) : std::logic_error("Błąd strumienia podczas zapisywania do pliku." + fileName) {};
 };
 
-
+/**
+ * Wyjątek gdy pojawia się nieoczkiwany znak
+ */
 class UnexpectedCharacterException : public std::logic_error {
 public:
 	explicit UnexpectedCharacterException(const std::string& clas) : std::logic_error(clas + "Wczytano nieoczekiwany znak.") {};
 };
+
+
+/**
+ * Wyjątek gdy pojawia się nieoczkiwany znak
+ */
+class ArchiveArchivedException : public std::logic_error {
+public:
+	explicit ArchiveArchivedException(const std::string& clas) : logic_error( "Nie można zaarchiwiować zarchiwizowanego " + clas) {};
+};
+
+
 #endif //REHABILITATIONCENTRE_EXCEPTIONS_H
