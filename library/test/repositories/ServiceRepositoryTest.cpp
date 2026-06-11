@@ -49,8 +49,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteServiceRepository, TestSuiteServiceRepositoryF
 
 	BOOST_AUTO_TEST_CASE(SaveDataTest)
 	{
-		// Sprawdzamy czy zapis się powiódł
-		BOOST_TEST_REQUIRE(serviceRepo->saveData() == true);
+		serviceRepo->saveData();
 
 		ifstream inFile(fileName);
 		string line;
@@ -80,8 +79,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteServiceRepository, TestSuiteServiceRepositoryF
 		ServiceRepositoryPtr serviceRepo1 = make_shared<ServiceRepository>(fileName);
 
 		// Zapisujemy stan oryginalnego repozytorium i ładujemy do nowego
-		BOOST_TEST_REQUIRE(serviceRepo->saveData() == true);
-		BOOST_TEST_REQUIRE(serviceRepo1->loadData() == true);
+		serviceRepo->saveData();
+		serviceRepo1->loadData();
 
 		// Weryfikacja rozmiaru
 		BOOST_TEST_REQUIRE(serviceRepo1->getVectorOfData().size() == serviceRepo->getVectorOfData().size());

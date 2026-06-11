@@ -8,7 +8,9 @@
 #include <vector>
 #include "rooms/RehabillitationRoom.h"
 
-
+/**
+ * Klasa reprezentująca zarządce pracowników
+ */
 class RoomManager : public ManagerTemplate<RoomPtr, RoomRepository, RoomPredicate, const unsigned int>
 {
 public:

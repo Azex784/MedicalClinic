@@ -62,7 +62,6 @@ AppointmentManager::AppointmentManager(const std::string& fileName, const std::s
 	{
 		getRepository()->saveData();
 		getArchiveRepository()->saveData();
-
 	}
 }
 
@@ -236,7 +235,7 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 	}
 	//Rozmiar lekarzy
 	if (service->getRequiredDoctorSize() != doctors.size())
-		throw LogicException("Przydzielono niepoprawną ilość specjalistów.");;
+		throw LogicException("Przydzielono niepoprawną ilość specjalistów.");
 
 	//Pokoju
 	if (isDate(getRoomAppointments(room), appointmentBeginDate, duration))
@@ -246,7 +245,6 @@ AppointmentPtr AppointmentManager::arrangeAppointment(const PatientPtr& patient,
 
 	//Usluga
 	if (service->getIsAvailable() != true)
-
 		throw ActivityException("Usługa: " + service->getInfo());
 
 	//Sprawdzenie czy wyposażenie jest odpowiednie
@@ -308,7 +306,7 @@ unsigned int AppointmentManager::finishAppointment(unsigned int appointmentId)
 	return appointment->setAppointmentCost();
 }
 
-bool AppointmentManager::changeAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId)
+void AppointmentManager::changeAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId)
 {
 	AppointmentPtr appointment = getRepository()->get((unsigned int)appointmentId);
 	unsigned int duration = appointment->getService()->getServiceDuration();
@@ -325,7 +323,6 @@ bool AppointmentManager::changeAppointment(const boost::posix_time::ptime& _date
 	}
 
 	appointment->setAppointmentBeginDate(_date);
-	return true;
 }
 
 void AppointmentManager::cancelAppointment(const unsigned int appointmentId)

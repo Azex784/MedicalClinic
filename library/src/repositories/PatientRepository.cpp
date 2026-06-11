@@ -21,7 +21,7 @@ PatientRepository::PatientRepository() : RepositoryTemplate<
 {
 }
 
-bool PatientRepository::loadData()
+void PatientRepository::loadData()
 {
 	ifstream inFile;
 	inFile.open(getFileName());
@@ -86,10 +86,9 @@ bool PatientRepository::loadData()
 		}
 	}
 	inFile.close();
-	return true;
 }
 
-bool PatientRepository::saveData() const
+void PatientRepository::saveData() const
 {
 	ofstream outFile;
 
@@ -122,5 +121,4 @@ bool PatientRepository::saveData() const
 		}
 		outFile.close();
 	}
-	return true;
 }

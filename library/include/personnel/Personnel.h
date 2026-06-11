@@ -1,14 +1,12 @@
 #ifndef REHABILITATIONCENTRE_PERSONNEL_H
 #define REHABILITATIONCENTRE_PERSONNEL_H
 
-#include <string>
-#include <vector>
 #include "Person.h"
 
 enum class Specialisation;
 
 /**
- * Klasa reprezentująca personel
+ * Klasa reprezentująca pracownika kliniki
  */
 class Personnel : public Person{
 private:

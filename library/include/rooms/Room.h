@@ -1,8 +1,8 @@
 #ifndef REHABILITATIONCENTRE_ROOM_H
 #define REHABILITATIONCENTRE_ROOM_H
+
 #include <string>
 
-//deklaracja wyprzedzająca
 enum class Equipment;
 
 /**

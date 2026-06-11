@@ -15,7 +15,7 @@ private:
     boost::posix_time::ptime appointmentBeginDate;
     boost::posix_time::ptime appointmentEndDate = boost::posix_time::not_a_date_time;
     unsigned int appointmentId;
-    unsigned int appointmentCost = 0;
+    unsigned int appointmentCost;
     std::vector<PersonnelPtr> personnel;
     PatientPtr patient;
     ServicePtr service;

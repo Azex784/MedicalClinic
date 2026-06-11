@@ -7,13 +7,16 @@
 #include "managers/ManagerTemplate.h"
 #include "typedefs.h"
 
+/**
+ * Klasa reprezentująca zarządce usług
+ */
 class ServiceManager : public ManagerTemplate<ServicePtr, ServiceRepository, ServicePredicate, const unsigned int>
 {
 public:
-   /**
-	* Domyślny konstruktor menedżera usług.
-	* Inicjuje obiekt menedżera, korzystając z mechanizmów klasy bazowej ManagerTemplate.
-	*/
+	/**
+	 * Domyślny konstruktor menedżera usług.
+	 * Inicjuje obiekt menedżera, korzystając z mechanizmów klasy bazowej ManagerTemplate.
+	 */
 	ServiceManager() = default;
 
 	/**
@@ -40,7 +43,8 @@ public:
 	 */
 	void addConsultation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
 	                     const std::string& serviceName, const unsigned int& serviceId,
-	                     Specialisation requiredSpecialisation, const std::string& topic, const unsigned int& requiredDocSize, bool isOnline);
+	                     Specialisation requiredSpecialisation, const std::string& topic,
+	                     const unsigned int& requiredDocSize, bool isOnline);
 
 	/**
 	 * Metoda dodająca nową usługę rehabilitacyjną do systemu.
@@ -52,12 +56,11 @@ public:
 	 * @param requiredSpecialisation Wymagana specjalizacja personelu do przeprowadzenia rehabilitacji.
 	 * @param requiredDocSize Liczba potrzebnych lekarzy.
 	 * @param requiredNurseSize Liczba potrzebnych pielęgniarek.
-	 *
 	 */
 	void addRehabilitation(const unsigned int& serviceCost, const unsigned int& serviceDuration,
 	                       const std::string& serviceName, const unsigned int& serviceId,
 	                       std::vector<Equipment> requiredEquipment, Specialisation requiredSpecialisation,
-	                       const unsigned int& requiredDocSize,const unsigned int& requiredNurseSize);
+	                       const unsigned int& requiredDocSize, const unsigned int& requiredNurseSize);
 };
 
 

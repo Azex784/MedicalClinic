@@ -6,6 +6,9 @@
 #include "typedefs.h"
 #include "patient/Patient.h"
 
+/**
+ * Klasa reprezentująca zarządce pacjentów
+ */
 class PatientManager : public ManagerTemplate<PatientPtr, PatientRepository,PatientPredicate,const std::string>
 {
 public:
@@ -26,6 +29,12 @@ public:
 	 * Inicjuje obiekt menedżera, korzystając z mechanizmów klasy bazowej ManagerTemplate.
 	 */
 	PatientManager() = default;
+
+	/**
+	 * Domyślny destruktor menedżera pacjentów.
+	 * Inicjuje obiekt menedżera, korzystając z mechanizmów klasy bazowej ManagerTemplate.
+	 */
+	~PatientManager() = default;
 
 	/**
 	 * Konstruktor menedżera pacjentów z niestandardową ścieżką do pliku danych.

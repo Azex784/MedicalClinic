@@ -32,6 +32,10 @@ void ServiceManager::addConsultation(const unsigned int& serviceCost, const unsi
 		throw length_error("Nazwa usługi przekracza limit 20 znaków.");
 	}
 
+	if (topic.length() > 40)
+	{
+		throw length_error("Temat konsultacji przekracza limit 20 znaków.");
+	}
 	if (getRepository()->get(serviceId) == nullptr)
 	{
 		ServicePtr service = make_shared<Consultation>(serviceCost, serviceDuration, serviceName, serviceId,

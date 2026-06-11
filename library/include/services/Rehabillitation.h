@@ -28,7 +28,7 @@ public:
 	 * @param requiredDoctorSize Wymagana liczba lekarzy nadzorujących zabieg.
 	 * @param requiredDoctorSpec Wymagana specjalizacja lekarza do przeprowadzenia zabiegu.
 	 * @param requiredEqupiment Wektor przechowujący listę specjalistycznego sprzętu niezbędnego do wykonania zabiegu.
-	 * @param requiredNurseSize Wymagana liczba pielęgniarek lub personelu pomocniczego niezbędna do obsługi zabiegu.
+	 * @param requiredNurseSize Wymagana liczba pielęgniarek niezbędna do obsługi zabiegu.
 	 */
 	Rehabillitation(const unsigned serviceCost, const unsigned serviceDuration, const std::string& serviceName,
 		const unsigned serviceId, const unsigned requiredDoctorSize, const Specialisation requiredDoctorSpec,
@@ -43,7 +43,7 @@ public:
 	/**
 	 * Metoda zwracająca pełne informacje o usłudze rehabilitacyjnej.
 	 * Nadpisuje metodę wirtualną z klasy bazowej (Service).
-	 * @return Sformatowany łańcuch znaków zawierający specyfikację zabiegu, wymagany sprzęt i potrzebny personel.
+	 * @return Sformatowany łańcuch znaków zawierający informacje o zabiegu.
 	*/
 	const std::string getInfo() const override;
 

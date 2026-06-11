@@ -41,7 +41,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitePatientRepository, TestSuitPatientRepositoryFi
 	BOOST_AUTO_TEST_CASE(SaveDataTest)
 	{
 
-		BOOST_TEST_REQUIRE(pacjentRepo->saveData() == true);
+		pacjentRepo->saveData();
 
 		ifstream inFile;
 		inFile.open(fileName);
@@ -82,8 +82,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitePatientRepository, TestSuitPatientRepositoryFi
 	PatientRepositoryPtr pacjentRepo1 = make_shared<PatientRepository>(fileName);
 
 	//Musi byc prawidlowe zapis i wczytanie pliku
-	BOOST_TEST_REQUIRE(pacjentRepo->saveData() == true);
-	BOOST_TEST_REQUIRE(pacjentRepo1->loadData() == true);
+	pacjentRepo->saveData();
+	pacjentRepo1->loadData();
 
 	//Weryfikacja rozmiaru
     BOOST_TEST_REQUIRE(pacjentRepo1->getVectorOfData().size() == pacjentRepo->getVectorOfData().size());

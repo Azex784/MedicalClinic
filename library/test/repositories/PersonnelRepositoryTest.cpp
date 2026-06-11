@@ -47,7 +47,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitePersonnelRepository, TestSuitePersonnelReposit
 BOOST_AUTO_TEST_CASE(SaveDataTest)
 {
     //Czy zapis się powiódł
-    BOOST_TEST_REQUIRE(personnelRepo->saveData() == true);
+    personnelRepo->saveData();
 
     ifstream inFile(fileName);
     string line;
@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
     PersonnelRepositoryPtr personnelRepo1 = make_shared<PersonnelRepository>(fileName);
 
     // Zapisujemy stan oryginalnego repozytorium i ładujemy do nowego
-    BOOST_TEST_REQUIRE(personnelRepo->saveData() == true);
-    BOOST_TEST_REQUIRE(personnelRepo1->loadData() == true);
+    personnelRepo->saveData();
+    personnelRepo1->loadData();
 
     // Weryfikacja rozmiaru
     BOOST_TEST_REQUIRE(personnelRepo1->getVectorOfData().size() == personnelRepo->getVectorOfData().size());

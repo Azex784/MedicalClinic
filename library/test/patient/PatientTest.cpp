@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE(ConstructorTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	std::string expectedInfo = "Osoba: Walter White pacjent o peselu: 90010112345, adresie: Miasto: Albuquerqe, ulica: Juan Poet 10/15";
+	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pacjent o peselu: 90010112345, adresie: Miasto: Albuquerqe, ulica: Juan Poet 10/15";
 
 	BOOST_TEST(testPatient.getInfo() == expectedInfo);
 }

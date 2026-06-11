@@ -22,7 +22,7 @@ PersonnelRepository::PersonnelRepository()
 }
 
 
-bool PersonnelRepository::loadData()
+void PersonnelRepository::loadData()
 {
 	ifstream inFile;
 	inFile.open(getFileName());
@@ -119,10 +119,9 @@ bool PersonnelRepository::loadData()
 
 	}
 	inFile.close();
-	return true;
 }
 
-bool PersonnelRepository::saveData() const
+void PersonnelRepository::saveData() const
 {
 	ofstream outFile;
 
@@ -179,5 +178,4 @@ bool PersonnelRepository::saveData() const
 		}
 		outFile.close();
 	}
-	return true;
 }

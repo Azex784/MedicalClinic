@@ -3,6 +3,9 @@
 
 #include "rooms/Room.h"
 
+/**
+ * Klasa reprezentująca pokój konsultacyjny
+ */
 class ConsultationRoom : public Room
 {
 public:

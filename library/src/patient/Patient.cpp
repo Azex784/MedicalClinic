@@ -25,5 +25,5 @@ const std::string& Patient::getUniqueParameter() const
 
 const std::string Patient::getInfo() const
 {
-    return Person::getInfo() +" pacjent o peselu: " + personalNumber +  ", adresie: " + getAddress()->getInfo();
+    return Person::getInfo() + " pacjent o peselu: " + personalNumber +  ", adresie: " + getAddress()->getInfo();
 }

@@ -95,18 +95,17 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointment, TestSuiteAppointmentFixture)
 	{
 		std::stringstream ss;
 
-		ss << "Wizyta: ID: " << testAppointment.getUniqueParameter() << ")\n";
-		ss << "Koszt: " << testAppointment.getAppointmentCost() << " PLN\n";
-		ss << "Rozpoczęcie: " << testAppointment.getAppointmentBeginDate() << "\n";
-		ss << "Zakończenie: " << testAppointment.getAppointmentEndDate() << "\n";
+		ss << "Wizyta: ID: " << testAppointment.getUniqueParameter() << std::endl;
+		ss << "Rozpoczęcie: " << testAppointment.getAppointmentBeginDate() << std::endl;
+		ss << "Zakończenie: " << testAppointment.getAppointmentEndDate() << std::endl;
 		ss << "Pacjent:\n";
-		ss << testAppointment.getPatient()->getInfo() << "\n";
+		ss << testAppointment.getPatient()->getInfo() << std::endl;
 		ss << "Usluga:\n";
-		ss << testAppointment.getService()->getInfo() << "\n";
+		ss << testAppointment.getService()->getInfo() << std::endl;
 		ss << "Sala:\n";
-		ss << testAppointment.getRoom()->getInfo() << "\n";
+		ss << testAppointment.getRoom()->getInfo() << std::endl;
 		ss << "Personel przypisany do wizyty:\n";
-		ss << "- " << testAppointment.getPersonnel()[0]->getInfo() << "\n";
+		ss << " * " << testAppointment.getPersonnel()[0]->getInfo() << std::endl;
 
 		BOOST_TEST(testAppointment.getInfo() == ss.str());
 	}

@@ -40,12 +40,12 @@ BOOST_AUTO_TEST_CASE(SettersTest)
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
 	// Sprawdzamy poprawnosc dzialania metody getInfo
-	BOOST_TEST(testPerson.getInfo() == "Osoba: Jan Kowalski");
+	BOOST_TEST(testPerson.getInfo() == "Osoba: Jan Kowalski, niearchiwalna");
 
 	// Sprawdzenie getInfo po zmianie
 	testPerson.setName("Anna");
 	testPerson.setLastName("Maria");
-	BOOST_TEST(testPerson.getInfo() == "Osoba: Anna Maria");
+	BOOST_TEST(testPerson.getInfo() == "Osoba: Anna Maria, niearchiwalna");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

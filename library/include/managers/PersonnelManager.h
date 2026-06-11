@@ -6,6 +6,9 @@
 #include "typedefs.h"
 #include "managers/ManagerTemplate.h"
 
+/**
+ * Klasa reprezentująca zarządce pracowników
+ */
 class PersonnelManager : public ManagerTemplate<PersonnelPtr, PersonnelRepository, PersonnelPredicate, const unsigned int>
 {
 public:

@@ -7,6 +7,9 @@
 #include "managers/AppointmentManager.h"
 #include "managers/RoomManager.h"
 
+/**
+ * Klasa reprezentująca zarządce logiki aplikacji
+ */
 class LogicManager
 {
 private:
@@ -38,8 +41,6 @@ public:
 	 * Domyślny destruktor
 	 */
 	~LogicManager() = default;
-
-	//Gettery
 
 	/**
 	 * Zwraca zarządcę personelu.
@@ -81,9 +82,8 @@ public:
 	/**
 	 * Sprawia, że pacjent staje się archiwalny, JEŚLI nie ma żadnych spotkań.
 	 * @param personalID
-	 * @return true w przypadku sukcesu, false w przypadku porażki
 	 */
-	bool unregisterPatient(const std::string& personalID);
+	void unregisterPatient(const std::string& personalID);
 
 	/**
 	 * Sprawia, że pokój staje się nieaktywny, archiwalny i anuluje
@@ -96,9 +96,8 @@ public:
 	 * Sprawia, że dana usługa staje się niedostępna i archiwalna,
 	 * JEŚLI nie ma zaplanowanych już terminów związanych z tą usługą.
 	 * @param serviceID
-	 * @return true w przypadku sukcesu, false w przypadku porażki
 	 */
-	bool removeService(unsigned int serviceID);
+	void removeService(unsigned int serviceID);
 };
 
 

@@ -32,9 +32,9 @@ public:
 	        const Specialisation requiredDoctorSpec);
 
 	/**
-	 * Domyślny destruktor klasy.
+	 * Domyślny abstrakcyjny destruktor klasy.
 	 */
-	virtual ~Service() =  0;
+	virtual ~Service() = 0;
 
 	/**
 	 * Metoda wirtualna zwracająca pełne informacje o usłudze.

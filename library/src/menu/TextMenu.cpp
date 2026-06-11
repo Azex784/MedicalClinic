@@ -27,6 +27,7 @@ bool TerminalMenu::isContinue() const
 	case 1:
 		return true;
 	}
+	return false;
 }
 
 bool TerminalMenu::isAmount(const string& tmp, const int& amount) const
@@ -506,7 +507,7 @@ void TerminalMenu::appointment() const
 		getline(cin, tmp);
 
 		if (!isAmount(tmp, 1)) continue;
-		input = isDigit(tmp[0], '7');
+		input = isDigit(tmp[0], '8');
 
 		switch (input)
 		{

@@ -6,6 +6,9 @@
 #include "typedefs.h"
 #include "repositories/AppointmentRepository.h"
 
+/**
+ * Klasa reprezentująca zarządce wizyt
+ */
 class AppointmentManager
 {
 private:
@@ -33,7 +36,6 @@ public:
 	 * Domyślny destruktor menedżera wizyt, które zapisuje dane na dysku.
 	 */
 	~AppointmentManager();
-
 
 	/**
 	* Zwraca obiekt repozytorium archiwalnego przypisany do tego menedżera.
@@ -68,7 +70,6 @@ public:
 	const std::vector<AppointmentPtr> findBy(AppointmentPredicate up) const;
 
 	/**
-	 *
 	 * Zwraca wszystkie obiekty znajdujące się obecnie w repozytorium.
 	 * @return Wektor zawierający wszystkie obiekty.
 	 */
@@ -137,9 +138,8 @@ public:
 	 * Metoda zmieniająca datę wybranej wizyty.
 	 * @param _date Nowy termin wizyty.
 	 * @param appointmentId Nowy termin wizyty.
-	 * @return Zwraca true, jeśli zmiana terminu się powiodła, w przeciwnym razie false.
 	 */
-	bool changeAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId);
+	void changeAppointment(const boost::posix_time::ptime& _date, const unsigned int appointmentId);
 
 	/**
 	 * Metoda anulująca wizytę zaplanowaną na dany termin.

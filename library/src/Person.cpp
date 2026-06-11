@@ -40,5 +40,15 @@ bool Person::getIsArchive() const
 
 const std::string Person::getInfo() const
 {
-    return "Osoba: " + getName() + " " + getLastName();
+    std::ostringstream oss;
+    oss << "Osoba: " + getName() + " " + getLastName();
+    if (getIsArchive())
+    {
+        oss << ", archiwalna";
+    }
+    else
+    {
+        oss << ", niearchiwalna";
+    }
+    return oss.str();
 }

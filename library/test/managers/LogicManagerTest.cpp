@@ -175,7 +175,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitLogicManager, TestSuitLogicManagerFixture)
 		BOOST_TEST(logicManager->getPatientManager()->get("40010112345")->getIsArchive() == false);
 
 		//Prawidłowe
-		BOOST_TEST(logicManager->unregisterPatient("20010112345"));
+		logicManager->unregisterPatient("20010112345");
 		BOOST_TEST(logicManager->getPatientManager()->get("20010112345")->getIsArchive() == true);
 	}
 
@@ -233,7 +233,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitLogicManager, TestSuitLogicManagerFixture)
 		BOOST_TEST(logicManager->getServiceManager()->get(201)->getIsAvailable() == true);
 
 		//Prawidłowe
-		BOOST_TEST(logicManager->removeService(101));
+		logicManager->removeService(101);
 		BOOST_TEST(logicManager->getServiceManager()->get(101)->getIsArchive() == true);
 		BOOST_TEST(logicManager->getServiceManager()->get(101)->getIsAvailable() == false);
 	}

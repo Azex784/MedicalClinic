@@ -56,7 +56,7 @@ void LogicManager::removePersonnel(unsigned int personnelId)
 	personnel->setIsArchive(true);
 }
 
-bool LogicManager::unregisterPatient(const std::string& personalID)
+void LogicManager::unregisterPatient(const std::string& personalID)
 {
 	auto patient = getPatientManager()->get(personalID);
 
@@ -74,7 +74,6 @@ bool LogicManager::unregisterPatient(const std::string& personalID)
 	}
 
 	patient->setIsArchive(true);
-	return true;
 }
 
 void LogicManager::removeRoom(unsigned int roomNumber)
@@ -99,7 +98,7 @@ void LogicManager::removeRoom(unsigned int roomNumber)
 	room->setIsArchive(true);
 }
 
-bool LogicManager::removeService(unsigned int serviceID)
+void LogicManager::removeService(unsigned int serviceID)
 {
 	auto service = getServiceManager()->get(serviceID);
 	if (service == nullptr)
@@ -117,9 +116,7 @@ bool LogicManager::removeService(unsigned int serviceID)
 
 	service->setIsAvailable(false);
 	service->setIsArchive(true);
-	return true;
 }
-
 
 const std::shared_ptr<PersonnelManager>& LogicManager::getPersonnelManager() const
 {

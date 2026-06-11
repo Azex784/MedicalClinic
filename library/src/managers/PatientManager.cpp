@@ -30,7 +30,6 @@ void PatientManager::registerPatient(const std::string& firstName, const std::st
 
 	if (firstName.length() > 20 ||
 		lastName.length() > 20 ||
-		personalID.length() > 20 ||
 		city.length() > 20 ||
 		street.length() > 20 ||
 		number.length() > 20)

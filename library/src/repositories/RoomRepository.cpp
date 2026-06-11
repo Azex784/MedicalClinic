@@ -22,7 +22,7 @@ RoomRepository::RoomRepository()
 {
 }
 
-bool RoomRepository::loadData()
+void RoomRepository::loadData()
 {
 	ifstream inFile;
 	inFile.open(getFileName());
@@ -107,10 +107,9 @@ bool RoomRepository::loadData()
 
 	}
 	inFile.close();
-	return true;
 }
 
-bool RoomRepository::saveData() const
+void RoomRepository::saveData() const
 {
 	ofstream outFile;
 
@@ -172,5 +171,4 @@ bool RoomRepository::saveData() const
 		}
 		outFile.close();
 	}
-	return true;
 }

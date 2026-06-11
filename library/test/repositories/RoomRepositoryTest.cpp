@@ -44,7 +44,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 
 	BOOST_AUTO_TEST_CASE(SaveDataTest)
 	{
-		BOOST_TEST_REQUIRE(roomRepo->saveData() == true);
+		roomRepo->saveData();
 
 		ifstream inFile(fileName);
 		string line;
@@ -75,8 +75,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 		RoomRepositoryPtr roomRepo1 = make_shared<RoomRepository>(fileName);
 
 		// Zapisujemy stan oryginalnego repozytorium i ładujemy do nowego
-		BOOST_TEST_REQUIRE(roomRepo->saveData() == true);
-		BOOST_TEST_REQUIRE(roomRepo1->loadData() == true);
+		roomRepo->saveData();
+		roomRepo1->loadData();
 
 		// Weryfikacja rozmiaru
 		BOOST_TEST_REQUIRE(roomRepo1->getVectorOfData().size() == roomRepo->getVectorOfData().size());

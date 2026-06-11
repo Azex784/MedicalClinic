@@ -16,13 +16,11 @@ struct TmpTemplate :  RepositoryTemplate<PatientPtr, PatientPredicate, const std
 	}
 
 	~TmpTemplate() = default;
-	bool loadData() override
+	void loadData() override
 	{
-		return true;
 	}
-	bool saveData() const override
+	void saveData() const override
 	{
-		return true;
 	}
 };
 

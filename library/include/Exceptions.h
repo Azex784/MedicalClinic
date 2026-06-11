@@ -9,7 +9,7 @@
  */
 class ActivityException : public std::logic_error {
 public:
-	explicit ActivityException(const std::string& thing) : std::logic_error(thing + " nie jest obecnie dostępny") {};
+	explicit ActivityException(const std::string& thing) : std::logic_error(thing + " nie jest obecnie dostępny.") {};
 };
 
 /**
@@ -17,7 +17,7 @@ public:
  */
 class DateException : public std::logic_error {
 public:
-	explicit DateException(const std::string& thing) : std::logic_error(thing + " ma spotkanie w podanym terminie") {};
+	explicit DateException(const std::string& thing) : std::logic_error(thing + " ma spotkanie w podanym terminie.") {};
 };
 
 /**
@@ -33,7 +33,7 @@ public:
  */
 class NullPointerException : public std::logic_error {
 public:
-	explicit NullPointerException(const std::string& pointerName) : std::logic_error("Wskaźnik " + pointerName + " ma wartość null.") {};
+	explicit NullPointerException(const std::string& pointerName) : std::logic_error("Wskaźnik " + pointerName + " ma wartość nullptr.") {};
 };
 
 /**
@@ -41,21 +41,19 @@ public:
  */
 class NoExistException : public std::logic_error {
 public:
-	explicit NoExistException(const std::string& name,const std::string& uniqueParametr) : std::logic_error("Nie istnieje " + name + " o takim paramtrze: " + uniqueParametr +  ".") {};
+	explicit NoExistException(const std::string& name,const std::string& uniqueParametr) : std::logic_error("Nie istnieje " + name + " o takim parametrze: " + uniqueParametr) {};
 };
-
-
 
 /**
  * Wyjątki, gdy coś istnieje
  */
 class ExistException : public std::logic_error {
 public:
-	explicit ExistException(const std::string& name,const std::string& uniqueParametr) : std::logic_error("Istnieje " + name + " o takim paramtrze: " + uniqueParametr +  ".") {};
+	explicit ExistException(const std::string& name,const std::string& uniqueParametr) : std::logic_error("Istnieje " + name + " o takim parametrze: " + uniqueParametr) {};
 };
 
 /**
- * Wyjątki gdy jest nieprawidłowe otworzenie pliku
+ * Wyjątki gdy jest nieprawidłowe otwarcie pliku
  */
 class OpeningException : public std::logic_error {
 public:
@@ -67,7 +65,7 @@ public:
  */
 class EmptyRecordException : public std::logic_error {
 public:
-	explicit EmptyRecordException(const std::string& name) : std::logic_error("Próba zapisu pustego wetkora:" + name) {};
+	explicit EmptyRecordException(const std::string& name) : std::logic_error("Próba zapisu pustego wektora: " + name) {};
 };
 
 /**
@@ -75,7 +73,7 @@ public:
  */
 class WriteException : public std::logic_error {
 public:
-	explicit WriteException(const std::string& fileName) : std::logic_error("Błąd strumienia podczas zapisywania do pliku." + fileName) {};
+	explicit WriteException(const std::string& fileName) : std::logic_error("Błąd strumienia podczas zapisywania do pliku: " + fileName) {};
 };
 
 /**
@@ -83,12 +81,12 @@ public:
  */
 class UnexpectedCharacterException : public std::logic_error {
 public:
-	explicit UnexpectedCharacterException(const std::string& clas) : std::logic_error(clas + "Wczytano nieoczekiwany znak.") {};
+	explicit UnexpectedCharacterException(const std::string& clas) : std::logic_error(clas + " Wczytano nieoczekiwany znak.") {};
 };
 
 
 /**
- * Wyjątek gdy pojawia się nieoczkiwany znak
+ * Wyjątek gdy pojawia jest próba archiwizacji zaarchiwizowanego elementu
  */
 class ArchiveArchivedException : public std::logic_error {
 public:

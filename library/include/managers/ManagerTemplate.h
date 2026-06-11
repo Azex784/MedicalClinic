@@ -4,14 +4,13 @@
 #include "Exceptions.h"
 
 /**
- * Szablon klasy dla menadzerow
+ * Szablon klasy dla klas zarządców
  */
 template <typename UniqueClass, typename UniqueRepoClass, typename PredicateT, typename UniqueParameter>
 class ManagerTemplate
 {
 protected:
 	std::shared_ptr<UniqueRepoClass> repository;
-
 public:
 	/**
 	 * Domyślny konstruktor menedżera.

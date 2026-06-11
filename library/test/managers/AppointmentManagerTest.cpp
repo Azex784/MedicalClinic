@@ -300,7 +300,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitAppointmentManager, TestSuitAppointmentManagerF
 				"2024-08-15 10:30:00"), testRoom1, 2) != nullptr);
 
 		//Poprawna zmiana
-		BOOST_TEST(appointmentManager->changeAppointment(time_from_string("2027-06-15 10:30:00"),1) == true);
+		appointmentManager->changeAppointment(time_from_string("2027-06-15 10:30:00"),1);
 
 		//Nieprawidłowa zmiana
 		BOOST_CHECK_THROW(appointmentManager->changeAppointment(time_from_string("2024-08-15 10:30:00"),1),

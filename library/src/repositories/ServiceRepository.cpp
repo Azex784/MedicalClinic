@@ -26,7 +26,7 @@ ServiceRepository::ServiceRepository()
 {
 }
 
-bool ServiceRepository::loadData()
+void ServiceRepository::loadData()
 {
 	ifstream inFile;
 	inFile.open(getFileName());
@@ -156,10 +156,9 @@ bool ServiceRepository::loadData()
 		}
 	}
 	inFile.close();
-	return true;
 }
 
-bool ServiceRepository::saveData() const
+void ServiceRepository::saveData() const
 {
 	ofstream outFile;
 
@@ -237,5 +236,4 @@ bool ServiceRepository::saveData() const
 		}
 		outFile.close();
 	}
-	return true;
 }

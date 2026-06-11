@@ -167,13 +167,12 @@ public:
 	* Czysto abstrakcyjna metoda odczytująca dane na dysku
 	* @return Zwraca wartosc określającą czy doszło do prawidłowego odczytu
 	*/
-	virtual bool loadData() = 0;
+	virtual void loadData() = 0;
 
 	/**
 	 * Czysto abstrakcyjna metoda zapisująca dane na dysku
-	 * @return Zwraca wartosc określającą czy doszło do prawidłowego zapisu
 	 */
-	virtual bool saveData() const = 0;
+	virtual void saveData() const = 0;
 };
 
 #endif //REHABILITATIONCENTRE_REPOSITORYTEMPLATE_H

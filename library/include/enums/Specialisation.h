@@ -16,7 +16,7 @@ enum class Specialisation {
     RHEUMATOLOGIST
 };
 
-
+//Konwersja do stringa
 const std::string specialisationToString(Specialisation spec);
 
 

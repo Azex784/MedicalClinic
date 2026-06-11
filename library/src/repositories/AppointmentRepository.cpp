@@ -76,7 +76,7 @@ AppointmentRepository::AppointmentRepository(
 {
 }
 
-bool AppointmentRepository::loadData()
+void AppointmentRepository::loadData()
 {
 	ifstream inFile;
 	inFile.open(getFileName());
@@ -156,10 +156,9 @@ bool AppointmentRepository::loadData()
 		}
 	}
 	inFile.close();
-	return true;
 }
 
-bool AppointmentRepository::saveData() const
+void AppointmentRepository::saveData() const
 {
 	ofstream outFile;
 
@@ -207,5 +206,4 @@ bool AppointmentRepository::saveData() const
 		}
 	}
 	outFile.close();
-	return true;
 }

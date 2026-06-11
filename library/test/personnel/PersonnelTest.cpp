@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	std::string expectedInfo = "Osoba: Walter White pracownik personelu o numerze pracownika: 2137, aktywyny zawodowo";
+	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pracownik personelu o numerze pracownika: 2137, aktywyny zawodowo";
 	BOOST_TEST(testPersonnel.getInfo() == expectedInfo);
 }
 
@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE(SettersTest)
 	testPersonnel.setIsActive(0);
 	BOOST_TEST(!testPersonnel.getIsActive());
 	//czy po zmianie zmienia sie komunikat
-	std::string expectedInfo = "Osoba: Walter White pracownik personelu o numerze pracownika: 2137, niedostępny";
+	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pracownik personelu o numerze pracownika: 2137, niedostępny";
 
 	BOOST_TEST(testPersonnel.getInfo() == expectedInfo);
 }

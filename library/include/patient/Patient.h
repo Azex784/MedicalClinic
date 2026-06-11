@@ -1,7 +1,6 @@
 #ifndef REHABILITATIONCENTRE_PATIENT_H
 #define REHABILITATIONCENTRE_PATIENT_H
 
-#include <string>
 #include "Person.h"
 #include "typedefs.h"
 

@@ -2,6 +2,7 @@
 #define REHABILITATIONCENTRE_PERSON_H
 
 #include <string>
+#include <sstream>
 
 /**
  * Klasa reprezentująca człowieka
