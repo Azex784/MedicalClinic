@@ -31,6 +31,11 @@ namespace RehabClinic
 		return false;
 	}
 
+	const LogicManagerPtr& TerminalMenu::getLogicManager() const
+	{
+		return logicManager;
+	}
+
 	bool TerminalMenu::isAmount(const string& tmp, const int& amount) const
 	{
 		if (tmp.size() != amount)
@@ -310,7 +315,7 @@ namespace RehabClinic
 	}
 
 	TerminalMenu::TerminalMenu() :
-		logicManger(make_shared<LogicManager>())
+		logicManager(make_shared<LogicManager>())
 	{
 	}
 
@@ -412,9 +417,9 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getPatientManager()->registerPatient(
+						getLogicManager()->getPatientManager()->registerPatient(
 							name, lastName, personalId, city, street, number);
-						cout << "Dodano: " << logicManger->getPatientManager()->get(personalId)->getInfo() << endl;
+						cout << "Dodano: " << getLogicManager()->getPatientManager()->get(personalId)->getInfo() << endl;
 						break;
 					}
 					catch (const LogicException& logicException)
@@ -441,8 +446,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->unregisterPatient(personalId);
-						cout << "Sukces! Udało się zaarchiwzować Pacjenta: " << logicManger->getPatientManager()->
+						getLogicManager()->unregisterPatient(personalId);
+						cout << "Sukces! Udało się zaarchiwzować Pacjenta: " << getLogicManager()->getPatientManager()->
 							get(personalId)->getInfo() << endl;
 						break;
 					}
@@ -464,7 +469,7 @@ namespace RehabClinic
 				}
 			case 3:
 				{
-					auto vector = logicManger->getPatientManager()->findAll();
+					auto vector = getLogicManager()->getPatientManager()->findAll();
 					displayAll<PatientPtr>(vector);
 
 					break;
@@ -475,7 +480,7 @@ namespace RehabClinic
 					cout << "Podaj PESEL pacjenta: ";
 					getline(cin, personalId);
 
-					auto patient = logicManger->getPatientManager()->get(personalId);
+					auto patient = getLogicManager()->getPatientManager()->get(personalId);
 					if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
 
 					break;
@@ -528,7 +533,7 @@ namespace RehabClinic
 					cout << "Podaj PESEL pacjenta: ";
 					getline(cin, personalId);
 
-					auto patient = logicManger->getPatientManager()->get(personalId);
+					auto patient = getLogicManager()->getPatientManager()->get(personalId);
 					if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
 
 					cout << "Podaj unikalne parametry personelu, który chesz przypisać do wizyty" << endl;
@@ -539,7 +544,7 @@ namespace RehabClinic
 
 						if (!isContinue()) break;
 
-						if (!findByInt<PersonnelPtr>("specjalisty", logicManger->getPersonnelManager(),
+						if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(),
 						                             searchedPersonnel))
 							continue;
 						if (contains<PersonnelPtr>(personnel, searchedPersonnel, "specjalisty"))
@@ -552,10 +557,10 @@ namespace RehabClinic
 					}
 
 					RoomPtr searchedRoom;
-					if (!findByInt<RoomPtr>("sali", logicManger->getRoomManager(), searchedRoom)) continue;
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
 
 					ServicePtr searchedService;
-					if (!findByInt<ServicePtr>("usługi", logicManger->getServiceManager(), searchedService)) continue;
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
 
 					cout << "Podaj unikalny parametr spotkania" << endl;
 					getline(cin, tmp);
@@ -573,10 +578,10 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getAppointmentManager()->arrangeAppointment(
+						getLogicManager()->getAppointmentManager()->arrangeAppointment(
 							patient, searchedService, personnel, beginDate, searchedRoom, appointmentId);
 
-						cout << "Sukces! Dodano nową wizytę: " << logicManger->getAppointmentManager()->
+						cout << "Sukces! Dodano nową wizytę: " << getLogicManager()->getAppointmentManager()->
 						                                                       get(appointmentId)->getInfo() << endl;
 						break;
 					}
@@ -616,8 +621,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getAppointmentManager()->changeAppointment(beginDate, appointmentId);
-						cout << "Sukces! Zmieniono termin wizyty: " << logicManger->getAppointmentManager()->
+						getLogicManager()->getAppointmentManager()->changeAppointment(beginDate, appointmentId);
+						cout << "Sukces! Zmieniono termin wizyty: " << getLogicManager()->getAppointmentManager()->
 							get(appointmentId)->getInfo() << endl;
 						break;
 					}
@@ -636,7 +641,7 @@ namespace RehabClinic
 					if (!checkInt(tmp, appointmentId)) continue;
 					try
 					{
-						logicManger->getAppointmentManager()->cancelAppointment(appointmentId);
+						getLogicManager()->getAppointmentManager()->cancelAppointment(appointmentId);
 						cout << "Sukces! Udało się anulować spotkanie " << endl;
 						break;
 					}
@@ -655,7 +660,7 @@ namespace RehabClinic
 					if (!checkInt(tmp, appointmentId)) continue;
 					try
 					{
-						int cost = logicManger->getAppointmentManager()->finishAppointment(appointmentId);
+						int cost = getLogicManager()->getAppointmentManager()->finishAppointment(appointmentId);
 						cout << "Sukces! Udało się zakończyć spotaknie" << endl;
 						cout << "Suma do zapłaty wynosi: " << to_string(cost) << endl;
 						break;
@@ -672,19 +677,19 @@ namespace RehabClinic
 					cout << "Podaj PESEL pacjenta: ";
 					getline(cin, personalId);
 
-					auto& patient = logicManger->getPatientManager()->get(personalId);
+					auto& patient = getLogicManager()->getPatientManager()->get(personalId);
 					if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
 
-					auto appointments = logicManger->getAppointmentManager()->getPatientAppointments(patient);
+					auto appointments = getLogicManager()->getAppointmentManager()->getPatientAppointments(patient);
 					displayAll(appointments);
 					break;
 				}
 			case 6:
 				{
 					PersonnelPtr searchedPersonnel = nullptr;
-					if (!findByInt<PersonnelPtr>("specjalisty", logicManger->getPersonnelManager(), searchedPersonnel))
+					if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(), searchedPersonnel))
 						continue;
-					auto appointments = logicManger->getAppointmentManager()->getPersonnelAppointments(
+					auto appointments = getLogicManager()->getAppointmentManager()->getPersonnelAppointments(
 						searchedPersonnel);
 					displayAll(appointments);
 					break;
@@ -692,16 +697,16 @@ namespace RehabClinic
 			case 7:
 				{
 					RoomPtr searchedRoom = nullptr;
-					if (!findByInt<RoomPtr>("sali", logicManger->getRoomManager(), searchedRoom)) continue;
-					auto appointments = logicManger->getAppointmentManager()->getRoomAppointments(searchedRoom);
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
+					auto appointments = getLogicManager()->getAppointmentManager()->getRoomAppointments(searchedRoom);
 					displayAll(appointments);
 					break;
 				}
 			case 8:
 				{
 					ServicePtr searchedService = nullptr;
-					if (!findByInt<ServicePtr>("usługi", logicManger->getServiceManager(), searchedService)) continue;
-					auto appointments = logicManger->getAppointmentManager()->getServiceAppointments(searchedService);
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
+					auto appointments = getLogicManager()->getAppointmentManager()->getServiceAppointments(searchedService);
 					displayAll(appointments);
 					break;
 				}
@@ -758,9 +763,9 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getRoomManager()->addRehabillitationRoom(
+						getLogicManager()->getRoomManager()->addRehabillitationRoom(
 							roomNumber, accessibleEquipment, maxCapacity);
-						cout << "Sukces! Udało się dodać salę rehabilitacyjną: " << logicManger->getRoomManager()->
+						cout << "Sukces! Udało się dodać salę rehabilitacyjną: " << getLogicManager()->getRoomManager()->
 							get(roomNumber)->getInfo() << endl;
 						break;
 					}
@@ -787,8 +792,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getRoomManager()->addConsultationRoom(roomNumber);
-						cout << "Sukces! Udało się dodać salę konsultacyjną: " << logicManger->getRoomManager()->
+						getLogicManager()->getRoomManager()->addConsultationRoom(roomNumber);
+						cout << "Sukces! Udało się dodać salę konsultacyjną: " << getLogicManager()->getRoomManager()->
 							get(roomNumber)->getInfo() << endl;
 						break;
 					}
@@ -810,8 +815,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->removeRoom(roomNumber);
-						cout << "Sukces! Udało się wyłączyć z użytku sale: " << logicManger->getRoomManager()->
+						getLogicManager()->removeRoom(roomNumber);
+						cout << "Sukces! Udało się wyłączyć z użytku sale: " << getLogicManager()->getRoomManager()->
 							get(roomNumber)->getInfo() << endl;
 						break;
 					}
@@ -828,13 +833,13 @@ namespace RehabClinic
 				}
 			case 4:
 				{
-					auto w = logicManger->getRoomManager()->findAll();
+					auto w = getLogicManager()->getRoomManager()->findAll();
 					displayAll<RoomPtr>(w);
 					break;
 				}
 			case 5:
 				{
-					if (!findByInt<RoomPtr>("sali", logicManger->getRoomManager())) continue;
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager())) continue;
 					break;
 				}
 			default:
@@ -890,12 +895,12 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getServiceManager()->addRehabilitation(serviceCost, serviceDuration,
+						getLogicManager()->getServiceManager()->addRehabilitation(serviceCost, serviceDuration,
 						                                                    serviceName, serviceId,
 						                                                    requiredEquipment,
 						                                                    requiredSpecialisation, requiredDocSize,
 						                                                    requiredNurseSize);
-						cout << "Sukces! Udało się dodać rehabilitacje: " << logicManger->getServiceManager()->
+						cout << "Sukces! Udało się dodać rehabilitacje: " << getLogicManager()->getServiceManager()->
 							get(serviceId)->getInfo() << endl;
 						break;
 					}
@@ -949,12 +954,12 @@ namespace RehabClinic
 					}
 					try
 					{
-						logicManger->getServiceManager()->addConsultation(serviceCost, serviceDuration,
+						getLogicManager()->getServiceManager()->addConsultation(serviceCost, serviceDuration,
 						                                                  serviceName, serviceId,
 						                                                  requiredSpecialisation, topic,
 						                                                  requiredDocSize,
 						                                                  isOnline);
-						cout << "Sukces! Udało się dodać konsultacje: " << logicManger->getServiceManager()->
+						cout << "Sukces! Udało się dodać konsultacje: " << getLogicManager()->getServiceManager()->
 							get(serviceId)->getInfo() << endl;
 						break;
 					}
@@ -986,8 +991,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->removeService(serviceId);
-						cout << "Sukces! Udało się wyłączyć z użytku usługę: " << logicManger->getServiceManager()->
+						getLogicManager()->removeService(serviceId);
+						cout << "Sukces! Udało się wyłączyć z użytku usługę: " << getLogicManager()->getServiceManager()->
 							get(serviceId)->getInfo() << endl;
 						break;
 					}
@@ -1009,13 +1014,13 @@ namespace RehabClinic
 				}
 			case 4:
 				{
-					auto w = logicManger->getServiceManager()->findAll();
+					auto w = getLogicManager()->getServiceManager()->findAll();
 					displayAll<ServicePtr>(w);
 					break;
 				}
 			case 5:
 				{
-					if (!findByInt<ServicePtr>("usługi", logicManger->getServiceManager())) continue;
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager())) continue;
 					break;
 				}
 			default:
@@ -1081,10 +1086,10 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getPersonnelManager()->addDoctor(name, lastName, personnelId, specialisations,
+						getLogicManager()->getPersonnelManager()->addDoctor(name, lastName, personnelId, specialisations,
 						                                              doctorCost);
 
-						cout << "Sukces! Udało się dodać lekarza: " << logicManger->getPersonnelManager()->
+						cout << "Sukces! Udało się dodać lekarza: " << getLogicManager()->getPersonnelManager()->
 							get(personnelId)->getInfo() << endl;
 						break;
 					}
@@ -1113,9 +1118,9 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->getPersonnelManager()->addNurse(name, lastName, personnelId);
+						getLogicManager()->getPersonnelManager()->addNurse(name, lastName, personnelId);
 
-						cout << "Sukces! Udało się dodać pielęgniarke: " << logicManger->getPersonnelManager()->
+						cout << "Sukces! Udało się dodać pielęgniarke: " << getLogicManager()->getPersonnelManager()->
 							get(personnelId)->getInfo() << endl;
 						break;
 					}
@@ -1146,8 +1151,8 @@ namespace RehabClinic
 
 					try
 					{
-						logicManger->removePersonnel(personnelId);
-						cout << "Sukces! Udało się zwolnić specialistę: " << logicManger->getPersonnelManager()->
+						getLogicManager()->removePersonnel(personnelId);
+						cout << "Sukces! Udało się zwolnić specialistę: " << getLogicManager()->getPersonnelManager()->
 							get(personnelId)->getInfo() << endl;
 						break;
 					}
@@ -1164,13 +1169,13 @@ namespace RehabClinic
 				}
 			case 4:
 				{
-					auto w = logicManger->getPersonnelManager()->findAll();
+					auto w = getLogicManager()->getPersonnelManager()->findAll();
 					displayAll<PersonnelPtr>(w);
 					break;
 				}
 			case 5:
 				{
-					if (!findByInt<PersonnelPtr>("specialisty", logicManger->getPersonnelManager())) continue;
+					if (!findByInt<PersonnelPtr>("specialisty", getLogicManager()->getPersonnelManager())) continue;
 					break;
 				}
 			default:

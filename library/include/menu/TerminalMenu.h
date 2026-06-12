@@ -9,8 +9,11 @@ namespace RehabClinic
 */
 class TerminalMenu
 {
+public:
+	const LogicManagerPtr& getLogicManager() const;
+
 private:
-	LogicManagerPtr logicManger;
+	LogicManagerPtr logicManager;
 
 	//Metoda sprawdzająca prawidłową liczbę znaków.
 	bool isAmount(const std::string& tmp, const int& amount) const;
