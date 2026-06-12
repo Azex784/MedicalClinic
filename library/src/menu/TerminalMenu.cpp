@@ -536,6 +536,9 @@ namespace RehabClinic
 					while (true)
 					{
 						PersonnelPtr searchedPersonnel;
+
+						if (!isContinue()) break;
+
 						if (!findByInt<PersonnelPtr>("specjalisty", logicManger->getPersonnelManager(),
 						                             searchedPersonnel))
 							continue;
@@ -546,7 +549,6 @@ namespace RehabClinic
 						}
 						personnel.push_back(searchedPersonnel);
 
-						if (!isContinue()) break;
 					}
 
 					RoomPtr searchedRoom;
