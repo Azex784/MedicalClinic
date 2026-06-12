@@ -1,4 +1,4 @@
-@startuml
+    @startuml
 
 
 !include ../managers/appointmentManager.puml
@@ -6,6 +6,7 @@
 !include ../managers/personnelManager.puml
 !include ../managers/roomManager.puml
 !include ../managers/serviceManager.puml
+!include ../managers/managerTemplate.puml
 
 !include ../managers/logicManager.puml
 
@@ -15,7 +16,6 @@
 !include ../model/personnel/doctor.puml
 !include ../model/personnel/nurse.puml
 !include ../model/personnel/personnel.puml
-
 
 !include ../model/rooms/consultationRoom.puml
 !include ../model/rooms/rehabilitationRoom.puml
@@ -29,16 +29,18 @@
 !include ../model/functions.puml
 !include ../model/person.puml
 
+!include ../model/enums/specialisation.puml
+!include ../model/enums/equipment.puml
+
 !include ../repositories/appointmentRepository.puml
-
 !include ../repositories/patientRepository.puml
-
 !include ../repositories/personnelRepository.puml
 !include ../repositories/roomRepository.puml
 !include ../repositories/serviceRepository.puml
+!include ../repositories/repositoryTemplate.puml
 
-!include ../relationships/specialisationRelationship.puml
-!include ../relationships/equipmentRelationship.puml
+!include ../menu/terminalMenu.puml
+
 
 
 

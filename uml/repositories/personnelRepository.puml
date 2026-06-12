@@ -1,13 +1,8 @@
 @startuml
 
 class PersonnelRepository{
-+get(personnelId:usnigned int):Personnel
-+add(personnel:Personnel):void
-+remove(personnel:Personnel):void
-+report():string
-+size():int
-+findBy(predicate:PersonnelPredicate):Personnel[0..*]
-+findAll():Personnel[0..*]
++loadData(): void
++saveData(): const void
 }
 
 PersonnelRepository  "[0..*]" --> Personnel
@@ -16,11 +11,8 @@ PersonnelRepository ..> PersonnelPredicate
 !ifndef UKRYJ_NOTATKI
 
 note right of PersonnelRepository
-Klasa pełniąca rolę magazynu danych.
-Zapewnia standardowy interfejs do
-zarządzania obiektami: dodawanie, usuwanie,
-pobieranie oraz zaawansowane wyszukiwanie
-za pomocą predykatów.
+Klasa przechowująca dane o pracownikach.
+Dziedziczy po szablonie RepositoryTemplate.
 end note
 
 !endif

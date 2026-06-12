@@ -36,7 +36,7 @@ namespace RehabClinic
 		/**
 		 * Domyślny abstrakcyjny destruktor klasy.
 		 */
-		virtual ~Service();
+		virtual ~Service() = 0;
 
 		/**
 		 * Metoda wirtualna zwracająca pełne informacje o usłudze.

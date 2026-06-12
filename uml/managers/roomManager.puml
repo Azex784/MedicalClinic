@@ -1,11 +1,8 @@
 @startuml
 
 class RoomManager {
-+getRoom(roomNumber:unsigned int):Room
 +addConsultationRoom(roomNumber:unsigned int):void
 +addRehabillitationRoom(roomNumber:unsigned int, vector<equipment>, maxCapacity: int):void
-+findRooms(predicate:RoomPredicate):Room[0..*]
-+findAll():Rooml[0..*]
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -14,8 +11,8 @@ note right of RoomManager
 Klasa zarządzająca pomieszczeniami.
 addRehabillitationRoom - dodaje pokój zabiegowy
 addConsultationRoom dodaje pokój konsultacyjny
-findRooms - predykt zwracający konkrente niearchiwalne pokoje
-findAll - zawraca wszystkie niearchiwalny pokoje
+Dziedziczy z klasy która jest tworzona na podstawie template i zawiera
+odpowiednie klasy sal.
 end note
 
 !endif

@@ -1,22 +1,16 @@
 @startuml
 
-
-enum equipment {
+enum Equipment {
     NONE,
     PHYSICAL_THERAPY_DEVICE,
     KINESITHERAPY_SPACE,
     ROBOTIC_SYSTEM
 }
 
-
-note right of equipment
+note right of Equipment
 Typ wyliczeniowy zawierający cały sprzęt mogący
 być potrzebny przez daną rehabilitacje i będący
 dostępny w danym pokoju.
 end note
-
-
-RehabillitationRoom .up.> equipment : używa >
-Rehabillitation .up.> equipment : potrzebuje >
 
 @enduml

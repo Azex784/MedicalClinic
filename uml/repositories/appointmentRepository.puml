@@ -1,13 +1,11 @@
 @startuml
 
 class AppointmentRepository{
-+get(appointmentId:unsigned int):Appointment
-+add(appointment:Appointment):void
-+remove(appointment:Appointment):void
-+report():string
-+size():int
-+findBy(predicate:AppointmentPredicate):Appointment[0..*]
-+findAll():Appointment[0..*]
++AppointmentRepository(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
++AppointmentRepository(fileName: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
++loadData(): void
++saveData(): const void
+
 }
 
 AppointmentRepository "[0..*]"  -->  Appointment
@@ -17,12 +15,18 @@ AppointmentRepository ..>  AppointmentPredicate
 !ifndef UKRYJ_NOTATKI
 
 note right of AppointmentRepository
-Klasa pełniąca rolę magazynu danych.
-Zapewnia standardowy interfejs do
-zarządzania obiektami: dodawanie, usuwanie,
-pobieranie oraz zaawansowane wyszukiwanie
-za pomocą predykatów.
+Klasa przechowująca dane o wizytach.
+Dziedziczy po szablonie RepositoryTemplate.
+Zawiera inne repozytorra, ponieważ w wizytach
+dokonywany jest zapis tylko unikalnych identyfikatory, a pełne obiekty
+odnajdywane są w dedykowanych magazynach danych.
+loadData - wczytuje dane z pliku tekstowego na dysku do pamięci operacyjnej RAM.
+saveData - zapisuje aktualny stan kolekcji z pamięci ulotnej do trwałej pamięci fizycznej.
 end note
 
+AppointmentRepository --> PatientRepository : -patientRepository >
+AppointmentRepository --> PersonnelRepository : -personnelRepository >
+AppointmentRepository --> RoomRepository : -roomRepository >
+AppointmentRepository --> ServiceRepository : -serviceRepository >
 !endif
 @enduml

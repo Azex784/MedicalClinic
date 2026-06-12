@@ -1,8 +1,6 @@
 @startuml
 
-
-
-enum  specialisation {
+enum Specialisation {
     PHYSIOTHERAPIST,
     ORTHOPEDIST,
     NEUROLOGIST,
@@ -14,15 +12,12 @@ enum  specialisation {
 
 !ifndef UKRYJ_NOTATKI
 
-note right of specialisation
+note right of Specialisation
 Typ wyliczeniowy zawierający wszystkie
 specjalności.
 end note
 
 !endif
 
-
-Doctor .up.> specialisation : używa >
-Service .up.> specialisation : potrzebuje >
 
 @enduml

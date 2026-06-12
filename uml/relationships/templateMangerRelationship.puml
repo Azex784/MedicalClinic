@@ -2,10 +2,13 @@
 
 'Do pdfa
 
-!include ../managers/logicManager.puml
+!include ../managers/managerTemplate.puml
+!include ../managers/serviceManager.puml
 !include ../managers/patientManager.puml
 !include ../managers/personnelManager.puml
-!include ../managers/serviceManager.puml
 !include ../managers/roomManager.puml
+
+
+
 
 @enduml

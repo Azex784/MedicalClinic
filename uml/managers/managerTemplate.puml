@@ -1,0 +1,39 @@
+@startuml
+
+class "ManagerTemplate<UniqueClass, UniqueRepoClass, PredicateT, UniqueParameter>" as ManagerTemplate {
++ManagerTemplate()
++ManagerTemplate(fileName: string)
++<<virtual>> ~ManagerTemplate()
++getRepository(): const std::shared_ptr<UniqueRepoClass>&
++get(up: UniqueParameter): const UniqueClass
++findBy(up: PredicateT): const std::vector<UniqueClass>
++findAll(): const std::vector<UniqueClass>
+}
+
+ManagerTemplate *--> UniqueRepoClass
+ManagerTemplate ..> UniqueClass
+ManagerTemplate ..> PredicateT
+ManagerTemplate ..> UniqueParameter
+
+
+ManagerTemplate <|-- PatientManager
+ManagerTemplate <|-- PersonnelManager
+ManagerTemplate <|-- RoomManager
+ManagerTemplate <|-- ServiceManager
+
+!ifndef UKRYJ_NOTATKI
+
+note right of ManagerTemplate
+Szablon klasy dla klas zarządców.
+ManagerTemplate() - domyślny konstruktor, inicjuje puste repozytorium i wczytuje dane z pliku
+ManagerTemplate(fileName) - inicjuje repozytorium z konkretną ścieżką dostępu(głownie do testów)
+~ManagerTemplate() - destruktor, automatycznie zapisuje dane
+getRepository - zwraca obiekt repozytorium przypisany do tego menedżera
+get - zwraca pojedynczy obiekt na podstawie unikalnego parametru
+findBy - wyszukuje obiekty spełniające zadany warunek (predykat)
+findAll - zwraca wszystkie obiekty znajdujące się obecnie w repozytorium
+end note
+
+!endif
+
+@enduml

@@ -1,10 +1,16 @@
 @startuml
 
 class Rehabillitation{
--requiredEqupiment: vector<equpiment>
+-requiredEquipment: vector<equipment>
 -requiredNurseSize: unsigned int
 +getInfo():string
 }
+
+
+enum Equipment
+
+Rehabillitation --> Equipment : lista sprzętu >
+
 
 !ifndef UKRYJ_NOTATKI
 

@@ -1,6 +1,6 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+'Do pdf
 
 !include ../model/services/service.puml
 !include ../model/appointment.puml

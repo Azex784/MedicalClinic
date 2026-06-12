@@ -7,13 +7,18 @@ abstract class Service{
 -serviceId:unsigned int
 -requiredDoctorSize: unsigned int
 -requiredDoctorSpec:specialisation
--isAvailble:bool
+-isAvailable:bool
 -isArchive:bool
-+{abstract}getInfo():string
++<<virtual>>getInfo():string
++{abstract}~Service();
 }
 
 Service <|-- Consultation
 Service <|-- Rehabillitation
+
+enum Specialisation
+
+Service ..> Specialisation : używa >
 
 !ifndef UKRYJ_NOTATKI
 
@@ -29,6 +34,7 @@ requiredDoctorSpec - wymagane specjalności lekarza
 isAvailable - czy jest dostępna dana usługa -
 potrzebne do przeprowadzenia usługi
 isArchive - czy jest archiwalna
+Abstrakcyjny destruktor zapewnia abstrakcyjność klasy.
 end note
 
 !endif

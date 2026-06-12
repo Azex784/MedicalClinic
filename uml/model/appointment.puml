@@ -6,6 +6,7 @@ class Appointment{
 -appointmentId:usigned int
 -appointmentCost:unsigned int
 +getInfo():string
++setAppointmentCost(): unsigned int
 }
 
 Appointment --> Patient
@@ -26,7 +27,9 @@ prestiżu przydzielonych lekarzy i koszt usługi.
 Klasa ta zawiera wskaznik do pacjenta, usługi i zawiera liste
 przydzielonego personelu do danej usługi i do pokoju w którym
 spotkanie się odbędzie.
-
+Przelicza całkowity koszt wizyty dodajc koszt prestizu lekarzy i uslugi
+Można tyko raz tego uzyc
+Zwraca ostateczny koszt po przeliczeniu.
 end note
 
 !endif

@@ -1,13 +1,13 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+'Do pdfa
 
 !include ../repositories/patientRepository.puml
 !include ../repositories/personnelRepository.puml
-!include ../repositories/appointmentRepository.puml
 !include ../repositories/serviceRepository.puml
 !include ../repositories/roomRepository.puml
-!include ../repositories/storageContainer.puml
+!include ../repositories/repositoryTemplate.puml
+!include ../repositories/appointmentRepository.puml
 
 
 

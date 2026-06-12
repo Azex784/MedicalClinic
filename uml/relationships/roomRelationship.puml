@@ -1,6 +1,6 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+'Do pdfa
 
 !include ../model/rooms/room.puml
 !include ../model/rooms/consultationRoom.puml
