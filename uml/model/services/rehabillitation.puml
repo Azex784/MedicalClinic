@@ -6,6 +6,12 @@ class Rehabillitation{
 +getInfo():string
 }
 
+
+enum Equipment
+
+Rehabillitation --> Equipment : lista sprzętu >
+
+
 !ifndef UKRYJ_NOTATKI
 
 note right of Rehabillitation

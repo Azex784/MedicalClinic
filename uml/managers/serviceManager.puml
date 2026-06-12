@@ -1,11 +1,8 @@
 @startuml
 
 class ServiceManager {
-  +getService(serviceID:unsigned int):Service
   +addConsultation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredSpecialisation:specialisation,topic:string):Service
   +addRehabillitation(serviceCost:unsigned int, serviceDuration:unsigned int, serviceName:string,serviceId:unsigned int, requiredEqupiment:vector<equipment>, requiredSpecialisation:specialisation):Service
-  +findServices(predicate:ServicePredicate):Service[0..*]
-  +findAllServices():Service[0..*]
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -14,14 +11,13 @@ note right of ServiceManager
 Klasa zarządzająca usługami.
 addConsultation - dodaje kosnultacje
 addRehabillitation - dodaje zabieg
-findServices - predykt zwracający konkretne usługi
-findAllServices - zawraca wszystkie niearchiwalne usługi
+Dziedziczy z klasy która jest tworzona na podstawie template i zawiera
+odpowiednie klasy usługi.
 end note
 
 !endif
 
 ServiceManager *--> ServiceRepository
-
 ServiceManager  ..> Service
 ServiceManager ..> ServicePredicate
 

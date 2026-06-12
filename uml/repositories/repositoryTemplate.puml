@@ -1,0 +1,50 @@
+@startuml
+
+abstract class "RepositoryTemplate<T, PredicateT, UniqueParameter>" as RepositoryTemplate {
+  -fileName: string
+  +RepositoryTemplate(fileName: string)
+  +clearVectorOfData(): void
+  +getFileName(): const string&
+  +get(i: int): T
+  +add(t: T): void
+  +remove(t: T): void
+  +report(): const string
+  +size(): const int
+  +findBy(predicate: PredicateT): const vector<T>
+  +findAll(): const vector<T>&
+  +getVectorOfData(): const vector<T>&
+  +get(up: UniqueParameter): const T
+  +{abstract} loadData(): void
+  +{abstract} saveData(): void
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of RepositoryTemplate
+Szablon klasy abstrakcyjnej dla repozytoriów.
+Zarządza kolekcją danych w pamięci i wymusza implementację zapisu/odczytu.
+clearVectorOfData - czyści wektor z danymi.
+get - pobiera obiekt na podstawie indeksu lub unikalnego parametru.
+add - dodaje nowy obiekt do repozytorium (ignoruje duplikaty).
+remove - usuwa wskazany obiekt z kolekcji.
+report - generuje sformatowany raport tekstowy o stanie i zawartości repozytorium.
+size - zwraca aktualną liczbę elementów w kolekcji.
+findBy - filtruje i wyszukuje elementy spełniające warunek predykatu.
+findAll - zwraca pełną listę wszystkich obiektów.
+loadData - czysto abstrakcyjna metoda odczytująca dane z dysku.
+saveData - czysto abstrakcyjna metoda zapisująca dane na dysk.
+end note
+
+!endif
+
+RepositoryTemplate --> "0..*" T : -vectorOfData >
+
+RepositoryTemplate ..> PredicateT
+RepositoryTemplate ..> UniqueParameter
+
+RepositoryTemplate <|-- PatientRepository
+RepositoryTemplate <|-- PersonnelRepository
+RepositoryTemplate <|-- RoomRepository
+RepositoryTemplate <|-- ServiceRepository
+
+@enduml

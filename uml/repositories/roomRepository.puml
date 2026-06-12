@@ -1,13 +1,8 @@
 @startuml
 
 class RoomRepository{
-+get(roomNumber:unsigned int):Room
-+add(room:Room):void
-+remove(room:Room):void
-+report():string
-+size():int
-+findBy(predicate:RoomPredicate):Room[0..*]
-+findAll():Room[0..*]
++loadData(): void
++saveData(): const void
 }
 
 RoomRepository  "[0..*]" --> Room
@@ -16,11 +11,8 @@ RoomRepository ..> RoomPredicate
 !ifndef UKRYJ_NOTATKI
 
 note right of RoomRepository
-Klasa pełniąca rolę magazynu danych.
-Zapewnia standardowy interfejs do
-zarządzania obiektami: dodawanie, usuwanie,
-pobieranie oraz zaawansowane wyszukiwanie
-za pomocą predykatów.
+Klasa przechowująca dane o pracownikach.
+Dziedziczy po szablonie RepositoryTemplate.
 end note
 
 !endif

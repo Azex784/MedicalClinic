@@ -1,18 +1,23 @@
 @startuml
 
 class AppointmentManager {
+  +AppointmentManager(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
+  +AppointmentManager(fileName: string, fileNameArchive: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
+  +~AppointmentManager()
+  +findByArchive(up: AppointmentPredicate): Appointment[0..*]
+  +findAllArchive(): Appointment[0..*]
   +getPatientAppointments(patient:Patient):Appointment[0..*]
   +getPersonnelAppointments(personnel:Appointment):Appointment[0..*]
   +getServiceAppointments(service:Service):Appointment[0..*]
   +getAppointmentsCost(patient:Patient):unsigned int
   +getRoomAppointments(room:Room):Appointment[0..*]
 
-  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime):Appointment
-  +finishAppointment(patient:Patient, beginTime:ptime):unsigned int
+  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime,appointmentId:unsigned int):Appointment
+  +finishAppointment(appointmentId:unsigned int):unsigned int
 
-  +changeAppointment(ptime _date):bool
-  +cancelAppointment(ptime _date):void
-
+  +changeAppointment(appointmentId:unsigned int,ptime _date):bool
+  +cancelAppointment(appointmentId:unsigned int):void
+  +isDate(appointments: Appointment[0..*], beginDate: ptime, duration: unsigned int): bool
   +findAppointments(predicate:AppointmentPredicate):Appointment[0..*]
   +findAllAppointments():Appointment[0..*]
 }
@@ -21,27 +26,27 @@ class AppointmentManager {
 
 note right of AppointmentManager
 Klasa zarządzająca spotkaniami.
-getAppointmentsCost - wysokość kosztów danego klienta;
+getAppointmentsCost - wysokość kosztów danego pacjenta.
 arrangeAppointment - metoda służąca do zorganizowania
-spotkania. Dodaje ona spotkanie do repozytrium activeAppointments.
+spotkania. Dodaje ona spotkanie do repozytorium (repository).
 Musi ona sprawdzić czy personel i dany
-pokój i pacjent jest wolny w danym terminie
-W przypadku braku dopasowania odpowiednich pararametrów
+pokój i pacjent jest wolny w danym terminie.
+W przypadku braku dopasowania odpowiednich parametrów
 podanych elementów zostaje zwrócony nullptr.
 finishAppointment - metoda szukająca konkretne
-spotkanie klienta, wyliczajacy końcowy koszt.
+spotkanie klienta, wyliczająca końcowy koszt.
 Sprawia ona również że klasa Appointment zostaje dodana do
-repozytrium archive.
-findAppointments - predykt zwracający konkretne aktywne spotkania
-findAllAppointments - zawraca wszystkich aktywne spotkania
-changeAppointment - metoda zmienia date spotkania, jeśli dany
-termin i personel jest w tej dacie wolny. Zwraca wartość czy powiodła się ta zmiana.
+repozytorium archive (archiveRepository).
+findBy / findByArchive - predykat zwracający konkretne wizyty.
+findAll / findAllArchive - zwraca wszystkie wizyty.
+changeAppointment - metoda zmienia datę spotkania, jeśli dany
+termin i personel jest w tej dacie wolny.
 cancelAppointment - anulowanie umówionego spotkania.
-Zwalnia przydział wszystkich zasobów związanych z tym spotkaniem i dodaje do archive dane spotkanie
+Zwalnia przydział wszystkich zasobów związanych z tym spotkaniem
+i usuwa z repozytorium pliku.
 end note
 
 !endif
-
 
 AppointmentManager *-->  "archiveAppointments" AppointmentRepository
 
@@ -50,5 +55,9 @@ AppointmentManager *-->  "activeAppointments" AppointmentRepository
 AppointmentManager  ..>  Appointment
 AppointmentManager ..>  AppointmentPredicate
 
+AppointmentManager ..> Patient
+AppointmentManager ..> Personnel
+AppointmentManager ..> Room
+AppointmentManager ..> Service
 
 @enduml

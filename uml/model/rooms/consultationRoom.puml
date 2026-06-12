@@ -2,6 +2,7 @@
 
 class ConsultationRoom{
 +getInfo():string
++canBeUsed(equipment:Equipment):bool
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -10,6 +11,8 @@ note right of ConsultationRoom
 Klasa reprezentująca salę przeznaczoną
 do przeprowadzania konsultacji.
 Klasa ta dziedziczy z klasy Room.
+canBeUsed(equipment:Equipment) - zwraca true tylko
+dla NONE
 end note
 
 !endif

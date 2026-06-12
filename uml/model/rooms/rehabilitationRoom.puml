@@ -4,7 +4,12 @@ class RehabillitationRoom{
 -accessibleEqupiment:vector<equpiment>
 -maxCapacity: int
 +getInfo():string
++canBeUsed(equipment:Equipment):bool
 }
+
+enum Equipment
+
+RehabillitationRoom --> Equipment : lista sprzętu >
 
 !ifndef UKRYJ_NOTATKI
 

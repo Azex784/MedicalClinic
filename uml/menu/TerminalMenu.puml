@@ -1,0 +1,46 @@
+@startuml
+
+class TerminalMenu {
+  + start(): void
+  + patient(): void
+  + appointment(): void
+  + room(): void
+  + service(): void
+  + personnel(): void
+  - isAmount(tmp: string, amount: int): bool
+  - isDigit(znak: char, max: char): int
+  - contains<type>(vectorOfValues: vector<type>, value: type, itemName: string): bool
+  - checkInt(tmp: string, liczba: unsigned int&): bool
+  - displayAll<type>(wektor: vector<type>): void
+  - displaySpecific<type>(patient: type, msg: string): bool
+  - loadEquipment(accessibleEquipment: vector<Equipment>&): bool
+  - jointLoadService(serviceCost: unsigned int&, requiredDocSize: unsigned int&, serviceId: unsigned int&, serviceDuration: unsigned int&, specjalizacja: Specialisation&, serviceName: string&): bool
+  - jointLoadPersonnel(firstName: string&, lastName: string&, personnelId: unsigned int&): bool
+  - specialisationLoad(spec: Specialisation&): bool
+  - findByInt<type, ManagerPtr>(msg: string, manage: ManagerPtr): bool
+  - findByInt<type, ManagerPtr>(msg: string, manager: ManagerPtr, returnValue: type&): bool
+  - isContinue(): bool
+  - checkDate(dateInput: string, timeInput: string, parsedTime: ptime&): bool
+}
+
+!ifndef UKRYJ_NOTATKI
+
+note right of TerminalMenu
+Klasa zapewniająca tekstowe interaktywne menu
+do obsługi centrum rehabilitacji.
+Gromadzi wejście od użytkownika, waliduje je
+i przekazuje żądania do warstwy logiki (LogicManager).
+start - rozpoczęcie obsługi .
+patient - obsługa pacjenta.
+appointment - obsługa wizyty.
+room - obsługa sal.
+service - obsługa usług.
+personnel - obsługa pracowników.
+
+end note
+
+!endif
+
+TerminalMenu *--> LogicManager : -logicManger >
+
+@enduml

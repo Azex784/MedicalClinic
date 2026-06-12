@@ -4,12 +4,16 @@ abstract class Room{
 -roomNumber:unsigned int
 -isActive:bool
 -isArchive:bool
-+{abstract} canBeUsed():bool
-+{abstract} getInfo(): string
++{abstract} canBeUsed(equipment:Equipment):bool
++<<virtual>> getInfo(): string
 }
 
 Room <|-- RehabillitationRoom
 Room <|-- ConsultationRoom
+
+enum Equipment
+
+Room ..> Equipment : używa >
 
 !ifndef UKRYJ_NOTATKI
 
@@ -18,6 +22,7 @@ Abstrakcyjna klasa reprezentująca sale.
 roomNumber - numer sali
 isActive - czy sala jest dostępna
 isArchive - czy jest archiwalny
+canBeUsed(equipment:Equipment):bool - określa czy dany pokój zawiera dany sprzęt
 end note
 
 !endif

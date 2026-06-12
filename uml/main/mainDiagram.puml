@@ -16,7 +16,6 @@
 !include ../model/personnel/nurse.puml
 !include ../model/personnel/personnel.puml
 
-
 !include ../model/rooms/consultationRoom.puml
 !include ../model/rooms/rehabilitationRoom.puml
 !include ../model/rooms/room.puml
@@ -29,6 +28,9 @@
 !include ../model/functions.puml
 !include ../model/person.puml
 
+!include ../model/enums/specialisation.puml
+!include ../model/enums/equipment.puml
+
 !include ../repositories/appointmentRepository.puml
 
 !include ../repositories/patientRepository.puml
@@ -37,8 +39,8 @@
 !include ../repositories/roomRepository.puml
 !include ../repositories/serviceRepository.puml
 
-!include ../relationships/specialisationRelationship.puml
-!include ../relationships/equipmentRelationship.puml
+!include ../menu/terminalMenu.puml
+
 
 
 

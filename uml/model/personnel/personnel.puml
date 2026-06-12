@@ -4,7 +4,7 @@ abstract class Personnel{
 -isActive:bool
 -personnelId:unsigned int
 +{abstract} canConductTreatment(specialization:Specialization):bool
-+{abstract} getInfo(): string
++<<virtual>>getInfo(): string
 }
 
 Personnel <|-- Doctor
@@ -26,11 +26,13 @@ canConductTreatment - metoda
 sprawdzająca czy lekarz potrafi
 dokonac zabiegu z dana specjalzaccji,
 w przypadku pielegniarek zakladamy,
-ze potrafi on zawsze zreali
+ze potrafi zrealizować każdy zabieg poza
+neourlogicznym
 end note
 
+enum Equipment
 
-
+Personnel ..> Equipment : używa >
 
 !endif
 @enduml

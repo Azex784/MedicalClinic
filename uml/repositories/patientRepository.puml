@@ -1,13 +1,8 @@
 @startuml
 
 class PatientRepository{
-+get(personalNumber:string):Patient
-+add(patient:Patient):void
-+remove(patient:Patient):void
-+report():string
-+size():int
-+findBy(predicate:PatientPredicate):Patient[0..*]
-+findAll():Patient[0..*]
++loadData(): void
++saveData(): const void
 }
 
 PatientRepository "[0..*]" --> Patient
@@ -16,11 +11,8 @@ PatientRepository ..> PatientPredicate
 !ifndef UKRYJ_NOTATKI
 
 note right of PatientRepository
-Klasa pełniąca rolę magazynu danych.
-Zapewnia standardowy interfejs do
-zarządzania obiektami: dodawanie, usuwanie,
-pobieranie oraz zaawansowane wyszukiwanie
-za pomocą predykatów.
+Klasa przechowująca dane o pacjentach.
+Dziedziczy po szablonie RepositoryTemplate.
 end note
 
 !endif

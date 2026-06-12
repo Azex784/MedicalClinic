@@ -4,9 +4,12 @@ class Doctor{
 -specialisation:vector<specialisation>
 -doctorCost:unsinged int
 +getInfo():string
++canConductTreatment(specialization:Specialization):bool
 }
 
 !ifndef UKRYJ_NOTATKI
+
+enum Equipment
 
 note right of Doctor
 Klasa reprezentująca doktora.
@@ -14,6 +17,8 @@ Klasa ta dziedziczy z klasy Personnel.
 specialisation określa jakie specjalizacje ma doktor - jakie zabiegi może dokonać.
 doctorCost - określa koszt lekarza w zależności od prestiżu lekarza.
 end note
+
+Doctor --> Equipment : lista specjalności >
 
 !endif
 

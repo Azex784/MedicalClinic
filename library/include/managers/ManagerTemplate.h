@@ -7,8 +7,6 @@ namespace RehabClinic
 {/**
  * Szablon klasy dla klas zarządców
  */
-
-
 	template <typename UniqueClass, typename UniqueRepoClass, typename PredicateT, typename UniqueParameter>
 	class ManagerTemplate
 	{
