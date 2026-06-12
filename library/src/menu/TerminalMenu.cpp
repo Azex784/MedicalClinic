@@ -1,4 +1,4 @@
-#include "menu/TerminalMenu.h"
+#include "../../include/menu/TerminalMenu.h"
 
 #include <Appointment.h>
 #include <iostream>
@@ -13,7 +13,7 @@ namespace RehabClinic
 	{
 		string tmp1;
 		int input1;
-		cout << "Czy chesz kontynuować? (0/1)" << endl;
+		cout << "Czy chesz kontynuować/ropocząć wpisywanie potrzebnych danych? (0/1)" << endl;
 
 		getline(cin, tmp1);
 
@@ -259,10 +259,8 @@ namespace RehabClinic
 
 		return true;
 	}
-
-
 	template <typename type, typename ManagerPtr>
-	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager) const
+	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type* returnValue) const
 	{
 		string tmp2;
 		unsigned int uniqeParamter = 0;
@@ -271,31 +269,14 @@ namespace RehabClinic
 		getline(cin, tmp2);
 
 		if (!checkInt(tmp2, uniqeParamter)) return false;
-
 		auto thing = manager->get(uniqeParamter);
+		if (returnValue != nullptr) *returnValue = manager->get(uniqeParamter);
+
 		if (!displaySpecific<type>(thing, "identyfikator" + msg)) return false;
 
 		return true;
 	}
 
-
-	template <typename type, typename ManagerPtr>
-	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type& returnValue) const
-	{
-		string tmp2;
-		unsigned int uniqeParamter = 0;
-
-		cout << "Podaj identyfikator " + msg + ", która ma być wyświetlony: ";
-		getline(cin, tmp2);
-
-		if (!checkInt(tmp2, uniqeParamter)) return false;
-
-		returnValue = manager->get(uniqeParamter);
-
-		if (!displaySpecific<type>(returnValue, "identyfikator" + msg)) return false;
-
-		return true;
-	}
 
 	bool TerminalMenu::checkDate(const string& dateInput, const string& timeInput,
 	                             boost::posix_time::ptime& parsedTime) const
@@ -319,7 +300,586 @@ namespace RehabClinic
 	{
 	}
 
-	//Do optymalizacji
+	bool TerminalMenu::registerPatient() const
+	{
+		string name, lastName, personalId, city, street, number;
+
+		cout << "Podaj imię: ";
+		getline(cin, name);
+
+		cout << "Podaj nazwisko: ";
+		getline(cin, lastName);
+
+		cout << "Podaj PESEL: ";
+		getline(cin, personalId);
+
+		cout << "Podaj miasto: ";
+		getline(cin, city);
+
+		cout << "Podaj ulicę: ";
+		getline(cin, street);
+
+		cout << "Podaj numer: ";
+		getline(cin, number);
+
+		try
+		{
+			getLogicManager()->getPatientManager()->registerPatient(
+				name, lastName, personalId, city, street, number);
+			cout << "Dodano: " << getLogicManager()->getPatientManager()->get(personalId)->getInfo() << endl;
+			return true;
+		}
+		catch (const LogicException& logicException)
+		{
+			cerr << logicException.what() << endl;
+			return false;
+		}
+		catch (const length_error& length_error)
+		{
+			cerr << length_error.what() << endl;
+			return false;;
+		}
+		catch (const ExistException& existException)
+		{
+			cerr << existException.what() << endl;
+			return false;;
+		}
+	}
+
+	bool TerminalMenu::archivePatient() const
+	{
+		string personalId;
+		cout << "Podaj PESEL pacjenta: ";
+		getline(cin, personalId);
+
+		try
+		{
+			getLogicManager()->unregisterPatient(personalId);
+			cout << "Sukces! Udało się zaarchiwzować Pacjenta: " << getLogicManager()->getPatientManager()->
+				get(personalId)->getInfo() << endl;
+			return true;
+		}
+		catch (const NoExistException& noExistException)
+		{
+			cerr << noExistException.what() << endl;
+			return false;
+		}
+		catch (const DateException& dateException)
+		{
+			cerr << dateException.what() << endl;
+			return false;
+		}
+		catch (const ArchiveArchivedException& logicException)
+		{
+			cerr << logicException.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addRehabilitationRoom() const
+	{
+		string tmp2;
+		unsigned int roomNumber = 0;
+		unsigned int maxCapacity = 0;
+		vector<Equipment> accessibleEquipment;
+
+		cout << "Podaj numer sali: ";
+		getline(cin, tmp2);
+
+		if (!checkInt(tmp2, roomNumber)) return false;
+
+		cout << "Podaj maksymlną ilość specjalistów: ";
+		getline(cin, tmp2);
+
+		if (!checkInt(tmp2, maxCapacity)) return false;
+
+		if (!loadEquipment(accessibleEquipment)) return false;
+
+		try
+		{
+			getLogicManager()->getRoomManager()->addRehabillitationRoom(
+				roomNumber, accessibleEquipment, maxCapacity);
+			cout << "Sukces! Udało się dodać salę rehabilitacyjną: " << getLogicManager()->getRoomManager()
+				->
+				get(roomNumber)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cerr << le.what() << endl;
+			return false;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addRehabilitationService() const
+	{
+		string tmp2, serviceName;
+		unsigned int serviceCost, serviceDuration, requiredNurseSize, requiredDocSize, serviceId;
+		vector<Equipment> requiredEquipment;
+		Specialisation requiredSpecialisation;
+
+		if (!jointLoadService(serviceCost, requiredDocSize, serviceId, serviceDuration,
+		                      requiredSpecialisation,
+		                      serviceName))
+			return false;
+
+		cout << "Podaj potrzebną ilość pielęgniarek: ";
+		getline(cin, tmp2);
+		if (!checkInt(tmp2, requiredNurseSize)) return false;
+
+		if (!loadEquipment(requiredEquipment)) return false;
+
+		try
+		{
+			getLogicManager()->getServiceManager()->addRehabilitation(serviceCost, serviceDuration,
+			                                                          serviceName, serviceId,
+			                                                          requiredEquipment,
+			                                                          requiredSpecialisation, requiredDocSize,
+			                                                          requiredNurseSize);
+			cout << "Sukces! Udało się dodać rehabilitacje: " << getLogicManager()->getServiceManager()->
+				get(serviceId)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cerr << le.what() << endl;
+			return false;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (length_error& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addConsultationService() const
+	{
+		string tmp2, serviceName, topic;
+		unsigned int serviceCost, serviceDuration, requiredDocSize, serviceId, input1;
+		Specialisation requiredSpecialisation;
+		bool isOnline;
+
+		if (!jointLoadService(serviceCost, requiredDocSize, serviceId, serviceDuration,
+		                      requiredSpecialisation,
+		                      serviceName))
+			return false;
+
+		cout << "Podaj tematu konsultacji: ";
+		getline(cin, topic);
+
+		cout << "Czy konsultacja jest w trybie online(<0>,<1>)? " << endl;
+
+		getline(cin, tmp2);
+
+		if (!isAmount(tmp2, 1)) return false;
+		input1 = isDigit(tmp2[0], '1');
+		if (input1 == -1) return false;
+
+		switch (input1)
+		{
+		case 0:
+			isOnline = false;
+			break;
+		case 1:
+			isOnline = true;
+			break;
+		}
+		try
+		{
+			getLogicManager()->getServiceManager()->addConsultation(serviceCost, serviceDuration,
+			                                                        serviceName, serviceId,
+			                                                        requiredSpecialisation, topic,
+			                                                        requiredDocSize,
+			                                                        isOnline);
+			cout << "Sukces! Udało się dodać konsultacje: " << getLogicManager()->getServiceManager()->
+				get(serviceId)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cerr << le.what() << endl;
+			return false;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (length_error& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addConsultationRoom() const
+	{
+		string tmp2;
+		unsigned int roomNumber = 0;
+
+		cout << "Podaj numer sali: ";
+		getline(cin, tmp2);
+
+		if (!checkInt(tmp2, roomNumber)) return false;
+
+		try
+		{
+			getLogicManager()->getRoomManager()->addConsultationRoom(roomNumber);
+			cout << "Sukces! Udało się dodać salę konsultacyjną: " << getLogicManager()->getRoomManager()->
+				get(roomNumber)->getInfo() << endl;
+			return true;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::dismissPersonnel() const
+	{
+		string tmp2;
+		unsigned int personnelId = 0;
+
+		cout << "Podaj identyfikator specialisty, który ma zostać zwolniony(zaarchiwiowany): ";
+		getline(cin, tmp2);
+		if (!checkInt(tmp2, personnelId)) return false;
+
+		try
+		{
+			getLogicManager()->removePersonnel(personnelId);
+			cout << "Sukces! Udało się zwolnić specialistę: " << getLogicManager()->getPersonnelManager()->
+				get(personnelId)->getInfo() << endl;
+			return true;
+		}
+		catch (NoExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (const ArchiveArchivedException& logicException)
+		{
+			cerr << logicException.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addNurse() const
+	{
+		string tmp2, name, lastName;
+		unsigned int personnelId = 0;
+
+		if (!jointLoadPersonnel(name, lastName, personnelId)) return false;
+
+		try
+		{
+			getLogicManager()->getPersonnelManager()->addNurse(name, lastName, personnelId);
+
+			cout << "Sukces! Udało się dodać pielęgniarke: " << getLogicManager()->getPersonnelManager()->
+				get(personnelId)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cerr << le.what() << endl;
+			return false;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (length_error& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::deactivateService() const
+	{
+		string tmp2;
+		unsigned int serviceId = 0;
+
+		cout << "Podaj identyfikator, usługi która ma być wyłączona z użytku: ";
+		getline(cin, tmp2);
+
+		if (!checkInt(tmp2, serviceId)) return false;
+
+		try
+		{
+			getLogicManager()->removeService(serviceId);
+			cout << "Sukces! Udało się wyłączyć z użytku usługę: " << getLogicManager()->getServiceManager()
+				->
+				get(serviceId)->getInfo() << endl;
+			return true;
+		}
+		catch (NoExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (const ArchiveArchivedException& logicException)
+		{
+			cerr << logicException.what() << endl;
+			return false;
+		}
+		catch (const DateException& dateException)
+		{
+			cerr << dateException.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::addDoctor() const
+	{
+		string tmp2, name, lastName;
+		unsigned int personnelId, doctorCost;
+		vector<Specialisation> specialisations;
+
+		if (!jointLoadPersonnel(name, lastName, personnelId)) return false;
+
+		cout << "Podaj koszt prestiżu lekarza: ";
+		getline(cin, tmp2);
+		if (!checkInt(tmp2, doctorCost)) return false;;
+
+		while (true)
+		{
+			Specialisation spc;
+			if (!specialisationLoad(spc))
+			{
+				cerr << "Wprowadzona niepoprawną specjalizację." << endl;
+				continue;
+			}
+
+			if (contains<Specialisation>(specialisations, spc, "specjalizacji")) continue;
+
+			specialisations.push_back(spc);
+
+			if (!isContinue()) break;
+		}
+
+		try
+		{
+			getLogicManager()->getPersonnelManager()->addDoctor(
+				name, lastName, personnelId, specialisations,
+				doctorCost);
+
+			cout << "Sukces! Udało się dodać lekarza: " << getLogicManager()->getPersonnelManager()->
+			                                                                  get(personnelId)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cerr << le.what() << endl;
+			return false;
+		}
+		catch (ExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (length_error& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::deactivateRoom() const
+	{
+		string tmp2;
+		unsigned int roomNumber = 0;
+
+		cout << "Podaj numer sali, która ma być wyłączona z użytku: ";
+		getline(cin, tmp2);
+
+		if (!checkInt(tmp2, roomNumber)) return false;
+
+		try
+		{
+			getLogicManager()->removeRoom(roomNumber);
+			cout << "Sukces! Udało się wyłączyć z użytku sale: " << getLogicManager()->getRoomManager()->
+				get(roomNumber)->getInfo() << endl;
+			return true;
+		}
+		catch (NoExistException& ee)
+		{
+			cerr << ee.what() << endl;
+			return false;
+		}
+		catch (const ArchiveArchivedException& logicException)
+		{
+			cerr << logicException.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::finishAppointment() const
+	{
+		string tmp;
+		unsigned int appointmentId;
+
+		cout << "Podaj unikalny parametr spotkania" << endl;
+		getline(cin, tmp);
+		if (!checkInt(tmp, appointmentId)) return false;
+		try
+		{
+			int cost = getLogicManager()->getAppointmentManager()->finishAppointment(appointmentId);
+			cout << "Sukces! Udało się zakończyć spotaknie" << endl;
+			cout << "Suma do zapłaty wynosi: " << to_string(cost) << endl;
+			return true;
+		}
+		catch (LogicException& de)
+		{
+			cerr << de.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::cancelAppointment() const
+	{
+		string tmp;
+		unsigned int appointmentId;
+
+		cout << "Podaj unikalny parametr spotkania" << endl;
+		getline(cin, tmp);
+		if (!checkInt(tmp, appointmentId)) return false;
+		try
+		{
+			getLogicManager()->getAppointmentManager()->cancelAppointment(appointmentId);
+			cout << "Sukces! Udało się anulować spotkanie " << endl;
+			return true;
+		}
+		catch (LogicException& de)
+		{
+			cerr << de.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::arrangeAppointment() const
+	{
+		string personalId, date, hour, tmp;
+		unsigned int appointmentId;
+		boost::posix_time::ptime beginDate;
+		vector<PersonnelPtr> personnel;
+
+		cout << "Podaj odpowiednie unikalne wartości poszczególnych atrybutów spotkania." << endl;
+
+		cout << "Podaj PESEL pacjenta: ";
+		getline(cin, personalId);
+
+		auto patient = getLogicManager()->getPatientManager()->get(personalId);
+		if (!displaySpecific<PatientPtr>(patient, "pesel")) return false;
+
+		cout << "Podaj unikalne parametry personelu, który chesz przypisać do wizyty" << endl;
+
+		while (true)
+		{
+			PersonnelPtr searchedPersonnel;
+
+			if (!isContinue()) break;
+
+			if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(),
+			                             &searchedPersonnel))
+				continue;
+			if (contains<PersonnelPtr>(personnel, searchedPersonnel, "specjalisty"))
+			{
+				if (!isContinue()) break;
+				else continue;
+			}
+			personnel.push_back(searchedPersonnel);
+		}
+
+		RoomPtr searchedRoom;
+		if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), &searchedRoom)) return false;
+
+		ServicePtr searchedService;
+		if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), &searchedService)) return false;
+
+
+		cout << "Podaj unikalny parametr spotkania" << endl;
+		getline(cin, tmp);
+		if (!checkInt(tmp, appointmentId)) return false;
+
+
+		cout << "Podaj date rozpoczęcia spotkania (format: YYYY-MM-DD)" << endl;
+		getline(cin, date);
+
+		cout << "Podaj godzinę rozpoczęcia spotkania (format: HH:MM)" << endl;
+		getline(cin, hour);
+
+		if (!checkDate(date, hour, beginDate)) return false;
+
+		try
+		{
+			getLogicManager()->getAppointmentManager()->arrangeAppointment(
+				patient, searchedService, personnel, beginDate, searchedRoom, appointmentId);
+
+			cout << "Sukces! Dodano nową wizytę: " << getLogicManager()->getAppointmentManager()->
+			                                                             get(appointmentId)->getInfo() << endl;
+			return true;
+		}
+		catch (LogicException& le)
+		{
+			cout << le.what() << endl;
+			return false;
+		}
+		catch (DateException& de)
+		{
+			cout << de.what() << endl;
+			return false;
+		}
+		catch (ActivityException& ae)
+		{
+			cout << ae.what() << endl;
+			return false;
+		}
+	}
+
+	bool TerminalMenu::changeAppointment() const
+	{
+		unsigned int appointmentId;
+		string date, time, tmp;
+		boost::posix_time::ptime beginDate;
+
+		cout << "Podaj unikalny parametr spotkania" << endl;
+		getline(cin, tmp);
+		if (!checkInt(tmp, appointmentId)) return false;
+
+		cout << "Podaj date rozpoczęcia spotkania (format - 'YYYY-MM-DD')" << endl;
+		getline(cin, date);
+
+		cout << "Podaj godzinę rozpoczęcia spotkania (format - 'HH:MM')" << endl;
+		getline(cin, time);
+
+		if (!checkDate(date, time, beginDate)) return false;
+
+		try
+		{
+			getLogicManager()->getAppointmentManager()->changeAppointment(beginDate, appointmentId);
+			cout << "Sukces! Zmieniono termin wizyty: " << getLogicManager()->getAppointmentManager()->
+			                                                                  get(appointmentId)->getInfo() << endl;
+			return true;
+		}
+		catch (DateException& de)
+		{
+			cerr << de.what() << endl;
+			return false;
+		}
+	}
+
 	void TerminalMenu::start() const
 	{
 		cout << "Witaj w centrum rehabilitacji!" << endl;
@@ -367,7 +927,6 @@ namespace RehabClinic
 		}
 	}
 
-	//Do optymalizacji
 	void TerminalMenu::patient() const
 	{
 		cout << "Wybrałeś obsługę pacjenta!" << endl;
@@ -395,77 +954,13 @@ namespace RehabClinic
 				break;
 			case 1:
 				{
-					string name, lastName, personalId, city, street, number;
-
-					cout << "Podaj imię: ";
-					getline(cin, name);
-
-					cout << "Podaj nazwisko: ";
-					getline(cin, lastName);
-
-					cout << "Podaj PESEL: ";
-					getline(cin, personalId);
-
-					cout << "Podaj miasto: ";
-					getline(cin, city);
-
-					cout << "Podaj ulicę: ";
-					getline(cin, street);
-
-					cout << "Podaj numer: ";
-					getline(cin, number);
-
-					try
-					{
-						getLogicManager()->getPatientManager()->registerPatient(
-							name, lastName, personalId, city, street, number);
-						cout << "Dodano: " << getLogicManager()->getPatientManager()->get(personalId)->getInfo() << endl;
-						break;
-					}
-					catch (const LogicException& logicException)
-					{
-						cerr << logicException.what() << endl;
-						continue;
-					}
-					catch (const length_error& length_error)
-					{
-						cerr << length_error.what() << endl;
-						continue;
-					}
-					catch (const ExistException& existException)
-					{
-						cerr << existException.what() << endl;
-						continue;
-					}
+					if (registerPatient()) break;
+					continue;
 				}
 			case 2:
 				{
-					string personalId;
-					cout << "Podaj PESEL pacjenta: ";
-					getline(cin, personalId);
-
-					try
-					{
-						getLogicManager()->unregisterPatient(personalId);
-						cout << "Sukces! Udało się zaarchiwzować Pacjenta: " << getLogicManager()->getPatientManager()->
-							get(personalId)->getInfo() << endl;
-						break;
-					}
-					catch (const NoExistException& noExistException)
-					{
-						cerr << noExistException.what() << endl;
-						continue;
-					}
-					catch (const DateException& dateException)
-					{
-						cerr << dateException.what() << endl;
-						continue;
-					}
-					catch (const ArchiveArchivedException& logicException)
-					{
-						cerr << logicException.what() << endl;
-						continue;
-					}
+					if (archivePatient()) break;
+					continue;
 				}
 			case 3:
 				{
@@ -491,7 +986,6 @@ namespace RehabClinic
 		}
 	}
 
-	//Do optymalizacji
 	void TerminalMenu::appointment() const
 	{
 		cout << "Wybrałeś obsługę wizyty!" << endl;
@@ -523,153 +1017,23 @@ namespace RehabClinic
 				break;
 			case 1:
 				{
-					string personalId, date, hour;
-					unsigned int appointmentId;
-					boost::posix_time::ptime beginDate;
-					vector<PersonnelPtr> personnel;
-
-					cout << "Podaj odpowiednie unikalne wartości poszczególnych atrybutów spotkania." << endl;
-
-					cout << "Podaj PESEL pacjenta: ";
-					getline(cin, personalId);
-
-					auto patient = getLogicManager()->getPatientManager()->get(personalId);
-					if (!displaySpecific<PatientPtr>(patient, "pesel")) continue;
-
-					cout << "Podaj unikalne parametry personelu, który chesz przypisać do wizyty" << endl;
-
-					while (true)
-					{
-						PersonnelPtr searchedPersonnel;
-
-						if (!isContinue()) break;
-
-						if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(),
-						                             searchedPersonnel))
-							continue;
-						if (contains<PersonnelPtr>(personnel, searchedPersonnel, "specjalisty"))
-						{
-							if (!isContinue()) break;
-							else continue;
-						}
-						personnel.push_back(searchedPersonnel);
-
-					}
-
-					RoomPtr searchedRoom;
-					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
-
-					ServicePtr searchedService;
-					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
-
-					cout << "Podaj unikalny parametr spotkania" << endl;
-					getline(cin, tmp);
-					if (!checkInt(tmp, appointmentId)) continue;
-
-
-					cout << "Podaj date rozpoczęcia spotkania (format: YYYY-MM-DD)" << endl;
-					getline(cin, date);
-
-					cout << "Podaj godzinę rozpoczęcia spotkania (format: HH:MM)" << endl;
-					getline(cin, hour);
-
-					if (!checkDate(date, hour, beginDate)) continue;
-
-
-					try
-					{
-						getLogicManager()->getAppointmentManager()->arrangeAppointment(
-							patient, searchedService, personnel, beginDate, searchedRoom, appointmentId);
-
-						cout << "Sukces! Dodano nową wizytę: " << getLogicManager()->getAppointmentManager()->
-						                                                       get(appointmentId)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cout << le.what() << endl;
-						continue;
-					}
-					catch (DateException& de)
-					{
-						cout << de.what() << endl;
-						continue;
-					}
-					catch (ActivityException& ae)
-					{
-						cout << ae.what() << endl;
-						continue;
-					}
+					if (arrangeAppointment()) break;
+					continue;
 				}
 			case 2:
 				{
-					unsigned int appointmentId;
-					string date, time;
-					boost::posix_time::ptime beginDate;
-
-					cout << "Podaj unikalny parametr spotkania" << endl;
-					getline(cin, tmp);
-					if (!checkInt(tmp, appointmentId)) continue;
-
-					cout << "Podaj date rozpoczęcia spotkania (format - 'YYYY-MM-DD')" << endl;
-					getline(cin, date);
-
-					cout << "Podaj godzinę rozpoczęcia spotkania (format - 'HH:MM')" << endl;
-					getline(cin, time);
-
-					if (!checkDate(date, time, beginDate)) continue;
-
-					try
-					{
-						getLogicManager()->getAppointmentManager()->changeAppointment(beginDate, appointmentId);
-						cout << "Sukces! Zmieniono termin wizyty: " << getLogicManager()->getAppointmentManager()->
-							get(appointmentId)->getInfo() << endl;
-						break;
-					}
-					catch (DateException& de)
-					{
-						cerr << de.what() << endl;
-						continue;
-					}
+					if (changeAppointment()) break;
+					continue;
 				}
 			case 3:
 				{
-					unsigned int appointmentId;
-
-					cout << "Podaj unikalny parametr spotkania" << endl;
-					getline(cin, tmp);
-					if (!checkInt(tmp, appointmentId)) continue;
-					try
-					{
-						getLogicManager()->getAppointmentManager()->cancelAppointment(appointmentId);
-						cout << "Sukces! Udało się anulować spotkanie " << endl;
-						break;
-					}
-					catch (LogicException& de)
-					{
-						cerr << de.what() << endl;
-						continue;
-					}
+					if (cancelAppointment()) break;
+					continue;
 				}
 			case 4:
 				{
-					unsigned int appointmentId;
-
-					cout << "Podaj unikalny parametr spotkania" << endl;
-					getline(cin, tmp);
-					if (!checkInt(tmp, appointmentId)) continue;
-					try
-					{
-						int cost = getLogicManager()->getAppointmentManager()->finishAppointment(appointmentId);
-						cout << "Sukces! Udało się zakończyć spotaknie" << endl;
-						cout << "Suma do zapłaty wynosi: " << to_string(cost) << endl;
-						break;
-					}
-					catch (LogicException& de)
-					{
-						cerr << de.what() << endl;
-						continue;
-					}
+					if (finishAppointment()) break;
+					continue;
 				}
 			case 5:
 				{
@@ -687,7 +1051,8 @@ namespace RehabClinic
 			case 6:
 				{
 					PersonnelPtr searchedPersonnel = nullptr;
-					if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(), searchedPersonnel))
+					if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(),
+					                             &searchedPersonnel))
 						continue;
 					auto appointments = getLogicManager()->getAppointmentManager()->getPersonnelAppointments(
 						searchedPersonnel);
@@ -697,7 +1062,7 @@ namespace RehabClinic
 			case 7:
 				{
 					RoomPtr searchedRoom = nullptr;
-					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), &searchedRoom)) continue;
 					auto appointments = getLogicManager()->getAppointmentManager()->getRoomAppointments(searchedRoom);
 					displayAll(appointments);
 					break;
@@ -705,8 +1070,10 @@ namespace RehabClinic
 			case 8:
 				{
 					ServicePtr searchedService = nullptr;
-					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
-					auto appointments = getLogicManager()->getAppointmentManager()->getServiceAppointments(searchedService);
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), &searchedService))
+						continue;
+					auto appointments = getLogicManager()->getAppointmentManager()->getServiceAppointments(
+						searchedService);
 					displayAll(appointments);
 					break;
 				}
@@ -715,7 +1082,6 @@ namespace RehabClinic
 		}
 	}
 
-	//Do optymalizacji
 	void TerminalMenu::room() const
 	{
 		cout << "Wybrałeś obsługe sali!" << endl;
@@ -744,92 +1110,18 @@ namespace RehabClinic
 				break;
 			case 1:
 				{
-					string tmp2;
-					unsigned int roomNumber = 0;
-					unsigned int maxCapacity = 0;
-					vector<Equipment> accessibleEquipment;
-
-					cout << "Podaj numer sali: ";
-					getline(cin, tmp2);
-
-					if (!checkInt(tmp2, roomNumber)) continue;
-
-					cout << "Podaj maksymlną ilość specjalistów: ";
-					getline(cin, tmp2);
-
-					if (!checkInt(tmp2, maxCapacity)) continue;
-
-					if (!loadEquipment(accessibleEquipment)) continue;
-
-					try
-					{
-						getLogicManager()->getRoomManager()->addRehabillitationRoom(
-							roomNumber, accessibleEquipment, maxCapacity);
-						cout << "Sukces! Udało się dodać salę rehabilitacyjną: " << getLogicManager()->getRoomManager()->
-							get(roomNumber)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cerr << le.what() << endl;
-						continue;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addRehabilitationRoom()) break;
+					continue;
 				}
 			case 2:
 				{
-					string tmp2;
-					unsigned int roomNumber = 0;
-
-					cout << "Podaj numer sali: ";
-					getline(cin, tmp2);
-
-					if (!checkInt(tmp2, roomNumber)) continue;
-
-					try
-					{
-						getLogicManager()->getRoomManager()->addConsultationRoom(roomNumber);
-						cout << "Sukces! Udało się dodać salę konsultacyjną: " << getLogicManager()->getRoomManager()->
-							get(roomNumber)->getInfo() << endl;
-						break;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addConsultationRoom()) break;
+					continue;
 				}
 			case 3:
 				{
-					string tmp2;
-					unsigned int roomNumber = 0;
-
-					cout << "Podaj numer sali, która ma być wyłączona z użytku: ";
-					getline(cin, tmp2);
-
-					if (!checkInt(tmp2, roomNumber)) continue;
-
-					try
-					{
-						getLogicManager()->removeRoom(roomNumber);
-						cout << "Sukces! Udało się wyłączyć z użytku sale: " << getLogicManager()->getRoomManager()->
-							get(roomNumber)->getInfo() << endl;
-						break;
-					}
-					catch (NoExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (const ArchiveArchivedException& logicException)
-					{
-						cerr << logicException.what() << endl;
-						continue;
-					}
+					if (deactivateRoom()) break;
+					continue;
 				}
 			case 4:
 				{
@@ -848,7 +1140,6 @@ namespace RehabClinic
 		}
 	}
 
-	//Do optymalizacji
 	void TerminalMenu::service() const
 	{
 		cout << "Wybrałeś obsługę usługi!" << endl;
@@ -877,140 +1168,18 @@ namespace RehabClinic
 				break;
 			case 1:
 				{
-					string tmp2, serviceName;
-					unsigned int serviceCost, serviceDuration, requiredNurseSize, requiredDocSize, serviceId;
-					vector<Equipment> requiredEquipment;
-					Specialisation requiredSpecialisation;
-
-					if (!jointLoadService(serviceCost, requiredDocSize, serviceId, serviceDuration,
-					                      requiredSpecialisation,
-					                      serviceName))
-						continue;
-
-					cout << "Podaj potrzebną ilość pielęgniarek: ";
-					getline(cin, tmp2);
-					if (!checkInt(tmp2, requiredNurseSize)) continue;
-
-					if (!loadEquipment(requiredEquipment)) continue;
-
-					try
-					{
-						getLogicManager()->getServiceManager()->addRehabilitation(serviceCost, serviceDuration,
-						                                                    serviceName, serviceId,
-						                                                    requiredEquipment,
-						                                                    requiredSpecialisation, requiredDocSize,
-						                                                    requiredNurseSize);
-						cout << "Sukces! Udało się dodać rehabilitacje: " << getLogicManager()->getServiceManager()->
-							get(serviceId)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cerr << le.what() << endl;
-						continue;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (length_error& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addRehabilitationService()) break;
+					continue;
 				}
 			case 2:
 				{
-					string tmp2, serviceName, topic;
-					unsigned int serviceCost, serviceDuration, requiredDocSize, serviceId, input1;
-					Specialisation requiredSpecialisation;
-					bool isOnline;
-
-					if (!jointLoadService(serviceCost, requiredDocSize, serviceId, serviceDuration,
-					                      requiredSpecialisation,
-					                      serviceName))
-						continue;
-
-					cout << "Podaj tematat konsultacji: ";
-					getline(cin, topic);
-
-					cout << "Czy konsultacja jest w trybie online(<0>,<1>)? " << endl;
-
-					getline(cin, tmp2);
-
-					if (!isAmount(tmp2, 1)) continue;
-					input1 = isDigit(tmp2[0], '1');
-					if (input1 == -1) continue;
-
-					switch (input1)
-					{
-					case 0:
-						isOnline = false;
-						break;
-					case 1:
-						isOnline = true;
-						break;
-					}
-					try
-					{
-						getLogicManager()->getServiceManager()->addConsultation(serviceCost, serviceDuration,
-						                                                  serviceName, serviceId,
-						                                                  requiredSpecialisation, topic,
-						                                                  requiredDocSize,
-						                                                  isOnline);
-						cout << "Sukces! Udało się dodać konsultacje: " << getLogicManager()->getServiceManager()->
-							get(serviceId)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cerr << le.what() << endl;
-						continue;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (length_error& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addConsultationService()) break;
+					continue;
 				}
 			case 3:
 				{
-					string tmp2;
-					unsigned int serviceId = 0;
-
-					cout << "Podaj identyfikator, usługi która ma być wyłączona z użytku: ";
-					getline(cin, tmp2);
-
-					if (!checkInt(tmp2, serviceId)) continue;
-
-					try
-					{
-						getLogicManager()->removeService(serviceId);
-						cout << "Sukces! Udało się wyłączyć z użytku usługę: " << getLogicManager()->getServiceManager()->
-							get(serviceId)->getInfo() << endl;
-						break;
-					}
-					catch (NoExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (const ArchiveArchivedException& logicException)
-					{
-						cerr << logicException.what() << endl;
-						continue;
-					}
-					catch (const DateException& dateException)
-					{
-						cerr << dateException.what() << endl;
-						continue;
-					}
+					if (deactivateService()) break;
+					continue;
 				}
 			case 4:
 				{
@@ -1029,7 +1198,6 @@ namespace RehabClinic
 		}
 	}
 
-	//Do optymalizacji
 	void TerminalMenu::personnel() const
 	{
 		cout << "Wybrałeś obsługe personelu!" << endl;
@@ -1058,114 +1226,18 @@ namespace RehabClinic
 				break;
 			case 1:
 				{
-					string tmp2, name, lastName;
-					unsigned int personnelId, doctorCost;
-					vector<Specialisation> specialisations;
-
-					if (!jointLoadPersonnel(name, lastName, personnelId)) continue;
-
-					cout << "Podaj koszt prestiżu lekarza: ";
-					getline(cin, tmp2);
-					if (!checkInt(tmp2, doctorCost)) continue;;
-
-					while (true)
-					{
-						Specialisation spc;
-						if (!specialisationLoad(spc))
-						{
-							cerr << "Wprowadzona niepoprawną specjalizację." << endl;
-							continue;
-						}
-
-						if (contains<Specialisation>(specialisations, spc, "specjalizacji")) continue;
-
-						specialisations.push_back(spc);
-
-						if (!isContinue()) break;
-					}
-
-					try
-					{
-						getLogicManager()->getPersonnelManager()->addDoctor(name, lastName, personnelId, specialisations,
-						                                              doctorCost);
-
-						cout << "Sukces! Udało się dodać lekarza: " << getLogicManager()->getPersonnelManager()->
-							get(personnelId)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cerr << le.what() << endl;
-						continue;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (length_error& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addDoctor()) break;
+					continue;
 				}
 			case 2:
 				{
-					string tmp2, name, lastName;
-					unsigned int personnelId = 0;
-
-					if (!jointLoadPersonnel(name, lastName, personnelId)) continue;
-
-					try
-					{
-						getLogicManager()->getPersonnelManager()->addNurse(name, lastName, personnelId);
-
-						cout << "Sukces! Udało się dodać pielęgniarke: " << getLogicManager()->getPersonnelManager()->
-							get(personnelId)->getInfo() << endl;
-						break;
-					}
-					catch (LogicException& le)
-					{
-						cerr << le.what() << endl;
-						continue;
-					}
-					catch (ExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (length_error& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
+					if (addNurse()) break;
+					continue;
 				}
 			case 3:
 				{
-					string tmp2;
-					unsigned int personnelId = 0;
-
-					cout << "Podaj identyfikator specialisty, który ma zostać zwolniony(zaarchiwiowany): ";
-					getline(cin, tmp2);
-					if (!checkInt(tmp2, personnelId)) continue;
-
-					try
-					{
-						getLogicManager()->removePersonnel(personnelId);
-						cout << "Sukces! Udało się zwolnić specialistę: " << getLogicManager()->getPersonnelManager()->
-							get(personnelId)->getInfo() << endl;
-						break;
-					}
-					catch (NoExistException& ee)
-					{
-						cerr << ee.what() << endl;
-						continue;
-					}
-					catch (const ArchiveArchivedException& logicException)
-					{
-						cerr << logicException.what() << endl;
-						continue;
-					}
+					if (dismissPersonnel()) break;
+					continue;
 				}
 			case 4:
 				{

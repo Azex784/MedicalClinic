@@ -1,0 +1,10 @@
+@startuml
+
+'Do pdf
+
+!include ../model/services/service.puml
+!include ../model/services/rehabillitation.puml
+!include ../model/services/consultation.puml
+
+
+@enduml
