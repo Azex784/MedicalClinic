@@ -55,13 +55,9 @@ private:
 	bool specialisationLoad(Specialisation& spec) const;
 
 	//Metoda szablonowa znajdująca konkretne obiekty w zależności od wczytanej danej.
-	template <typename type, typename ManagerPtr>
-	bool findByInt(const std::string& msg, ManagerPtr manage) const;
-
-	//Metoda szablonowa znajdująca konkretne obiekty w zależności od wczytanej danej.
 	//Dodatkowo metoda ta pozwala na zwrócenie przez referencje znalezionej wartości.
 	template <typename type, typename ManagerPtr>
-	bool findByInt(const std::string& msg, ManagerPtr manager, type& returnValue) const;
+	bool findByInt(const std::string& msg, ManagerPtr manager, type* returnValue = nullptr) const;
 
 	//Metoda pytająca się użytkownika czy chec kontynować.
 	//Zwraca wartość logiczną w zależności od wyboru użytkownika.

@@ -1,0 +1,63 @@
+@startuml
+
+
+class "std::logic_error" as std_logic_error {
+}
+
+class ActivityException {
+  + ActivityException(thing: string)
+}
+
+class DateException {
+  + DateException(thing: string)
+}
+
+class LogicException {
+  + LogicException(msg: string)
+}
+
+class NullPointerException {
+  + NullPointerException(pointerName: string)
+}
+
+class NoExistException {
+  + NoExistException(name: string, uniqueParametr: string)
+}
+
+class ExistException {
+  + ExistException(name: string, uniqueParametr: string)
+}
+
+class OpeningException {
+  + OpeningException(fileName: string)
+}
+
+class EmptyRecordException {
+  + EmptyRecordException(name: string)
+}
+
+class WriteException {
+  + WriteException(fileName: string)
+}
+
+class UnexpectedCharacterException {
+  + UnexpectedCharacterException(clas: string)
+}
+
+class ArchiveArchivedException {
+  + ArchiveArchivedException(clas: string)
+}
+
+std_logic_error <|-- ActivityException
+std_logic_error <|-- DateException
+std_logic_error <|-- LogicException
+std_logic_error <|-- NullPointerException
+std_logic_error <|-- NoExistException
+std_logic_error <|-- ExistException
+std_logic_error <|-- OpeningException
+std_logic_error <|-- EmptyRecordException
+std_logic_error <|-- WriteException
+std_logic_error <|-- UnexpectedCharacterException
+std_logic_error <|-- ArchiveArchivedException
+
+@enduml

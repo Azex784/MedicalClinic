@@ -262,7 +262,7 @@ namespace RehabClinic
 
 
 	template <typename type, typename ManagerPtr>
-	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager) const
+	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type* returnValue) const
 	{
 		string tmp2;
 		unsigned int uniqeParamter = 0;
@@ -273,26 +273,10 @@ namespace RehabClinic
 		if (!checkInt(tmp2, uniqeParamter)) return false;
 
 		auto thing = manager->get(uniqeParamter);
+
+		if (returnValue != nullptr) *returnValue = manager->get(uniqeParamter);
+
 		if (!displaySpecific<type>(thing, "identyfikator" + msg)) return false;
-
-		return true;
-	}
-
-
-	template <typename type, typename ManagerPtr>
-	bool TerminalMenu::findByInt(const string& msg, ManagerPtr manager, type& returnValue) const
-	{
-		string tmp2;
-		unsigned int uniqeParamter = 0;
-
-		cout << "Podaj identyfikator " + msg + ", która ma być wyświetlony: ";
-		getline(cin, tmp2);
-
-		if (!checkInt(tmp2, uniqeParamter)) return false;
-
-		returnValue = manager->get(uniqeParamter);
-
-		if (!displaySpecific<type>(returnValue, "identyfikator" + msg)) return false;
 
 		return true;
 	}
@@ -545,7 +529,7 @@ namespace RehabClinic
 						if (!isContinue()) break;
 
 						if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(),
-						                             searchedPersonnel))
+						                             &searchedPersonnel))
 							continue;
 						if (contains<PersonnelPtr>(personnel, searchedPersonnel, "specjalisty"))
 						{
@@ -557,10 +541,10 @@ namespace RehabClinic
 					}
 
 					RoomPtr searchedRoom;
-					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), &searchedRoom)) continue;
 
 					ServicePtr searchedService;
-					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), &searchedService)) continue;
 
 					cout << "Podaj unikalny parametr spotkania" << endl;
 					getline(cin, tmp);
@@ -687,7 +671,7 @@ namespace RehabClinic
 			case 6:
 				{
 					PersonnelPtr searchedPersonnel = nullptr;
-					if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(), searchedPersonnel))
+					if (!findByInt<PersonnelPtr>("specjalisty", getLogicManager()->getPersonnelManager(), &searchedPersonnel))
 						continue;
 					auto appointments = getLogicManager()->getAppointmentManager()->getPersonnelAppointments(
 						searchedPersonnel);
@@ -697,7 +681,7 @@ namespace RehabClinic
 			case 7:
 				{
 					RoomPtr searchedRoom = nullptr;
-					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), searchedRoom)) continue;
+					if (!findByInt<RoomPtr>("sali", getLogicManager()->getRoomManager(), &searchedRoom)) continue;
 					auto appointments = getLogicManager()->getAppointmentManager()->getRoomAppointments(searchedRoom);
 					displayAll(appointments);
 					break;
@@ -705,7 +689,7 @@ namespace RehabClinic
 			case 8:
 				{
 					ServicePtr searchedService = nullptr;
-					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), searchedService)) continue;
+					if (!findByInt<ServicePtr>("usługi", getLogicManager()->getServiceManager(), &searchedService)) continue;
 					auto appointments = getLogicManager()->getAppointmentManager()->getServiceAppointments(searchedService);
 					displayAll(appointments);
 					break;

@@ -19,8 +19,7 @@ class TerminalMenu {
   - jointLoadService(serviceCost: unsigned int&, requiredDocSize: unsigned int&, serviceId: unsigned int&, serviceDuration: unsigned int&, specjalizacja: Specialisation&, serviceName: string&): bool
   - jointLoadPersonnel(firstName: string&, lastName: string&, personnelId: unsigned int&): bool
   - specialisationLoad(spec: Specialisation&): bool
-  - findByInt<type, ManagerPtr>(msg: string, manage: ManagerPtr): bool
-  - findByInt<type, ManagerPtr>(msg: string, manager: ManagerPtr, returnValue: type&): bool
+  - findByInt<type, ManagerPtr>(msg: string, manager: ManagerPtr, returnValue: *type): bool
   - isContinue(): bool
   - checkDate(dateInput: string, timeInput: string, parsedTime: ptime&): bool
 }

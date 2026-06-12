@@ -8,6 +8,8 @@
 !include ../managers/serviceManager.puml
 !include ../managers/managerTemplate.puml
 
+!include ../exceptions/exception.puml
+
 !include ../managers/logicManager.puml
 
 !include ../model/patient/address.puml
