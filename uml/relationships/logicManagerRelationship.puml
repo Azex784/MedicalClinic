@@ -1,8 +1,7 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+'Do pdfa
 
-!include ../managers/appointmentManager.puml
 !include ../managers/logicManager.puml
 !include ../managers/patientManager.puml
 !include ../managers/personnelManager.puml

@@ -1,9 +1,10 @@
 @startuml
 
+'Do pdfa
+
 class AppointmentManager {
   +AppointmentManager(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
   +AppointmentManager(fileName: string, fileNameArchive: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
-  +~AppointmentManager()
   +findByArchive(up: AppointmentPredicate): Appointment[0..*]
   +findAllArchive(): Appointment[0..*]
   +getPatientAppointments(patient:Patient):Appointment[0..*]

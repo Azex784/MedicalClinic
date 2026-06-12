@@ -7,7 +7,7 @@ abstract class Service{
 -serviceId:unsigned int
 -requiredDoctorSize: unsigned int
 -requiredDoctorSpec:specialisation
--isAvailble:bool
+-isAvailable:bool
 -isArchive:bool
 +<<virtual>>getInfo():string
 +{abstract}~Service();

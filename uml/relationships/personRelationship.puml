@@ -1,6 +1,6 @@
 @startuml
 
-!define UKRYJ_NOTATKI
+'Do pdfa
 
 !include ../model/patient/patient.puml
 !include ../model/patient/address.puml

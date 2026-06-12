@@ -1,7 +1,7 @@
 @startuml
 
 class Rehabillitation{
--requiredEqupiment: vector<equpiment>
+-requiredEquipment: vector<equipment>
 -requiredNurseSize: unsigned int
 +getInfo():string
 }

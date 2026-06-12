@@ -1,5 +1,7 @@
 @startuml
 
+'Do pdfaq
+
 class TerminalMenu {
   + start(): void
   + patient(): void
@@ -36,7 +38,6 @@ appointment - obsługa wizyty.
 room - obsługa sal.
 service - obsługa usług.
 personnel - obsługa pracowników.
-
 end note
 
 !endif

@@ -1,0 +1,14 @@
+@startuml
+
+'Do pdfa
+
+!include ../managers/managerTemplate.puml
+!include ../managers/serviceManager.puml
+!include ../managers/patientManager.puml
+!include ../managers/personnelManager.puml
+!include ../managers/roomManager.puml
+
+
+
+
+@enduml
