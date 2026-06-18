@@ -47,9 +47,6 @@ class TerminalMenu {
 note right of TerminalMenu
 Klasa zapewniająca tekstowe interaktywne menu
 do obsługi centrum rehabilitacji.
-Zawiera teraz wszystkie wydzielone metody
-operacyjne, co znacznie
-odchudziło główne instrukcje switch.
 end note
 !endif
 

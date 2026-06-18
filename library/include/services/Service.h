@@ -100,9 +100,9 @@ namespace RehabClinic
 
 		/**
 		 * Zmienia status dostępności usługi.
-		 * @param is_availble.
+		 * @param isAvailble.
 		 */
-		void setIsAvailable(const bool isAvailble1);
+		void setIsAvailable(const bool isAvailble);
 
 		/**
 		 * Zmienia status archiwizacji usługi.

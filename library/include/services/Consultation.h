@@ -20,7 +20,7 @@ namespace RehabClinic
 		/**
 		 * Konstruktor tworzący nowy obiekt konsultacji.
 		 * @param serviceCost Koszt przeprowadzenia konsultacji.
-		 * @param serviceDuration Przewidywany czas trwania konsultacji w minutach.
+		 * @param serviceDuration Czas trwania konsultacji w minutach.
 		 * @param serviceName Nazwa usługi konsultacyjnej.
 		 * @param serviceId Unikalny identyfikator usługi.
 		 * @param requiredDoctorSize Wymagana liczba lekarzy do przeprowadzenia konsultacji.
@@ -46,7 +46,7 @@ namespace RehabClinic
 		const std::string getInfo() const override;
 
 		/**
-		 * Pobiera temat konsultacji.
+		 * Zwraca temat konsultacji.
 		 * @return Stała referencja do łańcucha znaków przechowującego temat.
 		 */
 		const std::string& getTopic() const;

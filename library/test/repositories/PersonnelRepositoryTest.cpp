@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
         if (originalNurse != nullptr)
         {
             NursePtr loadedNurse = dynamic_pointer_cast<Nurse>(loadedPerson);
-            //Możemy jedynie sprawdzic czy zostało to wycztane, gdyz parametry pielęgniarki zostały już sprawdzone
+            //Możemy jedynie sprawdzic czy zostało to wczytane, gdyz parametry pielęgniarki zostały już sprawdzone
             BOOST_TEST_REQUIRE(loadedNurse != nullptr);
         }
     }

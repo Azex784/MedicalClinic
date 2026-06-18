@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)
     BOOST_TEST(testNurse.canConductTreatment(Specialisation::OSTEOPATH) == true);
     BOOST_TEST(testNurse.canConductTreatment(Specialisation::MASSAGE_THERAPIST) == true);
     BOOST_TEST(testNurse.canConductTreatment(Specialisation::RHEUMATOLOGIST) == true);
-    //czy nie moze przeprowadizc neurologi
+    //czy nie moze przeprowadzic zbeigu z specjalizacją neurologi
     BOOST_TEST(testNurse.canConductTreatment(Specialisation::NEUROLOGIST) == false);
 }
 

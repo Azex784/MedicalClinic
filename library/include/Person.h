@@ -36,7 +36,7 @@ namespace RehabClinic
         virtual ~Person() = default;
 
         /**
-        * Pobiera imię osoby.
+        * Zwraca imię osoby.
         * @return Stała referencja do łańcucha znaków przechowującego imię.
         */
         const std::string& getName() const;
@@ -60,7 +60,7 @@ namespace RehabClinic
         void setIsArchive(const bool isArchive1);
 
         /**
-	     * Pobiera nazwisko osoby.
+	     * Zwraca nazwisko osoby.
 	     * @return Stała referencja do łańcucha znaków przechowującego nazwisko.
 	     */
         const std::string& getLastName() const;

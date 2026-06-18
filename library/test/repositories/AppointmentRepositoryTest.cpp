@@ -101,8 +101,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointmentRepository, TestSuiteAppointmentRep
 	{
 		//Sprawdzenie prawidłowe działanie getterów
 		BOOST_TEST(appointmentRepo->getRoomRepository()->getVectorOfData()[0]->getUniqueParameter() == 101);
-		BOOST_TEST(appointmentRepo->getPatientRepository()->getVectorOfData()[0]->getUniqueParameter() == "40010112345")
-		;
+		BOOST_TEST(appointmentRepo->getPatientRepository()->getVectorOfData()[0]->getUniqueParameter() == "40010112345");
 		BOOST_TEST(appointmentRepo->getServiceRepository()->getVectorOfData()[0]->getUniqueParameter() == 101);
 		BOOST_TEST(appointmentRepo->getPersonnelRepository()->getVectorOfData()[0]->getUniqueParameter() == 100);
 	}

@@ -34,8 +34,6 @@ set(SOURCE_FILES
         src/managers/LogicManger.cpp
         src/menu/TerminalMenu.cpp
         include/menu/TerminalMenu.h
-        src/menu/MainMenu.cpp
-        include/menu/MainMenu.h
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})

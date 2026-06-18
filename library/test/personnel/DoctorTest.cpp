@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)
     BOOST_TEST(testDoctor.canConductTreatment(Specialisation::PHYSIOTHERAPIST) == true);
     BOOST_TEST(testDoctor.canConductTreatment(Specialisation::ORTHOPEDIST) == true);
 
-    // Lekarz nie posiada tej specjalizacji wiec nie powinem moc jej wykonywac
+    // Lekarz nie posiada tej specjalizacji wiec nie powinem moc wykonywac zabiegow
     BOOST_TEST(testDoctor.canConductTreatment(Specialisation::NEUROLOGIST) == false);
 }
 

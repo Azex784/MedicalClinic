@@ -56,19 +56,19 @@ namespace RehabClinic
 		const std::string getInfo() const;
 
 		/**
-	     * Pobiera datę i czas rozpoczęcia wizyty.
+	     * Zwraca datę i czas rozpoczęcia wizyty.
 	     * @return Referencja do obiektu ptime z datą rozpoczęcia.
 	     */
 		const boost::posix_time::ptime& getAppointmentBeginDate() const;
 
 		/**
-	     * Pobiera datę i czas zakończenia wizyty.
+	     * Zwraca datę i czas zakończenia wizyty.
 	     * @return Referencja do obiektu ptime z datą zakończenia.
 	     */
 		const boost::posix_time::ptime& getAppointmentEndDate() const;
 
 		/**
-	     * Pobiera unikalny identyfikator wizyty.
+	     * Zwraca unikalny identyfikator wizyty.
 	     * @return ID wizyty jako int
 	     */
 		unsigned int getUniqueParameter() const;
@@ -79,13 +79,13 @@ namespace RehabClinic
 		unsigned int getAppointmentCost() const;
 
 		/**
-	     * Pobiera listę(vector) personelu przypisanego do wizyty.
+	     * Zwraca listę(vector) personelu przypisanego do wizyty.
 	     * @return Stała referencja do wektora personelu.
 	     */
 		const std::vector<PersonnelPtr>& getPersonnel() const;
 
 		/**
-	     * Pobiera pacjenta przypisanego do wizyty.
+	     * Zwraca pacjenta przypisanego do wizyty.
 	     * @return Stała referencja na wskaźnik pacjenta.
 	     */
 		const PatientPtr& getPatient() const;
@@ -108,7 +108,7 @@ namespace RehabClinic
 
 		/**
 	     * Przelicza całkowity koszt wizyty dodajc koszt prestizu lekarzy i uslugi
-	     * Można tyko raz tego uzyc
+	     * Można tyko raz tego użyć.
 	     * @return Zwraca ostateczny koszt po przeliczeniu.
 	     */
 		const unsigned int setAppointmentCost();
