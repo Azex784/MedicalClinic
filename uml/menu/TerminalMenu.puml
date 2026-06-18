@@ -1,14 +1,33 @@
 @startuml
 
-'Do pdfaq
-
 class TerminalMenu {
+  - logicManager: LogicManagerPtr
+
+  + TerminalMenu()
+  + ~TerminalMenu()
+  + getLogicManager(): const LogicManagerPtr&
   + start(): void
   + patient(): void
   + appointment(): void
   + room(): void
   + service(): void
   + personnel(): void
+  + registerPatient(): bool
+  + archivePatient(): bool
+  + arrangeAppointment(): bool
+  + changeAppointment(): bool
+  + addRehabilitationRoom(): bool
+  + addConsultationRoom(): bool
+  + deactivateRoom(): bool
+  + addRehabilitationService(): bool
+  + addConsultationService(): bool
+  + deactivateService(): bool
+  + cancelAppointment(): bool
+  + finishAppointment(): bool
+  + addNurse(): bool
+  + addDoctor(): bool
+  + dismissPersonnel(): bool
+
   - isAmount(tmp: string, amount: int): bool
   - isDigit(znak: char, max: char): int
   - contains<type>(vectorOfValues: vector<type>, value: type, itemName: string): bool
@@ -19,28 +38,21 @@ class TerminalMenu {
   - jointLoadService(serviceCost: unsigned int&, requiredDocSize: unsigned int&, serviceId: unsigned int&, serviceDuration: unsigned int&, specjalizacja: Specialisation&, serviceName: string&): bool
   - jointLoadPersonnel(firstName: string&, lastName: string&, personnelId: unsigned int&): bool
   - specialisationLoad(spec: Specialisation&): bool
-  - findByInt<type, ManagerPtr>(msg: string, manager: ManagerPtr, returnValue: *type): bool
+  - findByInt<type, ManagerPtr>(msg: string, manage: ManagerPtr, returnValue: type*): bool
   - isContinue(): bool
   - checkDate(dateInput: string, timeInput: string, parsedTime: ptime&): bool
 }
 
 !ifndef UKRYJ_NOTATKI
-
 note right of TerminalMenu
 Klasa zapewniająca tekstowe interaktywne menu
 do obsługi centrum rehabilitacji.
-Gromadzi wejście od użytkownika, waliduje je
-i przekazuje żądania do warstwy logiki (LogicManager).
-start - rozpoczęcie obsługi .
-patient - obsługa pacjenta.
-appointment - obsługa wizyty.
-room - obsługa sal.
-service - obsługa usług.
-personnel - obsługa pracowników.
+Zawiera teraz wszystkie wydzielone metody
+operacyjne, co znacznie
+odchudziło główne instrukcje switch.
 end note
-
 !endif
 
-TerminalMenu *--> LogicManager : -logicManger >
+TerminalMenu *--> LogicManager : -logicManager >
 
 @enduml
