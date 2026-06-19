@@ -165,7 +165,7 @@ namespace RehabClinic
 	{
 		ofstream outFile;
 
-		outFile.open(getFileName(), std::ios::trunc);
+		outFile.open(getFileName(), ios::trunc);
 
 		if (!outFile.is_open())
 		{

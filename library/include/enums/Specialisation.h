@@ -4,8 +4,7 @@
 #include <string>
 
 namespace RehabClinic
-{
-	/**
+{/**
  * Typ wyliczeniowy zawierajcy specjalizacje
  */
 	enum class Specialisation
