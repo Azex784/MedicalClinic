@@ -3,7 +3,7 @@
 #include "personnel/Doctor.h"
 #include "personnel/Nurse.h"
 #include "repositories/PersonnelRepository.h"
-#include "enums/Specialisation.H"
+#include "enums/Specialisation.h"
 #include "typedefs.h"
 #include <fstream>
 #include <vector>
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
     BOOST_TEST_REQUIRE(personnelRepo1->getVectorOfData().size() == personnelRepo->getVectorOfData().size());
 
     // Pętla weryfikująca odczytane obiekty
-    for (int i = 0; i < personnelRepo1->getVectorOfData().size(); i++)
+    for (int i = 0; i < (int)personnelRepo1->getVectorOfData().size(); i++)
     {
         PersonnelPtr loadedPerson = personnelRepo1->getVectorOfData()[i];
         PersonnelPtr originalPerson = personnelRepo->getVectorOfData()[i];
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
             BOOST_TEST_REQUIRE(loadedDoctor->getSpecialisation().size() == originalDoctor->getSpecialisation().size());
 
             // Weryfikacja wartości enuma
-            for (int j = 0; j < loadedDoctor->getSpecialisation().size(); j++)
+            for (int j = 0; j < (int)loadedDoctor->getSpecialisation().size(); j++)
             {
                 BOOST_TEST(specialisationToString(loadedDoctor->getSpecialisation()[j]) ==
                            specialisationToString(originalDoctor->getSpecialisation()[j]));

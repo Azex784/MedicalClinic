@@ -88,7 +88,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteServiceRepository, TestSuiteServiceRepositoryF
 		BOOST_TEST_REQUIRE(serviceRepo1->getVectorOfData().size() == serviceRepo->getVectorOfData().size());
 
 		// Pętla weryfikująca
-		for (int i = 0; i < serviceRepo1->getVectorOfData().size(); i++)
+		for (int i = 0; i < (int)serviceRepo1->getVectorOfData().size(); i++)
 		{
 			ServicePtr loadedService = serviceRepo1->getVectorOfData()[i];
 			ServicePtr originalService = serviceRepo->getVectorOfData()[i];
@@ -134,7 +134,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteServiceRepository, TestSuiteServiceRepositoryF
 					getRequiredEqupiment().size());
 
 				// Weryfikacja wartości wektora enumów
-				for (int j = 0; j < loadedRehabillitation->getRequiredEqupiment().size(); j++)
+				for (int j = 0; j < (int)loadedRehabillitation->getRequiredEqupiment().size(); j++)
 				{
 					BOOST_TEST(equipmentToString(loadedRehabillitation->getRequiredEqupiment()[j]) ==
 						equipmentToString(originalRehabillitation->getRequiredEqupiment()[j]));

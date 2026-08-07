@@ -31,7 +31,7 @@ namespace RehabClinic
         return requiredDoctorSize;
     }
 
-    const Specialisation Service::getRequiredDoctorSpec() const
+    Specialisation Service::getRequiredDoctorSpec() const
     {
         return requiredDoctorSpec;
     }

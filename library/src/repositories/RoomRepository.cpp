@@ -150,7 +150,7 @@ namespace RehabClinic
 					}
 					int i;
 					//Zapisujemy enuma za pomocą inta
-					for (i = 0; eqp.size() - 1 > i; i++)
+					for (i = 0; (int)eqp.size() - 1 > i; i++)
 					{
 						outFile << static_cast<int>(rehabilitationRoom->getAccessibleEqupiment()[i]) << ",";
 					}

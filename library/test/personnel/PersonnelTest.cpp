@@ -1,5 +1,5 @@
 #include <boost/test/unit_test.hpp>
-#include "Personnel/Personnel.h"
+#include "personnel/Personnel.h"
 
 using namespace RehabClinic;
 

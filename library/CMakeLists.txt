@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.10)
 project(Library)
+
+cmake_policy(SET CMP0167 NEW)
+
 set(SOURCE_FILES
         include/typedefs.h
         include/managers/ManagerTemplate.h
@@ -36,11 +39,11 @@ set(SOURCE_FILES
         include/menu/TerminalMenu.h
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
-add_library(Library ${SOURCE_FILES})
+add_library(Library STATIC ${SOURCE_FILES})
 target_include_directories(Library PUBLIC include)
 
 enable_testing()
-find_package (Boost 1.80.0 COMPONENTS "unit_test_framework" REQUIRED)
+find_package(Boost 1.90.0 COMPONENTS unit_test_framework REQUIRED)
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include

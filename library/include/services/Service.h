@@ -78,7 +78,7 @@ namespace RehabClinic
 		 * Zwraca specjalizację wymaganą do przeprowadzenia usługi.
 		 * @return Specjalizacja lekarska zdefiniowana w enumie Specialisation.
 		 */
-		const Specialisation getRequiredDoctorSpec() const;
+		Specialisation getRequiredDoctorSpec() const;
 
 		/**
 		 * Sprawdza, czy usługa jest obecnie dostępna do rezerwacji/wykonania.

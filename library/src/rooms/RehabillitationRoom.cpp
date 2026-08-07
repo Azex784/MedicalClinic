@@ -11,7 +11,7 @@ namespace RehabClinic
 	{
 		ostringstream oss;
 		int i;
-		for (i = 0; i < getAccessibleEqupiment().size() - 1; i++)
+		for (i = 0; i < (int)getAccessibleEqupiment().size() - 1; i++)
 		{
 			oss << equipmentToString(getAccessibleEqupiment()[i]) << ", ";
 		}
@@ -30,7 +30,7 @@ namespace RehabClinic
 
 	bool RehabillitationRoom::canBeUsed(Equipment equipment) const
 	{
-		for (int i = 0; i < getAccessibleEqupiment().size(); i++)
+		for (int i = 0; i < (int)getAccessibleEqupiment().size(); i++)
 		{
 			if (equipment == getAccessibleEqupiment()[i])
 			{

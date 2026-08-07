@@ -1,7 +1,7 @@
 #ifndef REHABILITATIONCENTRE_PERSONNELMANAGER_H
 #define REHABILITATIONCENTRE_PERSONNELMANAGER_H
 
-#include "Personnel/Personnel.h"
+#include "personnel/Personnel.h"
 #include <repositories/PersonnelRepository.h>
 #include "typedefs.h"
 #include "managers/ManagerTemplate.h"

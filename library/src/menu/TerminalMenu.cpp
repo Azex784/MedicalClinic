@@ -38,7 +38,7 @@ namespace RehabClinic
 
 	bool TerminalMenu::isAmount(const string& tmp, const int& amount) const
 	{
-		if (tmp.size() != amount)
+		if ((int)tmp.size() != amount)
 		{
 			cerr << "Wprowadzono nieprawidłową ilość znaków!" << endl;
 			return false;
@@ -176,8 +176,6 @@ namespace RehabClinic
 	) const
 	{
 		string tmp2;
-		unsigned int input1;
-
 		cout << "Podaj nazwę usługi: ";
 		getline(cin, serviceName);
 
@@ -483,9 +481,9 @@ namespace RehabClinic
 
 		if (!isAmount(tmp2, 1)) return false;
 		input1 = isDigit(tmp2[0], '1');
-		if (input1 == -1) return false;
+		if ((int)input1 == -1) return false;
 
-		switch (input1)
+		switch ((int)input1)
 		{
 		case 0:
 			isOnline = false;

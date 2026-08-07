@@ -111,7 +111,7 @@ namespace RehabClinic
 	     * Można tyko raz tego użyć.
 	     * @return Zwraca ostateczny koszt po przeliczeniu.
 	     */
-		const unsigned int setAppointmentCost();
+		unsigned int setAppointmentCost();
 	};
 }
 

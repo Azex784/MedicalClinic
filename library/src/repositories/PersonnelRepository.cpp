@@ -155,7 +155,7 @@ namespace RehabClinic
 
 					int i;
 					//Zapisujemy enuma za pomocą inta
-					for (i = 0; doctor->getSpecialisation().size() - 1 > i; i++)
+					for (i = 0; (int)doctor->getSpecialisation().size() - 1 > i; i++)
 					{
 						outFile << static_cast<int>(doctor->getSpecialisation()[i]) << ",";
 					}

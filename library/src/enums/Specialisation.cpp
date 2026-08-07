@@ -16,6 +16,7 @@ namespace RehabClinic
 		case Specialisation::OSTEOPATH: return "Osteopata";
 		case Specialisation::MASSAGE_THERAPIST: return "Masażysta";
 		case Specialisation::RHEUMATOLOGIST: return "Reumatolog";
+		default: return "Unknown";
 		}
 	}
 }

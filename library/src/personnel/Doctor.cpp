@@ -32,7 +32,7 @@ namespace RehabClinic
 
 	bool Doctor::canConductTreatment(Specialisation specjalizacja) const
 	{
-		for (int i = 0; i < getSpecialisation().size(); i++)
+		for (int i = 0; i < (int)getSpecialisation().size(); i++)
 		{
 			if (specjalizacja == getSpecialisation()[i])
 			{
@@ -45,9 +45,9 @@ namespace RehabClinic
 	const std::string Doctor::getInfo() const
 	{
 		ostringstream ss;
-		for (int i = 0; i < getSpecialisation().size(); i++)
+		for (int i = 0; i < (int)getSpecialisation().size(); i++)
 		{
-			if (i != getSpecialisation().size() - 1)
+			if (i != (int)getSpecialisation().size() - 1)
 			{
 				ss << specialisationToString(getSpecialisation()[i]) << " ";
 			}

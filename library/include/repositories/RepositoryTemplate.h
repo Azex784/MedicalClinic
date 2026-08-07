@@ -101,7 +101,7 @@ namespace RehabClinic
 		 * Pobiera aktualną liczbę elementów przechowywanych w repozytorium.
 		 * @return Liczba elementów jako stała wartość typu int.
 		 */
-		const int size() const
+		int size() const
 		{
 			return getVectorOfData().size();
 		}
@@ -114,7 +114,7 @@ namespace RehabClinic
 		const std::vector<T> findBy(PredicateT predicate) const
 		{
 			std::vector<T> found;
-			for (unsigned int i = 0; i < size(); i++)
+			for (int i = 0; i < size(); i++)
 			{
 				T t = getVectorOfData()[i];
 				if (predicate(t))

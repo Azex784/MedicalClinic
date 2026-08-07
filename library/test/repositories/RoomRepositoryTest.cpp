@@ -84,7 +84,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 		BOOST_TEST_REQUIRE(roomRepo1->getVectorOfData().size() == roomRepo->getVectorOfData().size());
 
 		// Weryfikacja równości obu obiektów - z wczytanymi danymi i tymi ktore były zapisane
-		for (int i = 0; i < roomRepo1->getVectorOfData().size(); i++)
+		for (int i = 0; i < (int)roomRepo1->getVectorOfData().size(); i++)
 		{
 			RoomPtr loadedRoom = roomRepo1->getVectorOfData()[i];
 			RoomPtr originalRoom = roomRepo->getVectorOfData()[i];
@@ -113,7 +113,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 					getAccessibleEqupiment().size());
 
 				// Weryfikacja wartości enumów
-				for (int j = 0; j < loadedRehabillitationRoom->getAccessibleEqupiment().size(); j++)
+				for (int j = 0; j < (int)loadedRehabillitationRoom->getAccessibleEqupiment().size(); j++)
 				{
 					BOOST_TEST(equipmentToString(loadedRehabillitationRoom->getAccessibleEqupiment()[j]) ==
 						equipmentToString(originalRehabillitationRoom->getAccessibleEqupiment()[j]));

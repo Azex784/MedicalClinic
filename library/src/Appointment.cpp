@@ -19,13 +19,13 @@ namespace RehabClinic
 			boost::posix_time::minutes(service->getServiceDuration());
 	}
 
-	const int unsigned Appointment::setAppointmentCost()
+	int unsigned Appointment::setAppointmentCost()
 	{
 		boost::posix_time::ptime teraz = boost::posix_time::second_clock::local_time();
 		// zmiana może nastapić gdy koszt nie był zmieniany i jest już po dacie zakończenia wizyty
 		if (getAppointmentCost() == 0 && teraz >= getAppointmentEndDate())
 		{
-			for (int i = 0; i < getPersonnel().size(); i++)
+			for (int i = 0; i < (int)getPersonnel().size(); i++)
 			{
 				shared_ptr<Doctor> person = dynamic_pointer_cast<Doctor>(getPersonnel()[i]);
 				if (person != nullptr)
@@ -135,7 +135,7 @@ namespace RehabClinic
 
 		ss << "Personel przypisany do wizyty:\n";
 
-		for (int i = 0; i < getPersonnel().size(); i++)
+		for (int i = 0; i < (int)getPersonnel().size(); i++)
 		{
 			ss << " * " << getPersonnel()[i]->getInfo() << endl;
 		}

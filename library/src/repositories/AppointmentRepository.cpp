@@ -178,7 +178,7 @@ namespace RehabClinic
 		}
 		else
 		{
-			for (const AppointmentPtr appointment : getVectorOfData())
+			for (const AppointmentPtr &appointment : getVectorOfData())
 			{
 				outFile << boost::posix_time::to_iso_string(appointment->getAppointmentBeginDate()) << ";";
 				outFile << appointment->getUniqueParameter() << ";";
@@ -192,7 +192,7 @@ namespace RehabClinic
 				int i;
 				//Zapisujemy kazdy unikalny numer osoby z personelu, by móc na podstawie tego zidetyfikować interesujące nas
 				//obiekty
-				for (i = 0; personnel.size() - 1 > i; i++)
+				for (i = 0; (int)personnel.size() - 1 > i; i++)
 				{
 					outFile << appointment->getPersonnel()[i]->getUniqueParameter() << ",";
 				}

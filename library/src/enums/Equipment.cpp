@@ -12,6 +12,7 @@ namespace RehabClinic
 		case Equipment::PHYSICAL_THERAPY_DEVICE: return "Urządzenie do fizykoterapii";
 		case Equipment::KINESITHERAPY_SPACE: return "Przestrzeń do kinezyterapii";
 		case Equipment::ROBOTIC_SYSTEM: return "System zrobotyzowany";
+		default: return "Unknown";
 		}
 	}
 }

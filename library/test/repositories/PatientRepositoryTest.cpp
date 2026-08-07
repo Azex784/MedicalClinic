@@ -90,7 +90,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuitePatientRepository, TestSuitPatientRepositoryFi
 	//Weryfikacja rozmiaru
     BOOST_TEST_REQUIRE(pacjentRepo1->getVectorOfData().size() == pacjentRepo->getVectorOfData().size());
 
-	for (int i = 0; i < pacjentRepo1->getVectorOfData().size(); i++)
+	for (int i = 0; i < (int)pacjentRepo1->getVectorOfData().size(); i++)
 	{
 		BOOST_TEST(pacjentRepo1->getVectorOfData()[i]->getName() == pacjentRepo->getVectorOfData()[i]->getName());
 		BOOST_TEST(pacjentRepo1->getVectorOfData()[i]->getLastName() == pacjentRepo->getVectorOfData()[i]->getLastName());

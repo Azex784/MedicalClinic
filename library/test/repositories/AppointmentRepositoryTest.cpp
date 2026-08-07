@@ -137,7 +137,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteAppointmentRepository, TestSuiteAppointmentRep
 		BOOST_TEST_REQUIRE(appointmentRepo1->size() == appointmentRepo->size());
 
 		// Weryfikacja równości obu obiektów z wczytanymi danymi i tymi ktore były zapisane
-		for (int i = 0; i < appointmentRepo1->getVectorOfData().size(); i++)
+		for (int i = 0; i < (int)appointmentRepo1->getVectorOfData().size(); i++)
 		{
 			AppointmentPtr loadedAppointment = appointmentRepo1->getVectorOfData()[i];
 

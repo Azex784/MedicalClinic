@@ -11,6 +11,9 @@ struct TmpRoom : public Room
     //Wypelnienie metody czysto wirtualnej
     bool canBeUsed(Equipment equipment) const override
     {
+        if (canBeUsed(equipment)) {
+
+        };
         return true;
     }
 };

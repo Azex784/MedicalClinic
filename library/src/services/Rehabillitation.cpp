@@ -35,7 +35,7 @@ namespace RehabClinic
     {
         ostringstream oss;
         int i;
-        for (i = 0; i < getRequiredEqupiment().size() - 1; i++)
+        for (i = 0; i < (int)getRequiredEqupiment().size() - 1; i++)
         {
             oss << equipmentToString(getRequiredEqupiment()[i]) << " ";
         }

@@ -1,12 +1,10 @@
 # Minimalna wersja cmake konieczna do zbudowania tego projektu
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.10)
 
 # Parametry konfiguracyjne platformy programistycznej i flagi kompilatora
-set(CMAKE_CXX_COMPILER g++) # g++ jako kompilator C++
-set(CMAKE_C_COMPILER gcc)   # gcc jako kompilator C
 set(CMAKE_CXX_STANDARD 17)  # Standard C++ 17, bez tego parametru g++ użyje wartości domyślnej. Dla g++ od wersji 8 jest to C++14
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # Określony wyżej standard C++ jest wymagany
-set(-Wall, -Wextra, -Werror)
+add_compile_options(-Wall -Wextra -Werror)
 
 # Profil debug i maksymalny poziom debug info g3 oraz format debug info na dwarf-4 (musi być gdb w wersji 7).
 # BUILD_TYPE może być ustawiony na:
@@ -22,15 +20,13 @@ set(CMAKE_C_FLAGS_DEBUG "-g3 -gdwarf-4")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -gdwarf-4")
 
 # Ustaw nazwę projektu i język na C++
-project(RehabilitationCentre)
-enable_language(CXX)
+project(MedicalClinic)
 
 # W specjalnym pliku compile_commands.json można podejrzeć wszystkie operacje kompilatora wraz z parametrami, 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
 set(CMAKE_VERBOSE_MAKEFILE TRUE) 
 
 # Uwzględnij podprojekt znajdujący się w podkatalogu program. Musi być w nim plik CMakeLists.txt
-
 add_subdirectory(library)
 add_subdirectory(program)
 

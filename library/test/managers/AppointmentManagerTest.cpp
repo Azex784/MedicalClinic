@@ -90,12 +90,12 @@ struct TestSuitAppointmentManagerFixture
 		  eq2({Equipment::PHYSICAL_THERAPY_DEVICE}
 		  )
 		  ,
+		  serviceRepo(std::make_shared<ServiceRepository>("../../library/test/data/AppointmentServiceManager.txt")),
 		  cons1(std::make_shared<Consultation>(150, 30, "Konsultacja odnosnie masażu", 101, 1,
 		                                       Specialisation::MASSAGE_THERAPIST, "Omowienie wynikow", false)),
 		  rehab1(std::make_shared<Rehabillitation>(100, 60, "Masaz kregoslupa", 201, 0,
 		                                           Specialisation::MASSAGE_THERAPIST,
 		                                           eq1, 1)),
-		  serviceRepo(std::make_shared<ServiceRepository>("../../library/test/data/AppointmentServiceManager.txt")),
 		  testAppointmentRepository(std::make_shared<AppointmentRepository>(
 				  "../../library/test/data/AppointmentManager.txt", testPatientRepository, testPersonnelRepository,
 				  testRoomRepository, serviceRepo)
