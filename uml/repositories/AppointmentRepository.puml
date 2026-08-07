@@ -1,16 +1,12 @@
 @startuml
 
 class AppointmentRepository{
-+AppointmentRepository(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
-+AppointmentRepository(fileName: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
-+loadData(): void
-+saveData(): const void
-
++parseData(): void
++dumpData(): string
 }
 
 AppointmentRepository "[0..*]"  -->  Appointment
 AppointmentRepository ..>  AppointmentPredicate
-
 
 !ifndef UKRYJ_NOTATKI
 
@@ -20,13 +16,7 @@ Dziedziczy po szablonie RepositoryTemplate.
 Zawiera inne repozytorra, ponieważ w wizytach
 dokonywany jest zapis tylko unikalnych identyfikatory, a pełne obiekty
 odnajdywane są w dedykowanych magazynach danych.
-loadData - wczytuje dane z pliku tekstowego na dysku do pamięci operacyjnej RAM.
-saveData - zapisuje aktualny stan kolekcji z pamięci ulotnej do trwałej pamięci fizycznej.
 end note
 
-AppointmentRepository --> PatientRepository : -patientRepository >
-AppointmentRepository --> PersonnelRepository : -personnelRepository >
-AppointmentRepository --> RoomRepository : -roomRepository >
-AppointmentRepository --> ServiceRepository : -serviceRepository >
 !endif
 @enduml

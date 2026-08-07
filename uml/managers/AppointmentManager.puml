@@ -5,13 +5,6 @@
 class AppointmentManager {
   +AppointmentManager(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
   +AppointmentManager(fileName: string, fileNameArchive: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
-  +findByArchive(up: AppointmentPredicate): Appointment[0..*]
-  +findAllArchive(): Appointment[0..*]
-  +getPatientAppointments(patient:Patient):Appointment[0..*]
-  +getPersonnelAppointments(personnel:Appointment):Appointment[0..*]
-  +getServiceAppointments(service:Service):Appointment[0..*]
-  +getAppointmentsCost(patient:Patient):unsigned int
-  +getRoomAppointments(room:Room):Appointment[0..*]
 
   +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime,appointmentId:unsigned int):Appointment
   +finishAppointment(appointmentId:unsigned int):unsigned int
@@ -19,8 +12,10 @@ class AppointmentManager {
   +changeAppointment(appointmentId:unsigned int,ptime _date):bool
   +cancelAppointment(appointmentId:unsigned int):void
   +isDate(appointments: Appointment[0..*], beginDate: ptime, duration: unsigned int): bool
-  +findAppointments(predicate:AppointmentPredicate):Appointment[0..*]
-  +findAllAppointments():Appointment[0..*]
+
+  +findByArchive(predicate:AppointmentPredicate): Appointment[0..*]
+  +findAllArchive(): Appointment[0..*]
+
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -53,7 +48,12 @@ AppointmentManager *-->  "archiveAppointments" AppointmentRepository
 
 AppointmentManager *-->  "activeAppointments" AppointmentRepository
 
-AppointmentManager  ..>  Appointment
+AppointmentManager -->  PatientManager
+AppointmentManager -->  ServiceManager
+AppointmentManager -->  PersonnelManager
+AppointmentManager -->  RoomManager
+
+AppointmentManager ..>  Appointment
 AppointmentManager ..>  AppointmentPredicate
 
 AppointmentManager ..> Patient

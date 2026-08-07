@@ -1,8 +1,8 @@
 @startuml
 
 class RoomRepository{
-+loadData(): void
-+saveData(): const void
++parseData(): void
++dumpData(): string
 }
 
 RoomRepository  "[0..*]" --> Room

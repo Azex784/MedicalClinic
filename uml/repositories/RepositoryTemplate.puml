@@ -2,20 +2,27 @@
 
 abstract class "RepositoryTemplate<T, PredicateT, UniqueParameter>" as RepositoryTemplate {
   -fileName: string
+  -vectorOfData: vector<T>
+
   +RepositoryTemplate(fileName: string)
-  +clearVectorOfData(): void
-  +getFileName(): const string&
   +get(i: int): T
+  +get(up: UniqueParameter): const T
+
   +add(t: T): void
   +remove(t: T): void
+
   +report(): const string
   +size(): const int
+
   +findBy(predicate: PredicateT): const vector<T>
   +findAll(): const vector<T>&
-  +getVectorOfData(): const vector<T>&
-  +get(up: UniqueParameter): const T
-  +{abstract} loadData(): void
-  +{abstract} saveData(): void
+
+  +clearVectorOfData(): void
+
+  +loadData(): void
+  +saveData(): void
+  +{abstract} parseData(): void
+  +{abstract} dumpData(): string
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -31,8 +38,10 @@ report - generuje sformatowany raport tekstowy o stanie i zawartości repozytori
 size - zwraca aktualną liczbę elementów w kolekcji.
 findBy - filtruje i wyszukuje elementy spełniające warunek predykatu.
 findAll - zwraca pełną listę wszystkich obiektów.
-loadData - czysto abstrakcyjna metoda odczytująca dane z dysku.
-saveData - czysto abstrakcyjna metoda zapisująca dane na dysk.
+loadData - metoda odczytująca dane z dysku.
+saveData - metoda zapisująca dane na dysk.
+dumpData - czysto abstrakcyjna klasa do zrzutu danych.
+parseData - czysto abstrakcyjna klasa do iterpretacji danych.
 end note
 
 !endif
@@ -46,5 +55,6 @@ RepositoryTemplate <|-- PatientRepository
 RepositoryTemplate <|-- PersonnelRepository
 RepositoryTemplate <|-- RoomRepository
 RepositoryTemplate <|-- ServiceRepository
+RepositoryTemplate <|-- AppointmentRepository
 
 @enduml
