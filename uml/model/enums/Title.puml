@@ -1,0 +1,19 @@
+@startuml
+
+enum TITLE {
+    MD,
+    DR_MED,
+    DR_HAB_MED,
+    PROF
+}
+
+note right of TITLE
+Typ wyliczeniowy określający stopnie zawodowe
+i tytuły naukowe personelu medycznego:
+MD - Lekarz (Medical Doctor)
+DR_MED - Doktor nauk medycznych
+DR_HAB_MED - Doktor habilitowany nauk medycznych
+PROF - Profesor
+end note
+
+@enduml

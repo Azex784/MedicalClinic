@@ -1,0 +1,27 @@
+@startuml
+
+abstract class Statusable {
+-status: EntityStatus
++getStatus(): EntityStatus
++setStatus(status: EntityStatus): void
++isAvailable(): bool
+}
+
+class Room
+class Person
+class Service
+
+Statusable <|-- Room
+Statusable <|-- Person
+Statusable <|-- Service
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Statusable
+Abstrakcyjna klasa, interfejs, który pozwala na
+zmianę, sprawdzenie statusu usługi.
+end note
+
+!endif
+
+@enduml

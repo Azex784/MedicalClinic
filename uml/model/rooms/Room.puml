@@ -1,0 +1,27 @@
+@startuml
+
+abstract class Room{
+-roomNumber:unsigned int
++{abstract} canBeUsed(service:Service):bool
++<<virtual>> getInfo(): string
+}
+
+abstract class Statusable{}
+
+Room <|-- SurgeryRoom
+Room <|-- ConsultationRoom
+Room ..>  Service : używa >
+Statusable <|--  Room
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Room
+Abstrakcyjna klasa reprezentująca sale.
+roomNumber - numer sali
+status - reprezentuje status pomieszczenia
+canBeUsed(service:Service):bool - określa czy dana usługa może być wykonana w danym pokuju
+end note
+
+!endif
+
+@enduml

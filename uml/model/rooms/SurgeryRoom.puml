@@ -4,7 +4,7 @@ class RehabillitationRoom{
 -accessibleEqupiment:vector<equpiment>
 -maxCapacity: int
 +getInfo():string
-+canBeUsed(equipment:Equipment):bool
++canBeUsed(service:Service):bool
 }
 
 enum Equipment
@@ -18,9 +18,9 @@ Klasa reprezentująca sale przeznaczoną
 do przeprowadzania zabiegów.
 Klasa ta dziedziczy z klasy Room.
 accessibleEqupiment - lista sprzętu,
-który zawiera pokój
+który zawiera pokój;
 maxCapacity - informuje ile maksymalnie personelu
-może się zmieścić w sali.
+może się zmieścić w sali;
 end note
 
 !endif

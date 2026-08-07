@@ -1,0 +1,25 @@
+@startuml
+
+abstract class Personnel{
+-personnelId:unsigned int
++<<virtual>>getInfo(): string
+}
+
+class Person
+
+Personnel <|-- Doctor
+Personnel <|-- Nurse
+Person <|-- Personnel
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Personnel
+Abstrakcyjna klasa reprezentująca
+personel.
+Klasa ta dziedziczy z klasy person.
+personnelId - specjalny
+identyfikator pracownika personelu.
+end note
+
+!endif
+@enduml

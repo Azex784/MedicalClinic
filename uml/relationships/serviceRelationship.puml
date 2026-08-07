@@ -2,9 +2,9 @@
 
 'Do pdf
 
-!include ../model/services/service.puml
-!include ../model/services/rehabillitation.puml
-!include ../model/services/consultation.puml
+!include ../model/services/Service.puml
+!include ../model/services/Rehabillitation.puml
+!include ../model/services/Consultation.puml
 
 
 @enduml

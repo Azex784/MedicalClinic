@@ -1,0 +1,13 @@
+@startuml
+
+enum Status {
+    AVAILABLE,
+    UNAVAILABLE,
+    ARCHIVED
+}
+
+note right of Status
+Typ wyliczeniowy zawierający wszystkie statusy logiki biznesu.
+end note
+
+@enduml

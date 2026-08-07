@@ -1,0 +1,25 @@
+@startuml
+
+enum Equipment {
+    NONE,
+    DEFIBRILLATOR,
+    ECG_MACHINE,
+    PATIENT_MONITOR,
+    VENTILATOR,
+    INFUSION_PUMP,
+    ULTRASOUND_MACHINE,
+    X_RAY_MACHINE,
+    CT_SCANNER,
+    MRI_SCANNER,
+    ANESTHESIA_MACHINE,
+    SURGICAL_TABLE,
+    INCUBATOR
+}
+
+note right of Equipment
+Typ wyliczeniowy zawierający cały sprzęt mogący
+być potrzebny przez dany zabieg i będący
+dostępny w danym pokoju.
+end note
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+class Doctor{
+-specialisation:vector<Specialization>
+-doctorCost:float
+-title:Title
++getInfo():string
++canConductTreatment(service: Service):bool
+}
+
+!ifndef UKRYJ_NOTATKI
+
+enum Specialisation
+enum Title
+class Service
+
+note right of Doctor
+Klasa reprezentująca lekarza.
+Klasa ta dziedziczy z klasy Personnel.
+specialisation określa jakie specjalizacje ma doktor;
+doctorCost - określa koszt lekarza w zależności od stopnia wykształcenia lekarza;
+title - stopień naukowy, który jest w przechowywany w formie enuma;
+canConductTreatment - określa czy lekarz jest w stanie przeprowadzić dany zabieg.
+end note
+
+Doctor --> Specialisation : lista specjalności >
+Doctor --> Title : tytuł naukowy >
+Doctor ..>  Service
+
+!endif
+
+@enduml

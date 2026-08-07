@@ -2,12 +2,11 @@
 
 class Nurse{
 +getInfo():string
-+canConductTreatment(specialization:Specialization):bool
 }
 !ifndef UKRYJ_NOTATKI
 
 note right of Nurse
-Klasa reprezentująca pielegniarke.
+Klasa reprezentująca pielegniarkę.
 Klasa ta dziedziczy z klasy Personnel.
 end note
 

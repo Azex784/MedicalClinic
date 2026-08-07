@@ -6,34 +6,31 @@ abstract class Service{
 -serviceName:string
 -serviceId:unsigned int
 -requiredDoctorSize: unsigned int
--requiredDoctorSpec:specialisation
--isAvailable:bool
--isArchive:bool
+-requiredDoctorSpec:vector<specialisation>
 +<<virtual>>getInfo():string
 +{abstract}~Service();
 }
 
+enum Specialisation
+abstract class Statusable{}
+
 Service <|-- Consultation
 Service <|-- Rehabillitation
-
-enum Specialisation
-
 Service ..> Specialisation : używa >
+Statusable <|--  Service
 
 !ifndef UKRYJ_NOTATKI
 
 note right of Service
 Abstrakcyjna klasa reprezentująca usługę.
 serviceCost - koszt usługi, wliczającą koszt pielęgniarek i
-podstawową stawkę doktora
-serviceDuration - czas w minutach trwania usługi
-serviceName - nazwa usługi
-serviceId - unikalny numer usługi
-requiredDoctorSize - wymagana liczba lekarzy
-requiredDoctorSpec - wymagane specjalności lekarza
-isAvailable - czy jest dostępna dana usługa -
-potrzebne do przeprowadzenia usługi
-isArchive - czy jest archiwalna
+podstawową stawkę doktora (dla tytułu naukowego lekarz);
+serviceDuration - czas (w minutach) trwania usługi;
+serviceName - nazwa usługi;
+serviceId - unikalny numer usługi;
+requiredDoctorSize - wymagana liczba lekarzy;
+requiredDoctorSpec - wymagane specjalności lekarza;
+ServiceStatus - status usługi;
 Abstrakcyjny destruktor zapewnia abstrakcyjność klasy.
 end note
 

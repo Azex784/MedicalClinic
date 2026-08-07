@@ -3,7 +3,7 @@
 abstract class Person{
 -name:string
 -lastName:string
--isArchive:bool
+-status: Status
 + <<virtual>> getInfo(): string
 }
 
@@ -12,16 +12,19 @@ abstract class Person{
 note right of Person
 Abstrakcyjna klasa reprezentująca
 człowieka.
-name - imie
-lastName - nazwisko
+name - imie;
+lastName - nazwisko;
 isArchive - prezentuje czy dany człowiek jest archiwalny.
+getInfo - wirtualna metoda prezentuja informacje o osobie.
 end note
 
 !endif
 
 abstract class Personnel{}
+abstract class Statusable{}
 
 Person <|-- Personnel
 Person <|-- Patient
+Statusable <|--  Person
 
 @enduml

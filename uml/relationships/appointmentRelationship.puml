@@ -2,10 +2,10 @@
 
 'Do pdf
 
-!include ../model/services/service.puml
-!include ../model/appointment.puml
-!include ../model/rooms/room.puml
-!include ../model/personnel/personnel.puml
+!include ../model/services/Service.puml
+!include ../model/Appointment.puml
+!include ../model/rooms/Room.puml
+!include ../model/personnel/Personnel.puml
 
 
 @enduml

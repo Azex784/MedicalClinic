@@ -6,7 +6,6 @@ class Rehabillitation{
 +getInfo():string
 }
 
-
 enum Equipment
 
 Rehabillitation --> Equipment : lista sprzętu >

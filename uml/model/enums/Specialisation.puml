@@ -1,0 +1,37 @@
+@startuml
+
+enum Specialisation {
+    CARDIOLOGIST,
+    NEUROLOGIST,
+    ONCOLOGIST,
+    PEDIATRICIAN,
+    GENERAL_SURGEON,
+    ANESTHESIOLOGIST,
+    RADIOLOGIST,
+    OPHTHALMOLOGIST,
+    GYNECOLOGIST,
+    UROLOGIST,
+    PULMONOLOGIST,
+    GASTROENTEROLOGIST,
+    ENDOCRINOLOGIST,
+    NEPHROLOGIST,
+    HEMATOLOGIST,
+    ORTHOPEDIST,
+    DERMATOLOGIST,
+    PSYCHIATRIST,
+    INTERNIST,
+    EMERGENCY_PHYSICIAN
+    LARYNGOLOGIST
+    }
+
+!ifndef UKRYJ_NOTATKI
+
+note right of Specialisation
+Typ wyliczeniowy zawierający wszystkie
+specjalności.
+end note
+
+!endif
+
+
+@enduml

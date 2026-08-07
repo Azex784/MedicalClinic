@@ -2,11 +2,11 @@
 
 'Do pdfa
 
-!include ../model/patient/patient.puml
-!include ../model/patient/address.puml
-!include ../model/personnel/doctor.puml
-!include ../model/personnel/nurse.puml
-!include ../model/personnel/personnel.puml
-!include ../model/person.puml
+!include ../model/patient/Patient.puml
+!include ../model/patient/Address.puml
+!include ../model/personnel/Doctor.puml
+!include ../model/personnel/Nurse.puml
+!include ../model/personnel/Personnel.puml
+!include ../model/Person.puml
 
 @enduml

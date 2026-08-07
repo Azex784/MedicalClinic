@@ -6,7 +6,7 @@ class Appointment{
 -appointmentId:usigned int
 -appointmentCost:unsigned int
 +getInfo():string
-+setAppointmentCost(): unsigned int
++finishAppointment(): unsigned int
 }
 
 Appointment --> Patient
