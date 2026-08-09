@@ -2,7 +2,7 @@
 #include "personnel/Doctor.h"
 #include "enums/Specialisation.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuiteDoctorFixture

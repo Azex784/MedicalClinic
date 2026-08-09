@@ -1,5 +1,5 @@
-#ifndef REHABILITATIONCENTRE_LOGICMANAGER_H
-#define REHABILITATIONCENTRE_LOGICMANAGER_H
+#ifndef MEDICALCLINIC_LOGICMANAGER_H
+#define MEDICALCLINIC_LOGICMANAGER_H
 
 #include "managers/PatientManager.h"
 #include "managers/PersonnelManager.h"
@@ -7,7 +7,7 @@
 #include "managers/AppointmentManager.h"
 #include "managers/RoomManager.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca zarządce logiki aplikacji
  */
@@ -102,4 +102,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_LOGICMANAGER_H
+#endif //MEDICALCLINIC_LOGICMANAGER_H

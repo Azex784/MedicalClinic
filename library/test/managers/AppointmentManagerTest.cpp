@@ -23,7 +23,7 @@
 #include "../../include/Exceptions.h"
 
 using namespace boost::posix_time;
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 struct TestSuitAppointmentManagerFixture
 {

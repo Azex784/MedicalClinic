@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_REHABILLITATIONROOM_H
-#define REHABILITATIONCENTRE_REHABILLITATIONROOM_H
+#ifndef MEDICAL_CLINIC_REHABILLITATIONROOM_H
+#define MEDICAL_CLINIC_REHABILLITATIONROOM_H
 
 #include "rooms/Room.h"
 #include <vector>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	enum class Equipment;
 
@@ -62,4 +62,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_REHABILLITATIONROOM_H
+#endif //MEDICAL_CLINIC_REHABILLITATIONROOM_H

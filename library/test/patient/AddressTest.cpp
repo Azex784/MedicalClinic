@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "patient/Address.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 struct TestSuiteAddressFixture
 {

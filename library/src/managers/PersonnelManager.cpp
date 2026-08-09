@@ -5,7 +5,7 @@
 #include "typedefs.h"
 #include "Exceptions.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

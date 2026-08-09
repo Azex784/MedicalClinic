@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_TERMINALMENU_H
-#define REHABILITATIONCENTRE_TERMINALMENU_H
+#ifndef MEDICALCLINIC_TERMINALMENU_H
+#define MEDICALCLINIC_TERMINALMENU_H
 
 #include "managers/LogicManager.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	* Klasa zapewniające tekstowe menu do obsługi centrum rehabilitacji
@@ -205,4 +205,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_TERMINALMENU_H
+#endif //MEDICALCLINIC_TERMINALMENU_H

@@ -1,12 +1,12 @@
-#ifndef REHABILITATIONCENTRE_APPOINTMENT_H
-#define REHABILITATIONCENTRE_APPOINTMENT_H
+#ifndef MEDICAL_CLINIC_APPOINTMENT_H
+#define MEDICAL_CLINIC_APPOINTMENT_H
 
 #include <boost/date_time.hpp>
 #include <string>
 #include <vector>
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	/**
@@ -116,4 +116,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_APPOINTMENT_H
+#endif //MEDICAL_CLINIC_APPOINTMENT_H

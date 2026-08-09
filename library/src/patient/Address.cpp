@@ -1,6 +1,6 @@
 #include "patient/Address.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
     const std::string& Address::getCity() const
     {

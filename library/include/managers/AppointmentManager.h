@@ -1,12 +1,12 @@
-#ifndef REHABILITATIONCENTRE_APPOINTMENTMANAGER_H
-#define REHABILITATIONCENTRE_APPOINTMENTMANAGER_H
+#ifndef MEDICAL_CLINIC_APPOINTMENTMANAGER_H
+#define MEDICAL_CLINIC_APPOINTMENTMANAGER_H
 
 #include <vector>
 #include <boost/date_time/posix_time/ptime.hpp>
 #include "typedefs.h"
 #include "repositories/AppointmentRepository.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	 * Klasa reprezentująca zarządce wizyt
@@ -170,4 +170,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_APPOINTMENTMANAGER_H
+#endif //MEDICAL_CLINIC_APPOINTMENTMANAGER_H

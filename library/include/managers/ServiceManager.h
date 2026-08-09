@@ -1,5 +1,5 @@
-#ifndef REHABILITATIONCENTRE_SERVICEMANAGER_H
-#define REHABILITATIONCENTRE_SERVICEMANAGER_H
+#ifndef MEDICAL_CLINIC_SERVICEMANAGER_H
+#define MEDICAL_CLINIC_SERVICEMANAGER_H
 
 #include "enums/Specialisation.h"
 #include "enums/Equipment.h"
@@ -7,7 +7,7 @@
 #include "managers/ManagerTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca zarządce usług
  */
@@ -66,4 +66,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_SERVICEMANAGER_H
+#endif //MEDICAL_CLINIC_SERVICEMANAGER_H

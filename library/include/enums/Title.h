@@ -1,20 +1,19 @@
-#ifndef REHABILITATIONCENTRE_STATUS_H
-#define REHABILITATIONCENTRE_STATUS_H
+#ifndef MEDICALCLINIC_TITLE_H
+#define MEDICALCLINIC_TITLE_H
 
-#include <string>
-
-namespace RehabClinic
+namespace MedicalClinic
 {
 /**
- * Typ wyliczeniowy zawierajcy sprzet
+ * Typ wyliczeniowy zawierajcy tytuły naukowe lekarza
  */
-    enum class Status
+    enum class Title
     {
-        AVAILABLE,
-        UNAVAILABLE,
-        ARCHIVED
+        MD,
+        DR_MED,
+        DR_HAB_MED,
+        PROF
     };
 
 }
 
-#endif //REHABILITATIONCENTRE_STATUS_H
+#endif //MEDICALCLINIC_TITLE_H

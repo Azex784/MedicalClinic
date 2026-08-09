@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_ServiceREPOSITORY_H
-#define REHABILITATIONCENTRE_ServiceREPOSITORY_H
+#ifndef MEDICAL_CLINIC_ServiceREPOSITORY_H
+#define MEDICAL_CLINIC_ServiceREPOSITORY_H
 
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	 * Klasa przechwująca dane o usługach
@@ -39,4 +39,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_ServiceREPOSITORY_H
+#endif //MEDICAL_CLINIC_ServiceREPOSITORY_H

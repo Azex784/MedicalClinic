@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_CONSULTATIONROOM_H
-#define REHABILITATIONCENTRE_CONSULTATIONROOM_H
+#ifndef MEDICAL_CLINIC_CONSULTATIONROOM_H
+#define MEDICAL_CLINIC_CONSULTATIONROOM_H
 
 #include "rooms/Room.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	 * Klasa reprezentująca pokój konsultacyjny
@@ -41,4 +41,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_CONSULTATIONROOM_H
+#endif //MEDICAL_CLINIC_CONSULTATIONROOM_H

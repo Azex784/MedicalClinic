@@ -3,7 +3,7 @@
 #include <enums/Specialisation.h>
 #include "services/Rehabillitation.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 struct TestSuiteRehabillitationFixture
 {

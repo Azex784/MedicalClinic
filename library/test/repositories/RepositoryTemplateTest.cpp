@@ -4,7 +4,7 @@
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 //Struktura tymczasowa, potrzebna tylko by sprawdzic prawidłowe działanie template klasy abstrakcyjnej RepositoryTemplate
 struct TmpTemplate :  RepositoryTemplate<PatientPtr, PatientPredicate, const std::string>
 {

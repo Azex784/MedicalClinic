@@ -6,7 +6,7 @@
 #include "repositories/PatientRepository.h"
 #include "typedefs.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 struct TestSuitManagerTemplateFixture
 {

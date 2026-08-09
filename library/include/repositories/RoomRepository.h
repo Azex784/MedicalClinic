@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_RoomREPOSITORY_H
-#define REHABILITATIONCENTRE_RoomREPOSITORY_H
+#ifndef MEDICAL_CLINIC_RoomREPOSITORY_H
+#define MEDICAL_CLINIC_RoomREPOSITORY_H
 
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	 * Klasa przechwująca dane o pokojach
@@ -43,4 +43,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_RoomREPOSITORY_H
+#endif //MEDICAL_CLINIC_RoomREPOSITORY_H

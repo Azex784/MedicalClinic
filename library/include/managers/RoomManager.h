@@ -1,5 +1,5 @@
-#ifndef REHABILITATIONCENTRE_ROOMMANAGER_H
-#define REHABILITATIONCENTRE_ROOMMANAGER_H
+#ifndef MEDICAL_CLINIC_ROOMMANAGER_H
+#define MEDICAL_CLINIC_ROOMMANAGER_H
 
 #include "repositories/RoomRepository.h"
 #include "managers/ManagerTemplate.h"
@@ -8,7 +8,7 @@
 #include <vector>
 #include "rooms/RehabillitationRoom.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca zarządce pracowników
  */
@@ -50,4 +50,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_ROOMMANAGER_H
+#endif //MEDICAL_CLINIC_ROOMMANAGER_H

@@ -6,7 +6,7 @@
 #include <fstream>
 
 using namespace std;
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuitPatientRepositoryFixture

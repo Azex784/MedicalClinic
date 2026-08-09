@@ -2,7 +2,7 @@
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuiteConsultationRoomFixture

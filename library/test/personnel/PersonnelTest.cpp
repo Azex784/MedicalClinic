@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "personnel/Personnel.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 //tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
 struct TmpPersonnel : public Personnel

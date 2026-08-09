@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_AppointmentREPOSITORY_H
-#define REHABILITATIONCENTRE_AppointmentREPOSITORY_H
+#ifndef MEDICAL_CLINIC_AppointmentREPOSITORY_H
+#define MEDICAL_CLINIC_AppointmentREPOSITORY_H
 
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa przechwująca dane o wizytach
  */
@@ -77,4 +77,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_AppointmentREPOSITORY_H
+#endif //MEDICAL_CLINIC_AppointmentREPOSITORY_H

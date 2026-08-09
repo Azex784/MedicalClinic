@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_PERSONNEL_H
-#define REHABILITATIONCENTRE_PERSONNEL_H
+#ifndef MEDICAL_CLINIC_PERSONNEL_H
+#define MEDICAL_CLINIC_PERSONNEL_H
 
 #include "Person.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
     enum class Specialisation;
@@ -65,4 +65,4 @@ namespace RehabClinic
     };
 }
 
-#endif //REHABILITATIONCENTRE_PERSONNEL_H
+#endif //MEDICAL_CLINIC_PERSONNEL_H

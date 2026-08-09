@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_PersonnelREPOSITORY_H
-#define REHABILITATIONCENTRE_PersonnelREPOSITORY_H
+#ifndef MEDICAL_CLINIC_PersonnelREPOSITORY_H
+#define MEDICAL_CLINIC_PersonnelREPOSITORY_H
 
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	 /**
 	 * Klasa przechwująca dane o personelu
@@ -40,4 +40,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_PersonnelREPOSITORY_H
+#endif //MEDICAL_CLINIC_PersonnelREPOSITORY_H

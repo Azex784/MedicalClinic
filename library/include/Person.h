@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_PERSON_H
-#define REHABILITATIONCENTRE_PERSON_H
+#ifndef MEDICAL_CLINIC_PERSON_H
+#define MEDICAL_CLINIC_PERSON_H
 
 #include <string>
 #include <sstream>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
      /**
     * Klasa reprezentująca człowieka
@@ -73,4 +73,4 @@ namespace RehabClinic
     };
 }
 
-#endif //REHABILITATIONCENTRE_PERSON_H
+#endif //MEDICAL_CLINIC_PERSON_H

@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_DOCTOR_H
-#define REHABILITATIONCENTRE_DOCTOR_H
+#ifndef MEDICAL_CLINIC_DOCTOR_H
+#define MEDICAL_CLINIC_DOCTOR_H
 
 #include "personnel/Personnel.h"
 #include <vector>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	enum class Specialisation;
@@ -68,4 +68,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_DOCTOR_H
+#endif //MEDICAL_CLINIC_DOCTOR_H

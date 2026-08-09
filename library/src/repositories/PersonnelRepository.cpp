@@ -7,7 +7,7 @@
 
 #include "enums/Specialisation.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

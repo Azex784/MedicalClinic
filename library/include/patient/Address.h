@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_ADDRESS_H
-#define REHABILITATIONCENTRE_ADDRESS_H
+#ifndef MEDICAL_CLINIC_ADDRESS_H
+#define MEDICAL_CLINIC_ADDRESS_H
 
 #include <string>
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca adres
  */
@@ -54,4 +54,4 @@ namespace RehabClinic
     };
 }
 
-#endif //REHABILITATIONCENTRE_ADDRESS_H
+#endif //MEDICAL_CLINIC_ADDRESS_H

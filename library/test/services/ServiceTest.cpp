@@ -2,7 +2,7 @@
 #include <enums/Specialisation.h>
 #include "services/Service.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 //Tymczasowa struktura potrzebna do testow
 struct TmpService : public Service

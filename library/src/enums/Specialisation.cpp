@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	const string specialisationToString(Specialisation spec)

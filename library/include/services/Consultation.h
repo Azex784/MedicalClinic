@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_CONSULTATION_H
-#define REHABILITATIONCENTRE_CONSULTATION_H
+#ifndef MEDICAL_CLINIC_CONSULTATION_H
+#define MEDICAL_CLINIC_CONSULTATION_H
 
 #include <string>
 #include "services/Service.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	/**
 	 * Klasa reprezentująca konsultacje.
@@ -59,4 +59,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_CONSULTATION_H
+#endif //MEDICAL_CLINIC_CONSULTATION_H

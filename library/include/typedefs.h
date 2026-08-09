@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_TYPEDEFS_H
-#define REHABILITATIONCENTRE_TYPEDEFS_H
+#ifndef MEDICALCLINIC_TYPEDEFS_H
+#define MEDICALCLINIC_TYPEDEFS_H
 
 #include <memory>
 #include <functional>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 const std::string ALLOWEDCHARS =
 " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/.ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
@@ -92,4 +92,4 @@ class ServiceManager;
 typedef std::shared_ptr<ServiceManager> ServiceManagerPtr;
 }
 
-#endif //REHABILITATIONCENTRE_TYPEDEFS_H
+#endif //MEDICALCLINIC_TYPEDEFS_H

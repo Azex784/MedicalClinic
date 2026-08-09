@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_PATIENT_H
-#define REHABILITATIONCENTRE_PATIENT_H
+#ifndef MEDICAL_CLINIC_PATIENT_H
+#define MEDICAL_CLINIC_PATIENT_H
 
 #include "Person.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca pacjenta dziedziczy z klasy Person
  */
@@ -52,4 +52,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_PATIENT_H
+#endif //MEDICAL_CLINIC_PATIENT_H

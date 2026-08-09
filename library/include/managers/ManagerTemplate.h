@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_MANAGERTEMPLATE_H
-#define REHABILITATIONCENTRE_MANAGERTEMPLATE_H
+#ifndef MEDICALCLINIC_MANAGERTEMPLATE_H
+#define MEDICALCLINIC_MANAGERTEMPLATE_H
 
 #include "Exceptions.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Szablon klasy dla klas zarządców
  */
@@ -107,4 +107,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_MANAGERTEMPLATE_H
+#endif //MEDICALCLINIC_MANAGERTEMPLATE_H

@@ -1,12 +1,12 @@
-#ifndef REHABILITATIONCENTRE_REPOSITORYTEMPLATE_H
-#define REHABILITATIONCENTRE_REPOSITORYTEMPLATE_H
+#ifndef MEDICAL_CLINIC_REPOSITORYTEMPLATE_H
+#define MEDICAL_CLINIC_REPOSITORYTEMPLATE_H
 
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <sstream>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 
@@ -180,4 +180,4 @@ namespace RehabClinic
 	};
 }
 
-#endif //REHABILITATIONCENTRE_REPOSITORYTEMPLATE_H
+#endif //MEDICAL_CLINIC_REPOSITORYTEMPLATE_H

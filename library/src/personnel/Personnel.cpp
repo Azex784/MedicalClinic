@@ -1,7 +1,7 @@
 #include "personnel/Personnel.h"
 #include "sstream"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

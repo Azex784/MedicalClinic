@@ -5,10 +5,38 @@
 #ifndef MEDICALCLINIC_STATUSABLE_H
 #define MEDICALCLINIC_STATUSABLE_H
 
+#include "enums/Status.h"
 
-class Statusable
+namespace MedicalClinic
 {
-};
+    /**
+     * Klasa przedstawiajca status danego obiektu
+     */
+    class Statusable
+    {
+    private:
+        Status entityStatus;
 
+    public:
+        /**
+         * Getter entityStatus
+         * @return
+         */
+        Status getEntityStatus() const;
+
+        /**
+         * Setter paramtetru entityStatus
+         * @param entityStatus_
+         */
+        void setEntityStatus(Status entityStatus_);
+
+        /**
+         * Zwraca prawdę gdy wartość EntityStatus to AVAILABLE
+         * @return BOOL
+         */
+        bool isAvailable() const;
+    };
+
+}
 
 #endif //MEDICALCLINIC_STATUSABLE_H

@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_NURSE_H
-#define REHABILITATIONCENTRE_NURSE_H
+#ifndef MEDICAL_CLINIC_NURSE_H
+#define MEDICAL_CLINIC_NURSE_H
 
 #include "personnel/Personnel.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca pielęgniarkę.
  * Dziedziczy ona z klasy Perosnnel
@@ -44,4 +44,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_NURSE_H
+#endif //MEDICAL_CLINIC_NURSE_H

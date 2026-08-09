@@ -12,7 +12,7 @@
 #include "Exceptions.h"
 
 using namespace std;
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuitPersonnelManagerFixture

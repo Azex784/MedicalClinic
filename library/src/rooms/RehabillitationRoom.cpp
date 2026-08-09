@@ -2,7 +2,7 @@
 #include "enums/Equipment.h"
 #include "sstream"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

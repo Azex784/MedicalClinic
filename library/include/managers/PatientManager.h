@@ -1,12 +1,12 @@
-#ifndef REHABILITATIONCENTRE_PATIENTMANAGER_H
-#define REHABILITATIONCENTRE_PATIENTMANAGER_H
+#ifndef MEDICAL_CLINIC_PATIENTMANAGER_H
+#define MEDICAL_CLINIC_PATIENTMANAGER_H
 
 #include "repositories/PatientRepository.h"
 #include "managers/ManagerTemplate.h"
 #include "typedefs.h"
 #include "patient/Patient.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca zarządce pacjentów
  */
@@ -47,4 +47,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_PATIENTMANAGER_H
+#endif //MEDICAL_CLINIC_PATIENTMANAGER_H

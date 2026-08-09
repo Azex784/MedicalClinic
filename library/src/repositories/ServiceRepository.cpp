@@ -12,7 +12,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

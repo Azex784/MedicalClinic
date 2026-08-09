@@ -8,7 +8,7 @@
 #include "typedefs.h"
 #include "Exceptions.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 struct TestSuitPatientTemplateFixture
 {

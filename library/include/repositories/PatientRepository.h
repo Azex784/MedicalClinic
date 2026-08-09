@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_PATIENTREPOSITORY_H
-#define REHABILITATIONCENTRE_PATIENTREPOSITORY_H
+#ifndef MEDICAL_CLINIC_PATIENTREPOSITORY_H
+#define MEDICAL_CLINIC_PATIENTREPOSITORY_H
 
 #include "repositories/RepositoryTemplate.h"
 #include "typedefs.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa przechwująca dane o pacjentach
  */
@@ -40,4 +40,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_PATIENTREPOSITORY_H
+#endif //MEDICAL_CLINIC_PATIENTREPOSITORY_H

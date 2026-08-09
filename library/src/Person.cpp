@@ -1,6 +1,6 @@
 #include "Person.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
     Person::Person(const std::string& name, const std::string& lastName) : name(name),

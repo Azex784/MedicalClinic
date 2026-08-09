@@ -1,6 +1,6 @@
 #include "services/Consultation.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	using namespace std;
 

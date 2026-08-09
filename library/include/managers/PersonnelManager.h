@@ -1,12 +1,12 @@
-#ifndef REHABILITATIONCENTRE_PERSONNELMANAGER_H
-#define REHABILITATIONCENTRE_PERSONNELMANAGER_H
+#ifndef MEDICAL_CLINIC_PERSONNELMANAGER_H
+#define MEDICAL_CLINIC_PERSONNELMANAGER_H
 
 #include "personnel/Personnel.h"
 #include <repositories/PersonnelRepository.h>
 #include "typedefs.h"
 #include "managers/ManagerTemplate.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {/**
  * Klasa reprezentująca zarządce pracowników
  */
@@ -53,4 +53,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_PERSONNELMANAGER_H
+#endif //MEDICAL_CLINIC_PERSONNELMANAGER_H

@@ -10,7 +10,7 @@
 #include <vector>
 
 using namespace std;
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuiteRoomRepositoryFixture

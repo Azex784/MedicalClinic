@@ -1,7 +1,7 @@
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

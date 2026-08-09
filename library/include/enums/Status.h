@@ -1,32 +1,17 @@
-#ifndef REHABILITATIONCENTRE_EQUIPMENT_H
-#define REHABILITATIONCENTRE_EQUIPMENT_H
+#ifndef MEDICALCLINIC_STATUS_H
+#define MEDICALCLINIC_STATUS_H
 
-#include <string>
-
-namespace RehabClinic
+namespace MedicalClinic
 {
 /**
- * Typ wyliczeniowy zawierajcy sprzet
+ * Typ wyliczeniowy zawierajcy status obiektu
  */
-    enum class Equipment
+    enum class Status
     {
-        NONE,
-        DEFIBRILLATOR,
-        ECG_MACHINE,
-        PATIENT_MONITOR,
-        VENTILATOR,
-        INFUSION_PUMP,
-        ULTRASOUND_MACHINE,
-        X_RAY_MACHINE,
-        CT_SCANNER,
-        MRI_SCANNER,
-        ANESTHESIA_MACHINE,
-        SURGICAL_TABLE,
-        INCUBATOR
+        AVAILABLE,
+        UNAVAILABLE,
+        ARCHIVED
     };
-
-    //Konwersja do stringa
-    const std::string equipmentToString(Equipment eq);
 }
 
-#endif //REHABILITATIONCENTRE_EQUIPMENT_H
+#endif //MEDICALCLINIC_STATUS_H

@@ -3,7 +3,7 @@
 #include "patient/Patient.h"
 #include "patient/Address.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuitePatientFixture

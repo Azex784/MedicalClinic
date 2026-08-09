@@ -1,6 +1,6 @@
 #include "menu/TerminalMenu.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 int main(){
 

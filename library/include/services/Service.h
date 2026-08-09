@@ -1,9 +1,9 @@
-#ifndef REHABILITATIONCENTRE_SERVICE_H
-#define REHABILITATIONCENTRE_SERVICE_H
+#ifndef MEDICAL_CLINIC_SERVICE_H
+#define MEDICAL_CLINIC_SERVICE_H
 
 #include <string>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 	enum class Specialisation;
 
@@ -113,4 +113,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_SERVICE_H
+#endif //MEDICAL_CLINIC_SERVICE_H

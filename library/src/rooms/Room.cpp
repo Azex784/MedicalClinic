@@ -1,6 +1,6 @@
 #include "rooms/Room.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
     using namespace std;

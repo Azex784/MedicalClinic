@@ -1,10 +1,10 @@
-#ifndef REHABILITATIONCENTRE_EXCEPTIONS_H
-#define REHABILITATIONCENTRE_EXCEPTIONS_H
+#ifndef MEDICALCLINIC_EXCEPTIONS_H
+#define MEDICALCLINIC_EXCEPTIONS_H
 
 #include <string>
 #include <stdexcept>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	/**
@@ -139,4 +139,4 @@ namespace RehabClinic
 }
 
 
-#endif //REHABILITATIONCENTRE_EXCEPTIONS_H
+#endif //MEDICALCLINIC_EXCEPTIONS_H

@@ -2,7 +2,7 @@
 #include "Exceptions.h"
 #include "patient/Address.h"
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
     const AddressPtr& Patient::getAddress() const

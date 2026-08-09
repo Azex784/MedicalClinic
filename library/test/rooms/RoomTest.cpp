@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "rooms/Room.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 //struct sluzacy do sprawdzenia dzialania metod klasy bazowej
 struct TmpRoom : public Room

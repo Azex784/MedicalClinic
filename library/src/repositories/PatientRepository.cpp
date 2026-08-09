@@ -7,7 +7,7 @@
 
 #include <fstream>
 
-namespace RehabClinic
+namespace MedicalClinic
 {
 
 	using namespace std;

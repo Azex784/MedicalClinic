@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "Person.h"
 
-using namespace RehabClinic;
+using namespace MedicalClinic;
 
 
 struct TestSuitePersonFixture
