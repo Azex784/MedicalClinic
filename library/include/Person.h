@@ -2,25 +2,24 @@
 #define MEDICAL_CLINIC_PERSON_H
 
 #include <string>
-#include <sstream>
+#include "Statusable.h"
 
 namespace MedicalClinic
 {
-     /**
+    /**
     * Klasa reprezentująca człowieka
     */
-    class Person
+    class Person : public Statusable
     {
     private:
         std::string name;
         std::string lastName;
-        bool isArchive;
 
     public:
         /**
-       * Metoda wirtualna zwracająca informacje o osobie.
-       * @return Sformatowany łańcuch znaków zawierający dane osoby.
-       */
+        * Metoda wirtualna zwracająca informacje o osobie.
+        * @return Sformatowany łańcuch znaków zawierający dane osoby.
+        */
         virtual const std::string getInfo() const;
 
         /**
@@ -33,7 +32,7 @@ namespace MedicalClinic
         /**
         * Domyślny destruktor klasy.
         */
-        virtual ~Person() = default;
+        virtual ~Person() = 0;
 
         /**
         * Zwraca imię osoby.
@@ -54,22 +53,10 @@ namespace MedicalClinic
         void setLastName(const std::string& lastName1);
 
         /**
-	     * Zmienia status archiwizacji osoby.
-	     * @param isArchive1
-	     */
-        void setIsArchive(const bool isArchive1);
-
-        /**
 	     * Zwraca nazwisko osoby.
 	     * @return Stała referencja do łańcucha znaków przechowującego nazwisko.
 	     */
         const std::string& getLastName() const;
-
-        /**
-	     * Sprawdza status archiwizacji osoby.
-	     * @return Wartość logiczna Archive.
-	     */
-        bool getIsArchive() const;
     };
 }
 

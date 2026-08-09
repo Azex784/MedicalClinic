@@ -19,6 +19,16 @@ namespace MedicalClinic
 
     public:
         /**
+         * Konstruktor, który automatycznie zmienia status usługi na AVAILABLE
+         */
+        Statusable();
+
+        /**
+         *
+         */
+        virtual ~Statusable() = 0;
+
+        /**
          * Getter entityStatus
          * @return
          */

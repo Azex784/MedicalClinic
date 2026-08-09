@@ -6,6 +6,14 @@
 
 namespace MedicalClinic
 {
+    Statusable::Statusable() : entityStatus(Status::AVAILABLE)
+    {
+    }
+
+    Statusable::~Statusable()
+    {
+    }
+
     Status Statusable::getEntityStatus() const
     {
         return entityStatus;
