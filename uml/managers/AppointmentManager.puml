@@ -1,21 +1,15 @@
 @startuml
 
-'Do pdfa
-
 class AppointmentManager {
-  +AppointmentManager(patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
-  +AppointmentManager(fileName: string, fileNameArchive: string, patientRepository: PatientRepositoryPtr, personnelRepository: PersonnelRepositoryPtr, roomRepository: RoomRepositoryPtr, serviceRepository: ServiceRepositoryPtr)
+  +AppointmentManager()
+  +AppointmentManager(fileName: string, fileNameArchive: string)
 
-  +arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime,appointmentId:unsigned int):Appointment
-  +finishAppointment(appointmentId:unsigned int):unsigned int
-
-  +changeAppointment(appointmentId:unsigned int,ptime _date):bool
   +cancelAppointment(appointmentId:unsigned int):void
   +isDate(appointments: Appointment[0..*], beginDate: ptime, duration: unsigned int): bool
+  +finishAppointment(appointmentId:unsigned int):unsigned int
 
   +findByArchive(predicate:AppointmentPredicate): Appointment[0..*]
   +findAllArchive(): Appointment[0..*]
-
 }
 
 !ifndef UKRYJ_NOTATKI
@@ -33,10 +27,8 @@ finishAppointment - metoda szukająca konkretne
 spotkanie klienta, wyliczająca końcowy koszt.
 Sprawia ona również że klasa Appointment zostaje dodana do
 repozytorium archive (archiveRepository).
-findBy / findByArchive - predykat zwracający konkretne wizyty.
-findAll / findAllArchive - zwraca wszystkie wizyty.
-changeAppointment - metoda zmienia datę spotkania, jeśli dany
-termin i personel jest w tej dacie wolny.
+findByArchive - predykat zwracający konkretne wizyty.
+findAllArchive - zwraca wszystkie wizyty.
 cancelAppointment - anulowanie umówionego spotkania.
 Zwalnia przydział wszystkich zasobów związanych z tym spotkaniem
 i usuwa z repozytorium pliku.
@@ -45,13 +37,7 @@ end note
 !endif
 
 AppointmentManager *-->  "archiveAppointments" AppointmentRepository
-
 AppointmentManager *-->  "activeAppointments" AppointmentRepository
-
-AppointmentManager -->  PatientManager
-AppointmentManager -->  ServiceManager
-AppointmentManager -->  PersonnelManager
-AppointmentManager -->  RoomManager
 
 AppointmentManager ..>  Appointment
 AppointmentManager ..>  AppointmentPredicate
