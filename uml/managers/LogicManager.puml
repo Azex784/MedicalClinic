@@ -1,15 +1,13 @@
 @startuml
 
 class LogicManager {
-+getPersonnelManager():PersonnelManager
-+getPatientManager():PatientManager
-+getServiceManager():ServiceManager
-+getAppointmentManager():AppointmentManager
-
 +removePersonnel(personnelId:unsigned int):void
 +unregisterPatient(personalID:string):bool
 +removeRoom(roomNumber:unsigned int):void
 +removeService(serviceID:unsigned int):bool
+
++arrangeAppointment(patient:Patient,service:Service,personnel:Appointment,appointmentBeginDate:ptime,appointmentId:unsigned int):Appointment
++changeAppointment(appointmentId:unsigned int,ptime _date):bool
 }
 
 LogicManager *--> AppointmentManager
@@ -42,6 +40,8 @@ staje się nie dostępna i archiwlna,
 jeśli nie ma zaplanowynych już terminów
 związanych z tą usługą. W zależności od sukcesu
 usunięcia jest zwracany bool.
+changeAppointment - metoda zmienia datę spotkania, jeśli dany
+termin i personel jest w tej dacie wolny.
 end note
 
 !endif

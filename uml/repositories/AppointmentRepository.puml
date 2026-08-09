@@ -1,0 +1,22 @@
+@startuml
+
+class AppointmentRepository{
++parseData(): void
++dumpData(): string
+}
+
+AppointmentRepository "[0..*]"  -->  Appointment
+AppointmentRepository ..>  AppointmentPredicate
+
+!ifndef UKRYJ_NOTATKI
+
+note right of AppointmentRepository
+Klasa przechowująca dane o wizytach.
+Dziedziczy po szablonie RepositoryTemplate.
+Zawiera inne repozytorra, ponieważ w wizytach
+dokonywany jest zapis tylko unikalnych identyfikatory, a pełne obiekty
+odnajdywane są w dedykowanych magazynach danych.
+end note
+
+!endif
+@enduml

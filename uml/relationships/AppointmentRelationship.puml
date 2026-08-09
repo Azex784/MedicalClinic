@@ -1,11 +1,8 @@
 @startuml
 
-'Do pdf
-
 !include ../model/services/Service.puml
 !include ../model/Appointment.puml
 !include ../model/rooms/Room.puml
 !include ../model/personnel/Personnel.puml
-
 
 @enduml

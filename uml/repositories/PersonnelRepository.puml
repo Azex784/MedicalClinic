@@ -1,8 +1,8 @@
 @startuml
 
 class PersonnelRepository{
-+loadData(): void
-+saveData(): const void
++parseData(): void
++dumpData(): string
 }
 
 PersonnelRepository  "[0..*]" --> Personnel

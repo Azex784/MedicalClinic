@@ -1,0 +1,14 @@
+@startuml
+
+'Do pdfa
+
+!include ../repositories/PatientRepository.puml
+!include ../repositories/PersonnelRepository.puml
+!include ../repositories/ServiceRepository.puml
+!include ../repositories/RoomRepository.puml
+!include ../repositories/RepositoryTemplate.puml
+!include ../repositories/AppointmentRepository.puml
+
+
+
+@enduml

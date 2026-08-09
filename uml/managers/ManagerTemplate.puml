@@ -15,11 +15,11 @@ ManagerTemplate ..> UniqueClass
 ManagerTemplate ..> PredicateT
 ManagerTemplate ..> UniqueParameter
 
-
 ManagerTemplate <|-- PatientManager
 ManagerTemplate <|-- PersonnelManager
 ManagerTemplate <|-- RoomManager
 ManagerTemplate <|-- ServiceManager
+ManagerTemplate <|-- AppointmentManager
 
 !ifndef UKRYJ_NOTATKI
 
