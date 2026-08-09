@@ -3,7 +3,6 @@
 abstract class Person{
 -name:string
 -lastName:string
--status: Status
 + <<virtual>> getInfo(): string
 }
 

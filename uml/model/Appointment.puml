@@ -3,7 +3,7 @@
 class Appointment{
 -appointmentBeginDate:ptime
 -appointmentEndDate:ptime
--appointmentId:usigned int
+-appointmentId:unsigned int
 -appointmentCost:unsigned int
 +getInfo():string
 +finishAppointment(): unsigned int
