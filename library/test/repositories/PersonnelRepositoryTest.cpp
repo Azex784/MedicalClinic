@@ -117,8 +117,8 @@ BOOST_AUTO_TEST_CASE(LoadDataTest)
             // Weryfikacja wartości enuma
             for (int j = 0; j < (int)loadedDoctor->getSpecialisation().size(); j++)
             {
-                BOOST_TEST(specialisationToString(loadedDoctor->getSpecialisation()[j]) ==
-                           specialisationToString(originalDoctor->getSpecialisation()[j]));
+                BOOST_TEST(toString(loadedDoctor->getSpecialisation()[j]) ==
+                           toString(originalDoctor->getSpecialisation()[j]));
             }
         }
 

@@ -33,8 +33,8 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 
     // Weryfikacja wektora specjalizacji
     BOOST_TEST_REQUIRE(testDoctor.getSpecialisation().size() == 2);
-    BOOST_TEST(specialisationToString(testDoctor.getSpecialisation()[0]) == specialisationToString(Specialisation::PHYSIOTHERAPIST));
-    BOOST_TEST(specialisationToString(testDoctor.getSpecialisation()[1]) == specialisationToString(Specialisation::ORTHOPEDIST));
+    BOOST_TEST(toString(testDoctor.getSpecialisation()[0]) == toString(Specialisation::PHYSIOTHERAPIST));
+    BOOST_TEST(toString(testDoctor.getSpecialisation()[1]) == toString(Specialisation::ORTHOPEDIST));
 }
 
 BOOST_AUTO_TEST_CASE(SettersTest)

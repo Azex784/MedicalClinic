@@ -19,9 +19,9 @@ namespace MedicalClinic
         return entityStatus;
     }
 
-    void Statusable::setEntityStatus(Status entityStatus_)
+    void Statusable::setEntityStatus(Status entityStatus)
     {
-        entityStatus = entityStatus_;
+        this->entityStatus = entityStatus;
     }
 
     bool Statusable::isAvailable() const

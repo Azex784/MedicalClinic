@@ -13,9 +13,9 @@ namespace MedicalClinic
 		int i;
 		for (i = 0; i < (int)getAccessibleEqupiment().size() - 1; i++)
 		{
-			oss << equipmentToString(getAccessibleEqupiment()[i]) << ", ";
+			oss << toString(getAccessibleEqupiment()[i]) << ", ";
 		}
-		oss << equipmentToString(getAccessibleEqupiment()[i]);
+		oss << toString(getAccessibleEqupiment()[i]);
 		return Room::getInfo() + " pokoj rehabilitacyjny co moze maskymalnie pomiescic " + to_string(getMaxCapacity()) +
 			" osob z personulu, sprzęt dostępny w pokoju: " + oss.str();
 	}

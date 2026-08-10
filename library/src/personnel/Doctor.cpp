@@ -49,11 +49,11 @@ namespace MedicalClinic
 		{
 			if (i != (int)getSpecialisation().size() - 1)
 			{
-				ss << specialisationToString(getSpecialisation()[i]) << " ";
+				ss << toString(getSpecialisation()[i]) << " ";
 			}
 			else
 			{
-				ss << specialisationToString(getSpecialisation()[i]);
+				ss << toString(getSpecialisation()[i]);
 			}
 		}
 		return Personnel::getInfo() + " doktor o cenie prestizu: " + to_string(getDoctorCost()) + " specjalnosci: " + ss

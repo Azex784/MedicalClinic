@@ -4,7 +4,7 @@ using namespace std;
 
 namespace MedicalClinic
 {
-	const std::string statusToString(Status status)
+	const std::string toString(Status status)
 	{
 		switch (status)
 		{
@@ -13,5 +13,10 @@ namespace MedicalClinic
 			case Status::ARCHIVED: return "Archiwalny";
 			default: return "Unknown";
 		}
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Status& status) {
+		os << toString(status);
+		return os;
 	}
 }

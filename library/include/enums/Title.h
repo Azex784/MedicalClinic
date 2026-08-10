@@ -21,7 +21,16 @@ namespace MedicalClinic
      * @param Title
      * @return
      */
-    const std::string titleToString(Title Title);
+    const std::string toString(Title Title);
+
+    /**
+     * Operator przeciązaenia.
+     * Podczas wypisywania wywołuje funkcje toString.
+     * @param os
+     * @param t
+     * @return
+     */
+    std::ostream& operator<<(std::ostream& os, const Title& t);
 }
 
 #endif //MEDICALCLINIC_TITLE_H

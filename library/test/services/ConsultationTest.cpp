@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
     BOOST_TEST(testConsultation.getServiceDuration() == 45);
     BOOST_TEST(testConsultation.getServiceName() == "Konsultacja ortopedyczna");
     BOOST_TEST(testConsultation.getUniqueParameter() == 3001);
-    BOOST_TEST(specialisationToString(testConsultation.getRequiredDoctorSpec()) == specialisationToString(Specialisation::ORTHOPEDIST));
+    BOOST_TEST(toString(testConsultation.getRequiredDoctorSpec()) == toString(Specialisation::ORTHOPEDIST));
     BOOST_TEST(testConsultation.getRequiredDoctorSize() == 1);
 
     BOOST_TEST(testConsultation.getTopic() == "Ból kolana");

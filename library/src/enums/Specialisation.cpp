@@ -4,7 +4,7 @@ using namespace std;
 
 namespace MedicalClinic
 {
-	const string specialisationToString(Specialisation spec)
+	const string toString(Specialisation spec)
 	{
 		switch (spec)
 		{
@@ -31,5 +31,11 @@ namespace MedicalClinic
 			case Specialisation::LARYNGOLOGIST: return "Laryngolog";
 			default: return "Unknown";
 		}
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Specialisation& spec)
+	{
+		os << toString(spec);
+		return os;
 	}
 }

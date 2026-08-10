@@ -4,7 +4,7 @@ using namespace std;
 
 namespace MedicalClinic
 {
-	const std::string titleToString(Title title)
+	const std::string toString(Title title)
 	{
 		switch (title)
 		{
@@ -14,5 +14,11 @@ namespace MedicalClinic
 			case Title::PROF: return "Profesor";
 			default: return "Unknown";
 		}
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Title& t)
+	{
+		os << toString(t);
+		return os;
 	}
 }

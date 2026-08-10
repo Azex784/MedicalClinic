@@ -31,8 +31,8 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
     BOOST_TEST(testRoom.getMaxCapacity() == 3);
     BOOST_TEST_REQUIRE(testRoom.getAccessibleEqupiment().size() == 2);
 
-    BOOST_TEST(equipmentToString(testRoom.getAccessibleEqupiment()[0]) == equipmentToString(Equipment::PHYSICAL_THERAPY_DEVICE));
-    BOOST_TEST(equipmentToString(testRoom.getAccessibleEqupiment()[1]) == equipmentToString(Equipment::KINESITHERAPY_SPACE));
+    BOOST_TEST(toString(testRoom.getAccessibleEqupiment()[0]) == toString(Equipment::PHYSICAL_THERAPY_DEVICE));
+    BOOST_TEST(toString(testRoom.getAccessibleEqupiment()[1]) == toString(Equipment::KINESITHERAPY_SPACE));
 }
 
 BOOST_AUTO_TEST_CASE(CanBeUsedTest)

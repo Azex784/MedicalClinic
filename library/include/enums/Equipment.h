@@ -30,7 +30,16 @@ namespace MedicalClinic
      * @param eq
      * @return
      */
-    const std::string equipmentToString(Equipment eq);
+    const std::string toString(Equipment eq);
+
+    /**
+     * Operator przeciązaenia.
+     * Podczas wypisywania wywołuje funkcje toString.
+     * @param os
+     * @param eq
+     * @return
+     */
+    std::ostream& operator<<(std::ostream& os, const Equipment& eq);
 }
 
 #endif //MEDICAL_CLINIC_EQUIPMENT_H

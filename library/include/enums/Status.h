@@ -20,7 +20,16 @@ namespace MedicalClinic
      * @param status
      * @return
      */
-    const std::string statusToString(Status status);
+    const std::string toString(Status status);
+
+    /**
+     * Operator przeciązaenia.
+     * Podczas wypisywania wywołuje funkcje statusToString.
+     * @param os
+     * @param status
+     * @return
+     */
+    std::ostream& operator<<(std::ostream& os, const Status& status);
 }
 
 #endif //MEDICALCLINIC_STATUS_H

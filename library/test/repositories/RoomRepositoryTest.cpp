@@ -115,8 +115,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 				// Weryfikacja wartości enumów
 				for (int j = 0; j < (int)loadedRehabillitationRoom->getAccessibleEqupiment().size(); j++)
 				{
-					BOOST_TEST(equipmentToString(loadedRehabillitationRoom->getAccessibleEqupiment()[j]) ==
-						equipmentToString(originalRehabillitationRoom->getAccessibleEqupiment()[j]));
+					BOOST_TEST(toString(loadedRehabillitationRoom->getAccessibleEqupiment()[j]) ==
+						toString(originalRehabillitationRoom->getAccessibleEqupiment()[j]));
 				}
 			}
 

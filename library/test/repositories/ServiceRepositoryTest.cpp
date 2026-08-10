@@ -136,8 +136,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteServiceRepository, TestSuiteServiceRepositoryF
 				// Weryfikacja wartości wektora enumów
 				for (int j = 0; j < (int)loadedRehabillitation->getRequiredEqupiment().size(); j++)
 				{
-					BOOST_TEST(equipmentToString(loadedRehabillitation->getRequiredEqupiment()[j]) ==
-						equipmentToString(originalRehabillitation->getRequiredEqupiment()[j]));
+					BOOST_TEST(toString(loadedRehabillitation->getRequiredEqupiment()[j]) ==
+						toString(originalRehabillitation->getRequiredEqupiment()[j]));
 				}
 			}
 		}

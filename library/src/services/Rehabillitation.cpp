@@ -37,9 +37,9 @@ namespace MedicalClinic
         int i;
         for (i = 0; i < (int)getRequiredEqupiment().size() - 1; i++)
         {
-            oss << equipmentToString(getRequiredEqupiment()[i]) << " ";
+            oss << toString(getRequiredEqupiment()[i]) << " ";
         }
-        oss << equipmentToString(getRequiredEqupiment()[i]);
+        oss << toString(getRequiredEqupiment()[i]);
         return Service::getInfo() + ", rehabilitacja, potrzebna ilosc pielegniarek: " + to_string(
                 getRequiredNurseSize()) +
             +", potrzebny sprzet: " + oss.str();

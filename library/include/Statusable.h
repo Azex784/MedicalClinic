@@ -38,7 +38,7 @@ namespace MedicalClinic
          * Setter paramtetru entityStatus
          * @param entityStatus_
          */
-        void setEntityStatus(Status entityStatus_);
+        void setEntityStatus(Status entityStatus);
 
         /**
          * Zwraca prawdę gdy wartość EntityStatus to AVAILABLE

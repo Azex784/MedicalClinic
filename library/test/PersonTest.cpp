@@ -3,6 +3,9 @@
 
 using namespace MedicalClinic;
 
+/**
+ * Potrzeba klasy przykładowej by sprawdzić działanie abstrakcyjnej klasy
+ */
 struct PersonTest: public Person
 {
 	PersonTest(const std::string& name, const std::string& lastName)
@@ -15,7 +18,6 @@ struct PersonTest: public Person
 
 	};
 };
-
 
 struct TestSuitePersonFixture
 {

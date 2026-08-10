@@ -38,7 +38,7 @@ namespace MedicalClinic
     {
         std::ostringstream oss;
 
-        oss << "Osoba, imię: " + getName() + ", nazwisko: " + getLastName()+ ", status: " + statusToString(getEntityStatus());
+        oss << "Osoba, imię: " + getName() + ", nazwisko: " + getLastName()+ ", status: " + toString(getEntityStatus());
        
         return oss.str();
     }

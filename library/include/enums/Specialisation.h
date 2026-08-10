@@ -38,7 +38,16 @@ namespace MedicalClinic
 	 * @param spec
 	 * @return
 	 */
-	const std::string specialisationToString(Specialisation spec);
+	const std::string toString(Specialisation spec);
+
+	/**
+	 * Operator przeciązaenia.
+	 * Podczas wypisywania wywołuje funkcje toString.
+	 * @param os
+	 * @param spec
+	 * @return
+	 */
+	std::ostream& operator<<(std::ostream& os, const Specialisation& spec);
 }
 
 

@@ -80,6 +80,7 @@ set(SOURCE_TEST_FILES
         test/PersonTest.cpp
         test/patient/AddressTest.cpp
         test/patient/PatientTest.cpp
+        test/StatusableTest.cpp
         #        test/PersonTest.cpp
 #        test/patient/AddressTest.cpp
 #        test/patient/PatientTest.cpp

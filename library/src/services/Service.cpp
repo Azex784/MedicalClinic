@@ -83,7 +83,7 @@ namespace MedicalClinic
         return "Nazwa usługi: " + getServiceName() + ", koszt usług: " + to_string(getServiceCost()) +
             ", czas trwania " + to_string(getServiceDuration()) + ", identyfikator: " + to_string(getUniqueParameter())
             + ", liczba lekarzy: " + to_string(getRequiredDoctorSize()) + ", specjalizacja lekarza/y: " +
-            specialisationToString(getRequiredDoctorSpec());;
+            toString(getRequiredDoctorSpec());;
     }
 
 }

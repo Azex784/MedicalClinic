@@ -108,10 +108,10 @@ namespace MedicalClinic
 		{
 			cout << "Podaj wyposażenie " << endl;
 			cout << "<0> - zakończono wybór" << endl;
-			cout << "<1> - " + equipmentToString(Equipment::KINESITHERAPY_SPACE) << endl;
-			cout << "<2> - " + equipmentToString(Equipment::NONE) << endl;
-			cout << "<3> - " + equipmentToString(Equipment::PHYSICAL_THERAPY_DEVICE) << endl;
-			cout << "<4> - " + equipmentToString(Equipment::ROBOTIC_SYSTEM) << endl;
+			cout << "<1> - " + toString(Equipment::KINESITHERAPY_SPACE) << endl;
+			cout << "<2> - " + toString(Equipment::NONE) << endl;
+			cout << "<3> - " + toString(Equipment::PHYSICAL_THERAPY_DEVICE) << endl;
+			cout << "<4> - " + toString(Equipment::ROBOTIC_SYSTEM) << endl;
 
 			getline(cin, tmp1);
 
@@ -150,7 +150,7 @@ namespace MedicalClinic
 		cout << "Wybrano następujący sprzęt:" << endl;
 		for (auto& equipment : accessibleEquipment)
 		{
-			cout << equipmentToString(equipment) << endl;
+			cout << toString(equipment) << endl;
 		}
 		return true;
 	}

@@ -4,7 +4,7 @@ using namespace std;
 
 namespace MedicalClinic
 {
-	const std::string equipmentToString(Equipment eq)
+	const std::string toString(Equipment eq)
 	{
 		switch (eq)
 		{
@@ -24,4 +24,10 @@ namespace MedicalClinic
 			default: return "Unknown";
 		}
 	}
+
+	std::ostream& operator<<(std::ostream& os, const Equipment& eq) {
+		os << toString(eq);
+		return os;
+	}
+
 }
