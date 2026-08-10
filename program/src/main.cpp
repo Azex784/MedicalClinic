@@ -4,9 +4,9 @@ using namespace MedicalClinic;
 
 int main(){
 
-	TerminalMenu menu;
+	//TerminalMenu menu;
 
-	menu.start();
+	//menu.start();
 
 	return 0;
 }

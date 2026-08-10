@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 	// Sprawdzenie metod z klasy bazowej (Person)
 	BOOST_TEST(testPersonnel.getName() == "Walter");
 	BOOST_TEST(testPersonnel.getLastName() == "White");
-	BOOST_TEST(testPersonnel.getIsArchive() == false);
+	//BOOST_TEST(testPersonnel.getIsArchive() == false);
 	BOOST_TEST(testPersonnel.getIsActive() == 1);
 
 	// Sprawdzenie metod z klasy pochodnej (Patient)

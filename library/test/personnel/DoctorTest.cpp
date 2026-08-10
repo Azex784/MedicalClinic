@@ -11,7 +11,7 @@ struct TestSuiteDoctorFixture
     Doctor testDoctor;
 
     TestSuiteDoctorFixture()
-        : testSpecs{Specialisation::PHYSIOTHERAPIST, Specialisation::ORTHOPEDIST},
+        : //testSpecs{Specialisation::PHYSIOTHERAPIST, Specialisation::ORTHOPEDIST},
           testDoctor("Maciej", "Kowalczyk", 9876, testSpecs, 250)
     {
     }

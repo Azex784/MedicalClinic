@@ -49,7 +49,7 @@ namespace MedicalClinic
 			string name, lastName, job, tmp;
 			unsigned int personnelId;
 			PersonnelPtr newPersonnel;
-			bool isActive, isArchive;
+			//bool isActive, isArchive;
 
 			getline(ss, job, ';');
 
@@ -65,10 +65,10 @@ namespace MedicalClinic
 				getline(ss, lastName, ';');
 
 				getline(ss, tmp, ';');
-				isActive = stoi(tmp);
+				//isActive = stoi(tmp);
 
 				getline(ss, tmp, ';');
-				isArchive = stoi(tmp);
+				//isArchive = stoi(tmp);
 
 				getline(ss, tmp, ';');
 				personnelId = stoul(tmp);
@@ -96,10 +96,10 @@ namespace MedicalClinic
 				getline(ss, lastName, ';');
 
 				getline(ss, tmp, ';');
-				isActive = stoi(tmp);
+				//isActive = stoi(tmp);
 
 				getline(ss, tmp, ';');
-				isArchive = stoi(tmp);
+				//isArchive = stoi(tmp);
 
 				getline(ss, tmp, '\n');
 				//Do unsigned longa(inta)
@@ -111,8 +111,8 @@ namespace MedicalClinic
 			{
 				throw UnexpectedCharacterException("Personnel");
 			}
-			newPersonnel->setIsActive(isActive);
-			newPersonnel->setIsArchive(isArchive);
+			//newPersonnel->setIsActive(isActive);
+			//newPersonnel->setIsArchive(isArchive);
 
 			add(newPersonnel);
 
@@ -150,7 +150,7 @@ namespace MedicalClinic
 					outFile << personnel->getName() << ";";
 					outFile << personnel->getLastName() << ";";
 					outFile << personnel->getIsActive() << ";";
-					outFile << personnel->getIsArchive() << ";";
+					//outFile << personnel->getIsArchive() << ";";
 					outFile << personnel->getUniqueParameter() << ";";
 
 					int i;
@@ -169,7 +169,7 @@ namespace MedicalClinic
 					outFile << personnel->getName() << ";";
 					outFile << personnel->getLastName() << ";";
 					outFile << personnel->getIsActive() << ";";
-					outFile << personnel->getIsArchive() << ";";
+					//outFile << personnel->getIsArchive() << ";";
 					outFile << personnel->getUniqueParameter() << "\n";
 				}
 

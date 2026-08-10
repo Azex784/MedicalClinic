@@ -32,7 +32,7 @@ namespace MedicalClinic
         /**
         * Domyślny destruktor klasy.
         */
-        virtual ~Person() = 0;
+        virtual ~Person();
 
         /**
         * Zwraca imię osoby.

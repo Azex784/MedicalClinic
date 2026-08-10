@@ -54,7 +54,7 @@ namespace MedicalClinic
 			getline(ss, number, ';');
 			getline(ss, tmp, '\n');
 
-			bool isArchived = stoi(tmp);
+			//bool isArchived = stoi(tmp);
 
 			//Tworzenie nowych obiektow z wczytanymi danymi
 
@@ -81,7 +81,7 @@ namespace MedicalClinic
 				nowyPacjent = make_shared<Patient>(firstName, lastName, personalNumber, found[0]->getAddress());
 			}
 
-			nowyPacjent->setIsArchive(isArchived);
+			//nowyPacjent->setIsArchive(isArchived);
 			add(nowyPacjent);
 
 			if (inFile.fail())
@@ -116,7 +116,7 @@ namespace MedicalClinic
 				outFile << patient->getAddress()->getCity() << ";";
 				outFile << patient->getAddress()->getStreet() << ";";
 				outFile << patient->getAddress()->getNumber() << ';';
-				outFile << patient->getIsArchive() << '\n';
+				//outFile << patient->getIsArchive() << '\n';
 
 				if (outFile.fail())
 				{

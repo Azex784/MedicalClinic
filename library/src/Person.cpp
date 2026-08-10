@@ -32,7 +32,10 @@ namespace MedicalClinic
     const std::string Person::getInfo() const
     {
         std::ostringstream oss;
-        oss << "Osoba: " + getName() + " " + getLastName();
+        getEntityStatus();
+
+
+        oss << "Osoba, imie: " + getName() + ", nazwisko: " + getLastName()+ " ";
        
         return oss.str();
     }

@@ -5,9 +5,9 @@
 
 namespace MedicalClinic
 {
-/**
- * Typ wyliczeniowy zawierajcy sprzet
- */
+    /**
+     * Typ wyliczeniowy zawierajcy sprzet
+     */
     enum class Equipment
     {
         NONE,
@@ -25,7 +25,11 @@ namespace MedicalClinic
         INCUBATOR
     };
 
-    //Konwersja do stringa
+    /**
+     * Funckja przekształcająca do postaci stringa typ status
+     * @param eq
+     * @return
+     */
     const std::string equipmentToString(Equipment eq);
 }
 

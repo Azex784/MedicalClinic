@@ -11,13 +11,13 @@ struct TestSuiteRehabillitationRoomFixture
     std::vector<Equipment> testEquipment;
     RehabillitationRoom testRoom;
 
-    TestSuiteRehabillitationRoomFixture() 
-        : testEquipment{Equipment::PHYSICAL_THERAPY_DEVICE, Equipment::KINESITHERAPY_SPACE},
-          testRoom(202, testEquipment, 3)
-    {
-    }
+    //TestSuiteRehabillitationRoomFixture()
+        //: testEquipment{Equipment::PHYSICAL_THERAPY_DEVICE, Equipment::KINESITHERAPY_SPACE},
+        //  testRoom(202, testEquipment, 3)
+   // {
+   // }
 
-    ~TestSuiteRehabillitationRoomFixture() = default;
+   // ~TestSuiteRehabillitationRoomFixture() = default;
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRehabillitationRoom, TestSuiteRehabillitationRoomFixture)

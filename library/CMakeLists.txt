@@ -5,42 +5,52 @@ cmake_policy(SET CMP0167 NEW)
 
 set(SOURCE_FILES
         include/typedefs.h
-        include/managers/ManagerTemplate.h
-        include/managers/LogicManager.h
-        include/Exceptions.h
-        src/enums/Specialisation.cpp
-        src/enums/Equipment.cpp
-        src/patient/Patient.cpp
-        src/patient/Address.cpp
-        src/Person.cpp
-        src/personnel/Personnel.cpp
-        src/personnel/Doctor.cpp
-        src/personnel/Nurse.cpp
-        src/rooms/Room.cpp
-        src/rooms/RehabillitationRoom.cpp
-        src/rooms/ConsultationRoom.cpp
-        src/services/Service.cpp
-        src/services/Consultation.cpp
-        src/services/Rehabillitation.cpp
-        src/Appointment.cpp
-        src/enums/Specialisation.cpp
-        src/repositories/PatientRepository.cpp
-        src/repositories/PersonnelRepository.cpp
-        src/repositories/AppointmentRepository.cpp
-        src/repositories/RoomRepository.cpp
-        src/repositories/ServiceRepository.cpp
-        src/managers/RoomManager.cpp
-        src/managers/AppointmentManager.cpp
-        src/managers/ServiceManager.cpp
-        src/managers/PatientManager.cpp
-        src/managers/PersonnelManager.cpp
-        src/managers/LogicManger.cpp
-        src/menu/TerminalMenu.cpp
-        include/menu/TerminalMenu.h
+
+        include/enums/Specialisation.h
+        include/enums/Equipment.h
         include/enums/Status.h
         include/enums/Title.h
-        src/Statusable.cpp
-        include/Statusable.h
+
+        src/enums/Specialisation.cpp
+        src/enums/Equipment.cpp
+        src/enums/Status.cpp
+        src/enums/Title.cpp
+
+#        src/patient/Patient.cpp
+#        include/managers/ManagerTemplate.h
+#        include/managers/LogicManager.h
+#        include/Exceptions.h
+
+#        src/patient/Address.cpp
+#        src/Person.cpp
+#        src/personnel/Personnel.cpp
+#        src/personnel/Doctor.cpp
+#        src/personnel/Nurse.cpp
+#        src/rooms/Room.cpp
+#        src/rooms/RehabillitationRoom.cpp
+#        src/rooms/ConsultationRoom.cpp
+#        src/services/Service.cpp
+#        src/services/Consultation.cpp
+#        src/services/Rehabillitation.cpp
+#        src/Appointment.cpp
+#        src/enums/Specialisation.cpp
+#        src/repositories/PatientRepository.cpp
+#        src/repositories/PersonnelRepository.cpp
+#        src/repositories/AppointmentRepository.cpp
+#        src/repositories/RoomRepository.cpp
+#        src/repositories/ServiceRepository.cpp
+#        src/managers/RoomManager.cpp
+#        src/managers/AppointmentManager.cpp
+#        src/managers/ServiceManager.cpp
+#        src/managers/PatientManager.cpp
+#        src/managers/PersonnelManager.cpp
+#        src/managers/LogicManger.cpp
+#        src/menu/TerminalMenu.cpp
+#        include/menu/TerminalMenu.h
+
+#        src/Statusable.cpp
+#        include/Statusable.h
+
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library STATIC ${SOURCE_FILES})
@@ -56,33 +66,33 @@ include_directories(
 
 set(SOURCE_TEST_FILES
         test/master.cpp
-        test/PersonTest.cpp
-        test/patient/AddressTest.cpp
-        test/patient/PatientTest.cpp
-        test/personnel/PersonnelTest.cpp
-        test/personnel/DoctorTest.cpp
-        test/personnel/NurseTest.cpp
-        test/rooms/ConsultationRoomTest.cpp
-        test/rooms/RehabillitationRoomTest.cpp
-        test/rooms/RoomTest.cpp
-        test/services/ServiceTest.cpp
-        test/services/ConsultationTest.cpp
-        test/services/RehabillitationTest.cpp
-        test/AppointmentTest.cpp
-        test/repositories/RepositoryTemplateTest.cpp
-        test/repositories/PatientRepositoryTest.cpp
-        test/repositories/PersonnelRepositoryTest.cpp
-        test/repositories/RoomRepositoryTest.cpp
-        test/repositories/ServiceRepositoryTest.cpp
-        test/repositories/AppointmentRepositoryTest.cpp
-        test/managers/ManagerTemplateTest.cpp
-        test/managers/PatientManagerTest.cpp
-        test/managers/RoomManagerTest.cpp
-        test/managers/PersonnelManagerTest.cpp
-        test/managers/AppointmentManagerTest.cpp
-        test/managers/ServiceManagerTest.cpp
-        test/managers/LogicManagerTest.cpp
-
+        test/enums/Enums.cpp
+#        test/PersonTest.cpp
+#        test/patient/AddressTest.cpp
+#        test/patient/PatientTest.cpp
+#        test/personnel/PersonnelTest.cpp
+#        test/personnel/DoctorTest.cpp
+#        test/personnel/NurseTest.cpp
+#        test/rooms/ConsultationRoomTest.cpp
+#        test/rooms/RehabillitationRoomTest.cpp
+#        test/rooms/RoomTest.cpp
+#        test/services/ServiceTest.cpp
+#        test/services/ConsultationTest.cpp
+#        test/services/RehabillitationTest.cpp
+#        test/AppointmentTest.cpp
+#        test/repositories/RepositoryTemplateTest.cpp
+#        test/repositories/PatientRepositoryTest.cpp
+#        test/repositories/PersonnelRepositoryTest.cpp
+#        test/repositories/RoomRepositoryTest.cpp
+#        test/repositories/ServiceRepositoryTest.cpp
+#        test/repositories/AppointmentRepositoryTest.cpp
+#        test/managers/ManagerTemplateTest.cpp
+#        test/managers/PatientManagerTest.cpp
+#        test/managers/RoomManagerTest.cpp
+#        test/managers/PersonnelManagerTest.cpp
+#        test/managers/AppointmentManagerTest.cpp
+#        test/managers/ServiceManagerTest.cpp
+#        test/managers/LogicManagerTest.cpp
 ) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})

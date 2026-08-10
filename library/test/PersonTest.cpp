@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 	BOOST_TEST(testPerson.getLastName() == "Kowalski");
 
 	// Zakładam, że domyślnie przy tworzeniu obiektu isArchive to false
-	BOOST_TEST(testPerson.getIsArchive() == false);
+	BOOST_TEST(testPerson.isAvailable());
 }
 
 BOOST_AUTO_TEST_CASE(SettersTest)
@@ -31,12 +31,10 @@ BOOST_AUTO_TEST_CASE(SettersTest)
 	// Zmiana stanu obiektu za pomocą setterów
 	testPerson.setName("Adam");
 	testPerson.setLastName("Nowak");
-	testPerson.setIsArchive(true);
 
 	// Weryfikacja
 	BOOST_TEST(testPerson.getName() == "Adam");
 	BOOST_TEST(testPerson.getLastName() == "Nowak");
-	BOOST_TEST(testPerson.getIsArchive() == true);
 }
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)

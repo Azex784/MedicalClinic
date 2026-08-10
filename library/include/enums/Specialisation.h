@@ -5,9 +5,9 @@
 
 namespace MedicalClinic
 {
-/**
- * Typ wyliczeniowy zawierajcy specjalizacje
- */
+	/**
+	 * Typ wyliczeniowy zawierajcy specjalizacje
+	 */
 	enum class Specialisation
 	{
 		CARDIOLOGIST,
@@ -33,7 +33,11 @@ namespace MedicalClinic
 		LARYNGOLOGIST
 	};
 
-	//Konwersja do stringa
+	/**
+	 * Funckja przekształcająca do postaci stringa typ status
+	 * @param spec
+	 * @return
+	 */
 	const std::string specialisationToString(Specialisation spec);
 }
 
