@@ -3,10 +3,23 @@
 
 using namespace MedicalClinic;
 
+struct PersonTest: public Person
+{
+	PersonTest(const std::string& name, const std::string& lastName)
+		: Person(name, lastName)
+	{
+	}
+
+	virtual ~PersonTest()
+	{
+
+	};
+};
+
 
 struct TestSuitePersonFixture
 {
-	Person testPerson;
+	PersonTest testPerson;
 	TestSuitePersonFixture() : testPerson("Jan", "Kowalski")
 	{
 	}
@@ -21,9 +34,6 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 {
 	BOOST_TEST(testPerson.getName() == "Jan");
 	BOOST_TEST(testPerson.getLastName() == "Kowalski");
-
-	// Zakładam, że domyślnie przy tworzeniu obiektu isArchive to false
-	BOOST_TEST(testPerson.isAvailable());
 }
 
 BOOST_AUTO_TEST_CASE(SettersTest)
@@ -39,13 +49,14 @@ BOOST_AUTO_TEST_CASE(SettersTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	// Sprawdzamy poprawnosc dzialania metody getInfo
-	BOOST_TEST(testPerson.getInfo() == "Osoba: Jan Kowalski, niearchiwalna");
+	// Sprawdzamy poprawność działania metody getInfo
+	BOOST_TEST(testPerson.getInfo() == "Osoba, imię: Jan, nazwisko: Kowalski, status: Dostępny");
 
 	// Sprawdzenie getInfo po zmianie
 	testPerson.setName("Anna");
 	testPerson.setLastName("Maria");
-	BOOST_TEST(testPerson.getInfo() == "Osoba: Anna Maria, niearchiwalna");
+
+	BOOST_TEST(testPerson.getInfo() == "Osoba, imię: Anna, nazwisko: Maria, status: Dostępny");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

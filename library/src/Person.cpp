@@ -1,11 +1,16 @@
 #include "Person.h"
 #include <sstream>
+#include "enums/Status.h"
 
 namespace MedicalClinic
 {
 
     Person::Person(const std::string& name, const std::string& lastName) : name(name),
                                                                            lastName(lastName)
+    {
+    }
+
+    Person::~Person()
     {
     }
 
@@ -32,10 +37,8 @@ namespace MedicalClinic
     const std::string Person::getInfo() const
     {
         std::ostringstream oss;
-        getEntityStatus();
 
-
-        oss << "Osoba, imie: " + getName() + ", nazwisko: " + getLastName()+ " ";
+        oss << "Osoba, imię: " + getName() + ", nazwisko: " + getLastName()+ ", status: " + statusToString(getEntityStatus());
        
         return oss.str();
     }

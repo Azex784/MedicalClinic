@@ -6,23 +6,29 @@ cmake_policy(SET CMP0167 NEW)
 set(SOURCE_FILES
         include/typedefs.h
 
+        src/enums/Specialisation.cpp
         include/enums/Specialisation.h
+
+        src/enums/Equipment.cpp
         include/enums/Equipment.h
+
+        src/enums/Status.cpp
         include/enums/Status.h
+
+        src/enums/Title.cpp
         include/enums/Title.h
 
-        src/enums/Specialisation.cpp
-        src/enums/Equipment.cpp
-        src/enums/Status.cpp
-        src/enums/Title.cpp
+        src/Statusable.cpp
+        include/Statusable.h
 
+        src/Person.cpp
+        include/Person.h
 #        src/patient/Patient.cpp
 #        include/managers/ManagerTemplate.h
 #        include/managers/LogicManager.h
 #        include/Exceptions.h
 
 #        src/patient/Address.cpp
-#        src/Person.cpp
 #        src/personnel/Personnel.cpp
 #        src/personnel/Doctor.cpp
 #        src/personnel/Nurse.cpp
@@ -48,9 +54,6 @@ set(SOURCE_FILES
 #        src/menu/TerminalMenu.cpp
 #        include/menu/TerminalMenu.h
 
-#        src/Statusable.cpp
-#        include/Statusable.h
-
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library STATIC ${SOURCE_FILES})
@@ -67,7 +70,8 @@ include_directories(
 set(SOURCE_TEST_FILES
         test/master.cpp
         test/enums/Enums.cpp
-#        test/PersonTest.cpp
+        test/PersonTest.cpp
+        #        test/PersonTest.cpp
 #        test/patient/AddressTest.cpp
 #        test/patient/PatientTest.cpp
 #        test/personnel/PersonnelTest.cpp
