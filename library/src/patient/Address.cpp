@@ -25,6 +25,6 @@ namespace MedicalClinic
 
     const std::string Address::getInfo() const
     {
-        return "Miasto: " + getCity() + ", ulica: " + getStreet() + " " + getNumber();
+        return "Adres, miasto: " + getCity() + ", ulica: " + getStreet() + ", numer: " + getNumber();
     }
 }

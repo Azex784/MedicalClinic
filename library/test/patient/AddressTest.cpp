@@ -27,8 +27,8 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	//sprawdzenie getInfo
-	BOOST_TEST(testAddress.getInfo() == "Miasto: Warszawa, ulica: Marszałkowska 10/15");
+	// Sprawdzenie getInfo
+	BOOST_TEST(testAddress.getInfo() == "Adres, miasto: Warszawa, ulica: Marszałkowska, numer: 10/15");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

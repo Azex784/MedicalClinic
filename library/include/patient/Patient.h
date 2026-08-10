@@ -5,9 +5,10 @@
 #include "typedefs.h"
 
 namespace MedicalClinic
-{/**
- * Klasa reprezentująca pacjenta dziedziczy z klasy Person
- */
+{
+	/**
+	 * Klasa reprezentująca pacjenta. Dziedziczy z klasy Person.
+	 */
 	class Patient : public Person
 	{
 	private:
@@ -16,12 +17,12 @@ namespace MedicalClinic
 
 	public:
 		/**
-	    * Konstruktor tworzący nowy obiekt pacjenta.
-	    * @param name Imię pacjenta.
-	    * @param lastName Nazwisko pacjenta.
-	    * @param personalNumber PESEL pacjenta - niezmienialny.
-	    * @param address Wskaźnik na obiekt adresu przypisany do pacjenta.
-	    */
+	     * Konstruktor tworzący nowy obiekt pacjenta.
+	     * @param name Imię pacjenta.
+	     * @param lastName Nazwisko pacjenta.
+	     * @param personalNumber PESEL pacjenta - niezmienialny.
+	     * @param address Wskaźnik na obiekt adresu przypisany do pacjenta.
+	     */
 		Patient(const std::string& name, const std::string& lastName, const std::string& personalNumber,
 		        const AddressPtr& address);
 

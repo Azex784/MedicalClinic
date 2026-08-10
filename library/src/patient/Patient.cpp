@@ -4,12 +4,11 @@
 
 namespace MedicalClinic
 {
-
     const AddressPtr& Patient::getAddress() const
     {
         if (address == nullptr)
         {
-            throw NullPointerException("archiveRepository");
+            throw NullPointerException("adres");
         }
         return address;
     }
@@ -19,6 +18,10 @@ namespace MedicalClinic
                                                   personalNumber(personalNumber),
                                                   address(address)
     {
+        if (address == nullptr)
+        {
+            throw NullPointerException("adres");
+        }
     }
 
     const std::string& Patient::getUniqueParameter() const
@@ -28,6 +31,6 @@ namespace MedicalClinic
 
     const std::string Patient::getInfo() const
     {
-        return Person::getInfo() + " pacjent o peselu: " + personalNumber + ", adresie: " + getAddress()->getInfo();
+        return Person::getInfo() + ", pacjent, pesel: " + personalNumber + ", " + getAddress()->getInfo();
     }
 }

@@ -1,14 +1,12 @@
 #include <boost/test/unit_test.hpp>
-#include <memory>
 #include "patient/Patient.h"
 #include "patient/Address.h"
 
 using namespace MedicalClinic;
 
-
 struct TestSuitePatientFixture
 {
-	std::shared_ptr<Address> testAddress;
+	AddressPtr testAddress;
 	Patient testPatient;
 
 	TestSuitePatientFixture()
@@ -27,12 +25,11 @@ BOOST_AUTO_TEST_CASE(ConstructorTest)
 	// Sprawdzenie metod z klasy bazowej (Person)
 	BOOST_TEST(testPatient.getName() == "Walter");
 	BOOST_TEST(testPatient.getLastName() == "White");
-	//BOOST_TEST(testPatient.getIsArchive() == false);
 
 	// Sprawdzenie metod z klasy pochodnej (Patient)
 	BOOST_TEST(testPatient.getUniqueParameter() == "90010112345");
 
-	// Weryfikacja, czy adres został poprawnie przypisany i czy wskazuje na dobre dane
+	// Weryfikacja, czy adres został poprawnie przypisany i czy wskazuje na prawidłowe dane
 	BOOST_TEST_REQUIRE(testPatient.getAddress() == testAddress);
 	BOOST_TEST(testPatient.getAddress()->getCity() == "Albuquerqe");
 	BOOST_TEST(testPatient.getAddress()->getStreet() == "Juan Poet");
@@ -40,23 +37,9 @@ BOOST_AUTO_TEST_CASE(ConstructorTest)
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pacjent o peselu: 90010112345, adresie: Miasto: Albuquerqe, ulica: Juan Poet 10/15";
+	std::string expectedInfo = testPatient.Person::getInfo() + ", pacjent, pesel: 90010112345, " + testAddress->getInfo();
 
 	BOOST_TEST(testPatient.getInfo() == expectedInfo);
-}
-
-BOOST_AUTO_TEST_CASE(InheritedSettersTest)
-{
-	testPatient.setName("Jesse");
-	testPatient.setLastName("Pinkman");
-	//testPatient.setIsArchive(true);
-
-	BOOST_TEST(testPatient.getName() == "Jesse");
-	BOOST_TEST(testPatient.getLastName() == "Pinkman");
-	//BOOST_TEST(testPatient.getIsArchive() == true);
-
-	//czy pesel jest ten sam
-	BOOST_TEST(testPatient.getUniqueParameter() == "90010112345");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

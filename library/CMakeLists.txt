@@ -23,7 +23,14 @@ set(SOURCE_FILES
 
         src/Person.cpp
         include/Person.h
-#        src/patient/Patient.cpp
+
+        src/patient/Address.cpp
+        include/patient/Address.h
+
+
+        src/patient/Patient.cpp
+        include/patient/Patient.h
+
 #        include/managers/ManagerTemplate.h
 #        include/managers/LogicManager.h
 #        include/Exceptions.h
@@ -71,6 +78,8 @@ set(SOURCE_TEST_FILES
         test/master.cpp
         test/enums/Enums.cpp
         test/PersonTest.cpp
+        test/patient/AddressTest.cpp
+        test/patient/PatientTest.cpp
         #        test/PersonTest.cpp
 #        test/patient/AddressTest.cpp
 #        test/patient/PatientTest.cpp
