@@ -3,15 +3,9 @@
 
 namespace MedicalClinic
 {
-
 	using namespace std;
 
-	bool Personnel::getIsActive() const
-	{
-		return isActive;
-	}
-
-	unsigned int Personnel::getUniqueParameter() const
+	const unsigned int &Personnel::getUniqueParameter() const
 	{
 		return personnelId;
 	}
@@ -20,26 +14,20 @@ namespace MedicalClinic
 		Person(name, lastName),
 		personnelId(personnelId)
 	{
-		setIsActive(1);
-	}
-
-	void Personnel::setIsActive(const bool isActive)
-	{
-		this->isActive = isActive;
 	}
 
 	const std::string Personnel::getInfo() const
 	{
 		string tmp;
-		if (getIsActive())
+		if (isAvailable())
 		{
-			tmp = ", aktywyny zawodowo";
+			tmp = ", aktywyny/a zawodowo";
 		}
 		else
 		{
-			tmp = ", niedostępny";
+			tmp = ", niedostępny/a";
 		}
 
-		return Person::getInfo() + " pracownik personelu o numerze pracownika: " + to_string(personnelId) + tmp;
+		return Person::getInfo() + ", pracownik personelu, numer pracownika: " + to_string(personnelId) + tmp;
 	}
 }

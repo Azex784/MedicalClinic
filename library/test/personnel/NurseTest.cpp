@@ -1,17 +1,15 @@
 #include <boost/test/unit_test.hpp>
 #include "personnel/Nurse.h"
-#include "enums/Specialisation.h"
 
 using namespace MedicalClinic;
 
 
 struct TestSuiteNurseFixture
 {
-    std::vector<Specialisation> testSpecs;
     Nurse testNurse;
 
     TestSuiteNurseFixture()
-        : testNurse("Elzbieta", "Kowalczyk", 12341)
+        : testNurse("Elżbieta", "Kowalczyk", 12341)
     {
     }
 
@@ -22,27 +20,15 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteNurse, TestSuiteNurseFixture)
 
 BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 {
-    // Constructor check
-    BOOST_TEST(testNurse.getName() == "Elzbieta");
+    BOOST_TEST(testNurse.getName() == "Elżbieta");
     BOOST_TEST(testNurse.getLastName() == "Kowalczyk");
     BOOST_TEST(testNurse.getUniqueParameter() == 12341);
 }
 
-BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)
-{
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::PHYSIOTHERAPIST) == true);
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::ORTHOPEDIST) == true);
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::SPORTS_MEDICINE) == true);
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::OSTEOPATH) == true);
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::MASSAGE_THERAPIST) == true);
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::RHEUMATOLOGIST) == true);
-    // //czy nie moze przeprowadzic zbeigu z specjalizacją neurologi
-    // BOOST_TEST(testNurse.canConductTreatment(Specialisation::NEUROLOGIST) == false);
-}
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-    std::string expectedInfo = "Osoba: Elzbieta Kowalczyk, niearchiwalna pracownik personelu o numerze pracownika: 12341, aktywyny zawodowo pielegniarka";
+    std::string expectedInfo = testNurse.Personnel::getInfo() + ", pielęgniarka.";
     BOOST_TEST(testNurse.getInfo() == expectedInfo);
 }
 

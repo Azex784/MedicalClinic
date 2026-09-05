@@ -5,7 +5,6 @@
 using namespace boost::unit_test;
 
 struct TestConfig {
-
     TestConfig() {
         expected_failures(0);
         timeout(1);

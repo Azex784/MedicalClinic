@@ -1,23 +1,29 @@
 #include "personnel/Doctor.h"
 #include "enums/Specialisation.h"
+#include "enums/Title.h"
+#include <cmath>
 #include "sstream"
 
 namespace MedicalClinic
 {
-
 	using namespace std;
 
 	Doctor::Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
-	               const std::vector<Specialisation>& specialisation,
-	               const unsigned int doctorCost) : Personnel(name, lastName, personnelId),
-	                                                specialisation(specialisation),
-	                                                doctorCost(doctorCost)
+		const std::vector<Specialisation>& specialisation, const Title title): Personnel(name, lastName, personnelId),
+		                                                                       specialisation(specialisation),
+		                                                                       title(title)
 	{
+		setDoctorRate();
 	}
 
-	void Doctor::setDoctorCost(const unsigned int doctorCost)
+	Title Doctor::getTitle() const
 	{
-		this->doctorCost = doctorCost;
+		return title;
+	}
+
+	const unsigned int &Doctor::getDoctorRate() const
+	{
+		return doctorRate;
 	}
 
 	const std::vector<Specialisation>& Doctor::getSpecialisation() const
@@ -25,12 +31,7 @@ namespace MedicalClinic
 		return specialisation;
 	}
 
-	unsigned int Doctor::getDoctorCost() const
-	{
-		return doctorCost;
-	}
-
-	bool Doctor::canConductTreatment(Specialisation specjalizacja) const
+	bool Doctor::canConductTreatment(const Specialisation &specjalizacja) const
 	{
 		for (int i = 0; i < (int)getSpecialisation().size(); i++)
 		{
@@ -49,15 +50,45 @@ namespace MedicalClinic
 		{
 			if (i != (int)getSpecialisation().size() - 1)
 			{
-				ss << toString(getSpecialisation()[i]) << " ";
+				ss << toString(getSpecialisation()[i]) << ", ";
 			}
 			else
 			{
-				ss << toString(getSpecialisation()[i]);
+				ss << toString(getSpecialisation()[i]) << ".";
 			}
 		}
-		return Personnel::getInfo() + " doktor o cenie prestizu: " + to_string(getDoctorCost()) + " specjalnosci: " + ss
-			.
-			str();
+		return Personnel::getInfo() + ", lekarz o stawce (jako procent zabiegu): " + "" + to_string(getDoctorRate()) + "%, specjalności: " + ss.str();
+	}
+
+	void Doctor::setTitle(const Title title)
+	{
+		this->title = title;
+		setDoctorRate();
+	}
+
+	void Doctor::setDoctorRate()
+	{
+		title = getTitle();
+
+		if (title == Title::MD)
+		{
+			doctorRate = 0;
+		}
+		else if (title == Title::DR_MED)
+		{
+			doctorRate = 1;
+		}
+		else if (title == Title::DR_HAB_MED)
+		{
+			doctorRate = 2;
+		}
+		else if (title == Title::PROF)
+		{
+			doctorRate = 3;
+		}
+		else
+		{
+			// Except
+		}
 	};
 }

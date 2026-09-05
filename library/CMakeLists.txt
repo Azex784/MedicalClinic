@@ -27,18 +27,18 @@ set(SOURCE_FILES
         src/patient/Address.cpp
         include/patient/Address.h
 
-
         src/patient/Patient.cpp
         include/patient/Patient.h
 
-#        include/managers/ManagerTemplate.h
-#        include/managers/LogicManager.h
-#        include/Exceptions.h
+        src/personnel/Personnel.cpp
+        include/personnel/Personnel.h
 
-#        src/patient/Address.cpp
-#        src/personnel/Personnel.cpp
-#        src/personnel/Doctor.cpp
-#        src/personnel/Nurse.cpp
+        src/personnel/Doctor.cpp
+        include/personnel/Doctor.h
+
+        src/personnel/Nurse.cpp
+        include/personnel/Nurse.h
+
 #        src/rooms/Room.cpp
 #        src/rooms/RehabillitationRoom.cpp
 #        src/rooms/ConsultationRoom.cpp
@@ -60,6 +60,9 @@ set(SOURCE_FILES
 #        src/managers/LogicManger.cpp
 #        src/menu/TerminalMenu.cpp
 #        include/menu/TerminalMenu.h
+        #        include/managers/ManagerTemplate.h
+        #        include/managers/LogicManager.h
+        #        include/Exceptions.h
 
 )# tu będą dodawan pliki zrodlowe
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -81,12 +84,9 @@ set(SOURCE_TEST_FILES
         test/patient/AddressTest.cpp
         test/patient/PatientTest.cpp
         test/StatusableTest.cpp
-        #        test/PersonTest.cpp
-#        test/patient/AddressTest.cpp
-#        test/patient/PatientTest.cpp
-#        test/personnel/PersonnelTest.cpp
-#        test/personnel/DoctorTest.cpp
-#        test/personnel/NurseTest.cpp
+        test/personnel/PersonnelTest.cpp
+        test/personnel/DoctorTest.cpp
+        test/personnel/NurseTest.cpp
 #        test/rooms/ConsultationRoomTest.cpp
 #        test/rooms/RehabillitationRoomTest.cpp
 #        test/rooms/RoomTest.cpp

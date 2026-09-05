@@ -3,15 +3,11 @@
 
 using namespace MedicalClinic;
 
-//tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
+// Tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
 struct TmpPersonnel : public Personnel
 {
-	TmpPersonnel(const std::string& name, const std::string& lastName, unsigned int id)
+	TmpPersonnel(const std::string& name, const std::string& lastName, const unsigned int& id)
 		: Personnel(name, lastName, id) {}
-
-	bool canConductTreatment(Specialisation) const override {
-		return true;
-	}
 };
 
 struct TestSuitePersonnelFixture
@@ -19,10 +15,9 @@ struct TestSuitePersonnelFixture
 	TmpPersonnel testPersonnel;
 
 	TestSuitePersonnelFixture()
-		: testPersonnel("Walter", "White", 2137)
+		: testPersonnel("Walter", "White", 1234)
 	{
 	}
-
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuitePersonnel, TestSuitePersonnelFixture)
@@ -32,29 +27,14 @@ BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
 	// Sprawdzenie metod z klasy bazowej (Person)
 	BOOST_TEST(testPersonnel.getName() == "Walter");
 	BOOST_TEST(testPersonnel.getLastName() == "White");
-	//BOOST_TEST(testPersonnel.getIsArchive() == false);
-	BOOST_TEST(testPersonnel.getIsActive() == 1);
 
-	// Sprawdzenie metod z klasy pochodnej (Patient)
-	BOOST_TEST(testPersonnel.getUniqueParameter() == 2137);
-
+	// Sprawdzenie metod z klasy pochodnej
+	BOOST_TEST(testPersonnel.getUniqueParameter() == 1234);
 }
 
 BOOST_AUTO_TEST_CASE(GetInfoTest)
 {
-	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pracownik personelu o numerze pracownika: 2137, aktywyny zawodowo";
-	BOOST_TEST(testPersonnel.getInfo() == expectedInfo);
-}
-
-BOOST_AUTO_TEST_CASE(SettersTest)
-{
-	//niezbedne jest sprawdzenie ze nastopila zmiana
-	BOOST_TEST_REQUIRE(testPersonnel.getIsActive());
-	testPersonnel.setIsActive(0);
-	BOOST_TEST(!testPersonnel.getIsActive());
-	//czy po zmianie zmienia sie komunikat
-	std::string expectedInfo = "Osoba: Walter White, niearchiwalna pracownik personelu o numerze pracownika: 2137, niedostępny";
-
+	std::string expectedInfo = testPersonnel.Person::getInfo() + ", pracownik personelu, numer pracownika: 1234, aktywyny/a zawodowo";
 	BOOST_TEST(testPersonnel.getInfo() == expectedInfo);
 }
 

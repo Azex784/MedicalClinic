@@ -10,17 +10,8 @@ namespace MedicalClinic
 	{
 	}
 
-	bool Nurse::canConductTreatment(Specialisation specjalizacja) const
-	{
-		if (specjalizacja != Specialisation::NEUROLOGIST)
-		{
-			return true;
-		}
-		return false;
-	}
-
 	const std::string Nurse::getInfo() const
 	{
-		return Personnel::getInfo() + " pielegniarka";
+		return Personnel::getInfo() + ", pielęgniarka.";
 	}
 }
