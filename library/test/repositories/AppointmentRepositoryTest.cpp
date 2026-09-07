@@ -15,7 +15,7 @@
 #include "personnel/Doctor.h"
 #include "personnel/Nurse.h"
 
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 
 #include "services/Consultation.h"
 
@@ -73,7 +73,7 @@ struct TestSuiteAppointmentRepositoryFixture
 		personnelRepo->add(doc1);
 		personnelRepo->add(doc2);
 
-		rehab1 = make_shared<RehabillitationRoom>(101, eq1, 10);
+		rehab1 = make_shared<SurgeryRoom>(101, eq1, 10);
 		roomRepo->add(rehab1);
 
 		cons1 = make_shared<Consultation>(150, 30, "Konsultacja odnosnie masazu", 101, 1,

@@ -1,13 +1,12 @@
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 #include "enums/Equipment.h"
 #include "sstream"
 
 namespace MedicalClinic
 {
-
 	using namespace std;
 
-	const std::string RehabillitationRoom::getInfo() const
+	const std::string SurgeryRoom::getInfo() const
 	{
 		ostringstream oss;
 		int i;
@@ -15,12 +14,12 @@ namespace MedicalClinic
 		{
 			oss << toString(getAccessibleEqupiment()[i]) << ", ";
 		}
-		oss << toString(getAccessibleEqupiment()[i]);
-		return Room::getInfo() + " pokoj rehabilitacyjny co moze maskymalnie pomiescic " + to_string(getMaxCapacity()) +
-			" osob z personulu, sprzęt dostępny w pokoju: " + oss.str();
+		oss << toString(getAccessibleEqupiment()[i]) << ".";
+		return Room::getInfo() + ", pokój operacyjny, maksymalna ładowność: " + to_string(getMaxCapacity()) +
+			" osób z personulu, sprzęt dostępny w pokoju: " + oss.str();
 	}
 
-	RehabillitationRoom::RehabillitationRoom(const unsigned roomNumber,
+	SurgeryRoom::SurgeryRoom(const unsigned roomNumber,
 	                                         const std::vector<Equipment>& accessibleEqupiment,
 	                                         const unsigned int maxCapacity) : Room(roomNumber),
 	                                                                           accessibleEqupiment(accessibleEqupiment),
@@ -28,7 +27,7 @@ namespace MedicalClinic
 	{
 	}
 
-	bool RehabillitationRoom::canBeUsed(Equipment equipment) const
+	bool SurgeryRoom::canBeUsed(Equipment equipment) const
 	{
 		for (int i = 0; i < (int)getAccessibleEqupiment().size(); i++)
 		{
@@ -40,12 +39,12 @@ namespace MedicalClinic
 		return false;
 	}
 
-	const std::vector<Equipment>& RehabillitationRoom::getAccessibleEqupiment() const
+	const std::vector<Equipment>& SurgeryRoom::getAccessibleEqupiment() const
 	{
 		return accessibleEqupiment;
 	}
 
-	unsigned int RehabillitationRoom::getMaxCapacity() const
+	unsigned int SurgeryRoom::getMaxCapacity() const
 	{
 		return maxCapacity;
 	}

@@ -8,7 +8,7 @@
 #include "personnel/Doctor.h"
 #include "personnel/Nurse.h"
 #include "rooms/ConsultationRoom.h"
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 #include "services/Consultation.h"
 #include "services/Rehabillitation.h"
 
@@ -64,7 +64,7 @@ struct TestSuitLogicManagerFixture
 		  testPatient1(std::make_shared<Patient>("Jesse", "Pinkman", "20010112345", testAddress)),
 		  wyposazenie({Equipment::PHYSICAL_THERAPY_DEVICE, Equipment::ROBOTIC_SYSTEM}),
 		  testRoom1(std::make_shared<ConsultationRoom>(101)),
-		  testRoom2(std::make_shared<RehabillitationRoom>(102, wyposazenie, 3)),
+		  testRoom2(std::make_shared<SurgeryRoom>(102, wyposazenie, 3)),
 		  specjalizacje({Specialisation::MASSAGE_THERAPIST, Specialisation::NEUROLOGIST}),
 		  testPersonnel1(std::make_shared<Nurse>("Jesse", "Pinkman", 123)),
 		  testPersonnel2(std::make_shared<Doctor>("Walter", "White", 124, specjalizacje, 200)),

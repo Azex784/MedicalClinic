@@ -6,7 +6,7 @@
 #include "personnel/Doctor.h"
 
 #include "rooms/Room.h"
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 
 #include "services/Service.h"
 #include "services/Rehabillitation.h"
@@ -251,7 +251,7 @@ namespace MedicalClinic
 			throw ActivityException("Usługa: " + service->getInfo());
 
 		//Sprawdzenie czy wyposażenie jest odpowiednie
-		RehabillitationRoomPtr rehabRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
+		RehabillitationRoomPtr rehabRoom = dynamic_pointer_cast<SurgeryRoom>(room);
 		RehabillitationPtr rehab = dynamic_pointer_cast<Rehabillitation>(service);
 
 		if (rehab != nullptr)

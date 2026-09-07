@@ -1,6 +1,6 @@
 #include "repositories/RoomRepository.h"
 #include "rooms/Room.h"
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
 #include "typedefs.h"
@@ -28,8 +28,8 @@ struct TestSuiteRoomRepositoryFixture
 		vector<Equipment> eq1 = {Equipment::NONE, Equipment::KINESITHERAPY_SPACE};
 		vector<Equipment> eq2 = {Equipment::PHYSICAL_THERAPY_DEVICE};
 
-		rehab1 = make_shared<RehabillitationRoom>(101, eq1, 10);
-		rehab2 = make_shared<RehabillitationRoom>(102, eq2, 5);
+		rehab1 = make_shared<SurgeryRoom>(101, eq1, 10);
+		rehab2 = make_shared<SurgeryRoom>(102, eq2, 5);
 		consult1 = make_shared<ConsultationRoom>(201);
 		consult2 = make_shared<ConsultationRoom>(202);
 
@@ -94,9 +94,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRoomRepository, TestSuiteRoomRepositoryFixture
 			BOOST_TEST(loadedRoom->getIsActive() == originalRoom->getIsActive());
 			BOOST_TEST(loadedRoom->getIsArchive() == originalRoom->getIsArchive());
 
-			RehabillitationRoomPtr loadedRehabillitationRoom = dynamic_pointer_cast<RehabillitationRoom>(loadedRoom);
+			RehabillitationRoomPtr loadedRehabillitationRoom = dynamic_pointer_cast<SurgeryRoom>(loadedRoom);
 			RehabillitationRoomPtr originalRehabillitationRoom = dynamic_pointer_cast<
-				RehabillitationRoom>(originalRoom);
+				SurgeryRoom>(originalRoom);
 
 			//Sprawdzamy dla pokoju rehabilitacji
 			if (originalRehabillitationRoom != nullptr)

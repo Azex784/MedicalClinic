@@ -6,7 +6,7 @@
 #include "typedefs.h"
 #include "rooms/ConsultationRoom.h"
 #include <vector>
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 
 namespace MedicalClinic
 {/**

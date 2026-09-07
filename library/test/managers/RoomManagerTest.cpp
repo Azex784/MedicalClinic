@@ -2,7 +2,7 @@
 #include "managers/RoomManager.h"
 
 #include "rooms/ConsultationRoom.h"
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 #include "managers/ManagerTemplate.h"
 #include "enums/Equipment.h"
 
@@ -27,7 +27,7 @@ struct TestSuitRoomManagerFixture
 		:
 		wyposazenie({Equipment::KINESITHERAPY_SPACE, Equipment::ROBOTIC_SYSTEM}),
 		testRoom1(std::make_shared<ConsultationRoom>(101)),
-		testRoom2(std::make_shared<RehabillitationRoom>(102, wyposazenie, 3)),
+		testRoom2(std::make_shared<SurgeryRoom>(102, wyposazenie, 3)),
 		testRoomRepository(std::make_shared<RoomRepository>("../../library/test/data/RoomManager.txt"))
 	{
 		testRoomRepository->add(testRoom1);

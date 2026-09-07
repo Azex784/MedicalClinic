@@ -2,7 +2,7 @@
 
 #include <Exceptions.h>
 
-#include "rooms/RehabillitationRoom.h"
+#include "rooms/SurgeryRoom.h"
 #include "rooms/ConsultationRoom.h"
 #include "enums/Equipment.h"
 
@@ -80,7 +80,7 @@ namespace MedicalClinic
 				getline(ss, tmp, '\n');
 				maxCapacity = stoi(tmp);
 
-				room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
+				room = make_shared<SurgeryRoom>(roomNumber, equipment, maxCapacity);
 				//Wczytujemy dane dla pokoju konsultacyjnego
 			}
 			else if (tmp == "C")
@@ -131,7 +131,7 @@ namespace MedicalClinic
 		{
 			for (const RoomPtr& room : getVectorOfData())
 			{
-				RehabillitationRoomPtr rehabilitationRoom = dynamic_pointer_cast<RehabillitationRoom>(room);
+				RehabillitationRoomPtr rehabilitationRoom = dynamic_pointer_cast<SurgeryRoom>(room);
 
 				if (rehabilitationRoom != nullptr)
 				{

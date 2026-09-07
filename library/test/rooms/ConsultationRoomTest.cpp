@@ -20,29 +20,24 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteConsultationRoom, TestSuiteConsultationRoomFix
 
 BOOST_AUTO_TEST_CASE(ConstructorTest)
 {
-    //sprawdzenie poprawne dzialanie konstruktora
+    // Sprawdzenie poprawne dzialanie konstruktora
     BOOST_TEST(testRoom.getUniqueParameter() == 303);
-    BOOST_TEST(testRoom.getIsActive() == true);
-    BOOST_TEST(testRoom.getIsArchive() == false);
 }
 
 BOOST_AUTO_TEST_CASE(CanBeUsedTest)
 {
-    // Pokoj konsultacyjny nie ma zadnego sprzetu
+    // Pokój konsultacyjny nie ma zadnego sprzetu
     BOOST_TEST(testRoom.canBeUsed(Equipment::NONE) == true);
 
-    //czy zostana odrzucone inne opcje
-    BOOST_TEST(testRoom.canBeUsed(Equipment::PHYSICAL_THERAPY_DEVICE) == false);
-    BOOST_TEST(testRoom.canBeUsed(Equipment::KINESITHERAPY_SPACE) == false);
-    BOOST_TEST(testRoom.canBeUsed(Equipment::ROBOTIC_SYSTEM) == false);
+    // Czy zostaną odrzucone inne opcje?
+    BOOST_TEST(testRoom.canBeUsed(Equipment::CT_SCANNER) == false);
+    BOOST_TEST(testRoom.canBeUsed(Equipment::INFUSION_PUMP) == false);
+    BOOST_TEST(testRoom.canBeUsed(Equipment::X_RAY_MACHINE) == false);
 }
 
 BOOST_AUTO_TEST_CASE(GetInfoTest){
-    //Sprawdzamy czy metoda getInfo jest dobrze implementowana
-    std::string expectedBaseRoomInfo = testRoom.Room::getInfo();
-
-    std::string expectedInfo = expectedBaseRoomInfo + " pokoj do przeprowadzania konsultacji";
-
+    // Sprawdzamy czy metoda getInfo jest dobrze implementowana
+    std::string expectedInfo = testRoom.Room::getInfo() + ", pokój do przeprowadzania konsultacji.";
     BOOST_TEST(testRoom.getInfo() == expectedInfo);
 }
 

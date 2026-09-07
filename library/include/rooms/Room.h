@@ -2,23 +2,22 @@
 #define MEDICAL_CLINIC_ROOM_H
 
 #include <string>
+#include "Statusable.h"
 
 namespace MedicalClinic
 {
 	enum class Equipment;
 
 	/**
-	 * Klasa reprezentująca pokój
+	 * Klasa reprezentująca pokój.
 	 */
-	class Room
+	class Room : public Statusable
 	{
 	private:
 		unsigned int roomNumber;
-		bool isActive;
-		bool isArchive;
 
 	public:
-		/**
+	   /**
 		* Konstruktor tworzący nowy obiekt sali.
 		* @param roomNumber Numer przypisany do sali.
 		*/
@@ -47,30 +46,6 @@ namespace MedicalClinic
 		 * @return Numer sali jako unsigned int.
 		 */
 		unsigned int getUniqueParameter() const;
-
-		/**
-		 * Sprawdza, czy sala jest obecnie dostępna.
-		 * @return Wartość true, jeśli sala jest aktywna, w przeciwnym razie false.
-		 */
-		bool getIsActive() const;
-
-		/**
-		 * Sprawdza, czy sala została przeniesiona do archiwum.
-		 * @return Wartość true, jeśli sala jest zarchiwizowana, w przeciwnym razie false.
-		 */
-		bool getIsArchive() const;
-
-		/**
-		* Zmienia status aktywności sali.
-		* @param isActive
-		*/
-		void setIsActive(const bool isActive);
-
-		/**
-		 * Zmienia status archiwizacji sali.
-		 * @param isArchive
-		 */
-		void setIsArchive(const bool isArchive);
 	};
 }
 

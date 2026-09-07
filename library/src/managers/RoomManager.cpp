@@ -28,7 +28,7 @@ namespace MedicalClinic
 	                                         const unsigned int maxCapacity)
 	{
 		if (equipment.empty())throw LogicException("Wpisano nieprawidłowe pusty sprzęt.");
-		RoomPtr room = make_shared<RehabillitationRoom>(roomNumber, equipment, maxCapacity);
+		RoomPtr room = make_shared<SurgeryRoom>(roomNumber, equipment, maxCapacity);
 		if (getRepository()->get(roomNumber) == nullptr)
 		{
 			getRepository()->add(room);

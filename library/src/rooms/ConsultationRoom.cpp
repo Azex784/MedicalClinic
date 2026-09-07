@@ -12,7 +12,7 @@ namespace MedicalClinic
 
 	const std::string ConsultationRoom::getInfo() const
 	{
-		return Room::getInfo() + " pokoj do przeprowadzania konsultacji";
+		return Room::getInfo() + ", pokój do przeprowadzania konsultacji.";
 	}
 
 	bool ConsultationRoom::canBeUsed(Equipment equipment) const

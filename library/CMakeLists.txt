@@ -39,9 +39,14 @@ set(SOURCE_FILES
         src/personnel/Nurse.cpp
         include/personnel/Nurse.h
 
-#        src/rooms/Room.cpp
-#        src/rooms/RehabillitationRoom.cpp
-#        src/rooms/ConsultationRoom.cpp
+        src/rooms/Room.cpp
+        include/rooms/Room.h
+
+        src/rooms/ConsultationRoom.cpp
+        include/rooms/ConsultationRoom.h
+
+        src/rooms/SurgeryRoom.cpp
+        include/rooms/SurgeryRoom.h
 #        src/services/Service.cpp
 #        src/services/Consultation.cpp
 #        src/services/Rehabillitation.cpp
@@ -87,9 +92,9 @@ set(SOURCE_TEST_FILES
         test/personnel/PersonnelTest.cpp
         test/personnel/DoctorTest.cpp
         test/personnel/NurseTest.cpp
-#        test/rooms/ConsultationRoomTest.cpp
-#        test/rooms/RehabillitationRoomTest.cpp
-#        test/rooms/RoomTest.cpp
+        test/rooms/ConsultationRoomTest.cpp
+        test/rooms/SurgeryRoomTest.cpp
+        test/rooms/RoomTest.cpp
 #        test/services/ServiceTest.cpp
 #        test/services/ConsultationTest.cpp
 #        test/services/RehabillitationTest.cpp
