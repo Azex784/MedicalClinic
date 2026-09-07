@@ -1,5 +1,7 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/test/data/test_case.hpp>
 #include "Person.h"
+#include "testsData/PersonData.h"
 
 using namespace MedicalClinic;
 
@@ -30,35 +32,42 @@ struct TestSuitePersonFixture
 	{
 	}
 };
+
 BOOST_FIXTURE_TEST_SUITE(TestSuitePerson, TestSuitePersonFixture)
 
-BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
+
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(data::names) ^ boost::unit_test::data::make(data::surnames), name, surname)
 {
-	BOOST_TEST(testPerson.getName() == "Jan");
-	BOOST_TEST(testPerson.getLastName() == "Kowalski");
+	PersonTest testPerson = PersonTest(name,surname);
+
+	BOOST_TEST(testPerson.getName() == name);
+	BOOST_TEST(testPerson.getLastName() == surname);
 }
 
-BOOST_AUTO_TEST_CASE(SettersTest)
+BOOST_DATA_TEST_CASE(SettersTest, boost::unit_test::data::make(data::names) ^  boost::unit_test::data::make(data::surnames), name, surname)
 {
-	// Zmiana stanu obiektu za pomocą setterów
-	testPerson.setName("Adam");
-	testPerson.setLastName("Nowak");
+	testPerson.setName(name);
+	testPerson.setLastName(surname);
 
-	// Weryfikacja
-	BOOST_TEST(testPerson.getName() == "Adam");
-	BOOST_TEST(testPerson.getLastName() == "Nowak");
+	BOOST_TEST(testPerson.getName() == name);
+	BOOST_TEST(testPerson.getLastName() == surname);
 }
 
-BOOST_AUTO_TEST_CASE(GetInfoTest)
+BOOST_DATA_TEST_CASE(GetInfoTest, boost::unit_test::data::make(data::names) ^ boost::unit_test::data::make(data::surnames), name, surname)
 {
-	// Sprawdzamy poprawność działania metody getInfo
-	BOOST_TEST(testPerson.getInfo() == "Osoba, imię: Jan, nazwisko: Kowalski, status: Dostępny");
+	PersonTest testPerson = PersonTest(name,surname);
 
-	// Sprawdzenie getInfo po zmianie
-	testPerson.setName("Anna");
-	testPerson.setLastName("Maria");
+	std::string expectedInfo = "Osoba, imię: " + name + ", nazwisko: " + surname + ", status: ";
+	// Oczekujemy tego, że podstawowo będzie miał status dostępny
+	BOOST_REQUIRE(testPerson.isAvailable());
+	// Sprawdzamy dla każdego przypadku
+	BOOST_TEST(testPerson.getInfo() == expectedInfo + "Dostępny");
 
-	BOOST_TEST(testPerson.getInfo() == "Osoba, imię: Anna, nazwisko: Maria, status: Dostępny");
+	testPerson.setEntityStatus(Status::ARCHIVED);
+	BOOST_TEST(testPerson.getInfo() == expectedInfo + "Archiwalny");
+
+	testPerson.setEntityStatus(Status::UNAVAILABLE);
+	BOOST_TEST(testPerson.getInfo() == expectedInfo + "Niedostępny");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

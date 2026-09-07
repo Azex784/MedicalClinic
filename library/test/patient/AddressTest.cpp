@@ -1,34 +1,31 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/test/data/test_case.hpp>
 #include "patient/Address.h"
+#include "../testsData/AddressData.h"
 
 using namespace MedicalClinic;
 
-struct TestSuiteAddressFixture
+BOOST_AUTO_TEST_SUITE(TestSuiteAddress)
+
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(data::cities) ^ boost::unit_test::data::make(data::streets) ^ boost::unit_test::data::make(data::numbers), city, street, number)
 {
-	Address testAddress;
+	Address testAddress = Address(city,street,number);
 
-	TestSuiteAddressFixture() : testAddress("Warszawa", "Marszałkowska", "10/15")
-	{
-	}
-
-	~TestSuiteAddressFixture()
-	{
-	}
-};
-
-BOOST_FIXTURE_TEST_SUITE(TestSuiteAddress, TestSuiteAddressFixture)
-
-BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
-{
-	BOOST_TEST(testAddress.getCity() == "Warszawa");
-	BOOST_TEST(testAddress.getStreet() == "Marszałkowska");
-	BOOST_TEST(testAddress.getNumber() == "10/15");
+	BOOST_TEST(testAddress.getCity() == city);
+	BOOST_TEST(testAddress.getStreet() == street);
+	BOOST_TEST(testAddress.getNumber() == number);
 }
 
-BOOST_AUTO_TEST_CASE(GetInfoTest)
+
+BOOST_DATA_TEST_CASE(GetInfoTest,  boost::unit_test::data::make(data::cities) ^ boost::unit_test::data::make(data::streets) ^ boost::unit_test::data::make(data::numbers), city, street, number)
 {
-	// Sprawdzenie getInfo
-	BOOST_TEST(testAddress.getInfo() == "Adres, miasto: Warszawa, ulica: Marszałkowska, numer: 10/15");
+
+	Address testAddress = Address(city,street,number);
+
+	// Sprawdzenie
+	BOOST_TEST(testAddress.getInfo() == "Adres, miasto: " + city + ", ulica: " + street + ", numer: " + number);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+
+using namespace MedicalClinic;

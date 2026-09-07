@@ -95,7 +95,10 @@ set(SOURCE_TEST_FILES
         test/rooms/ConsultationRoomTest.cpp
         test/rooms/SurgeryRoomTest.cpp
         test/rooms/RoomTest.cpp
-#        test/services/ServiceTest.cpp
+        test/testsData/PersonData.h
+        test/testsData/AddressData.h
+        test/testsData/PatientData.h
+        #        test/services/ServiceTest.cpp
 #        test/services/ConsultationTest.cpp
 #        test/services/RehabillitationTest.cpp
 #        test/AppointmentTest.cpp
