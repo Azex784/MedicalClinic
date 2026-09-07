@@ -1,9 +1,13 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
+
+#include "PersonData.h"
+
 #include "Person.h"
-#include "testsData/PersonData.h"
 
 using namespace MedicalClinic;
+
+namespace dataBoost = boost::unit_test::data;
 
 /**
  * Potrzeba klasy przykładowej by sprawdzić działanie abstrakcyjnej klasy
@@ -36,7 +40,8 @@ struct TestSuitePersonFixture
 BOOST_FIXTURE_TEST_SUITE(TestSuitePerson, TestSuitePersonFixture)
 
 
-BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(data::names) ^ boost::unit_test::data::make(data::surnames), name, surname)
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  dataBoost::make(data::names) ^ dataBoost::make(data::surnames),
+	name, surname)
 {
 	PersonTest testPerson = PersonTest(name,surname);
 
@@ -44,7 +49,8 @@ BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(da
 	BOOST_TEST(testPerson.getLastName() == surname);
 }
 
-BOOST_DATA_TEST_CASE(SettersTest, boost::unit_test::data::make(data::names) ^  boost::unit_test::data::make(data::surnames), name, surname)
+BOOST_DATA_TEST_CASE(SettersTest, dataBoost::make(data::names) ^  dataBoost::make(data::surnames),
+	name, surname)
 {
 	testPerson.setName(name);
 	testPerson.setLastName(surname);
@@ -53,7 +59,8 @@ BOOST_DATA_TEST_CASE(SettersTest, boost::unit_test::data::make(data::names) ^  b
 	BOOST_TEST(testPerson.getLastName() == surname);
 }
 
-BOOST_DATA_TEST_CASE(GetInfoTest, boost::unit_test::data::make(data::names) ^ boost::unit_test::data::make(data::surnames), name, surname)
+BOOST_DATA_TEST_CASE(GetInfoTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames),
+	name, surname)
 {
 	PersonTest testPerson = PersonTest(name,surname);
 

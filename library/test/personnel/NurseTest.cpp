@@ -1,34 +1,39 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/test/data/test_case.hpp>
+
+#include "PersonnelData.h"
+#include "PersonData.h"
+
 #include "personnel/Nurse.h"
 
 using namespace MedicalClinic;
 
+namespace dataBoost = boost::unit_test::data;
 
-struct TestSuiteNurseFixture
+BOOST_AUTO_TEST_SUITE(TestSuiteNurse)
+
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers)
+    , name, surname, personnelNumber )
 {
-    Nurse testNurse;
+    Nurse testNurse = Nurse(name,surname,personnelNumber);
 
-    TestSuiteNurseFixture()
-        : testNurse("Elżbieta", "Kowalczyk", 12341)
-    {
-    }
+    // Sprawdzenie metod z klasy bazowej (Person)
+    BOOST_TEST(testNurse.getName() == name);
+    BOOST_TEST(testNurse.getLastName() == surname);
 
-    ~TestSuiteNurseFixture() = default;
-};
-
-BOOST_FIXTURE_TEST_SUITE(TestSuiteNurse, TestSuiteNurseFixture)
-
-BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
-{
-    BOOST_TEST(testNurse.getName() == "Elżbieta");
-    BOOST_TEST(testNurse.getLastName() == "Kowalczyk");
-    BOOST_TEST(testNurse.getUniqueParameter() == 12341);
+    // Sprawdzenie metod z klasy pochodnej (Patient)
+    BOOST_TEST(testNurse.getUniqueParameter() == personnelNumber);
 }
 
-
-BOOST_AUTO_TEST_CASE(GetInfoTest)
+BOOST_DATA_TEST_CASE(GetInfoTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers)
+    , name, surname, personnelNumber )
 {
-    std::string expectedInfo = testNurse.Personnel::getInfo() + ", pielęgniarka.";
+    Nurse testNurse = Nurse(name,surname,personnelNumber);
+	
+    // Zakładam poprawność getInfo klas Person i Addres - są na to osbne testy
+    std::string expectedInfo = testNurse.Person::getInfo() + ", pracownik personelu, numer pracownika: " + std::to_string(personnelNumber) + ", pielęgniarka.";
+
+    // Oczekujemy tego, że podstawowo będzie miał status dostępny
     BOOST_TEST(testNurse.getInfo() == expectedInfo);
 }
 

@@ -1,40 +1,46 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/test/data/test_case.hpp>
+
+#include "PersonnelData.h"
+#include "PersonData.h"
+
 #include "personnel/Personnel.h"
 
 using namespace MedicalClinic;
 
+namespace dataBoost = boost::unit_test::data;
+
 // Tworzymy klase czysto pokazową by sprawdzić działanie klas bazowej
-struct TmpPersonnel : public Personnel
+struct TestPersonnel : public Personnel
 {
-	TmpPersonnel(const std::string& name, const std::string& lastName, const unsigned int& id)
+	TestPersonnel(const std::string& name, const std::string& lastName, unsigned int id)
 		: Personnel(name, lastName, id) {}
 };
 
-struct TestSuitePersonnelFixture
+BOOST_AUTO_TEST_SUITE(TestSuitePersonnel)
+
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers)
+	, name, surname, personnelNumber )
 {
-	TmpPersonnel testPersonnel;
+	TestPersonnel testPersonnel = TestPersonnel(name,surname,personnelNumber);
 
-	TestSuitePersonnelFixture()
-		: testPersonnel("Walter", "White", 1234)
-	{
-	}
-};
-
-BOOST_FIXTURE_TEST_SUITE(TestSuitePersonnel, TestSuitePersonnelFixture)
-
-BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
-{
 	// Sprawdzenie metod z klasy bazowej (Person)
-	BOOST_TEST(testPersonnel.getName() == "Walter");
-	BOOST_TEST(testPersonnel.getLastName() == "White");
+	BOOST_TEST(testPersonnel.getName() == name);
+	BOOST_TEST(testPersonnel.getLastName() == surname);
 
-	// Sprawdzenie metod z klasy pochodnej
-	BOOST_TEST(testPersonnel.getUniqueParameter() == 1234);
+	// Sprawdzenie metod z klasy pochodnej (Patient)
+	BOOST_TEST(testPersonnel.getUniqueParameter() == personnelNumber);
 }
 
-BOOST_AUTO_TEST_CASE(GetInfoTest)
+BOOST_DATA_TEST_CASE(GetInfoTest, dataBoost::make(data::names) ^ boost::unit_test::data::make(data::surnames) ^ boost::unit_test::data::make(data::personnelNumbers)
+	, name, surname, personnelNumber )
 {
-	std::string expectedInfo = testPersonnel.Person::getInfo() + ", pracownik personelu, numer pracownika: 1234, aktywyny/a zawodowo";
+	TestPersonnel testPersonnel = TestPersonnel(name,surname,personnelNumber);
+	
+	// Zakładam poprawność getInfo klas Person i Addres - są na to osbne testy
+	std::string expectedInfo = testPersonnel.Person::getInfo() + ", pracownik personelu, numer pracownika: " + std::to_string(personnelNumber);
+
+	// Oczekujemy tego, że podstawowo będzie miał status dostępny
 	BOOST_TEST(testPersonnel.getInfo() == expectedInfo);
 }
 

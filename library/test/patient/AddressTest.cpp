@@ -1,13 +1,18 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
+
+#include "AddressData.h"
+
 #include "patient/Address.h"
-#include "../testsData/AddressData.h"
 
 using namespace MedicalClinic;
 
+namespace dataBoost = boost::unit_test::data;
+
 BOOST_AUTO_TEST_SUITE(TestSuiteAddress)
 
-BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(data::cities) ^ boost::unit_test::data::make(data::streets) ^ boost::unit_test::data::make(data::numbers), city, street, number)
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  dataBoost::make(data::cities) ^ dataBoost::make(data::streets) ^ dataBoost::make(data::numbers),
+	city, street, number)
 {
 	Address testAddress = Address(city,street,number);
 
@@ -17,7 +22,8 @@ BOOST_DATA_TEST_CASE(ConstructorAndGettersTest,  boost::unit_test::data::make(da
 }
 
 
-BOOST_DATA_TEST_CASE(GetInfoTest,  boost::unit_test::data::make(data::cities) ^ boost::unit_test::data::make(data::streets) ^ boost::unit_test::data::make(data::numbers), city, street, number)
+BOOST_DATA_TEST_CASE(GetInfoTest,  dataBoost::make(data::cities) ^ dataBoost::make(data::streets) ^ dataBoost::make(data::numbers),
+	city, street, number)
 {
 
 	Address testAddress = Address(city,street,number);

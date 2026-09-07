@@ -18,16 +18,6 @@ namespace MedicalClinic
 
 	const std::string Personnel::getInfo() const
 	{
-		string tmp;
-		if (isAvailable())
-		{
-			tmp = ", aktywyny/a zawodowo";
-		}
-		else
-		{
-			tmp = ", niedostępny/a";
-		}
-
-		return Person::getInfo() + ", pracownik personelu, numer pracownika: " + to_string(personnelId) + tmp;
+		return Person::getInfo() + ", pracownik personelu, numer pracownika: " + to_string(personnelId);
 	}
 }

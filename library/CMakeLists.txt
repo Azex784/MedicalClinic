@@ -79,6 +79,7 @@ find_package(Boost 1.90.0 COMPONENTS unit_test_framework REQUIRED)
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/testsData
         ${Boost_INCLUDE_DIRS}
 )
 
@@ -98,6 +99,7 @@ set(SOURCE_TEST_FILES
         test/testsData/PersonData.h
         test/testsData/AddressData.h
         test/testsData/PatientData.h
+        test/testsData/PersonnelData.h
         #        test/services/ServiceTest.cpp
 #        test/services/ConsultationTest.cpp
 #        test/services/RehabillitationTest.cpp

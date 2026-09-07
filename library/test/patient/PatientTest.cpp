@@ -1,20 +1,22 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
+
 #include "patient/Patient.h"
 #include "patient/Address.h"
 
-#include "../testsData/PatientData.h"
-#include "../testsData/AddressData.h"
-#include "../testsData/PersonData.h"
+#include "PatientData.h"
+#include "AddressData.h"
+#include "PersonData.h"
 
 using namespace MedicalClinic;
+
 namespace dataBoost = boost::unit_test::data;
 
 BOOST_AUTO_TEST_SUITE(TestSuitePatient)
 
 BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::cities) ^ dataBoost::make(data::streets) ^ dataBoost::make(data::numbers)
-^ dataBoost::make(data::names) ^ boost::unit_test::data::make(data::surnames) ^ boost::unit_test::data::make(data::personalNumbers)
-	, city, street, number, name, surname, personalNumber )
+^ dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personalNumbers),
+	city, street, number, name, surname, personalNumber )
 {
 	AddressPtr testAddress = std::make_shared<Address>(city,street,number);
 	Patient testPatient = Patient(name,surname,personalNumber,testAddress);
