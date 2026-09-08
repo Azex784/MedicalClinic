@@ -13,7 +13,8 @@ namespace MedicalClinic
         MD,
         DR_MED,
         DR_HAB_MED,
-        PROF
+        PROF,
+        LAST
     };
 
     /**

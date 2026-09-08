@@ -16,6 +16,14 @@ namespace MedicalClinic
 		Title title;
 		unsigned int doctorRate;
 
+	   /**
+		* Wyznacza procentowy koszt lekarza na podstawie tytułu naukowego.
+		* MD - 0.0
+		* DR_MED - 0.01
+		* DR_HAB_MED - 0.02
+		* PROF - 0.03
+		*/
+		void setDoctorRate();
 	public:
 	   /**
 		* Konstruktor tworzący nowy obiekt lekarza.
@@ -25,7 +33,7 @@ namespace MedicalClinic
 		* @param specialisation Wektor przechowujący listę specjalności lekarza.
 		* @param title Tytuł naukowy lekarza.
 		*/
-		Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
+		Doctor(const std::string& name, const std::string& lastName, const unsigned int personnelId,
 			const std::vector<Specialisation>& specialisation, const Title title);
 
 	   /**
@@ -50,15 +58,6 @@ namespace MedicalClinic
 		* @return Koszt przypisany do lekarza jako unsigned int.
 		*/
 		void setTitle(const Title title);
-
-		/**
-		 * Wyznacza procentowy koszt lekarza na podstawie tytułu naukowego.
-		 * MD - 0.0
-		 * DR_MED - 0.01
-		 * DR_HAB_MED - 0.02
-		 * PROF - 0.03
-		 */
-		void setDoctorRate();
 
 	   /**
 		* Zwraca listę specjalizacji posiadanych przez lekarza.

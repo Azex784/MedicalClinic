@@ -9,7 +9,7 @@
 
 namespace data
 {
-    const std::vector<std::string> cities = {{
+    const std::vector<std::string> cities = {
         "Warszawa",
         "Kraków",
         "Wrocław",
@@ -20,9 +20,9 @@ namespace data
         "Katowice",
         "Lublin",
         "Toruń"
-    }};
+    };
 
-    const std::vector<std::string> streets = {{
+    const std::vector<std::string> streets = {
         "Marszałkowska",
         "Floriańska",
         "Świdnicka",
@@ -33,9 +33,9 @@ namespace data
         "Mariacka",
         "Krakowskie Przedmieście",
         "Szeroka"
-    }};
+    };
 
-    const std::vector<std::string> numbers = {{
+    const std::vector<std::string> numbers = {
         "10/15",
         "22",
         "5",
@@ -46,7 +46,7 @@ namespace data
         "7",
         "34",
         "12"
-    }};
+    };
 }
 
 

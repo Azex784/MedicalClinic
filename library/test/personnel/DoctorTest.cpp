@@ -1,9 +1,19 @@
 #include <boost/test/unit_test.hpp>
+#include <boost/test/data/test_case.hpp>
+#include <algorithm>
+
+#include "PersonnelData.h"
+#include "PersonData.h"
+#include "DoctorData.h"
+
+#include "personnel/Personnel.h"
 #include "personnel/Doctor.h"
 #include "enums/Specialisation.h"
 #include "enums/Title.h"
 
 using namespace MedicalClinic;
+
+namespace dataBoost = boost::unit_test::data;
 
 
 struct TestSuiteDoctorFixture
@@ -22,50 +32,91 @@ struct TestSuiteDoctorFixture
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteDoctor, TestSuiteDoctorFixture)
 
-BOOST_AUTO_TEST_CASE(ConstructorAndGettersTest)
+BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers) ^
+    dataBoost::make(data::titles) ^ dataBoost::make(data::specialisations),
+    name, surname, personnelNumber, title, specialsations )
 {
-    // Constructor check.
-    BOOST_TEST(testDoctor.getName() == "Maciej");
-    BOOST_TEST(testDoctor.getLastName() == "Kowalczyk");
-    BOOST_TEST(testDoctor.getUniqueParameter() == 9876);
+    Doctor testDoctor = Doctor(name,surname,personnelNumber,specialsations, title);
 
-    // Sprawdzenie zmiennych klasy Doctor.
-    BOOST_CHECK(testDoctor.getDoctorRate() == 3);
+    // Sprawdzenie metod z klasy bazowej (Person)
+    BOOST_TEST(testDoctor.getName() == name);
+    BOOST_TEST(testDoctor.getLastName() == surname);
 
-    BOOST_TEST(toString(testDoctor.getTitle())== toString(Title::PROF));
+    // Sprawdzenie metod z klasy pochodnej (Patient)
+    BOOST_TEST(testDoctor.getUniqueParameter() == personnelNumber);
 
-    // Weryfikacja wektora specjalizacji.
-    BOOST_TEST_REQUIRE(testDoctor.getSpecialisation().size() == 2);
-    BOOST_TEST(toString(testDoctor.getSpecialisation()[0]) == toString(Specialisation::ANESTHESIOLOGIST));
-    BOOST_TEST(toString(testDoctor.getSpecialisation()[1]) == toString(Specialisation::CARDIOLOGIST));
+    BOOST_TEST(toString(testDoctor.getTitle()) == toString(title));
+
+    BOOST_TEST_REQUIRE(testDoctor.getSpecialisation().size() == specialsations.size());
+
+    for (int i = 0; i < (int)specialsations.size(); i++)
+    {
+        BOOST_TEST(toString(testDoctor.getSpecialisation()[i]) == toString(specialsations[i]));
+    };
+
+    unsigned int rate = static_cast<int>(title);
+
+    BOOST_TEST(testDoctor.getDoctorRate() == rate);
 }
 
 BOOST_AUTO_TEST_CASE(SettersTest)
 {
     // Obowiązkowe upewniene się, że tytuł jest poprawny.
-    BOOST_TEST_REQUIRE(toString(testDoctor.getTitle())== toString(Title::PROF));
+    BOOST_TEST_REQUIRE(toString(testDoctor.getTitle()) == toString(Title::PROF));
+    // Zakładam, że doctorRate rośnie o 1 dla każdego stopnia.
+    for (int i = 0; i < static_cast<int>(Title::LAST); i++) {
+        Title current = static_cast<Title>(i);
+        testDoctor.setTitle(current);
 
-    // Zmiana tytułu
-    testDoctor.setTitle(Title::MD);
-
-    BOOST_TEST(toString(testDoctor.getTitle())== toString(Title::MD));
-    // Czy nastąpiła zmiana stawki po zmianie tytułu?
-    BOOST_CHECK(testDoctor.getDoctorRate() == 0);
+        BOOST_TEST(toString(testDoctor.getTitle())== toString(current));
+        // Czy nastąpiła zamiana rate?
+        BOOST_TEST(testDoctor.getDoctorRate() == i);
+    }
 }
 
-BOOST_AUTO_TEST_CASE(CanConductTreatmentTest)
+BOOST_DATA_TEST_CASE(CanConductTreatmentTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers) ^
+    dataBoost::make(data::titles) ^ dataBoost::make(data::specialisations),
+    name, surname, personnelNumber, title, specialsations )
 {
-    BOOST_TEST(testDoctor.canConductTreatment(Specialisation::ANESTHESIOLOGIST) == true);
-    BOOST_TEST(testDoctor.canConductTreatment(Specialisation::CARDIOLOGIST) == true);
+    Doctor testDoctor = Doctor(name,surname,personnelNumber,specialsations, title);
 
-    // Lekarz nie posiada tej specjalizacji wiec nie powinem moc wykonywac zabiegow
-    BOOST_TEST(testDoctor.canConductTreatment(Specialisation::NEUROLOGIST) == false);
+    for (int i = 0; i < static_cast<int>(Specialisation::LAST); i++) {
+        Specialisation current = static_cast<Specialisation>(i);
+
+        if (std::find(specialsations.begin(), specialsations.end(), current) == specialsations.end())
+        {
+            BOOST_TEST(testDoctor.canConductTreatment(current) == false);
+        }
+        else
+        {
+            BOOST_TEST(testDoctor.canConductTreatment(current) == true);
+        }
+    }
 }
 
-BOOST_AUTO_TEST_CASE(GetInfoTest)
+BOOST_DATA_TEST_CASE(GetInfoTest, dataBoost::make(data::names) ^ dataBoost::make(data::surnames) ^ dataBoost::make(data::personnelNumbers) ^
+    dataBoost::make(data::titles) ^ dataBoost::make(data::specialisations),
+    name, surname, personnelNumber, title, specialsations )
 {
-    std::string expectedInfo = testDoctor.Personnel::getInfo() + ", lekarz o stawce (jako procent zabiegu): 3%, specjalności: Anestezjolog, Kardiolog.";
-    BOOST_TEST(testDoctor.getInfo() == expectedInfo);
+    Doctor testDoctor = Doctor(name,surname,personnelNumber,specialsations, title);
+
+    std::string expectedInfo = testDoctor.Personnel::getInfo() + ", lekarz o stawce (jako procent zabiegu): " + std::to_string(testDoctor.getDoctorRate()) + "%, specjalności: ";
+
+    std::ostringstream oss;
+
+    for (int i = 0; i < (int)specialsations.size(); i++)
+    {
+        if (i != (int)specialsations.size() - 1)
+        {
+            oss << toString(specialsations[i]) << ", ";
+        }
+        else
+        {
+            oss << toString(specialsations[i]) << ".";
+        }
+    }
+
+    BOOST_TEST(testDoctor.getInfo() == expectedInfo + oss.str());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -2,6 +2,7 @@
 #define MEDICAL_CLINIC_SPECIALISATION_H
 
 #include <string>
+#include <vector>
 
 namespace MedicalClinic
 {
@@ -30,7 +31,8 @@ namespace MedicalClinic
 		PSYCHIATRIST,
 		INTERNIST,
 		EMERGENCY_PHYSICIAN,
-		LARYNGOLOGIST
+		LARYNGOLOGIST,
+		LAST
 	};
 
 	/**
@@ -41,13 +43,22 @@ namespace MedicalClinic
 	const std::string toString(Specialisation spec);
 
 	/**
-	 * Operator przeciązaenia.
+	 * Operator przeciązaenia specjalizacji.
 	 * Podczas wypisywania wywołuje funkcje toString.
 	 * @param os
 	 * @param spec
 	 * @return
 	 */
 	std::ostream& operator<<(std::ostream& os, const Specialisation& spec);
+
+	/**
+	 * Operator przeciązaenia wektora specjalizacji.
+	 * Podczas wypisywania wywołuje funkcje toString.
+	 * @param os
+	 * @param vec
+	 * @return
+	 */
+	std::ostream& operator<<(std::ostream& os, const std::vector<Specialisation>& vec);
 }
 
 

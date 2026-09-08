@@ -4,12 +4,13 @@
 
 #ifndef MEDICALCLINIC_PATIENTDATA_H
 #define MEDICALCLINIC_PATIENTDATA_H
+
 #include <string>
 #include <vector>
 
 namespace data
 {
-    const std::vector<std::string> personalNumbers = {{
+    const std::vector<std::string> personalNumbers = {
         "90010112345",
         "85051256789",
         "92082390123",
@@ -20,7 +21,7 @@ namespace data
         "03241567890",
         "99120134567",
         "84091012345"
-    }};
+    };
 }
 
 

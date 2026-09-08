@@ -8,7 +8,7 @@ namespace MedicalClinic
 {
 	using namespace std;
 
-	Doctor::Doctor(const std::string& name, const std::string& lastName, const unsigned personnelId,
+	Doctor::Doctor(const std::string& name, const std::string& lastName, const unsigned int personnelId,
 		const std::vector<Specialisation>& specialisation, const Title title): Personnel(name, lastName, personnelId),
 		                                                                       specialisation(specialisation),
 		                                                                       title(title)
@@ -85,10 +85,6 @@ namespace MedicalClinic
 		else if (title == Title::PROF)
 		{
 			doctorRate = 3;
-		}
-		else
-		{
-			// Except
 		}
 	};
 }

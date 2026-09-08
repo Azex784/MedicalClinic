@@ -4,11 +4,12 @@
 
 #ifndef MEDICALCLINIC_PERSONNELDATA_H
 #define MEDICALCLINIC_PERSONNELDATA_H
+
 #include <vector>
 
 namespace data
 {
-    const std::vector<unsigned int> personnelNumbers = {{
+    const std::vector<unsigned int> personnelNumbers = {
         1,
         2,
         3,
@@ -19,7 +20,7 @@ namespace data
         8,
         9,
         10
-    }};
+    };
 }
 
 

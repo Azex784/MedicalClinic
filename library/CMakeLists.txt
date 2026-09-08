@@ -100,6 +100,7 @@ set(SOURCE_TEST_FILES
         test/testsData/AddressData.h
         test/testsData/PatientData.h
         test/testsData/PersonnelData.h
+        test/testsData/DoctorData.h
         #        test/services/ServiceTest.cpp
 #        test/services/ConsultationTest.cpp
 #        test/services/RehabillitationTest.cpp
