@@ -45,13 +45,13 @@ BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::names) ^ d
     // Sprawdzenie metod z klasy pochodnej (Patient)
     BOOST_TEST(testDoctor.getUniqueParameter() == personnelNumber);
 
-    BOOST_TEST(toString(testDoctor.getTitle()) == toString(title));
+    BOOST_TEST(testDoctor.getTitle() == title);
 
     BOOST_TEST_REQUIRE(testDoctor.getSpecialisation().size() == specialsations.size());
 
     for (int i = 0; i < (int)specialsations.size(); i++)
     {
-        BOOST_TEST(toString(testDoctor.getSpecialisation()[i]) == toString(specialsations[i]));
+        BOOST_TEST(testDoctor.getSpecialisation()[i] == specialsations[i]);
     };
 
     unsigned int rate = static_cast<int>(title);
@@ -62,13 +62,13 @@ BOOST_DATA_TEST_CASE(ConstructorAndGettersTest, dataBoost::make(data::names) ^ d
 BOOST_AUTO_TEST_CASE(SettersTest)
 {
     // Obowiązkowe upewniene się, że tytuł jest poprawny.
-    BOOST_TEST_REQUIRE(toString(testDoctor.getTitle()) == toString(Title::PROF));
+    BOOST_TEST_REQUIRE(testDoctor.getTitle() == Title::PROF);
     // Zakładam, że doctorRate rośnie o 1 dla każdego stopnia.
     for (int i = 0; i < static_cast<int>(Title::LAST); i++) {
         Title current = static_cast<Title>(i);
         testDoctor.setTitle(current);
 
-        BOOST_TEST(toString(testDoctor.getTitle())== toString(current));
+        BOOST_TEST(testDoctor.getTitle()== current);
         // Czy nastąpiła zamiana rate?
         BOOST_TEST(testDoctor.getDoctorRate() == i);
     }

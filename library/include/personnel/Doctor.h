@@ -57,7 +57,7 @@ namespace MedicalClinic
 		* Zmienia aktualny tytuł naukowy przypisany do lekarza.
 		* @return Koszt przypisany do lekarza jako unsigned int.
 		*/
-		void setTitle(const Title title);
+		void setTitle(const Title& title);
 
 	   /**
 		* Zwraca listę specjalizacji posiadanych przez lekarza.

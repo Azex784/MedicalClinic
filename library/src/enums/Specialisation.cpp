@@ -32,22 +32,4 @@ namespace MedicalClinic
 			default: return "Unknown";
 		}
 	}
-
-	std::ostream& operator<<(std::ostream& os, const Specialisation& spec)
-	{
-		os << toString(spec);
-		return os;
-	}
-	std::ostream& operator<<(std::ostream& os, const std::vector<Specialisation>& vec)
-	{
-		for (auto Spec : vec)
-		{
-			if (vec[vec.size() - 1] != Spec)
-			{
-				os << toString(Spec) + ", ";
-			}
-			else os << toString(Spec) + ".";
-		};
-		return os;
-	}
 }

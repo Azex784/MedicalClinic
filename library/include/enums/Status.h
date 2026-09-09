@@ -2,6 +2,8 @@
 #define MEDICALCLINIC_STATUS_H
 
 #include <string>
+#include "enums/EnumsOverloads.h"
+
 
 namespace MedicalClinic
 {
@@ -12,7 +14,8 @@ namespace MedicalClinic
     {
         AVAILABLE,
         UNAVAILABLE,
-        ARCHIVED
+        ARCHIVED,
+        LAST
     };
 
     /**
@@ -21,15 +24,6 @@ namespace MedicalClinic
      * @return
      */
     const std::string toString(Status status);
-
-    /**
-     * Operator przeciązaenia.
-     * Podczas wypisywania wywołuje funkcje statusToString.
-     * @param os
-     * @param status
-     * @return
-     */
-    std::ostream& operator<<(std::ostream& os, const Status& status);
 }
 
 #endif //MEDICALCLINIC_STATUS_H

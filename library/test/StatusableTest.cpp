@@ -38,11 +38,14 @@ BOOST_AUTO_TEST_CASE(GettersTest)
 
 BOOST_AUTO_TEST_CASE(SettersTest)
 {
-	// Zmiana stanu obiektu za pomocą setterów
-	testExample.setEntityStatus(Status::UNAVAILABLE);
-
-	// Weryfikacja
-	BOOST_TEST(testExample.getEntityStatus() == Status::UNAVAILABLE);
+	for (int i = 0; i < static_cast<int>(Status::LAST); ++i)
+	{
+		Status current = static_cast<Status>(i);
+		// Zmiana stanu obiektu za pomocą setterów
+		testExample.setEntityStatus(current);
+		// Weryfikacja
+		BOOST_TEST(testExample.getEntityStatus() == current);
+	}
 }
 
 BOOST_AUTO_TEST_SUITE_END()

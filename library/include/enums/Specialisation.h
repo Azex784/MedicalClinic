@@ -2,7 +2,7 @@
 #define MEDICAL_CLINIC_SPECIALISATION_H
 
 #include <string>
-#include <vector>
+#include "enums/EnumsOverloads.h"
 
 namespace MedicalClinic
 {
@@ -41,24 +41,6 @@ namespace MedicalClinic
 	 * @return
 	 */
 	const std::string toString(Specialisation spec);
-
-	/**
-	 * Operator przeciązaenia specjalizacji.
-	 * Podczas wypisywania wywołuje funkcje toString.
-	 * @param os
-	 * @param spec
-	 * @return
-	 */
-	std::ostream& operator<<(std::ostream& os, const Specialisation& spec);
-
-	/**
-	 * Operator przeciązaenia wektora specjalizacji.
-	 * Podczas wypisywania wywołuje funkcje toString.
-	 * @param os
-	 * @param vec
-	 * @return
-	 */
-	std::ostream& operator<<(std::ostream& os, const std::vector<Specialisation>& vec);
 }
 
 

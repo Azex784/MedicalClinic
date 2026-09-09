@@ -47,7 +47,8 @@ set(SOURCE_FILES
 
         src/rooms/SurgeryRoom.cpp
         include/rooms/SurgeryRoom.h
-#        src/services/Service.cpp
+        include/enums/EnumsOverloads.h
+        #        src/services/Service.cpp
 #        src/services/Consultation.cpp
 #        src/services/Rehabillitation.cpp
 #        src/Appointment.cpp
@@ -85,7 +86,7 @@ include_directories(
 
 set(SOURCE_TEST_FILES
         test/master.cpp
-        test/enums/Enums.cpp
+        test/enums/EnumsTest.cpp
         test/PersonTest.cpp
         test/patient/AddressTest.cpp
         test/patient/PatientTest.cpp

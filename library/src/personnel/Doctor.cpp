@@ -60,7 +60,7 @@ namespace MedicalClinic
 		return Personnel::getInfo() + ", lekarz o stawce (jako procent zabiegu): " + "" + to_string(getDoctorRate()) + "%, specjalności: " + ss.str();
 	}
 
-	void Doctor::setTitle(const Title title)
+	void Doctor::setTitle(const Title& title)
 	{
 		this->title = title;
 		setDoctorRate();

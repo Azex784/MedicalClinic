@@ -2,6 +2,7 @@
 #define MEDICAL_CLINIC_EQUIPMENT_H
 
 #include <string>
+#include "enums/EnumsOverloads.h"
 
 namespace MedicalClinic
 {
@@ -22,7 +23,8 @@ namespace MedicalClinic
         MRI_SCANNER,
         ANESTHESIA_MACHINE,
         SURGICAL_TABLE,
-        INCUBATOR
+        INCUBATOR,
+        LAST
     };
 
     /**
@@ -31,15 +33,6 @@ namespace MedicalClinic
      * @return
      */
     const std::string toString(Equipment eq);
-
-    /**
-     * Operator przeciązaenia.
-     * Podczas wypisywania wywołuje funkcje toString.
-     * @param os
-     * @param eq
-     * @return
-     */
-    std::ostream& operator<<(std::ostream& os, const Equipment& eq);
 }
 
 #endif //MEDICAL_CLINIC_EQUIPMENT_H

@@ -15,10 +15,4 @@ namespace MedicalClinic
 			default: return "Unknown";
 		}
 	}
-
-	std::ostream& operator<<(std::ostream& os, const Title& t)
-	{
-		os << toString(t);
-		return os;
-	}
 }
